@@ -1,0 +1,9 @@
+C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\bin\Debug\netcoreapp2.1\ViewModelLayer.deps.json
+C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\bin\Debug\netcoreapp2.1\ViewModelLayer.dll
+C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\bin\Debug\netcoreapp2.1\ViewModelLayer.pdb
+C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\obj\Debug\netcoreapp2.1\ViewModelLayer.csprojAssemblyReference.cache
+C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\obj\Debug\netcoreapp2.1\ViewModelLayer.csproj.CoreCompileInputs.cache
+C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\obj\Debug\netcoreapp2.1\ViewModelLayer.AssemblyInfoInputs.cache
+C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\obj\Debug\netcoreapp2.1\ViewModelLayer.AssemblyInfo.cs
+C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\obj\Debug\netcoreapp2.1\ViewModelLayer.dll
+C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\obj\Debug\netcoreapp2.1\ViewModelLayer.pdb

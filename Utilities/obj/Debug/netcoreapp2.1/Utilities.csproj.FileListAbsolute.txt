@@ -1,0 +1,8 @@
+C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\bin\Debug\netcoreapp2.1\Utilities.deps.json
+C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\bin\Debug\netcoreapp2.1\Utilities.dll
+C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\bin\Debug\netcoreapp2.1\Utilities.pdb
+C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\obj\Debug\netcoreapp2.1\Utilities.csproj.CoreCompileInputs.cache
+C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\obj\Debug\netcoreapp2.1\Utilities.AssemblyInfoInputs.cache
+C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\obj\Debug\netcoreapp2.1\Utilities.AssemblyInfo.cs
+C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\obj\Debug\netcoreapp2.1\Utilities.dll
+C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\obj\Debug\netcoreapp2.1\Utilities.pdb
