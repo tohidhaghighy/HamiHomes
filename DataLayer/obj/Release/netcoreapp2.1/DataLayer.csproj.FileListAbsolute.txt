@@ -1,0 +1,14 @@
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Release\netcoreapp2.1\DataLayer.deps.json
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Release\netcoreapp2.1\DataLayer.runtimeconfig.json
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Release\netcoreapp2.1\DataLayer.runtimeconfig.dev.json
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Release\netcoreapp2.1\DataLayer.dll
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Release\netcoreapp2.1\DataLayer.pdb
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Release\netcoreapp2.1\DomainLayer.dll
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Release\netcoreapp2.1\DomainLayer.pdb
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\obj\Release\netcoreapp2.1\DataLayer.csprojAssemblyReference.cache
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\obj\Release\netcoreapp2.1\DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\obj\Release\netcoreapp2.1\DataLayer.AssemblyInfoInputs.cache
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\obj\Release\netcoreapp2.1\DataLayer.AssemblyInfo.cs
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\obj\Release\netcoreapp2.1\DataLayer.csproj.CopyComplete
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\obj\Release\netcoreapp2.1\DataLayer.dll
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\obj\Release\netcoreapp2.1\DataLayer.pdb

@@ -39,3 +39,5 @@ C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Debug\ne
 C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Debug\netcoreapp2.1\Razor\Views\Users\Details.g.cshtml.cs
 C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Debug\netcoreapp2.1\Razor\Views\Users\Edit.g.cshtml.cs
 C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Debug\netcoreapp2.1\Razor\Views\Users\Index.g.cshtml.cs
+C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_Managment.g.cshtml.cs
+C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Debug\netcoreapp2.1\Razor\Views\Managment\Index.g.cshtml.cs

@@ -4,4 +4,26 @@
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
-<p>Use this area to provide additional information.</p>
+<div id="map-container" style="width:500px; height:400px;"></div>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script type="text/javascript">
+    function initialize() {
+        alert("test");
+        var myLatlng = new google.maps.LatLng(32.5848, 56.515777);
+        var mapOptions = {
+            zoom: 16,
+            scrollwheel: false,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(document.getElementById('map-container'), mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: 'title'
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
