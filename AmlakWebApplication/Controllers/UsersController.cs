@@ -96,7 +96,7 @@ namespace AmlakWebApplication.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,Mobile,Username,Password")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Mobile,Username,Password")] User user)
         {
             if (id != user.Id)
             {
@@ -158,7 +158,7 @@ namespace AmlakWebApplication.Controllers
             }
         }
 
-        private bool UserExists(string id)
+        private bool UserExists(int id)
         {
             return _context.UserRepository.GetAll().Any(e => e.Id == id);
         }

@@ -1,0 +1,56 @@
+﻿@model ViewModelLayer.Login.Login
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+
+<div class="login-box">
+    <div class="login-logo">
+        <a href="http://hamihomes.com"><b>ورود به سایت</b></a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">فرم زیر را تکمیل کنید و ورود بزنید</p>
+
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger row" ></div>
+            <span asp-validation-for="Username" class="text-danger row"></span>
+            <span asp-validation-for="Password" class="text-danger row"></span>
+            <div class="form-group has-feedback">
+                <input asp-for="Username" class="form-control" placeholder="نام کاربری" />
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+
+            <div class="form-group has-feedback">
+                <input asp-for="Password" class="form-control" placeholder="رمز عبور" />
+                <span class="glyphicon glyphicon-pencil form-control-feedback"></span>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input asp-for="RememberMe" class="form-control" />
+                            مرا به خاطر بسپار
+                        </label>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">ورود</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
+
+
+        <!-- /.social-auth-links -->
+
+
+    </div>
+    <!-- /.login-box-body -->
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

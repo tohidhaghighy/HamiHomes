@@ -4,7 +4,9 @@ C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Release\netcoreapp
 C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Release\netcoreapp2.1\DataLayer.dll
 C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Release\netcoreapp2.1\DataLayer.pdb
 C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Release\netcoreapp2.1\DomainLayer.dll
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Release\netcoreapp2.1\Utilities.dll
 C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Release\netcoreapp2.1\DomainLayer.pdb
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Release\netcoreapp2.1\Utilities.pdb
 C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\obj\Release\netcoreapp2.1\DataLayer.csprojAssemblyReference.cache
 C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\obj\Release\netcoreapp2.1\DataLayer.csproj.CoreCompileInputs.cache
 C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\obj\Release\netcoreapp2.1\DataLayer.AssemblyInfoInputs.cache

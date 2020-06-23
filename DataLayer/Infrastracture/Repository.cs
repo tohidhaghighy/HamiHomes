@@ -64,6 +64,11 @@ namespace DataLayer.Infrastracture
             return await DbSet.Where(where).FirstOrDefaultAsync();
         }
 
+        public virtual async Task<TEntity> GetFirstAsync()
+        {
+            return await DbSet.FirstOrDefaultAsync();
+        }
+
         public virtual TEntity GetById(object Id)
         {
             return DbSet.Find(Id);
@@ -77,6 +82,16 @@ namespace DataLayer.Infrastracture
         public virtual async Task<List<TEntity>> GetManyAsync(Expression<Func<TEntity, bool>> where)
         {
             return await DbSet.Where(where).ToListAsync();
+        }
+
+        public virtual async Task<List<TEntity>> GetManyAsyncWithInclude(string children)
+        {
+            return await DbSet.Include(children).ToListAsync();
+        }
+
+        public virtual IEnumerable<TEntity> GetManyWithInclude(Expression<Func<TEntity, bool>> where)
+        {
+            return DbSet.Include(where).ToList();
         }
 
         public virtual void Insert(TEntity entity)

@@ -1561,6 +1561,16 @@
         "runtime": {
           "bin/placeholder/DomainLayer.dll": {}
         }
+      },
+      "Utilities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "compile": {
+          "bin/placeholder/Utilities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Utilities.dll": {}
+        }
       }
     }
   },
@@ -5415,6 +5425,11 @@
       "type": "project",
       "path": "../DomainLayer/DomainLayer.csproj",
       "msbuildProject": "../DomainLayer/DomainLayer.csproj"
+    },
+    "Utilities/1.0.0": {
+      "type": "project",
+      "path": "../Utilities/Utilities.csproj",
+      "msbuildProject": "../Utilities/Utilities.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -5424,7 +5439,8 @@
       "Microsoft.EntityFrameworkCore >= 2.1.1",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.1.1",
       "Microsoft.EntityFrameworkCore.Tools >= 2.1.1",
-      "Microsoft.NETCore.App >= 2.1.0"
+      "Microsoft.NETCore.App >= 2.1.0",
+      "Utilities >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -5459,6 +5475,9 @@
           "projectReferences": {
             "C:\\Users\\tohid\\Source\\Repos\\AmlakWebApplication\\DomainLayer\\DomainLayer.csproj": {
               "projectPath": "C:\\Users\\tohid\\Source\\Repos\\AmlakWebApplication\\DomainLayer\\DomainLayer.csproj"
+            },
+            "C:\\Users\\tohid\\Source\\Repos\\AmlakWebApplication\\Utilities\\Utilities.csproj": {
+              "projectPath": "C:\\Users\\tohid\\Source\\Repos\\AmlakWebApplication\\Utilities\\Utilities.csproj"
             }
           }
         }

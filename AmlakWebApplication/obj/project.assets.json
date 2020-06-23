@@ -4623,7 +4623,8 @@
           "DomainLayer": "1.0.0",
           "Microsoft.AspNetCore.Mvc.Core": "2.1.1",
           "Microsoft.EntityFrameworkCore": "2.1.1",
-          "Microsoft.EntityFrameworkCore.SqlServer": "2.1.1"
+          "Microsoft.EntityFrameworkCore.SqlServer": "2.1.1",
+          "Utilities": "1.0.0"
         },
         "compile": {
           "bin/placeholder/DataLayer.dll": {}
@@ -4643,6 +4644,29 @@
         },
         "runtime": {
           "bin/placeholder/DomainLayer.dll": {}
+        }
+      },
+      "Utilities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "compile": {
+          "bin/placeholder/Utilities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Utilities.dll": {}
+        }
+      },
+      "ViewModelLayer/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "DomainLayer": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/ViewModelLayer.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ViewModelLayer.dll": {}
         }
       }
     }
@@ -12558,6 +12582,16 @@
       "type": "project",
       "path": "../DomainLayer/DomainLayer.csproj",
       "msbuildProject": "../DomainLayer/DomainLayer.csproj"
+    },
+    "Utilities/1.0.0": {
+      "type": "project",
+      "path": "../Utilities/Utilities.csproj",
+      "msbuildProject": "../Utilities/Utilities.csproj"
+    },
+    "ViewModelLayer/1.0.0": {
+      "type": "project",
+      "path": "../ViewModelLayer/ViewModelLayer.csproj",
+      "msbuildProject": "../ViewModelLayer/ViewModelLayer.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -12566,7 +12600,9 @@
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.AspNetCore.Razor.Design >= 2.1.2",
       "Microsoft.NETCore.App >= 2.1.0",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.10"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.10",
+      "Utilities >= 1.0.0",
+      "ViewModelLayer >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -12601,6 +12637,12 @@
           "projectReferences": {
             "C:\\Users\\tohid\\Source\\Repos\\AmlakWebApplication\\DataLayer\\DataLayer.csproj": {
               "projectPath": "C:\\Users\\tohid\\Source\\Repos\\AmlakWebApplication\\DataLayer\\DataLayer.csproj"
+            },
+            "C:\\Users\\tohid\\Source\\Repos\\AmlakWebApplication\\Utilities\\Utilities.csproj": {
+              "projectPath": "C:\\Users\\tohid\\Source\\Repos\\AmlakWebApplication\\Utilities\\Utilities.csproj"
+            },
+            "C:\\Users\\tohid\\Source\\Repos\\AmlakWebApplication\\ViewModelLayer\\ViewModelLayer.csproj": {
+              "projectPath": "C:\\Users\\tohid\\Source\\Repos\\AmlakWebApplication\\ViewModelLayer\\ViewModelLayer.csproj"
             }
           }
         }

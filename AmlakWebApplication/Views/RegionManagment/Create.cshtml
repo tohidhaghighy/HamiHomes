@@ -1,0 +1,58 @@
+﻿@model DomainLayer.Region
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Managment.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        داشبرد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/RegionManagment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">استان جدید </li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>درج استان جدید</h4>
+
+</div>
+
+<div class="container">
+    <div class="box box-danger">
+        <div class="box-header">
+            <h3 class="box-title">استان جدید</h3>
+        </div>
+        <form asp-action="CreateItem">
+
+            <div class="box-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
+
+                <div class="form-group">
+                    <label>نام</label>
+                    <input asp-for="Name" type="text" class="form-control" placeholder="نام">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+               
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">درج استان جدید</button>
+                </div>
+
+            </div>
+        </form>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

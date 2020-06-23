@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace DomainLayer
 {
-    public class User:BaseEntity<string>
+    public class User:Person
     {
-        public User()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
-        public string Name { get; set; }
+        [Required(ErrorMessage ="نباید خالی باشد")]
+        [MaxLength(20,ErrorMessage ="باید کمتر از 20 کلمه باشد")]
         public string Mobile { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+
+        public Boolean Active { get; set; }
+
+        [MaxLength(20, ErrorMessage = "باید کمتر از 20 کلمه باشد")]
+        public string Activecode { get; set; }
     }
 }

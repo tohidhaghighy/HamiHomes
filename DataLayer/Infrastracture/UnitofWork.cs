@@ -12,6 +12,14 @@ namespace DataLayer.Infrastracture
     public class UnitofWork:IUnitofWork
     {
         private IRepository<User> userRepo;
+        private IRepository<Log> logRepo;
+        private IRepository<Admin> adminRepo;
+        private IRepository<City> cityRepo;
+        private IRepository<Region> regionRepo;
+        private IRepository<HomeGroup> homegroupRepo;
+        private IRepository<HomeFacility> homefacilitiRepo;
+        private IRepository<Setting> settingRepo;
+
         private AmlakDbContext db;
         public UnitofWork(AmlakDbContext DbContext)
         {
@@ -59,6 +67,85 @@ namespace DataLayer.Infrastracture
         }
 
         #endregion
+
+        #region Log
+        public ILogRepository LogRepository
+        {
+            get
+            {
+                return new LogRepository(db);
+            }
+        }
+
+        #endregion
+
+        #region admin
+
+        public IAdminRepository AdminRepository
+        {
+            get
+            {
+                return new AdminRepository(db);
+            }
+        }
+
+        #endregion
+
+        #region city
+        public ICityRepository CityRepository
+        {
+            get
+            {
+                return new CityRepository(db);
+            }
+        }
+
+        #endregion
+
+        #region region
+        public IRegionRepository RegionRepository
+        {
+            get
+            {
+                return new RegionRepository(db);
+            }
+        }
+
+        #endregion
+
+        #region homegroup
+        public IHomeGroupRepository HomeGroupRepository
+        {
+            get
+            {
+                return new HomeGroupRepository(db);
+            }
+        }
+
+        #endregion
+
+        #region homefacility
+        public IHomeFacilityRepository HomeFacilityRepository
+        {
+            get
+            {
+                return new HomeFacilityRepository(db);
+            }
+        }
+
+        #endregion
+
+        #region Setting
+        public ISettingRepository SettingRepository
+        {
+            get
+            {
+                return new SettingRepository(db);
+            }
+        }
+
+        #endregion
+
         #endregion
     }
 }

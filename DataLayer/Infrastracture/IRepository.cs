@@ -16,9 +16,12 @@ namespace DataLayer.Infrastracture
         TEntity GetById(object Id);
         IEnumerable<TEntity> GetAll();
         TEntity Get(Expression<Func<TEntity, bool>> where);
+        
         IEnumerable<TEntity> GetMany(Expression<Func<TEntity, bool>> where);
+        Task<List<TEntity>> GetManyAsyncWithInclude(string children);
         Task<List<TEntity>> GetAllAsync();
         Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> where);
+        Task<TEntity> GetFirstAsync();
         Task<List<TEntity>> GetManyAsync(Expression<Func<TEntity, bool>> where);
     }
 }

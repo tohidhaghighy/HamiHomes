@@ -62,7 +62,7 @@ namespace AmlakWebApplication
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Managment}/{action=Index}/{id?}");
+                    template: "{controller=AccountManagment}/{action=Index}/{id?}");
             });
         }
     }

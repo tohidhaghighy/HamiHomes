@@ -12,6 +12,13 @@ namespace DataLayer.Infrastracture
     public interface IUnitofWork
     {
         IUserRepository UserRepository { get; }
+        ILogRepository LogRepository { get; }
+        IAdminRepository AdminRepository { get; }
+        ICityRepository CityRepository { get; }
+        IRegionRepository RegionRepository { get; }
+        IHomeFacilityRepository HomeFacilityRepository { get; }
+        IHomeGroupRepository HomeGroupRepository { get; }
+        ISettingRepository SettingRepository { get; }
 
         void Commit();
 

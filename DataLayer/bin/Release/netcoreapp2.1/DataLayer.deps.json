@@ -12,7 +12,8 @@
           "Microsoft.AspNetCore.Mvc.Core": "2.1.1",
           "Microsoft.EntityFrameworkCore": "2.1.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.1.1",
-          "Microsoft.EntityFrameworkCore.Tools": "2.1.1"
+          "Microsoft.EntityFrameworkCore.Tools": "2.1.1",
+          "Utilities": "1.0.0"
         },
         "runtime": {
           "DataLayer.dll": {}
@@ -995,6 +996,11 @@
         "runtime": {
           "DomainLayer.dll": {}
         }
+      },
+      "Utilities/1.0.0": {
+        "runtime": {
+          "Utilities.dll": {}
+        }
       }
     }
   },
@@ -1677,6 +1683,11 @@
       "hashPath": "system.xml.xdocument.4.0.11.nupkg.sha512"
     },
     "DomainLayer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Utilities/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -1,0 +1,94 @@
+﻿@model List<DomainLayer.Region>
+    @{
+  ViewBag.Title = "استان ها";
+    }
+    <link href="~/css/alert/sweetalert.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <script src="~/css/alert/sweetalert.js"></script>
+
+    <style>
+        tr:nth-child(even) {
+            background: rgba(126, 136, 241, 0.59)
+        }
+    </style>
+
+
+    <section class="content-header">
+        <h1>
+            داشبرد
+            <small>کنترل پنل</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="/CityManagment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+            <li class="active">مدیریت استان ها</li>
+        </ol>
+    </section>
+
+    <div class="callout callout-info" style="margin-top:10px;">
+        <h4>مدریت استان ها</h4>
+        
+    </div>
+
+
+
+    <p style="margin-right:50px;">
+        <a href="/RegionManagment/Create" class="btn btn-default">افزودن استان جدید</a>
+    </p>
+
+    <div class="row" style="padding:50px;">
+        <div class="col-md-12 box">
+            <div class="table-responsive box-body">
+                <table id="mytable" class="table table-bordered table-hover" style="background-color:white;">
+                    <thead>
+                        <tr>
+                            <th class="text-center">نام</th>
+                            <th class="text-center">حذف</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listofarticle">
+                        @await Html.PartialAsync("_ListAjax", Model)
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+
+        function deleteitem(id) {
+            swal({
+                title: "آیا میخواهید حذف شود؟",
+                text: "",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "بله حذف شود",
+                cancelButtonText: "خیر",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        sendtoservertodelete(id);
+
+                    } else {
+                        swal("صرف نظر", "حذف نشد", "error");
+                    }
+                });
+        }
+
+        function sendtoservertodelete(id) {
+            $.ajax({
+                type: "Post",
+                url: '/RegionManagment/Delete',
+                data: { id: id },
+                success: function (data) {
+                    window.location.reload();
+                }
+            });
+        }
+    </script>

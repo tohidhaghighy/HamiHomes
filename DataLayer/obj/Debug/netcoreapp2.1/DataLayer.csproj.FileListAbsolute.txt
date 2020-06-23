@@ -12,3 +12,5 @@ C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Debug\netcoreapp2.
 C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\obj\Debug\netcoreapp2.1\DataLayer.csproj.CopyComplete
 C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Debug\netcoreapp2.1\DataLayer.runtimeconfig.json
 C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Debug\netcoreapp2.1\DataLayer.runtimeconfig.dev.json
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Debug\netcoreapp2.1\Utilities.dll
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DataLayer\bin\Debug\netcoreapp2.1\Utilities.pdb

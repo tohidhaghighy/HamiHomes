@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj" />
+    <ProjectReference Include="..\Utilities\Utilities.csproj" />
+    <ProjectReference Include="..\ViewModelLayer\ViewModelLayer.csproj" />
     
   </ItemGroup>
 

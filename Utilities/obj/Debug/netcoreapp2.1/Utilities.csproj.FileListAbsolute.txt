@@ -6,3 +6,11 @@ C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\obj\Debug\netcoreapp2.
 C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\obj\Debug\netcoreapp2.1\Utilities.AssemblyInfo.cs
 C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\obj\Debug\netcoreapp2.1\Utilities.dll
 C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\obj\Debug\netcoreapp2.1\Utilities.pdb
+C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.xml
+C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\obj\Debug\netcoreapp2.1\Utilities.csprojAssemblyReference.cache
+C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\obj\Debug\netcoreapp2.1\Utilities.csproj.CopyComplete
+C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Http.Features.xml
+C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.ViewFeatures.dll
+C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\bin\Debug\netcoreapp2.1\Microsoft.AspNetCore.Mvc.ViewFeatures.xml

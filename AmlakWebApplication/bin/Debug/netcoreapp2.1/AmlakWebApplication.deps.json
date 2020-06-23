@@ -28,7 +28,9 @@
           "Microsoft.AspNetCore.App": "2.1.1",
           "Microsoft.AspNetCore.Razor.Design": "2.1.2",
           "Microsoft.NETCore.App": "2.1.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.10"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.10",
+          "Utilities": "1.0.0",
+          "ViewModelLayer": "1.0.0"
         },
         "runtime": {
           "AmlakWebApplication.dll": {}
@@ -520,7 +522,8 @@
           "DomainLayer": "1.0.0",
           "Microsoft.AspNetCore.Mvc.Core": "2.1.1",
           "Microsoft.EntityFrameworkCore": "2.1.1",
-          "Microsoft.EntityFrameworkCore.SqlServer": "2.1.1"
+          "Microsoft.EntityFrameworkCore.SqlServer": "2.1.1",
+          "Utilities": "1.0.0"
         },
         "runtime": {
           "DataLayer.dll": {}
@@ -538,6 +541,22 @@
         },
         "compile": {
           "DomainLayer.dll": {}
+        }
+      },
+      "Utilities/1.0.0": {
+        "runtime": {
+          "Utilities.dll": {}
+        },
+        "compile": {
+          "Utilities.dll": {}
+        }
+      },
+      "ViewModelLayer/1.0.0": {
+        "runtime": {
+          "ViewModelLayer.dll": {}
+        },
+        "compile": {
+          "ViewModelLayer.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -3676,6 +3695,16 @@
       "sha512": ""
     },
     "DomainLayer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Utilities/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ViewModelLayer/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
