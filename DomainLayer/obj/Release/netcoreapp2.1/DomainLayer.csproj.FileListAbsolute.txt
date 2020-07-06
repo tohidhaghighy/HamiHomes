@@ -7,3 +7,6 @@ C:\Users\tohid\Source\Repos\AmlakWebApplication\DomainLayer\obj\Release\netcorea
 C:\Users\tohid\Source\Repos\AmlakWebApplication\DomainLayer\obj\Release\netcoreapp2.1\DomainLayer.AssemblyInfo.cs
 C:\Users\tohid\Source\Repos\AmlakWebApplication\DomainLayer\obj\Release\netcoreapp2.1\DomainLayer.dll
 C:\Users\tohid\Source\Repos\AmlakWebApplication\DomainLayer\obj\Release\netcoreapp2.1\DomainLayer.pdb
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DomainLayer\bin\Release\netcoreapp2.1\Utilities.dll
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DomainLayer\bin\Release\netcoreapp2.1\Utilities.pdb
+C:\Users\tohid\Source\Repos\AmlakWebApplication\DomainLayer\obj\Release\netcoreapp2.1\DomainLayer.csproj.CopyComplete

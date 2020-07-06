@@ -20,6 +20,9 @@ namespace DataLayer
         public DbSet<HomeGroup> HomeGroups { get; set; }
         public DbSet<HomeFacility> HomeFacilities { get; set; }
         public DbSet<Setting> Settings { get; set; }
+        public DbSet<Adviser> Advisers { get; set; }
+        public DbSet<Magzine> Magzine { get; set; }
+        public DbSet<MagzineType> MagzineType { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +34,9 @@ namespace DataLayer
             modelBuilder.Entity<HomeGroup>().ToTable("HomeGroup");
             modelBuilder.Entity<HomeFacility>().ToTable("HomeFacility");
             modelBuilder.Entity<Setting>().ToTable("Setting");
+            modelBuilder.Entity<Adviser>().ToTable("Adviser");
+            modelBuilder.Entity<Magzine>().ToTable("Magzine");
+            modelBuilder.Entity<MagzineType>().ToTable("MagzineType");
         }
     }
 }

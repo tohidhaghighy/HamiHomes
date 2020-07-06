@@ -27,6 +27,12 @@ namespace Utilities.Calender
             return PersianDays(pc.GetDayOfWeek(dt).ToString()) + " " + pc.GetDayOfMonth(dt).ToString() + " " + PersianMonth(pc.GetMonth(dt)) + " " + dt.Hour + ":" + dt.Minute + ":" + dt.Second;
         }
 
+        public static String OnlyPersianDate(DateTime dt)
+        {
+            PersianCalendar pc = new PersianCalendar();
+            return pc.GetYear(dt).ToString() + "/" + pc.GetMonth(dt).ToString() + "/" + pc.GetDayOfMonth(dt).ToString();
+        }
+
         public String GetPersianWeek(DateTime dt)
         {
             PersianCalendar pc = new PersianCalendar();

@@ -19,6 +19,9 @@ namespace DataLayer.Infrastracture
         IHomeFacilityRepository HomeFacilityRepository { get; }
         IHomeGroupRepository HomeGroupRepository { get; }
         ISettingRepository SettingRepository { get; }
+        IAdviserRepository AdviserRepository { get; }
+        IMagzineRepository MagzineRepository { get; }
+        IMagzineTypeRepository MagzineTypeRepository { get; }
 
         void Commit();
 

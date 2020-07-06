@@ -10,3 +10,5 @@ C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\obj\Release\netco
 C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\bin\Release\netcoreapp2.1\DomainLayer.dll
 C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\bin\Release\netcoreapp2.1\DomainLayer.pdb
 C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\obj\Release\netcoreapp2.1\ViewModelLayer.csproj.CopyComplete
+C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\bin\Release\netcoreapp2.1\Utilities.dll
+C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\bin\Release\netcoreapp2.1\Utilities.pdb

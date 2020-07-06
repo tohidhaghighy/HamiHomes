@@ -182,7 +182,11 @@
         },
         "frameworks": {
           "netcoreapp2.1": {
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\tohid\\Source\\Repos\\AmlakWebApplication\\Utilities\\Utilities.csproj": {
+                "projectPath": "C:\\Users\\tohid\\Source\\Repos\\AmlakWebApplication\\Utilities\\Utilities.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

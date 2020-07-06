@@ -1553,7 +1553,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
-          "Microsoft.AspNetCore.Mvc.Core": "2.1.1"
+          "Microsoft.AspNetCore.Mvc.Core": "2.1.1",
+          "Utilities": "1.0.0"
         },
         "compile": {
           "bin/placeholder/DomainLayer.dll": {}

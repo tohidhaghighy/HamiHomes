@@ -66,3 +66,12 @@ C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Release\
 C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Release\netcoreapp2.1\Razor\Views\HomeGroupManagment\Create.g.cshtml.cs
 C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Release\netcoreapp2.1\Razor\Views\HomeFacilityManagment\Create.g.cshtml.cs
 C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Release\netcoreapp2.1\Razor\Views\UserManagment\Create.g.cshtml.cs
+C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Release\netcoreapp2.1\Razor\Views\AdvisorManagment\Index.g.cshtml.cs
+C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Release\netcoreapp2.1\Razor\Views\AdvisorManagment\_ListAjax.g.cshtml.cs
+C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Release\netcoreapp2.1\Razor\Views\AdvisorManagment\Create.g.cshtml.cs
+C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Release\netcoreapp2.1\Razor\Views\MagzineManagment\Index.g.cshtml.cs
+C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Release\netcoreapp2.1\Razor\Views\MagzineTypeManagment\Index.g.cshtml.cs
+C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Release\netcoreapp2.1\Razor\Views\MagzineTypeManagment\Create.g.cshtml.cs
+C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Release\netcoreapp2.1\Razor\Views\MagzineManagment\Create.g.cshtml.cs
+C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Release\netcoreapp2.1\Razor\Views\MagzineManagment\_ListAjax.g.cshtml.cs
+C:\Users\tohid\Source\Repos\AmlakWebApplication\AmlakWebApplication\obj\Release\netcoreapp2.1\Razor\Views\MagzineTypeManagment\_ListAjax.g.cshtml.cs

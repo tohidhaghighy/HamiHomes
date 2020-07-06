@@ -19,6 +19,9 @@ namespace DataLayer.Infrastracture
         private IRepository<HomeGroup> homegroupRepo;
         private IRepository<HomeFacility> homefacilitiRepo;
         private IRepository<Setting> settingRepo;
+        private IRepository<Adviser> advisorRepo;
+        private IRepository<Magzine> magzineRepo;
+        private IRepository<MagzineType> magzinetypeRepo;
 
         private AmlakDbContext db;
         public UnitofWork(AmlakDbContext DbContext)
@@ -141,6 +144,39 @@ namespace DataLayer.Infrastracture
             get
             {
                 return new SettingRepository(db);
+            }
+        }
+
+        #endregion
+
+        #region Adviser
+        public IAdviserRepository AdviserRepository
+        {
+            get
+            {
+                return new AdviserRepository(db);
+            }
+        }
+
+        #endregion
+
+        #region Magzine
+        public IMagzineRepository MagzineRepository
+        {
+            get
+            {
+                return new MagzineRepository(db);
+            }
+        }
+
+        #endregion
+
+        #region MagzineType
+        public IMagzineTypeRepository MagzineTypeRepository
+        {
+            get
+            {
+                return new MagzineTypeRepository(db);
             }
         }
 

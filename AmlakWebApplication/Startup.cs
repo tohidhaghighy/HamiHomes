@@ -35,7 +35,9 @@ namespace AmlakWebApplication
             });
 
             services.AddDbContext<AmlakDbContext>(options =>
-                        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+            opt => opt.MigrationsAssembly("DataLayer")));
+
             services.AddScoped<IUnitofWork, UnitofWork>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
