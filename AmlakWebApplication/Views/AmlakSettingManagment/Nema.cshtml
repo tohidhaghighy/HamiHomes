@@ -1,0 +1,65 @@
+﻿@model List<DomainLayer.AmlakNema>
+@{
+    ViewData["Title"] = "انواع نما";
+    Layout = "~/Views/Shared/_Managment.cshtml";
+}
+
+<style>
+    tr:nth-child(even) {
+        background: rgba(126, 136, 241, 0.59)
+    }
+</style>
+
+
+<section class="content-header">
+    <h1>
+        داشبرد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Managment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">مدیریت تنظیمات ملک </li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>مدریت تنظیمات ملک</h4>
+    میتوانید در این قسمت تنظیمات ملک مربوط به انواع نما مانند چوب و کلاسیک و .. را ببینید
+    برای افزودن با توسعه دهنده خود در تماس باشید
+</div>
+
+
+<div class="row" style="padding:50px;">
+    <div class="col-md-12 box">
+        <div class="table-responsive box-body">
+            <table id="mytable" class="table table-bordered table-hover" style="background-color:white;">
+                <thead>
+                    <tr>
+                        <th class="text-center">نام</th>
+                    </tr>
+                </thead>
+                <tbody id="listofarticle">
+                    @{
+                        if (Model.Count() > 0)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-center" style="padding:50px;">@item.Name</td>
+
+                                </tr>
+                            }
+
+                        }
+
+                    }
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+

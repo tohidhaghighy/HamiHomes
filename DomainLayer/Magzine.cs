@@ -14,6 +14,7 @@ namespace DomainLayer
             this.InsertDate = DateTime.Now;
             this.Date = Calender.OnlyPersianDate(DateTime.Now);
             Is_Show = false;
+            Visit_Count = 0;
         }
 
         [Required(ErrorMessage ="نباید عنوان خالی باشد")]
@@ -30,16 +31,20 @@ namespace DomainLayer
         [Required(ErrorMessage = "نباید تاریخ خالی باشد")]
         public DateTime InsertDate { get; set; }
 
+        [MaxLength(500, ErrorMessage = "نباید طول ویدیو از 500 کارکتر بیشتر باشد")]
         public string Image { get; set; }
 
         public Boolean Is_Show { get; set; }
+        public int Visit_Count { get; set; }
 
-        [MaxLength(500, ErrorMessage = "نباید طول عنوان از 500 کارکتر بیشتر باشد")]
+        [MaxLength(500, ErrorMessage = "نباید طول تگ ها از 500 کارکتر بیشتر باشد")]
         public string Tags { get; set; }
 
+        [MaxLength(500, ErrorMessage = "نباید طول ویدیو از 500 کارکتر بیشتر باشد")]
         public string Video { get; set; }
 
         public int MagzineTypeId { get; set; }
+        
 
         #region Foregnkey
 

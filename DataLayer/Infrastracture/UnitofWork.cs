@@ -1,5 +1,7 @@
 ﻿using DataLayer.Repository.Interfaces;
+using DataLayer.Repository.Interfaces.AmlakSetting;
 using DataLayer.Repository.Repositories;
+using DataLayer.Repository.Repositories.AmlakSetting;
 using DomainLayer;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,6 +24,26 @@ namespace DataLayer.Infrastracture
         private IRepository<Adviser> advisorRepo;
         private IRepository<Magzine> magzineRepo;
         private IRepository<MagzineType> magzinetypeRepo;
+
+        #region amlak setting
+        private IRepository<AmlakDivar> amlakdivarRepo;
+        private IRepository<AmlakEmtiaz> amlakemtiazRepo;
+        private IRepository<AmlakJahatVahed> amlakjahatvahedRepo;
+        private IRepository<AmlakKaf> amlakkafRepo;
+        private IRepository<AmlakKitchen> amlakkitchenRepo;
+        private IRepository<AmlakMelkStatus> amlakmelkstatusRepo;
+        private IRepository<AmlakMogheiatMelk> amlakmoghiatemelkRepo;
+        private IRepository<AmlakMoshaat> amlakmoshaatRepo;
+        private IRepository<AmlakNema> amlaknemaRepo;
+        private IRepository<AmlakNoeZamin> amlaknoezaminRepo;
+        private IRepository<AmlakParking> amlakparkingRepo;
+        private IRepository<AmlakPishraftStatus> amlakpishraftstatusRepo;
+        private IRepository<AmlakSaghf> amlaksaghfRepo;
+        private IRepository<AmlakSanadStatus> amlaksanadstatusRepo;
+        private IRepository<AmlakEskeleton> amlakeskeletonRepo;
+        private IRepository<AmlakTasisatGarmaieshi> amlaktasisatgarmaieshRepo;
+        private IRepository<AmlakWC> amlakwcRepo;
+        #endregion
 
         private AmlakDbContext db;
         public UnitofWork(AmlakDbContext DbContext)
@@ -181,6 +203,155 @@ namespace DataLayer.Infrastracture
         }
 
         #endregion
+
+        #endregion
+
+
+        #region AmlakSetting
+        public IAmlakDivarRepository AmlakDivarRepository
+        {
+            get
+            {
+                return new AmlakDivarRepository(db);
+            }
+        }
+
+        public IAmlakEmtiazRepository AmlakEmtiazRepository
+        {
+            get
+            {
+                return new AmlakEmtiazRepository(db);
+            }
+        }
+
+        public IAmlakJahatvahedRepository AmlakJahatvahedRepository
+        {
+            get
+            {
+                return new AmlakJahatvahedRepository(db);
+            }
+        }
+
+        public IAmlakKafRepository AmlakKafRepository
+        {
+            get
+            {
+                return new AmlakKafRepository(db);
+            }
+        }
+
+        public IAmlakKitchenRepository AmlakKitchenRepository
+        {
+            get
+            {
+                return new AmlakKitchenRepository(db);
+            }
+        }
+
+        public IAmlakMelStatusRepository AmlakMelStatusRepository
+        {
+            get
+            {
+                return new AmlakMelStatusRepository(db);
+            }
+        }
+
+        public IAmlakMoghiateMelkRepository AmlakMoghiateMelkRepository
+        {
+            get
+            {
+                return new AmlakMoghiateMelkRepository(db);
+            }
+        }
+
+        public IAmlakMoshaatRepository AmlakMoshaatRepository
+        {
+            get
+            {
+                return new AmlakMoshaatRepository(db);
+            }
+        }
+
+        public IAmlakMoshakhaseRepository AmlakMoshakhaseRepository
+        {
+            get
+            {
+                return new AmlakMoshakhaseRepository(db);
+            }
+        }
+
+        public IAmlakNemaRepository AmlakNemaRepository
+        {
+            get
+            {
+                return new AmlakNemaRepository(db);
+            }
+        }
+
+        public IAmlakNoeZaminRepository AmlakNoeZaminRepository
+        {
+            get
+            {
+                return new AmlakNoeZaminRepository(db);
+            }
+        }
+
+        public IAmlakParkingRepository AmlakParkingRepository
+        {
+            get
+            {
+                return new AmlakParkingRepository(db);
+            }
+        }
+
+        public IAmlakPishraftStatusRepository AmlakPishraftStatusRepository
+        {
+            get
+            {
+                return new AmlakPishraftStatusRepository(db);
+            }
+        }
+
+        public IAmlakSaghfRepository AmlakSaghfRepository
+        {
+            get
+            {
+                return new AmlakSaghfRepository(db);
+            }
+        }
+
+        public IAmlakSanadStatusRepository AmlakSanadStatusRepository
+        {
+            get
+            {
+                return new AmlakSanadStatusRepository(db);
+            }
+        }
+
+        public IAmlakSkeletonRepository AmlakSkeletonRepository
+        {
+            get
+            {
+                return new AmlakSkeletonRepository(db);
+            }
+        }
+
+        public IAmlakTasisatGarmaieshiRepository AmlakTasisatGarmaieshiRepository
+        {
+            get
+            {
+                return new AmlakTasisatGarmaieshiRepository(db);
+            }
+        }
+
+        public IAmlakWcRepository AmlakWcRepository
+        {
+            get
+            {
+                return new AmlakWcRepository(db);
+            }
+        }
+
 
         #endregion
     }
