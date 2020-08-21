@@ -1,4 +1,4 @@
-﻿@model DomainLayer.HomeFacility
+﻿@model ViewModelLayer.Facility.FacilityItems
 
 @{
     ViewData["Title"] = "Create";
@@ -31,17 +31,55 @@
 
             <div class="box-body">
                 <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
-
-                <div class="form-group">
-                    <label>نام</label>
-                    <input asp-for="Name" type="text" class="form-control" placeholder="نام">
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>نام</label>
+                            <input asp-for="HomeFacility.Name" type="text" class="form-control" placeholder="نام">
+                            <span asp-validation-for="HomeFacility.Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>عکس</label>
+                            <input name="Icon" id="Icon" type="file" class="form-control" placeholder="عکس">
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label>عکس</label>
-                    <input name="Icon" id="Icon" type="file" class="form-control" placeholder="عکس">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label> نوع ملک </label>
+                            <select name="MelkTypeId" id="MelkTypeId" class="form-control">
+                                @{
+                                    foreach (var item in Model.MelkTypes)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label> نوع قرارداد </label>
+                            <select name="HomeTypeId" id="HomeTypeId" class="form-control">
+                                @{
+                                    foreach (var item in Model.Hometypes)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
                 </div>
+
+                
+                
+
+
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">درج امکانات جدید</button>

@@ -1,0 +1,121 @@
+﻿@model DomainLayer.Location.Nahie
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Managment.cshtml";
+}
+
+<link href="~/js/leaflet/leaflet.css" rel="stylesheet" />
+<script src="~/js/leaflet/leaflet.js"></script>
+
+
+<section class="content-header">
+    <h1>
+        داشبرد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/NahieManagment/Index?id=@ViewData["Id"]"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">مدیریت منطقه </li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>مدریت محلات</h4>
+    در این قسمت منطقه جدیدی را برای شهر مورد نظر وارد کنید
+</div>
+
+
+<div class="container">
+    <div class="box box-danger">
+        <div class="box-header">
+            <h3 class="box-title">منطقه جدید</h3>
+        </div>
+        <form asp-action="CreateItem" enctype="multipart/form-data">
+            <div class="box-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
+
+                <div class="form-group">
+                    <input asp-for="CityId" type="number" style="display:none;" value="@ViewData["Id"]">
+                </div>
+                <input asp-for="Icon" type="number" style="display:none;" >
+                <div class="form-group">
+                    <label>نام منطقه</label>
+                    <input asp-for="Name" type="text" class="form-control" placeholder="نام منطقه ">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div id="map" style="width:100%;height:300px;">
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>محور افقی</label>
+                            <input asp-for="Gpsx" id="gpsx" type="text" class="form-control" placeholder="محور افقی ">
+                            <span asp-validation-for="Gpsx" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>محور عموری</label>
+                            <input asp-for="Gpsy" id="gpsy" type="text" class="form-control" placeholder="محور عموری ">
+                            <span asp-validation-for="Gpsy" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>ایکون ناحیه</label>
+                    <input name="Icon" id="Icon" type="file" placeholder="ایکون ناحیه ">
+                    <span asp-validation-for="Icon" class="text-danger"></span>
+                </div>
+
+
+
+                <div class="form-group" style="margin-top:20px;">
+                    <button type="submit" class="btn btn-success">درج منطقه جدید</button>
+                </div>
+
+            </div>
+        </form>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+</div>
+
+<script>
+    var map = L.map('map').setView([37.553278571293816, 45.07666215851912], 13);
+
+	L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+	}).addTo(map);
+
+	var LeafIcon = L.Icon.extend({
+		options: {
+			iconSize:     [30, 30]
+		}
+	});
+
+	var greenIcon = new LeafIcon({iconUrl: '/js/leaflet/icon.png'});
+
+    var marker;
+    map.on("click", function (e) {
+     if (marker) {
+        map.removeLayer(marker);
+    }
+    marker = new L.Marker(e.latlng,{icon: greenIcon});
+        $('#gpsx').val(e.latlng.lat);
+        $('#gpsy').val(e.latlng.lng);
+        marker.addTo(map);
+ });
+
+
+
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

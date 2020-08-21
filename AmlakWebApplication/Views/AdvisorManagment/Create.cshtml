@@ -25,7 +25,7 @@
         <div class="box-header">
             <h3 class="box-title">مشاور جدید</h3>
         </div>
-        <form asp-action="CreateItem">
+        <form asp-action="CreateItem" enctype="multipart/form-data">
 
             <div class="box-body">
                 <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
@@ -45,17 +45,49 @@
                     <input asp-for="Mobile" type="text" class="form-control" placeholder="موبایل">
                     <span asp-validation-for="Mobile" class="text-danger"></span>
                 </div>
+
+                <div class="form-group">
+                    <label>چند سال سابقه</label>
+                    <input asp-for="ExperienceYear" type="number" class="form-control" placeholder="چند سال سابقه">
+                    <span asp-validation-for="ExperienceYear" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>ایمیل</label>
+                    <input asp-for="Email" type="email" class="form-control" placeholder="ایمیل" >
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>توضیحات</label>
+                    <textarea asp-for="Description" type="text" class="form-control" rows="6" placeholder="توضیحات"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
                 <div class="form-group">
                     <label>نام کاربری </label>
                     <input asp-for="Username" type="text" class="form-control" placeholder="نام کاربری">
                     <span asp-validation-for="Username" class="text-danger"></span>
                 </div>
+
                 <div class="form-group">
                     <label>پسورد</label>
                     <input asp-for="Password" type="password" class="form-control" placeholder="پسورد">
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
-                
+
+                <div class="form-group">
+                    <label>عکس کارشناس</label>
+                    <input asp-for="Image" type="file" placeholder="عکس کارشناس">
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>عکس پس زمینه کارشناس</label>
+                    <input asp-for="BackgroundImage" type="file" />
+                    <span asp-validation-for="BackgroundImage" class="text-danger"></span>
+                </div>
+
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">درج مشاور جدید</button>
                 </div>
@@ -68,6 +100,9 @@
     <!-- /.box -->
 </div>
 
+<script>
+  
+</script>
 
 
 @section Scripts {

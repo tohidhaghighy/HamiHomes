@@ -43,6 +43,7 @@
                         <tr>
                             <th class="text-center">نام</th>
                             <th class="text-center">استان</th>
+                            <th class="text-center">افزودن منطقه</th>
                             <th class="text-center">حذف</th>
                         </tr>
                     </thead>
@@ -91,5 +92,9 @@
                     window.location.reload();
                 }
             });
+        }
+
+        function Nahieitem(id) {
+        window.location.href = "/NahieManagment/Index?id=" + id;
         }
     </script>

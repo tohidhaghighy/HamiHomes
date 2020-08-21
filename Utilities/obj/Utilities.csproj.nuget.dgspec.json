@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tohid\\Source\\Repos\\AmlakWebApplication\\Utilities\\Utilities.csproj": {}
+    "D:\\Projects\\AmlakWebApplication\\Utilities\\Utilities.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tohid\\Source\\Repos\\AmlakWebApplication\\Utilities\\Utilities.csproj": {
+    "D:\\Projects\\AmlakWebApplication\\Utilities\\Utilities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tohid\\Source\\Repos\\AmlakWebApplication\\Utilities\\Utilities.csproj",
+        "projectUniqueName": "D:\\Projects\\AmlakWebApplication\\Utilities\\Utilities.csproj",
         "projectName": "Utilities",
-        "projectPath": "C:\\Users\\tohid\\Source\\Repos\\AmlakWebApplication\\Utilities\\Utilities.csproj",
-        "packagesPath": "C:\\Users\\tohid\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tohid\\Source\\Repos\\AmlakWebApplication\\Utilities\\obj\\",
+        "projectPath": "D:\\Projects\\AmlakWebApplication\\Utilities\\Utilities.csproj",
+        "packagesPath": "C:\\Users\\tohid-pc\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\AmlakWebApplication\\Utilities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\tohid\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tohid-pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -41,11 +41,19 @@
       "frameworks": {
         "netcoreapp2.1": {
           "dependencies": {
+            "Microsoft.AspNetCore.Cryptography.KeyDerivation": {
+              "target": "Package",
+              "version": "[2.1.1, )"
+            },
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
               "target": "Package",
               "version": "[2.1.0, )",
               "autoReferenced": true
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[4.5.1, )"
             }
           },
           "imports": [

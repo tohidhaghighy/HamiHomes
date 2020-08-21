@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Repository.Interfaces
 {
-    public interface ISettingRepository : IRepository<Setting>
+    public interface ISettingRepository : IRepository<DomainLayer.Setting>
     {
     }
 

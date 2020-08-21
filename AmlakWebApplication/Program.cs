@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataLayer;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -23,6 +24,7 @@ namespace AmlakWebApplication
                 try
                 {
                     var context = services.GetRequiredService<AmlakDbContext>();
+                    context.Database.Migrate();
                     DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)

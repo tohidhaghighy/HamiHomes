@@ -1,0 +1,648 @@
+﻿@model ViewModelLayer.UI.SearchList
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_SearchLayout.cshtml";
+}
+<style>
+    .zoom {
+        padding: 20px;
+        transition: transform .2s; /* Animation */
+        margin: 0 auto;
+        overflow: hidden;
+    }
+
+        .zoom:hover {
+            transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        }
+
+    .content {
+        overflow: hidden;
+        width: 100%;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+
+    .font-xs-b {
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 700;
+    }
+
+    .font-xs-ad {
+        color: #9c99b6;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 700;
+    }
+
+    option {
+        color: black;
+    }
+
+        .districts-list-item {
+        direction: rtl;
+        width: 100%;
+        background-color: #fdfdfd;
+        max-width: 430px;
+        border-radius: 4px;
+        box-shadow: 0 0 5px rgba(0,0,0,.05);
+        padding: .9rem 1.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 6px;
+        cursor: pointer;
+        transition: all .1s ease-in-out;
+    }
+
+        .districts-list-item:hover {
+            box-shadow: 0 5px 5px rgba(88, 88, 88, 0.20);
+        }
+
+    .dropdown-item {
+        font-family: sahel;
+    }
+
+    .dropdown-menu {
+        font-size: 1rem;
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12" style="height:100%">
+        <div id="map" style="width:100%;height:700px;">
+
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        <div id="search">
+            <div class="row">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-12" style="border-left: 1px solid rgba(169, 167, 167, 0.60);">
+                            <div class="container">
+                                <div class="text-center" style="padding-top:5px;">
+                                    <div class="dropdown" style="margin-right:2px;display:inline-block;background-color:rgba(255, 255, 255, 0.00);border-radius:0px;">
+                                        <div class="dropdown">
+                                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="showtypehome" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:black;border:0px;width:100%">
+                                                @Model.ShowItems.Melkname
+                                            </a>
+                                            <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;">
+                                                <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="changehometype(1,'آپارتمان')">آپارتمان</a><br />
+                                                <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="changehometype(2,'خانه حیاط دار')">خانه حیاط دار</a><br />
+                                                <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="changehometype(3,'زمین')">زمین</a><br />
+                                                <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="changehometype(4,'کلنگی')">کلنگی</a><br />
+                                                <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="changehometype(5,'اداری')">اداری</a><br />
+                                                <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="changehometype(6,'مغازه')">مغازه</a><br />
+                                                <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="changehometype(7,'مستغلات')">مستغلات</a><br />
+                                                <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="changehometype(8,'انبار و سوله')">انبار و سوله</a><br />
+                                                <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="changehometype(9,'باغ و باغچه')">باغ و باغچه</a><br />
+                                                <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="changehometype(10,'ویلا')">ویلا</a><br />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12" style="border-left: 1px solid rgba(169, 167, 167, 0.60);">
+                            <div class="container" onclick="showmetritem()" style="cursor:pointer;">
+                                <div class="text-center" style="padding-top:10px;">
+                                    <p style="font-size:14px;font-weight:bold;color:black;display:inline">  متراژ : @Model.ShowItems.MinMetr  - @Model.ShowItems.MaxMetr </p>
+                                    <span class="fa fa-caret-down"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12" style="border-left: 1px solid rgba(169, 167, 167, 0.60);">
+                            <div class="container" onclick="showcostitem()" style="cursor:pointer;">
+                                <div class="text-center" style="padding-top:10px;">
+                                    <p style="font-size:14px;font-weight:bold;color:black;display:inline">  قیمت : @Model.ShowItems.Mincost - @Model.ShowItems.Maxcost </p>
+                                    <span class="fa fa-caret-down"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <hr style="margin-top:0px;margin-bottom:0px;" />
+            <div class="row" id="showcostmetr">
+                <div class="col-lg-6 col-md-6 col-sm-12" style="border-left: 1px solid rgba(169, 167, 167, 0.60);">
+                    <div class="row" id="showmetrsub">
+                        <div class="col-6">
+                            <div class="container" style="padding-right:10px">
+                                <div class="text-center" style="padding-top:5px;">
+                                    <div class="dropdown" style="margin-right:2px;display:inline-block;background-color:rgba(255, 255, 255, 0.00);border-radius:0px;">
+                                        <div class="dropdown">
+                                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="minmetrsearch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:black;border:0px;width:100%">
+                                                حداقل متراژ
+                                            </a>
+                                            <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;" id="minmetrazcombo">
+                                                @{
+                                                    foreach (var item in Model.MainPage.MetrazSetting)
+                                                    {
+                                                        <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="showminmetraz('@item.Metraz',@item.Id)">@item.Metraz</a><br />
+                                                    }
+
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="">
+                                <div class="" style="padding-top:5px;">
+                                    <div class="dropdown" style="margin-right:2px;display:inline-block;background-color:rgba(255, 255, 255, 0.00);border-radius:0px;">
+                                        <div class="dropdown">
+                                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="maxmetrsearch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:black;border:0px;width:100%">
+                                                حداکثر متراژ
+                                            </a>
+                                            <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;" id="maxmetrazcombo">
+                                                @{
+                                                    foreach (var item in Model.MainPage.MetrazSetting)
+                                                    {
+                                                        <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="showmaxmetraz('@item.Metraz',@item.Id)">@item.Metraz</a><br />
+                                                    }
+
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12" style="border-left: 1px solid rgba(169, 167, 167, 0.60);">
+                    <div class="row" id="showcostsub">
+                        <div class="col-6">
+                            <div class="" style="padding-right:10px">
+                                <div class="" style="padding-top:5px;">
+                                    <div class="dropdown" style="margin-right:2px;display:inline-block;background-color:rgba(255, 255, 255, 0.00);border-radius:0px;">
+                                        <div class="dropdown">
+                                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="mincostsearch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:black;border:0px;width:100%;font-size:15px;">
+                                                حداقل قیمت  
+                                            </a>
+                                            <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;" id="mincostcombo">
+                                                @{
+                                                    foreach (var item in Model.MainPage.CostSetting)
+                                                    {
+                                                        <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="showmincost('@item.Cost',@item.Id)">@item.Cost</a><br />
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="">
+                                <div class="" style="padding-top:5px;">
+                                    <div class="dropdown" style="margin-right:2px;display:inline-block;background-color:rgba(255, 255, 255, 0.00);border-radius:0px;">
+                                        <div class="dropdown">
+                                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="maxcostsearch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:black;border:0px;width:100%">
+                                                حداکثر قیمت  
+                                            </a>
+                                            <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;" id="maxcostcombo">
+                                                @{
+                                                    foreach (var item in Model.MainPage.CostSetting)
+                                                    {
+                                                        <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="showmaxcost('@item.Cost',@item.Id)">@item.Cost</a><br />
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr style="margin-top:0px;margin-bottom:0px;" />
+            <div class="row" style="overflow-y:scroll;">
+                <div class="container">
+                    <div class="dropdown" style="direction:rtl;float:left;padding-left:20px;" id="dropdownlist">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color:rgba(0, 0, 0, 0.00);color:black;border:0px;margin-top:10px;">
+                            <p class="d-inline" style="font-size:16px;font-weight:bold;">جدیدترین ها</p>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="text-center"><a href="#">گران ترین</a></li>
+                            <li class="text-center"><a href="#">پربازدید ترین</a></li>
+                            <li class="text-center"><a href="#">ارزان ترین</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown" style="direction:rtl;float:left;padding-left:30px;margin-top:15px;" id="hidefilter">
+                        <a onclick="hidefilter()" class="btn">
+                            مخفی کردن <img src="/img/top.png" style="width:25px;height:25px;" />
+                        </a>
+
+                    </div>
+                    <div class="text-center" style="direction:rtl;float:right;padding-right:20px;padding-top:20px;">
+                        <img src="/img/filter.png" style="width:25px;height:25px;cursor:pointer;" onclick="searchbox()" />
+                    </div>
+                    <div class="text-center" style="direction:rtl;float:right;padding-right:20px;padding-top:20px;">
+                        <p> خیابان ارتش کوچه وکیل اباد </p>
+                    </div>
+                </div>
+
+                <hr style="margin-top:0px;margin-bottom:0px;" />
+
+
+                <div class="container">
+                    <div class="container" style="overflow-y: scroll;height:540px;" id="">
+                        <div id="searchboxtoggle">
+                            <div class="row" style="margin-left: 3px;margin-right: 3px;">
+                                <div class="col-lg-6 col-md-6 col-sm-12 zoom" style="padding-left:10px;">
+                                    <a href="/Home/Detail">
+                                        <div class="card">
+                                            <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
+                                            <div class="card-block p-3">
+                                                <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
+                                                <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
+                                            </div>
+                                            <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
+                                            <div class="row" style="padding:10px;">
+                                                <div class="col-4 text-center">
+                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
+
+                                                </div>
+                                                <div class="col-4 text-center">
+                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
+
+                                                </div>
+                                                <div class="col-4 text-center">
+                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 zoom" style="padding-left:10px;">
+                                    <a href="/Home/Detail">
+                                        <div class="card">
+                                            <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
+                                            <div class="card-block p-3">
+                                                <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
+                                                <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
+                                            </div>
+                                            <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
+                                            <div class="row" style="padding:10px;">
+                                                <div class="col-4 text-center">
+                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
+
+                                                </div>
+                                                <div class="col-4 text-center">
+                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
+
+                                                </div>
+                                                <div class="col-4 text-center">
+                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </div>
+
+                            <div class="row" style="margin-left: 3px;margin-right: 3px;margin-top:5px;">
+                                <div class="col-lg-6 col-md-6 col-sm-12 zoom" style="padding-left:10px;">
+                                    <a href="/Home/Detail">
+                                        <div class="card">
+                                            <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
+                                            <div class="card-block p-3">
+                                                <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
+                                                <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
+                                            </div>
+                                            <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
+                                            <div class="row" style="padding:10px;">
+                                                <div class="col-4 text-center">
+                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
+
+                                                </div>
+                                                <div class="col-4 text-center">
+                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
+
+                                                </div>
+                                                <div class="col-4 text-center">
+                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 zoom" style="padding-left:10px;">
+                                    <a href="/Home/Detail">
+                                        <div class="card">
+                                            <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
+                                            <div class="card-block p-3">
+                                                <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
+                                                <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
+                                            </div>
+                                            <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
+                                            <div class="row" style="padding:10px;">
+                                                <div class="col-4 text-center">
+                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
+
+                                                </div>
+                                                <div class="col-4 text-center">
+                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
+
+                                                </div>
+                                                <div class="col-4 text-center">
+                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </div>
+
+                            <div class="row" style="margin-left: 3px;margin-right: 3px;margin-top:5px;">
+                                <div class="col-lg-6 col-md-6 col-sm-12 zoom" style="padding-left:10px;">
+                                    <a href="/Home/Detail">
+                                        <div class="card">
+                                            <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
+                                            <div class="card-block p-3">
+                                                <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
+                                                <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
+                                            </div>
+                                            <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
+                                            <div class="row" style="padding:10px;">
+                                                <div class="col-4 text-center">
+                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
+
+                                                </div>
+                                                <div class="col-4 text-center">
+                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
+
+                                                </div>
+                                                <div class="col-4 text-center">
+                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 zoom" style="padding-left:10px;">
+                                    <a href="/Home/Detail">
+                                        <div class="card">
+                                            <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
+                                            <div class="card-block p-3">
+                                                <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
+                                                <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
+                                            </div>
+                                            <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
+                                            <div class="row" style="padding:10px;">
+                                                <div class="col-4 text-center">
+                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
+
+                                                </div>
+                                                <div class="col-4 text-center">
+                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
+
+                                                </div>
+                                                <div class="col-4 text-center">
+                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </a>
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+                        <div id="showfilterbox">
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<script>
+    @ViewData["type"] =
+</script>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+
+
+
+
+<script>
+
+    var buminmetrbana = "";
+    var bumaxmetrbana = "";
+    var buminmetrzamin = "";
+    var bumaxmetrzamin = "";
+    function getmetrazbana() {
+            $.ajax({
+                type: "Post",
+                url: '/Home/GetMetrazbana',
+                success: function (data) {
+                    buminmetrbana = data.buyminmetraz;
+                    bumaxmetrbana = data.buymaxmetraz;
+                }
+            });
+    }
+
+    function getmetrazzamin() {
+            $.ajax({
+                type: "Post",
+                url: '/Home/GetMetrazzamin',
+                success: function (data) {
+                    buminmetrzamin = data.buyminmetraz;
+                    bumaxmetrzamin = data.buymaxmetraz;
+                }
+            });
+        }
+
+    $(document).ready(function () {
+        
+        getmetrazbana();
+        getmetrazzamin();
+    });
+
+
+    showpartial(@Model.ShowItems.MelknameId);
+    $("#showfilterbox").hide();
+    $("#hidefilter").hide();
+    $("#showcostmetr").hide();
+
+    if (@ViewData["type"]== 1) {
+        $("#buyheadershow").addClass("border-down");
+    } else {
+        $("#rentheadershow").addClass("border-down");
+    }
+    var map = L.map('map').setView([37.553278571293816, 45.07666215851912], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var LeafIcon = L.Icon.extend({
+        options: {
+            iconSize: [30, 30]
+        }
+    });
+
+    var greenIcon = new LeafIcon({ iconUrl: '/img/house.png' });
+
+
+    var marker;
+     @foreach (var item in Model.ShowItems.ListNahie)
+        {
+            <text>
+               marker = new L.Marker([@item.Gpsx, @item.Gpsy], { icon: greenIcon });
+               marker.addTo(map).on('click', function (e) {
+               map.setView([@item.Gpsx,@item.Gpsy], 14);
+              });
+            </text>
+        }
+
+
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+
+    document.getElementById("map").style.height = h - 50 + "px";
+    document.getElementById("scrollbox").style.height = h - 90 + "px";
+
+    if (w < 600) {
+        document.getElementById("bodyid").style.overflowX = "auto";
+        document.getElementById("bodyid").style.overflowY = "auto";
+
+    }
+
+
+
+
+    function searchbox() {
+        var x = document.getElementById("searchboxtoggle");
+
+        if (x.style.display === "none") {
+            $("#showfilterbox").slideUp(1000);
+            x.style.display = "block";
+            $("#dropdownlist").show();
+            $("#hidefilter").hide();
+
+        } else {
+            $("#showfilterbox").slideDown(1000);
+            x.style.display = "none";
+            $("#dropdownlist").hide();
+            $("#hidefilter").show();
+
+        }
+    }
+
+
+    function hidefilter() {
+        var x = document.getElementById("searchboxtoggle");
+        $("#showfilterbox").slideUp(1000);
+        x.style.display = "block";
+        $("#dropdownlist").show();
+        $("#hidefilter").hide();
+        }
+
+    function changehometype(id, text) {
+        var buybtn = document.getElementById("showtypehome");
+        buybtn.innerHTML = text;
+        showpartial(id);
+
+        if (id == 3 || id == 4 || id == 9) {
+            $('#minmetrazcombo').empty();
+            $('#maxmetrazcombo').empty();
+            $('#minmetrazcombo').append(buminmetrzamin);
+            $('#maxmetrazcombo').append(bumaxmetrzamin);
+        }
+        else {
+            $('#minmetrazcombo').empty();
+            $('#maxmetrazcombo').empty();
+            $('#minmetrazcombo').append(buminmetrbana);
+            $('#maxmetrazcombo').append(bumaxmetrbana);
+        }
+        }
+
+    function showpartial(id) {
+        $("#showfilterbox").empty();
+        if (id==1) {
+            $('#showfilterbox').load('/Search/GetApartemanPartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $("#showfilterbox").show();
+        } else if (id==2) {
+            $('#showfilterbox').load('/Search/GetHomeWithGardenPartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $("#showfilterbox").show();
+        } else if (id==3) {
+            $('#showfilterbox').load('/Search/ZaminPartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $("#showfilterbox").show();
+        } else if (id==4) {
+            $('#showfilterbox').load('/Search/KolangiPartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $("#showfilterbox").show();
+        } else if (id==5) {
+            $('#showfilterbox').load('/Search/EdariPartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $("#showfilterbox").show();
+        } else if (id==6) {
+            $('#showfilterbox').load('/Search/MaghazePartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $("#showfilterbox").show();
+        } else if (id==7) {
+            $('#showfilterbox').load('/Search/MostaghelatPartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $("#showfilterbox").show();
+        } else if (id==8) {
+            $('#showfilterbox').load('/Search/GetAnbarPartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $("#showfilterbox").show();
+        } else if (id==9) {
+            $('#showfilterbox').load('/Search/GardenPartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $("#showfilterbox").show();
+        } else if (id==10) {
+            $('#showfilterbox').load('/Search/VillaPartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $("#showfilterbox").show();
+        }
+        $('#selectpicker').multiselect();
+    }
+
+    function showmetritem() {
+        $("#showcostmetr").toggle(1000);
+        $("#showcostsub").slideUp();
+        $("#showmetrsub").slideDown();
+        }
+
+    function showcostitem() {
+        $("#showcostmetr").toggle(1000);
+        $("#showmetrsub").slideUp();
+        $("#showcostsub").slideDown();
+        }
+
+
+    function showminmetraz(text,id) {
+         document.getElementById("minmetrsearch").innerHTML=text;
+        }
+
+    function showmaxmetraz(text,id) {
+         document.getElementById("maxmetrsearch").innerHTML=text;
+        }
+    function showmincost(text, id) {
+        document.getElementById("mincostsearch").innerHTML=text;
+        }
+
+    function showmaxcost(text,id) {
+         document.getElementById("maxcostsearch").innerHTML=text;
+    }
+</script>
+

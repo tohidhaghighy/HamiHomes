@@ -4,15 +4,72 @@
     {
         foreach (var item in Model)
         {
+            String s = "ندارد";
+            if (item.TypeHome == DomainLayer.Enums.TypeHome.Rent)
+            {
+                s = "اجاره";
+            }
+            else if (item.TypeHome == DomainLayer.Enums.TypeHome.build)
+            {
+                s = "ساخت";
+            }
+            else if (item.TypeHome == DomainLayer.Enums.TypeHome.Buy)
+            {
+                s = "خرید";
+            }
+
+            String melk = "ندارد";
+            if (item.MelkType == DomainLayer.Enums.MelkType.Anbar)
+            {
+                melk = "انبار";
+            }
+            else if (item.MelkType == DomainLayer.Enums.MelkType.Aparteman)
+            {
+                melk = "آپارتمان";
+            }
+            else if (item.MelkType == DomainLayer.Enums.MelkType.Edari)
+            {
+                melk = "اداری";
+            }
+            else if (item.MelkType == DomainLayer.Enums.MelkType.Garden)
+            {
+                melk = "باغ و باغچه";
+            }
+            else if (item.MelkType == DomainLayer.Enums.MelkType.HomeWithGarden)
+            {
+                melk = "خانه حیاط دار";
+            }
+            else if (item.MelkType == DomainLayer.Enums.MelkType.Kolangi)
+            {
+                melk = "کلنگی";
+            }
+            else if (item.MelkType == DomainLayer.Enums.MelkType.Maghaze)
+            {
+                melk = "مغازه";
+            }
+            else if (item.MelkType == DomainLayer.Enums.MelkType.Mostaghelat)
+            {
+                melk = "مستقلات";
+            }
+            else if (item.MelkType == DomainLayer.Enums.MelkType.Villa)
+            {
+                melk = "ویلا";
+            }
+            else if (item.MelkType == DomainLayer.Enums.MelkType.Zamin)
+            {
+                melk = "زمین";
+            }
             <tr>
-                <td class="text-center" style="padding:50px;">
+                <td class="text-center" style="padding:10px;">
                     <a href="~/images/@item.Icon"><img style="width:40px;height:40px;" src="~/images/@item.Icon" /></a>
                 </td>
-                <td class="text-center" style="padding:50px;">
+                <td class="text-center" style="padding:10px;">
                     @item.Name
                 </td>
+                <td class="text-center" style="padding:10px;">@s</td>
+                <td class="text-center" style="padding:10px;">@melk</td>
 
-                <td class="text-center" style="padding:50px;"><p data-placement="top" data-toggle="tooltip" title="حذف"><a class="btn btn-danger btn-xs" onclick="deleteitem(@item.Id)"><i class="ion ion-ios-trash"></i></a></p></td>
+                <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="حذف"><a class="btn btn-danger btn-xs" onclick="deleteitem(@item.Id)"><i class="ion ion-ios-trash"></i></a></p></td>
             </tr>
         }
 

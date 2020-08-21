@@ -5,9 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataLayer.Infrastracture;
 using DomainLayer;
+using DomainLayer.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ViewModelLayer;
+using ViewModelLayer.Facility;
 
 namespace AmlakWebApplication.Controllers
 {
@@ -27,12 +30,27 @@ namespace AmlakWebApplication.Controllers
 
         public async Task<IActionResult> Create()
         {
-            return View();
+            var item = new FacilityItems();
+            var hometypelist = new List<KeyValue>() { new KeyValue() { Id=1,Name= "خرید و فروش" } ,
+             new KeyValue() { Id=2,Name= "رهن و اجاره" } ,
+             new KeyValue() { Id=3,Name= "ساخت و ساز" } };
+            var melktypelist = new List<KeyValue>() { new KeyValue() { Id=1,Name= "آپارتمان" } ,
+             new KeyValue() { Id=2,Name= "خانه حیاط دار" } ,
+             new KeyValue() { Id=3,Name= "زمین" },
+            new KeyValue() { Id=4,Name= "کلنگی" },
+            new KeyValue() { Id=5,Name= "اداری" },
+            new KeyValue() { Id=6,Name= "مغازه" },
+            new KeyValue() { Id=7,Name= "مستقلات" },
+            new KeyValue() { Id=8,Name= "انبار " },
+            new KeyValue() { Id=9,Name= "باغ" },new KeyValue() { Id=10,Name= "ویلا" }};
+            item.Hometypes = hometypelist;
+            item.MelkTypes = melktypelist;
+            return View(item);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateItem(HomeFacility homefacility, IFormFile Icon)
+        public async Task<IActionResult> CreateItem(HomeFacility homefacility, IFormFile Icon, int MelkTypeId, int HomeTypeId)
         {
             try
             {
@@ -48,6 +66,8 @@ namespace AmlakWebApplication.Controllers
                         }
                         homefacility.Icon = fileName;
                     }
+                    homefacility.MelkType = (MelkType)MelkTypeId;
+                    homefacility.TypeHome = (TypeHome)HomeTypeId;
                     _context.HomeFacilityRepository.Insert(homefacility);
                     await _context.CommitAsync();
                 }

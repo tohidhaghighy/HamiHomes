@@ -1,0 +1,390 @@
+﻿@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: 900;
+    src: url('../fonts/iransans/eot/IRANSansWeb_Black.eot');
+    src: url('../fonts/iransans/eot/IRANSansWeb_Black.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+    url('../fonts/iransans/woff2/IRANSansWeb_Black.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+    url('../fonts/iransans/woff/IRANSansWeb_Black.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../fonts/iransans/ttf/IRANSansWeb_Black.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: bold;
+    src: url('../fonts/iransans/eot/IRANSansWeb_Bold.eot');
+    src: url('../fonts/iransans/eot/IRANSansWeb_Bold.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+    url('../fonts/iransans/woff2/IRANSansWeb_Bold.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+    url('../fonts/iransans/woff/IRANSansWeb_Bold.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../fonts/iransans/ttf/IRANSansWeb_Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: 500;
+    src: url('../fonts/iransans/eot/IRANSansWeb_Medium.eot');
+    src: url('../fonts/iransans/eot/IRANSansWeb_Medium.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+    url('../fonts/iransans/woff2/IRANSansWeb_Medium.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+    url('../fonts/iransans/woff/IRANSansWeb_Medium.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../fonts/iransans/ttf/IRANSansWeb_Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/iransans/eot/IRANSansWeb_Light.eot');
+    src: url('../fonts/iransans/eot/IRANSansWeb_Light.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+    url('../fonts/iransans/woff2/IRANSansWeb_Light.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+    url('../fonts/iransans/woff/IRANSansWeb_Light.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../fonts/iransans/ttf/IRANSansWeb_Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: 200;
+    src: url('../fonts/iransans/eot/IRANSansWeb_UltraLight.eot');
+    src: url('../fonts/iransans/eot/IRANSansWeb_UltraLight.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+    url('../fonts/iransans/woff2/IRANSansWeb_UltraLight.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+    url('../fonts/iransans/woff/IRANSansWeb_UltraLight.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../fonts/iransans/ttf/IRANSansWeb_UltraLight.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/iransans/eot/IRANSansWeb.eot');
+    src: url('../fonts/iransans/eot/IRANSansWeb.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+    url('../fonts/iransans/woff2/IRANSansWeb.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+    url('../fonts/iransans/woff/IRANSansWeb.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('../fonts/iransans/ttf/IRANSansWeb.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'sahel';
+    src: url('../fonts/sahel/sahel-FD.woff') format('woff');
+}
+
+body {
+    font-family: IRANSans !important;
+    font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, a, input, textarea {
+    font-family: IRANSans !important;
+    font-weight: bold;
+}
+
+h6,option{
+    font-family:sahel;
+    font-weight:bold;
+}
+/* breakpoint and up - mega dropdown styles */
+@media screen and (min-width: 992px) {
+    /* remove the padding from the navbar so the dropdown hover state is not broken */
+    .navbar {
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+        /* remove the padding from the nav-item and add some margin to give some breathing room on hovers */
+        .navbar .nav-link {
+            padding: .2rem .2rem;
+            margin: 0 .15rem;
+        }
+
+            .navbar .nav-link:hover {
+            }
+
+
+    .changesize {
+        width: 20%;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    h3 {
+        font-size: 16px;
+    }
+}
+
+.nav-tabs {
+    display: inline-block;
+    border-bottom: none;
+    padding-top: 15px;
+    font-weight: bold;
+}
+
+    .nav-tabs > li > a,
+    .nav-tabs > li > a:hover,
+    .nav-tabs > li > a:focus,
+    .nav-tabs > li.active > a,
+    .nav-tabs > li.active > a:hover,
+    .nav-tabs > li.active > a:focus {
+        border: none;
+        border-radius: 0;
+    }
+
+.nav-list {
+    border-bottom: 1px solid #eee;
+}
+
+    .nav-list > li {
+        padding: 10px 10px 10px;
+    }
+
+        .nav-list > li:last-child {
+        }
+
+        .nav-list > li > a:hover {
+            text-decoration: none;
+        }
+
+        .nav-list > li > a > span {
+            display: block;
+            font-weight: bold;
+            color: black;
+            text-transform: uppercase;
+        }
+
+            .nav-list > li > a > span:hover {
+                display: block;
+                font-weight: bold;
+                color: #FFF;
+                text-transform: uppercase;
+            }
+
+
+.nav-link::after {
+    content: '';
+    display: block;
+    width: 0px;
+    height: 2px;
+    background: #FFF;
+    transition: 0.01s;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show > .nav-link, .navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
+    color: #FFF;
+}
+
+.nav-link {
+    padding: 15px 5px;
+    transition: 0.01s;
+}
+
+
+
+.navbar {
+    padding: 0px;
+}
+
+.navbar-toggler-icon {
+    margin: 5px;
+}
+
+body, html {
+    height: 100%;
+}
+
+
+
+.navbar-fixed-top.scrolled {
+    background-color: #fff !important;
+    transition: background-color 200ms linear;
+}
+
+.btnchange {
+    -webkit-transition: color 1s; /* For Safari 3.0 to 6.0 */
+    transition: color 1s; /* For modern browsers */
+    border-radius: 10px 10px 10px 10px;
+    margin-top: 20px;
+    color: white;
+    padding: 10px;
+}
+
+    .btnchange:hover {
+        background: #FFF;
+        color: black;
+    }
+
+.btnchange1 {
+    -webkit-transition: color 1s; /* For Safari 3.0 to 6.0 */
+    transition: color 1s; /* For modern browsers */
+    border-radius: 10px 10px 10px 10px;
+    margin-top: 20px;
+    color: white;
+    padding: 10px;
+}
+
+    .btnchange1:hover {
+        color: #e1dddd;
+    }
+
+#btnbuy {
+    background-color: #e4002b;
+    color: white;
+}
+
+.btnsearch {
+    color: #FFF;
+    padding: 12px;
+    background-color: rgba(51,63,72,0.8);
+}
+
+    .btnsearch:hover {
+        background-color: rgba(85, 79, 78, 0.44);
+        color: white;
+    }
+
+a:hover {
+    color: #e4002b;
+}
+
+.coloricon {
+    color: white;
+}
+
+    .coloricon:hover {
+        color: #9b0a0a;
+    }
+
+.new_way {
+    position: relative;
+    text-align: center;
+}
+
+    .new_way::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: calc(50% - 10px);
+        background: #fcfbfb;
+        width: 20px;
+        height: 10px;
+        /* The points are: (left top: x y, right top: x y, center bottom: x y) */
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+
+
+
+#box {
+    -webkit-box-shadow: inset 0 100px 100px -60px rgba(0,0,0,2.9);
+    -moz-box-shadow: inset 0 100px 100px -60px rgba(0,0,0,2.9);
+    box-shadow: inset 0 100px 100px -60px rgba(0, 0, 0, 0.95);
+}
+
+.overlay {
+    background-color: rgba(42, 40, 40, 0.41);
+    width: 100%;
+    height: 100%;
+}
+
+input::-webkit-input-placeholder {
+    color: rgba(150, 143, 142, 0.44) !important;
+    font-size: 20px;
+}
+
+input:-moz-placeholder { /* Firefox 18- */
+    color: rgba(150, 143, 142, 0.44) !important;
+    font-size: 20px;
+}
+
+input::-moz-placeholder { /* Firefox 19+ */
+    color: rgba(150, 143, 142, 0.44) !important;
+    font-size: 20px;
+}
+
+input:-ms-input-placeholder {
+    color: rgba(150, 143, 142, 0.44) !important;
+    font-size: 20px;
+}
+
+.th-select {
+    display: inline-block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    line-height: 1.5;
+    color: #495057;
+    vertical-align: middle;
+    background: #fff url(../img/down-arrow.png) no-repeat left 0.75rem center;
+    background-size: auto;
+    background-size: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: IRANSans !important;
+    font-weight: bold;
+    font-size:15px;
+    color:black;
+}
+
+
+.th-without-select {
+    display: inline-block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    line-height: 1.5;
+    color: #495057;
+    vertical-align: middle;
+    background-color: rgb(255, 255, 255);
+    background-size: auto;
+    background-size: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: IRANSans !important;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.00);
+    border: 0px;
+    color:black;
+}
+
+select:hover {
+    display: inline-block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    line-height: 1.5;
+    color: #495057;
+    vertical-align: middle;
+    background: url(../img/up-arrow.png) no-repeat left 0.75rem center;
+    background-size: auto;
+    background-size: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-family: IRANSans !important;
+    font-weight: bold;
+    color:black;
+    transition: 1s;
+}
+
+.mainback {
+    background-image: url(../img/back2.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    animation-delay: 5s;
+    -webkit-animation-delay: 5s
+}
+
+button.multiselect {
+    margin-top: 3px;
+    background-color: rgba(0, 0, 0, 0.00);
+    color: white;
+    border: 0px solid #ced4da;
+}

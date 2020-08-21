@@ -8,5 +8,6 @@ namespace DomainLayer.Enums
     {
         Buy=1,
         Rent=2,
+        build=3,
     }
 }

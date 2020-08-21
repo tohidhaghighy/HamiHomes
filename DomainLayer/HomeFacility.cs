@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainLayer.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -13,5 +14,9 @@ namespace DomainLayer
 
         [MaxLength(500, ErrorMessage = "باید کمتر از 500 کلمه باشد")]
         public string Icon { get; set; }
+        public TypeHome TypeHome { get; set; }
+        public MelkType MelkType { get; set; }
+
+        public Boolean Selected { get; set; }
     }
 }

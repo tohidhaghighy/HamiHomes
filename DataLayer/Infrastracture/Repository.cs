@@ -89,6 +89,11 @@ namespace DataLayer.Infrastracture
             return await DbSet.Include(children).ToListAsync();
         }
 
+        public virtual IEnumerable<TEntity> GetAllWithWhereandInclude(string children ,Expression<Func<TEntity, bool>> where)
+        {
+            return DbSet.Include(children).Where(where).ToList();
+        }
+
         public virtual IEnumerable<TEntity> GetManyWithInclude(Expression<Func<TEntity, bool>> where)
         {
             return DbSet.Include(where).ToList();

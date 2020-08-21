@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using DataLayer.Infrastracture;
 using DomainLayer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Utilities.Hash;
@@ -53,14 +55,39 @@ namespace AmlakWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateItem(Adviser adviser)
+        public async Task<IActionResult> CreateItem(Adviser adviser, IFormFile Image, IFormFile BackgroundImage)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    if (Image != null)
+                    {
+                        var fileName = Guid.NewGuid() + Image.FileName;
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", fileName);
+                        var watermark_path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "logo.png");
+                        using (System.IO.Stream stream = new FileStream(path, FileMode.Create))
+                        {
+                            await Image.CopyToAsync(stream);
+
+                        }
+                        adviser.Image = fileName;
+                    }
+
+                    if (BackgroundImage != null)
+                    {
+                        var fileName = Guid.NewGuid() + BackgroundImage.FileName;
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", fileName);
+                        var watermark_path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "logo.png");
+                        using (System.IO.Stream stream = new FileStream(path, FileMode.Create))
+                        {
+                            await BackgroundImage.CopyToAsync(stream);
+
+                        }
+                        adviser.BackgroundImage = fileName;
+                    }
+
                     adviser.Password = adviser.Password.GetHashPassword();
-                    
                     _context.AdviserRepository.Insert(adviser);
                     await _context.CommitAsync();
                 }

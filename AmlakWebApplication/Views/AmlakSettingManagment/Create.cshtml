@@ -1,0 +1,81 @@
+﻿@model ViewModelLayer.Common.KeyValueList
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Managment.cshtml";
+}
+
+
+
+<section class="content-header">
+    <h1>
+        داشبرد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Managment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">تنظیمات جدید </li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>درج @ViewData["name"] جدید</h4>
+
+</div>
+
+<div class="container">
+    <div class="box box-danger">
+        <div class="box-header">
+            <h3 class="box-title">تنظیمات جدید</h3>
+        </div>
+        <form asp-action="CreateItem">
+            <div class="box-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
+
+                <input name="Id" id="Id" type="number" style="display:none;" value="@ViewData["Settingtype"]">
+
+
+                <div class="form-group">
+                    <label> نوع ملک </label>
+                    <select name="MelkTypeId" id="MelkTypeId" class="form-control">
+                        @{
+                            foreach (var item in Model.MelkTypes)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label> نوع قرارداد </label>
+                    <select name="HomeTypeId" id="HomeTypeId" class="form-control">
+                        @{
+                            foreach (var item in Model.Hometypes)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>نام</label>
+                    <input name="name" id="name" type="text" class="form-control" placeholder="نام">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">درج تنظیمات جدید</button>
+                </div>
+
+            </div>
+        </form>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

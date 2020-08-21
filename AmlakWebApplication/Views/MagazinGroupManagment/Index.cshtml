@@ -1,0 +1,131 @@
+﻿@model List<DomainLayer.Magzine.MagazinGroup>
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Managment.cshtml";
+}
+
+<link href="~/css/alert/sweetalert.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<script src="~/css/alert/sweetalert.js"></script>
+
+<style>
+    tr:nth-child(even) {
+        background: rgba(126, 136, 241, 0.59)
+    }
+</style>
+
+<section class="content-header">
+    <h1>
+        داشبرد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/MagazineManagment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">مدیریت دسته بندی مجلات </li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>مدریت دسته بندی مجلات</h4>
+    در این قسمت مجلات حامی هوم را میتوانید در دسته بندی های مختلف وارد کنید
+</div>
+
+
+
+<p style="margin-right:50px;">
+    <a href="/MagazinGroupManagment/Create?id=0" class="btn btn-default">افزودن دسته بندی مجلات جدید</a>
+</p>
+
+
+<div class="row" style="padding:50px;">
+    <div class="col-md-12 box">
+        <ul class="sidebar-menu" data-widget="tree" style="padding-top:20px;">
+            <li class="header" style="background-color:#ffffff;">منو</li>
+            @{if (Model != null)
+                {
+                    foreach (var item in Model.Where(a => a.ParentId == 0))
+                    {
+                        <li id="Workitem" class="treeview">
+                            <a href="#">
+                                <span style="margin-right:50px;">@item.Name</span>
+                                <span class="pull-left-container">
+                                    <i class="fa fa-trash pull-left" onclick="deleteitem(@item.Id)" title="حذف گروه" style="color:red;"></i>
+                                    <i class="fa fa-plus pull-left" onclick="additem(@item.Id)" title="درج زیر گروه"></i>
+                                    <i class="fa fa-dashboard pull-left" onclick="addMagzin(@item.Id)" title="افزودن مجله" style="color:green;"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                @{
+                                    foreach (var ziritem in Model.Where(a => a.ParentId == item.Id))
+                                    {
+                                        <li class="active" style="margin-right:20px;">
+                                            <a href="#">
+                                                <span style="margin-right:50px;">@ziritem.Name</span>
+                                                <span class="pull-left-container">
+                                                    <i class="fa fa-trash pull-left" onclick="deleteitem(@ziritem.Id)" title="حذف زیر گروه" style="color:red;"></i>
+                                                    <i class="fa fa-dashboard pull-left" onclick="addMagzin(@ziritem.Id)" title="افزودن مجله" style="color:green;"></i>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    }
+                                }
+
+
+                            </ul>
+                        </li>
+                    }
+                }
+            }
+
+        </ul>
+    </div>
+</div>
+
+
+<script>
+
+
+    function deleteitem(id) {
+        swal({
+            title: "آیا میخواهید حذف شود؟",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "بله حذف شود",
+            cancelButtonText: "خیر",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+                    sendtoservertodelete(id);
+
+                } else {
+                    swal("صرف نظر", "حذف نشد", "error");
+                }
+            });
+    }
+
+    function sendtoservertodelete(id) {
+        $.ajax({
+            type: "Post",
+            url: '/MagazinGroupManagment/Delete',
+            data: { id: id },
+            success: function (data) {
+                window.location.reload();
+            }
+        });
+        }
+
+    function addMagzin(id) {
+        window.location.href = "/MagzineManagment/Create?id=" + id;
+        }
+
+    function additem(id) {
+        window.location.href = "/MagazinGroupManagment/Create?id=" + id;
+    }
+
+</script>

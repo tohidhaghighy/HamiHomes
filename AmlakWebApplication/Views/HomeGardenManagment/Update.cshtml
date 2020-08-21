@@ -1,0 +1,109 @@
+﻿@model ViewModelLayer.Home.GardenFacility
+@{
+    ViewData["Title"] = "CreateFacility";
+    Layout = "~/Views/Shared/_Managment.cshtml";
+}
+
+<style>
+
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #af1e1e;
+        color: white;
+        direction: rtl;
+    }
+
+    span {
+        direction: rtl;
+    }
+</style>
+<section class="content-header">
+    <h1>
+        داشبرد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/HomeGardenManagment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">ویرایش باغ </li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>ویرایش اطلاعات باغ</h4>
+    در اینجا میتوانید مرحله دوم درج اطلاعات باغ را وارد کنید
+
+</div>
+
+<div class="container">
+    <div class="box box-danger">
+        <div class="box-header">
+            <h3 class="box-title">ویرایش اطلاعات باغ</h3>
+        </div>
+        <form asp-action="UpdateItem">
+
+            <div class="box-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
+
+                <input asp-for="Garden.Id" type="number" class="hidden">
+                <input asp-for="Garden.HomeId" type="number" class="hidden">
+
+                <div class="form-group">
+                    <div class="row">
+
+                        <div class="col-lg-2">
+                            <h4>متراژ زمین</h4>
+                            <input asp-for="Garden.Metrazhzamin" type="number" class="form-control" placeholder="متراژ زمین" value="1">
+                            <span asp-validation-for="Garden.Metrazhzamin" class="text-danger"></span>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h4>نام نگهبان</h4>
+                            <input asp-for="Garden.NegahbaniName" type="text" class="form-control" placeholder="نام نگهبان">
+                            <span asp-validation-for="Garden.NegahbaniName" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-4">
+                            <h4>شماره نگهبان</h4>
+                            <input asp-for="Garden.NegahbaniPhone" type="number" class="form-control" placeholder="شماره نگهبان">
+                            <span asp-validation-for="Garden.NegahbaniPhone" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="">
+                            <h4> امتیاز  :</h4><br />
+                            <select class="form-control select2 text-center" multiple="multiple" data-placeholder="   انتخاب کن  "
+                                    style="width: 100%;direction:rtl;float:right;" name="emtiaz" id="emtiaz">
+                                @for (var i = 0; i < Model.AmlakEmtiazes.Count; i++)
+                                {
+                                    <option value="@Model.AmlakEmtiazes[i].Name">@Model.AmlakEmtiazes[i].Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <hr />
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">ویرایش اطلاعات باغ - رفتن به مرحله بعد </button>
+                </div>
+
+            </div>
+        </form>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

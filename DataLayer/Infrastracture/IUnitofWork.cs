@@ -1,5 +1,9 @@
 ﻿using DataLayer.Repository.Interfaces;
 using DataLayer.Repository.Interfaces.AmlakSetting;
+using DataLayer.Repository.Interfaces.Home;
+using DataLayer.Repository.Interfaces.Location;
+using DataLayer.Repository.Interfaces.Magazin;
+using DataLayer.Repository.Interfaces.Setting;
 using DataLayer.Repository.Repositories;
 using DomainLayer;
 using Microsoft.EntityFrameworkCore;
@@ -15,14 +19,33 @@ namespace DataLayer.Infrastracture
         IUserRepository UserRepository { get; }
         ILogRepository LogRepository { get; }
         IAdminRepository AdminRepository { get; }
+        INahieRepository NahieRepository { get; }
+        IMahalleRepository MahalleRepository { get; }
         ICityRepository CityRepository { get; }
         IRegionRepository RegionRepository { get; }
         IHomeFacilityRepository HomeFacilityRepository { get; }
         IHomeGroupRepository HomeGroupRepository { get; }
         ISettingRepository SettingRepository { get; }
         IAdviserRepository AdviserRepository { get; }
-        IMagzineRepository MagzineRepository { get; }
-        IMagzineTypeRepository MagzineTypeRepository { get; }
+        IMagazinRepository MagazinRepository { get; }
+        IMagazinGroupRepository MagazinGroupRepository { get; }
+
+        #region Home
+        IHomeRepository HomeRepository { get; }
+        IHomeGalleryRepository HomeGalleryRepository { get; }
+        IGardenWithVilaRepository GardenWithVilaRepository { get; }
+        IHomeAnbarRepository HomeAnbarRepository { get; }
+        IHomeApartemanRepository HomeApartemanRepository { get; }
+        IHomeEdariRepository HomeEdariRepository { get; }
+        IHomeGardenRepository HomeGardenRepository { get; }
+        IHomeKolangiRepository HomeKolangiRepository { get; }
+        IHomeWithGardenRepository HomeWithGardenRepository { get; }
+        IMaghazeRepository MaghazeRepository { get; }
+        IMoshtghelatRepository MoshtghelatRepository { get; }
+        IVilaRepository VilaRepository { get; }
+        IZaminRepository ZaminRepository { get; }
+
+        #endregion
 
         #region amlak setting
         IAmlakDivarRepository AmlakDivarRepository { get; }
@@ -44,6 +67,11 @@ namespace DataLayer.Infrastracture
         IAmlakTasisatGarmaieshiRepository AmlakTasisatGarmaieshiRepository { get; }
         IAmlakWcRepository AmlakWcRepository { get; }
         #endregion
+
+        ICostSettingRepository CostSettingRepository { get; }
+        IMetrazSettingRepository MetrazSettingRepository { get; }
+        IVadieSettingRepository VadieSettingRepository { get; }
+        IEjareSettingRepository EjareSettingRepository { get; }
 
         void Commit();
 

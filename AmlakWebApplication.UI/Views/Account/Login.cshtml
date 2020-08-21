@@ -1,0 +1,95 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link href="~/lib/login/all.css" rel="stylesheet" />
+    <link href="~/css/Custom.css" rel="stylesheet" />
+    <style>
+        :root {
+            --input-padding-x: 1.5rem;
+            --input-padding-y: .75rem;
+        }
+
+       
+        .card-signin {
+            border: 0;
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+        }
+
+            .card-signin .card-title {
+                margin-bottom: 2rem;
+                font-weight: 300;
+                font-size: 1.5rem;
+            }
+
+            .card-signin .card-body {
+                padding: 2rem;
+            }
+
+        .form-signin {
+            width: 100%;
+        }
+
+            .form-signin .btn {
+                font-size: 80%;
+                border-radius: 5rem;
+                letter-spacing: .1rem;
+                font-weight: bold;
+                padding: 1rem;
+                transition: all 0.2s;
+            }
+
+        .form-label-group {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body id="boxbackgroundmain" style="background-image:url(/img/houseback.png);background-repeat: no-repeat;background-size: cover;">
+
+    <div class="container" style="direction:rtl;">
+        <div class="row">
+            <div class="mx-auto" style="padding-top:10%;padding-right:30%">
+                <div class="card card-signin my-5" style="background-color:white;border-radius:10px;width:60%">
+                    <div class="card-body">
+                        <h3 class="text-center" style="padding-bottom:20px;">ورود به سایت</h3>
+                        <form class="form-signin">
+                            <div class="form-label-group text-center">
+                                <input type="email" id="inputEmail" class="form-control" placeholder="نام کاربری" style="height:50px;text-align:center;font-size:15px;font-weight:bold" required>
+                            </div>
+
+                            <div class="form-label-group text-center">
+                                <input type="password" id="inputPassword" class="form-control" placeholder="پسورد" style="height:50px;text-align:center;font-size:15px;font-weight:bold" required>
+                            </div>
+
+                            <div class="custom-control custom-checkbox mb-3" style="padding-bottom:10px;padding-top:10px;">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                <label class="custom-control-label" for="customCheck1" style="font-size:15px;font-weight:bold">مرا به یاد داشته باش ؟</label>
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" style="font-size:15px;font-weight:bold">ورود</button>
+                            <a class="btn btn-lg btn-link btn-block text-uppercase" style="font-size:15px;font-weight:bold"> ثبت نام کن</a>
+                            <hr class="my-4">
+                            @*<button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
+        <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>*@
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      
+    </script>
+</body>
+</html>

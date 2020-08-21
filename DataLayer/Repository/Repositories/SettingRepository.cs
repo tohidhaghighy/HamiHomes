@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.Repository.Repositories
 {
-    public class SettingRepository : Repository<Setting>, ISettingRepository
+    public class SettingRepository : Repository<DomainLayer.Setting>, ISettingRepository
     {
         private readonly DbContext db;
         public SettingRepository(DbContext dB) : base(dB)

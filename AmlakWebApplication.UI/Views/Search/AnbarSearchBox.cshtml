@@ -1,0 +1,92 @@
+﻿@model ViewModelLayer.UI.SearchList
+<link href="~/lib/multiselect/multiselect.css" rel="stylesheet" />
+<script src="~/lib/multiselect/multiselect.js"></script>
+
+<style>
+    .btn.btn-secondary {
+        width: 20%;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+</style>
+<div class="wrapper" style="padding:20px;">
+
+
+    <div class="" style="padding-top:30px;">
+        <div class="row">
+            <div class="col-3">
+                <div class="" style="padding-right:30px;padding-top:10px;">
+                    <p style="font-weight:bold;font-size:16px;">عرض انبار </p>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-inline" style="padding-top:10px;margin-right:2px;">
+                            <label style="margin-left:10px;width:100px;">عرض ملک</label>
+                            <input type="number" class="form-control" value="1" placeholder="عرض ملک" style="width:100px;" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-inline" style="padding-top:10px;margin-right:2px;">
+                            <label style="margin-left:10px;width:100px;">عرض گذر</label>
+                            <input type="number" class="form-control" value="1" placeholder="عرض گذر" style="width:100px;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <hr>
+
+    <div class="" style="padding-top:30px;">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="" style="padding-right:30px;padding-top:10px;">
+                    <p style="font-weight:bold;font-size:16px;">موقعیت ملک</p>
+                </div>
+            </div>
+            <div class="col-9">
+                <select class="selectpicker" data-live-search="true">
+                    @foreach (var item in Model.AmlakMogheiatMelk)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+
+                </select>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+
+
+    <div class="" style="padding-top:30px;">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="" style="padding-right:30px;padding-top:10px;">
+                    <p style="font-weight:bold;font-size:16px;">وضعیت سند</p>
+                </div>
+            </div>
+            <div class="col-9">
+                <select class="selectpicker" data-live-search="true">
+                    @foreach (var item in Model.AmlakSanadStatus)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+
+    <a class="btn btn-success btn-block" style="color:white;">جستجو املاک</a>
+</div>
+
+
+<script>
+    $('.selectpicker').selectpicker();
+</script>

@@ -14,3 +14,12 @@ C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\obj\Release\netcoreapp
 C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\obj\Release\netcoreapp2.1\Utilities.csproj.CopyComplete
 C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\obj\Release\netcoreapp2.1\Utilities.dll
 C:\Users\tohid\Source\Repos\AmlakWebApplication\Utilities\obj\Release\netcoreapp2.1\Utilities.pdb
+D:\Projects\AmlakWebApplication\Utilities\obj\Release\netcoreapp2.1\Utilities.csproj.CoreCompileInputs.cache
+D:\Projects\AmlakWebApplication\Utilities\obj\Release\netcoreapp2.1\Utilities.AssemblyInfoInputs.cache
+D:\Projects\AmlakWebApplication\Utilities\obj\Release\netcoreapp2.1\Utilities.AssemblyInfo.cs
+D:\Projects\AmlakWebApplication\Utilities\obj\Release\netcoreapp2.1\Utilities.dll
+D:\Projects\AmlakWebApplication\Utilities\obj\Release\netcoreapp2.1\Utilities.pdb
+D:\Projects\AmlakWebApplication\Utilities\bin\Release\netcoreapp2.1\Utilities.deps.json
+D:\Projects\AmlakWebApplication\Utilities\bin\Release\netcoreapp2.1\Utilities.dll
+D:\Projects\AmlakWebApplication\Utilities\bin\Release\netcoreapp2.1\Utilities.pdb
+D:\Projects\AmlakWebApplication\Utilities\obj\Release\netcoreapp2.1\Utilities.csprojAssemblyReference.cache

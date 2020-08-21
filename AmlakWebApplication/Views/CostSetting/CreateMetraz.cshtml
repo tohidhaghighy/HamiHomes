@@ -1,0 +1,77 @@
+﻿@model DomainLayer.MetrazSetting
+@{
+    ViewData["Title"] = "CreateMetraz";
+    Layout = "~/Views/Shared/_Managment.cshtml";
+}
+
+
+
+<section class="content-header">
+    <h1>
+        داشبرد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/MetrazSetting/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">متراژ جدید </li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>درج متراژ جدید</h4>
+
+</div>
+
+<div class="container">
+    <div class="box box-danger">
+        <div class="box-header">
+            <h3 class="box-title">متراژ جدید</h3>
+        </div>
+        <form asp-action="CreateItemMetraz">
+            <div class="box-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
+
+                <div class="form-group">
+                    <label>متراژ نمایشی</label>
+                    <input asp-for="Metraz" type="text" class="form-control" placeholder="متراژ نمایشی">
+                    <span asp-validation-for="Metraz" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>متراژ </label>
+                    <input asp-for="MetrazChance" type="number" class="form-control" placeholder="متراژ ">
+                    <span asp-validation-for="MetrazChance" class="text-danger"></span>
+                </div>
+
+                 <div class="form-group" style="padding-bottom:20px;">
+                    <label>نوع ملک </label>
+                    <select name="TypeMetraz" id="TypeMetraz" class="form-control">
+                        <option value="1">متراژ بنا</option>
+                        <option value="2">متراژ زمین</option>
+                    </select>
+                </div>
+
+                
+
+
+
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">درج متراژ جدید</button>
+                </div>
+
+            </div>
+        </form>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

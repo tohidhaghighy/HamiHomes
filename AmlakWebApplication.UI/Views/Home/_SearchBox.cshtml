@@ -1,0 +1,243 @@
+﻿<link href="~/js/rangeslider/StyleSheet.css" rel="stylesheet" />
+<script src="~/js/rangeslider/JavaScript.js"></script>
+
+<style>
+    .btn.btn-secondary {
+        width: 20%;
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+</style>
+
+<div class="wrapper" style="padding:20px;">
+
+    <div class="" style="padding-top:30px;">
+        <div class="row">
+            <div class="col-3">
+                <div class="" style="padding-right:30px;padding-top:10px;">
+                    <p style="font-weight:bold;font-size:16px;">نوع خانه </p>
+                </div>
+            </div>
+            <div class="col-9">
+                <a class="btn btn-default" style="background-color:rgba(237, 235, 234, 0.50);margin:5px;width:120px;">آپارتمان</a>
+                <a class="btn btn-default" style="background-color:rgba(237, 235, 234, 0.50);margin:5px;width:120px;">خانه حیاط دار</a>
+                <a class="btn btn-default" style="background-color:rgba(237, 235, 234, 0.50);margin:5px;width:120px;">ویلا</a>
+                <a class="btn btn-default" style="background-color:rgba(237, 235, 234, 0.50);margin:5px;width:120px;">زمین</a>
+                <a class="btn btn-default" style="background-color:rgba(237, 235, 234, 0.50);margin:5px;width:120px;">کلنگی</a>
+                <a class="btn btn-default" style="background-color:rgba(237, 235, 234, 0.50);margin:5px;width:120px;">اداری</a>
+                <a class="btn btn-default" style="background-color:rgba(237, 235, 234, 0.50);margin:5px;width:120px;">مغازه</a>
+                <a class="btn btn-default" style="background-color:rgba(237, 235, 234, 0.50);margin:5px;width:120px;">مستغلات</a>
+                <a class="btn btn-default" style="background-color:rgba(237, 235, 234, 0.50);margin:5px;width:120px;">انبار و سوله</a>
+                <a class="btn btn-default" style="background-color:rgba(237, 235, 234, 0.50);margin:5px;width:120px;">باغ و باغچه</a>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    @*<div class="row" style="padding-top:20px;">
+            <div class="container">
+                <div class="text-center">
+                    <p style="font-family:sahel;font-weight:bold;display:inline;background-color:#f7a31d;color:white;padding:5px;border-radius: 20px;" id="txtstartcost"></p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="text-center">
+                <div class="extra-controls form-inline">
+                    <div class="form-group">
+                        <input type="text" class="js-input-from form-control" value="0" style="border:0px;display:none;" />
+                        <input type="text" class="js-input-to form-control" value="0" style="border:0px;display:none;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="range-slider">
+                <input type="text" class="js-range-slider" value="" />
+            </div>
+        </div>
+        <hr />*@
+
+    <div class="" style="padding-top:30px;">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="" style="padding-right:30px;padding-top:10px;">
+                    <p style="font-weight:bold;font-size:16px;">متراژ بنا </p>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="dropdown" style="margin-right:2px;display:inline-block;background-color:rgba(237, 235, 234, 0.50);">
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="buyminmetrbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:black;border:0px;width:100%">
+                            حداقل متراژ
+                        </a>
+                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;">
+
+                            <a class="btn select-btn dropdown-item" style="font-size:15px; color:black;">40 متر</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px; color:black;">50 متر</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px;color:black;">60 متر</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px;color:black;">70 متر</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px;color:black;">80 متر</a><br />
+
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown" style="margin-right:2px;display:inline-block;background-color:rgba(237, 235, 234, 0.50);">
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="buyminmetrbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:black;border:0px;width:100%;">
+                            حداکثر متراژ
+                        </a>
+                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;">
+
+                            <a class="btn select-btn dropdown-item" style="font-size:15px;">40 متر</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px;">50 متر</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px;">60 متر</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px;">70 متر</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px;">80 متر</a><br />
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="" style="padding-top:30px;">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="" style="padding-right:30px;padding-top:10px;">
+                    <p style="font-weight:bold;font-size:16px;">متراژ زمین </p>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="dropdown" style="margin-right:2px;display:inline-block;background-color:rgba(237, 235, 234, 0.50);">
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="buyminmetrbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:black;border:0px;width:100%">
+                            حداقل متراژ
+                        </a>
+                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;">
+
+                            <a class="btn select-btn dropdown-item" style="font-size:15px; color:black;">40 متر</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px; color:black;">50 متر</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px;color:black;">60 متر</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px;color:black;">70 متر</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px;color:black;">80 متر</a><br />
+
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown" style="margin-right:2px;display:inline-block;background-color:rgba(237, 235, 234, 0.50);">
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="buyminmetrbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:black;border:0px;width:100%;">
+                            حداکثر متراژ
+                        </a>
+                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;">
+
+                            <a class="btn select-btn dropdown-item" style="font-size:15px;">40 متر</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px;">50 متر</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px;">60 متر</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px;">70 متر</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px;">80 متر</a><br />
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="" style="padding-top:30px;">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="" style="padding-right:30px;padding-top:10px;">
+                    <p style="font-weight:bold;font-size:16px;">قیمت </p>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="dropdown" style="margin-right:2px;display:inline-block;background-color:rgba(237, 235, 234, 0.50);">
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="buyminmetrbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:black;border:0px;width:100%">
+                            حداقل قیمت
+                        </a>
+                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;">
+
+                            <a class="btn select-btn dropdown-item" style="font-size:15px; color:black;">100 میلیون</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px; color:black;">100 میلیون</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px; color:black;">100 میلیون</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px; color:black;">100 میلیون</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px; color:black;">100 میلیون</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px; color:black;">100 میلیون</a><br />
+
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown" style="margin-right:2px;display:inline-block;background-color:rgba(237, 235, 234, 0.50);">
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="buyminmetrbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:black;border:0px;width:100%;">
+                            حداکثر قیمت
+                        </a>
+                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;">
+
+                            <a class="btn select-btn dropdown-item" style="font-size:15px; color:black;">100 میلیون</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px; color:black;">100 میلیون</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px; color:black;">100 میلیون</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px; color:black;">100 میلیون</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px; color:black;">100 میلیون</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px; color:black;">100 میلیون</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px; color:black;">100 میلیون</a><br />
+                            <a class="btn select-btn dropdown-item" style="font-size:15px; color:black;">100 میلیون</a><br />
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="" style="padding-top:30px;">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="" style="padding-right:30px;padding-top:10px;">
+                    <p style="font-weight:bold;font-size:16px;">اتاق خواب </p>
+                </div>
+            </div>
+            <div class="col-9">
+                <a class="btn btn-default" style="background-color:rgba(237, 235, 234, 0.50);margin:5px;width:80px;">1 اتاق</a>
+                <a class="btn btn-default" style="background-color:rgba(237, 235, 234, 0.50);margin:5px;width:80px;"> اتاق 2</a>
+                <a class="btn btn-default" style="background-color:rgba(237, 235, 234, 0.50);margin:5px;width:80px;"> اتاق 3</a>
+                <a class="btn btn-default" style="background-color:rgba(237, 235, 234, 0.50);margin:5px;width:80px;"> اتاق 4</a>
+                <a class="btn btn-default" style="background-color:rgba(237, 235, 234, 0.50);margin:5px;width:80px;">+4 اتاق</a>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+
+    <div class="" style="padding-top:30px;">
+        <div class="row">
+            <div class="col-3">
+                <div class="" style="padding-right:30px;padding-top:10px;">
+                    <p style="font-weight:bold;font-size:16px;">امکانات </p>
+                </div>
+            </div>
+            <div class="col-9">
+
+            </div>
+        </div>
+    </div>
+
+    <a class="btn btn-success btn-block" style="color:white;">جستجو املاک</a>
+</div>
+
+
+<script>
+    function change() {
+        alert("sdfs");
+    }
+</script>

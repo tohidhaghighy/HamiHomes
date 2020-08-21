@@ -35,8 +35,8 @@ namespace AmlakWebApplication
             });
 
             services.AddDbContext<AmlakDbContext>(options =>
-                        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
-            opt => opt.MigrationsAssembly("DataLayer")));
+                             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
 
             services.AddScoped<IUnitofWork, UnitofWork>();
 
@@ -44,7 +44,7 @@ namespace AmlakWebApplication
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, AmlakDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -59,6 +59,7 @@ namespace AmlakWebApplication
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            //context.Database.Migrate();
 
             app.UseMvc(routes =>
             {

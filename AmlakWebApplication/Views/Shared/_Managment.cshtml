@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="~/Managment/bower_components/morris.js/morris.css">
     <!-- jvectormap -->
     <link rel="stylesheet" href="~/Managment/bower_components/jvectormap/jquery-jvectormap.css">
+    <link href="~/Managment/bower_components/select2/dist/css/select2.css" rel="stylesheet" />
     <!-- Daterange picker -->
     <link rel="stylesheet" href="~/Managment/bower_components/bootstrap-daterangepicker/daterangepicker.css">
     <!-- bootstrap wysihtml5 - text editor -->
@@ -32,13 +33,101 @@
 
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+
+
+
+
+    <style>
+        @@font-face {
+            font-family: IRANSans;
+            font-style: normal;
+            font-weight: 900;
+            src: url('../fonts/iransans/eot/IRANSansWeb_Black.eot');
+            src: url('../fonts/iransans/eot/IRANSansWeb_Black.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+            url('../fonts/iransans/woff2/IRANSansWeb_Black.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+            url('../fonts/iransans/woff/IRANSansWeb_Black.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+            url('../fonts/iransans/ttf/IRANSansWeb_Black.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: IRANSans;
+            font-style: normal;
+            font-weight: bold;
+            src: url('../fonts/iransans/eot/IRANSansWeb_Bold.eot');
+            src: url('../fonts/iransans/eot/IRANSansWeb_Bold.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+            url('../fonts/iransans/woff2/IRANSansWeb_Bold.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+            url('../fonts/iransans/woff/IRANSansWeb_Bold.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+            url('../fonts/iransans/ttf/IRANSansWeb_Bold.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: IRANSans;
+            font-style: normal;
+            font-weight: 500;
+            src: url('../fonts/iransans/eot/IRANSansWeb_Medium.eot');
+            src: url('../fonts/iransans/eot/IRANSansWeb_Medium.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+            url('../fonts/iransans/woff2/IRANSansWeb_Medium.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+            url('../fonts/iransans/woff/IRANSansWeb_Medium.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+            url('../fonts/iransans/ttf/IRANSansWeb_Medium.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: IRANSans;
+            font-style: normal;
+            font-weight: 300;
+            src: url('../fonts/iransans/iransans/eot/IRANSansWeb_Light.eot');
+            src: url('../fonts/iransans/eot/IRANSansWeb_Light.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+            url('../fonts/iransans/woff2/IRANSansWeb_Light.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+            url('../fonts/iransans/woff/IRANSansWeb_Light.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+            url('../fonts/iransans/ttf/IRANSansWeb_Light.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: IRANSans;
+            font-style: normal;
+            font-weight: 200;
+            src: url('../fonts/iransans/eot/IRANSansWeb_UltraLight.eot');
+            src: url('../fonts/iransans/eot/IRANSansWeb_UltraLight.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+            url('../fonts/iransans/woff2/IRANSansWeb_UltraLight.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+            url('../fonts/iransans/woff/IRANSansWeb_UltraLight.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+            url('../fonts/iransans/ttf/IRANSansWeb_UltraLight.ttf') format('truetype');
+        }
+
+        @@font-face {
+            font-family: IRANSans;
+            font-style: normal;
+            font-weight: normal;
+            src: url('../fonts/iransans/eot/IRANSansWeb.eot');
+            src: url('../fonts/iransans/eot/IRANSansWeb.eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+            url('../fonts/iransans/woff2/IRANSansWeb.woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+            url('../fonts/iransans/woff/IRANSansWeb.woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+            url('../fonts/iransans/ttf/IRANSansWeb.ttf') format('truetype');
+        }
+
+        body {
+            font-family: IRANSans !important;
+            font-weight: 300;
+            direction: rtl;
+            background-color: #E2E2E2;
+            margin: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6, a, p, label, li, btn, input, textarea {
+            font-family: IRANSans !important;
+        }
+
+        h1 {
+            font-weight: bold;
+        }
+    </style>
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition sidebar-mini skin-black-light">
     <div class="wrapper">
 
         <header class="main-header">
             <!-- Logo -->
-            <a href="index2.html" class="logo">
+            <a href="/Managment" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini">پنل</span>
                 <!-- logo for regular state and mobile devices -->
@@ -53,7 +142,7 @@
 
 
                 <!-- Delete This after download -->
-                <a class="btn hidden-xs" style="margin:6px 100px;padding:9px 50px;background-color:#d61577;border-color:#ad0b5d;font-weight:bold;color:#FFF">ورود به سایت</a>
+                <a class="btn hidden-xs" style="margin:6px 100px;padding:9px 50px;background-color:#d61577;border-color:#ad0b5d;font-weight:bold;color:#FFF" href="http://hamihomes.com">ورود به سایت</a>
                 <!-- End Delete-->
 
 
@@ -193,11 +282,132 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="active"><a href="#"><i class="fa fa-circle-o"></i> لیست املاک</a></li>
+                            <li class="active">
+                                <a href="/HomeManagment/Index">
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>جستجو املاک</span>
+                                    <span class="pull-left-container">
+                                        <span class="label label-primary pull-left">4</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/HomeApartemanManagment/Index">
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>لیست اپارتمان</span>
+                                    <span class="pull-left-container">
+                                        <span class="label label-default pull-left">4</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/HomeWithGardenManagment/Index">
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>لیست خانه حیاط دار</span>
+                                    <span class="pull-left-container">
+                                        <span class="label label-default pull-left">4</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/HomeGround/Index">
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>لیست زمین</span>
+                                    <span class="pull-left-container">
+                                        <span class="label label-default pull-left">4</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/HomeKolangi/Index">
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>لیست خانه کلنگی</span>
+                                    <span class="pull-left-container">
+                                        <span class="label label-default pull-left">4</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/HomeEdari/Index">
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>لیست خانه اداری</span>
+                                    <span class="pull-left-container">
+                                        <span class="label label-default pull-left">4</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/HomeMaghaze/Index">
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>لیست مغازه</span>
+                                    <span class="pull-left-container">
+                                        <span class="label label-default pull-left">4</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/HomeMostaghelat/Index">
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>لیست مستقلات</span>
+                                    <span class="pull-left-container">
+                                        <span class="label label-default pull-left">4</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/HomeAnbarManagment/Index">
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>لیست انبار و سوله</span>
+                                    <span class="pull-left-container">
+                                        <span class="label label-default pull-left">4</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/HomeGardenManagment/Index">
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>لیست باغ و باغچه</span>
+                                    <span class="pull-left-container">
+                                        <span class="label label-default pull-left">4</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="/HomeVilaManagment/Index">
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>لیست ویلا</span>
+                                    <span class="pull-left-container">
+                                        <span class="label label-default pull-left">4</span>
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>املاک ترکیه</span>
+                            <span class="pull-left-container">
+                                <i class="fa fa-angle-right pull-left"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="active"><a href="#"><i class="fa fa-circle-o"></i> لیست املاک ترکیه</a></li>
                             <li><a href="#"><i class="fa fa-circle-o"></i> افزودن ملک جدید</a></li>
                         </ul>
                     </li>
-                    <li class="active treeview">
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>باغات کشاورزی</span>
+                            <span class="pull-left-container">
+                                <i class="fa fa-angle-right pull-left"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="active"><a href="#"><i class="fa fa-circle-o"></i> لیست باغات کشاورزی</a></li>
+                            <li><a href="#"><i class="fa fa-circle-o"></i> افزودن باغ جدید</a></li>
+                        </ul>
+                    </li>
+                    <li class="treeview">
                         <a href="#">
                             <i class="fa fa-dashboard"></i> <span>تنظیمات املاک</span>
                             <span class="pull-left-container">
@@ -209,9 +419,9 @@
                             <li><a href="/AmlakSettingManagment/Wc"><i class="fa fa-circle-o"></i> سرویس بهداشتی و حمام</a></li>
                             <li><a href="/AmlakSettingManagment/Parking"><i class="fa fa-circle-o"></i> نوع و تعداد پارکینگ</a></li>
                             <li><a href="/AmlakSettingManagment/Emtiaz"><i class="fa fa-circle-o"></i> امتیاز</a></li>
-                            <li><a href="/AmlakSettingManagment/Wc"><i class="fa fa-circle-o"></i> مشخصه ملک </a></li>
+                            <li><a href="/AmlakSettingManagment/MoshakhaseMelk"><i class="fa fa-circle-o"></i> مشخصه ملک </a></li>
                             <li><a href="/AmlakSettingManagment/Nema"><i class="fa fa-circle-o"></i> نمای ساختمان </a></li>
-                            <li><a href="/AmlakSettingManagment/MoshakhaseMelk"><i class="fa fa-circle-o"></i> پوشش کف </a></li>
+                            <li><a href="/AmlakSettingManagment/Kaf"><i class="fa fa-circle-o"></i> پوشش کف </a></li>
                             <li><a href="/AmlakSettingManagment/Kitchen"><i class="fa fa-circle-o"></i> آشپزخانه </a></li>
                             <li><a href="/AmlakSettingManagment/Divar"><i class="fa fa-circle-o"></i> نوع دیوار </a></li>
                             <li><a href="/AmlakSettingManagment/TasisatGarmaieshi"><i class="fa fa-circle-o"></i> تاسیسات گرمایشی و سرمایشی </a></li>
@@ -246,6 +456,10 @@
                         <ul class="treeview-menu">
                             <li><a href="/HomeGroupManagment"><i class="fa fa-circle-o"></i> مدیریت دسته بندی ها</a></li>
                             <li><a href="/HomeFacilityManagment"><i class="fa fa-circle-o"></i> مدیریت امکانات </a></li>
+                            <li><a href="/CostSetting"><i class="fa fa-circle-o"></i> مدیریت قیمت </a></li>
+                            <li><a href="/CostSetting/Metraz"><i class="fa fa-circle-o"></i> مدیریت متراژ </a></li>
+                            <li><a href="/CostSetting/Ejare"><i class="fa fa-circle-o"></i> مدیریت اجاره </a></li>
+                            <li><a href="/CostSetting/Vadie"><i class="fa fa-circle-o"></i> مدیریت ودیعه </a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -259,6 +473,8 @@
                         <ul class="treeview-menu">
                             <li><a href="/CityManagment"><i class="fa fa-circle-o"></i> مدیریت شهر</a></li>
                             <li><a href="/RegionManagment"><i class="fa fa-circle-o"></i> مدیریت استان</a></li>
+                            <li><a href="/NahieManagment"><i class="fa fa-circle-o"></i> مدیریت منطقه</a></li>
+                            <li><a href="/MahalleManagment"><i class="fa fa-circle-o"></i> مدیریت محله</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -283,13 +499,25 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="/MagzineManagment"><i class="fa fa-circle-o"></i> مدیریت مجلات</a></li>
-                            <li><a href="/MagzineTypeManagment"><i class="fa fa-circle-o"></i> مدیریت دسته بندی مجلات</a></li>
-                            <li><a href="/MagzineManagment/Create"><i class="fa fa-circle-o"></i> درج مجله جدید</a></li>
+                            <li><a href="/MagazinGroupManagment"><i class="fa fa-circle-o"></i> مدیریت دسته بندی مجلات</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>ابزارهای مورد نیاز</span>
+                            <span class="pull-left-container">
+                                <i class="fa fa-angle-right pull-left"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="active"><a href="/Tools"><i class="fa fa-circle-o"></i>تبدیل عکس به ادرس سایت</a></li>
                         </ul>
                     </li>
 
                     <li><a href="/SettingManagment"><i class="fa fa-circle-o text-red"></i> <span>تنظیمات سایت</span></a></li>
-                    <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>گزارش ها</span></a></li>
+                    <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Export</span></a></li>
+                    <li><a href="/LogManagment"><i class="fa fa-circle-o text-primary"></i> <span>گزارش خطا</span></a></li>
                     <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Backup</span></a></li>
                 </ul>
             </section>
@@ -445,17 +673,132 @@
     <script src="~/Managment/dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/Managment/dist/js/demo.js"></script>
+    <script src="~/Managment/bower_components/select2/dist/js/select2.full.js"></script>
+    <script type="text/javascript" src="https://cdn.map.ir/web-sdk/1.4.2/js/mapp.env.js"></script>
+    <script type="text/javascript" src="https://cdn.map.ir/web-sdk/1.4.2/js/mapp.min.js"></script>
+
     <script>
+
+
+
+        function changedirection(x, y, zoom) {
+            app = new Mapp({
+                element: '#app',
+                presets: {
+                    latlng: {
+                        lat: x,
+                        lng: y,
+                    },
+                    zoom: zoom,
+                },
+                apiKey: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjAwYmI0M2UxMGIxNTE4ZjBjNmM5MWRjNTg0ODI5ODM5OWIxOGY4YjlmOTEwMmYyODdjOGNiNDMxZDUwZmM5NTgwN2NhNGE5N2YwOTFlMjgxIn0.eyJhdWQiOiIxMDI4NyIsImp0aSI6IjAwYmI0M2UxMGIxNTE4ZjBjNmM5MWRjNTg0ODI5ODM5OWIxOGY4YjlmOTEwMmYyODdjOGNiNDMxZDUwZmM5NTgwN2NhNGE5N2YwOTFlMjgxIiwiaWF0IjoxNTk2MDk3MTk5LCJuYmYiOjE1OTYwOTcxOTksImV4cCI6MTU5ODY4OTE5OSwic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.D72_lhlqLfYLWzU39Vht_UD-OokirrPZIsOmGDZVHhsD-5ha9DF7WaU7FJA-H3RhVYJJccYl5fL5ik6dooPiap8yL3mBIJO6QLGO5ZdN3Y_kQqjsgJlrUTtLcJ-fmAKjJFEdcgiP0ofcGkjGinEtJPNRNoGRlbhXX75neXlheJ2FQBvdNhdXRIbyBGOJZkPGHOurUWHtxOeGZzuu5WpJ3wphdHJhoQdfTZIMFNe-OO-s7UnUhGB2PUs6noqH6zVrAJpLwCG2IaYwTFl6uD7L7agAiAhFEm31zY7I7pDj8PKCWIfIKRC-FmwMlhGmx_vBWe5OpW5ezGoupEIaTn52_Q'
+            });
+            app.addLayers();
+            app.addZoomControls();
+            app.addSearch({
+                counts: {
+                    geocode: 10,
+                    poi: 10,
+                },
+                history: true,
+            });
+            app.addMarker({
+                name: 'basic-marker',
+                latlng: {
+                    lat: x,
+                    lng: y,
+                },
+                popup: {
+                    title: {
+                        html: 'جستجو ادرس در نقشه',
+                    },
+                    description: {
+                        html: '<h3>ارومیه</h3>',
+                    },
+                    open: true,
+                },
+                on: {
+                    click: function () {
+                        app.removeMarkers({
+                            group: app.groups.features.markers,
+                        });
+                    },
+                },
+            });
+
+        }
+
+
+
+
+
         $(function () {
-            $('#mytable').DataTable({
-                'paging': true,
-                'lengthChange': false,
-                'searching': false,
-                'ordering': true,
-                'info': true,
-                'autoWidth': false
+            //Initialize Select2 Elements
+            $('.select2').select2({
+                dir: "rtl"
+            });
+
+            //Datemask dd/mm/yyyy
+            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+            //Datemask2 mm/dd/yyyy
+            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            //Money Euro
+            $('[data-mask]').inputmask()
+
+            //Date range picker
+            $('#reservation').daterangepicker()
+            //Date range picker with time picker
+            $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' })
+            //Date range as a button
+            $('#daterange-btn').daterangepicker(
+                {
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    },
+                    startDate: moment().subtract(29, 'days'),
+                    endDate: moment()
+                },
+                function (start, end) {
+                    $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+                }
+            )
+
+            //Date picker
+            $('#datepicker').datepicker({
+                autoclose: true
             })
-        });
+
+            //iCheck for checkbox and radio inputs
+            $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+                checkboxClass: 'icheckbox_minimal-blue',
+                radioClass: 'iradio_minimal-blue'
+            })
+            //Red color scheme for iCheck
+            $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+                checkboxClass: 'icheckbox_minimal-red',
+                radioClass: 'iradio_minimal-red'
+            })
+            //Flat red color scheme for iCheck
+            $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+                checkboxClass: 'icheckbox_flat-green',
+                radioClass: 'iradio_flat-green'
+            })
+
+            //Colorpicker
+            $('.my-colorpicker1').colorpicker()
+            //color picker with addon
+            $('.my-colorpicker2').colorpicker()
+
+            //Timepicker
+            $('.timepicker').timepicker({
+                showInputs: false
+            })
+        })
     </script>
     @RenderSection("Scripts", required: false)
 

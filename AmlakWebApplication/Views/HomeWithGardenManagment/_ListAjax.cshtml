@@ -1,0 +1,31 @@
+﻿@model List<DomainLayer.Home.HomewithGarden>
+
+@{
+    if (Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr onclick="updateitem(@item.HomeId)">
+                <td class="text-center" style="padding:10px;">
+                    @item.MetrazhBena
+                </td>
+                <td class="text-center" style="padding:10px;">
+                    @item.Metrazhzamin
+                </td>
+                <td class="text-center" style="padding:10px;">
+                    @item.Tedadkoltabaghat
+                </td>
+
+                <td class="text-center" style="padding:10px;">
+                    @item.Arzegozar
+                </td>
+                <td class="text-center" style="padding:10px;">
+                    @item.Arzemelk
+                </td>
+                <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="حذف"><a class="btn btn-danger btn-xs" onclick="deleteitem(@item.Id)"><i class="ion ion-ios-trash"></i></a></p></td>
+            </tr>
+        }
+
+    }
+
+}

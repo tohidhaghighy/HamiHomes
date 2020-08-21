@@ -1,9 +1,88 @@
-﻿
+﻿@model DomainLayer.Magzine.Magazine
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Managment.cshtml";
 }
 
+<script src="~/js/ckeditor/ckeditor.js"></script>
+
+<section class="content-header">
+    <h1>
+        داشبرد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/MagazineManagment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">مدیریت مجلات </li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>مدریت مجلات</h4>
+    در این قسمت مجلات حامی هوم را میتوانید مجله جدیدی را وارد کنید
+</div>
 
 
+<div class="container">
+    <div class="box box-danger">
+        <div class="box-header">
+            <h3 class="box-title">مجله جدید</h3>
+        </div>
+        <form asp-action="CreateItem" enctype="multipart/form-data">
+            <div class="box-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
+
+                <div class="form-group">
+                    <input asp-for="MagazinGroupId" type="number" style="display:none;" value="@ViewData["Id"]">
+                </div>
+
+                <div class="form-group">
+                    <label>تیتر</label>
+                    <input asp-for="Title" type="text" class="form-control" placeholder="تیتر ">
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>متن</label>
+                    <textarea asp-for="Text" id="editortext" cols="80" rows="10">متن مجله</textarea>
+                    <span asp-validation-for="Text" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>تگ ها</label>
+                    <input asp-for="Tags" type="text" class="form-control" placeholder="تگ های مجله ">
+                    <span asp-validation-for="Tags" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>عکس</label>
+                    <input asp-for="Image" type="file" placeholder="عکس مجله ">
+                    <span asp-validation-for="Image" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>تور مجازی</label>
+                    <input asp-for="UrlTour360" type="text" class="form-control" placeholder="تور مجازی ">
+                    <span asp-validation-for="UrlTour360" class="text-danger"></span>
+                </div>
+
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">درج مجله جدید</button>
+                </div>
+
+            </div>
+        </form>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+</div>
+
+<script>
+    CKEDITOR.replace('editortext');
+    $('.textarea').wysihtml5();
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 

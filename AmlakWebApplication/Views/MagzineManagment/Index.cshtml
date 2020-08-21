@@ -1,4 +1,4 @@
-﻿@model List<DomainLayer.Magzine>
+﻿@model List<DomainLayer.Magzine.Magazine>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Managment.cshtml";
@@ -21,7 +21,7 @@
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="/MagzineManagment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li><a href="/MagazineManagment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
         <li class="active">مدیریت مجلات </li>
     </ol>
 </section>
@@ -34,7 +34,7 @@
 
 
 <p style="margin-right:50px;">
-    <a href="/MagzineManagment/Create" class="btn btn-default">افزودن مجله جدید</a>
+    <a href="/MagazinGroupManagment/Index" class="btn btn-default">افزودن مجله جدید</a>
 </p>
 
 <div class="row" style="padding:50px;">
@@ -43,7 +43,6 @@
             <table id="mytable" class="table table-bordered table-hover" style="background-color:white;">
                 <thead>
                     <tr>
-                        <th class="text-center">نمایش داده شود</th>
                         <th class="text-center">عکس</th>
                         <th class="text-center">عنوان</th>
                         <th class="text-center">دسته بندی</th>
@@ -58,9 +57,7 @@
                 </tbody>
 
             </table>
-
         </div>
-
     </div>
 </div>
 
@@ -92,12 +89,16 @@
         function sendtoservertodelete(id) {
             $.ajax({
                 type: "Post",
-                url: '/HomeFacilityManagment/Delete',
+                url: '/MagzineManagment/Delete',
                 data: { id: id },
                 success: function (data) {
                     window.location.reload();
                 }
             });
+    }
+
+    function Edititem(id) {
+        window.location.href = "/MagzineManagment/Update?id=" + id;
         }
 </script>
 

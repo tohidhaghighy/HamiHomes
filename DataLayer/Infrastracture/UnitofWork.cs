@@ -1,8 +1,18 @@
 ﻿using DataLayer.Repository.Interfaces;
 using DataLayer.Repository.Interfaces.AmlakSetting;
+using DataLayer.Repository.Interfaces.Home;
+using DataLayer.Repository.Interfaces.Location;
+using DataLayer.Repository.Interfaces.Magazin;
+using DataLayer.Repository.Interfaces.Setting;
 using DataLayer.Repository.Repositories;
 using DataLayer.Repository.Repositories.AmlakSetting;
+using DataLayer.Repository.Repositories.Home;
+using DataLayer.Repository.Repositories.Location;
+using DataLayer.Repository.Repositories.Magazin;
+using DataLayer.Repository.Repositories.Setting;
 using DomainLayer;
+using DomainLayer.Location;
+using DomainLayer.Magzine;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -22,8 +32,12 @@ namespace DataLayer.Infrastracture
         private IRepository<HomeFacility> homefacilitiRepo;
         private IRepository<Setting> settingRepo;
         private IRepository<Adviser> advisorRepo;
-        private IRepository<Magzine> magzineRepo;
-        private IRepository<MagzineType> magzinetypeRepo;
+        private IRepository<Magazine> magazinRepo;
+        private IRepository<MagazinGroup> magzingroupRepo;
+        private IRepository<Nahie> nahieRepo;
+        private IRepository<Mahalle> mahalleRepo;
+        private IRepository<VadieSetting> vadieRepo;
+        private IRepository<EjareSetting> ejareRepo;
 
         #region amlak setting
         private IRepository<AmlakDivar> amlakdivarRepo;
@@ -183,22 +197,22 @@ namespace DataLayer.Infrastracture
         #endregion
 
         #region Magzine
-        public IMagzineRepository MagzineRepository
+        public IMagazinRepository MagazinRepository
         {
             get
             {
-                return new MagzineRepository(db);
+                return new MagazinRepository(db);
             }
         }
 
         #endregion
 
-        #region MagzineType
-        public IMagzineTypeRepository MagzineTypeRepository
+        #region MagazinGroup
+        public IMagazinGroupRepository MagazinGroupRepository
         {
             get
             {
-                return new MagzineTypeRepository(db);
+                return new MagazinGroupRepository(db);
             }
         }
 
@@ -354,5 +368,160 @@ namespace DataLayer.Infrastracture
 
 
         #endregion
+
+        #region location
+        public INahieRepository NahieRepository
+        {
+            get
+            {
+                return new NahieRepository(db);
+            }
+        }
+
+        public IMahalleRepository MahalleRepository
+        {
+            get
+            {
+                return new MahalleRepository(db);
+            }
+        }
+        #endregion
+
+        #region home
+        public IHomeRepository HomeRepository
+        {
+            get
+            {
+                return new HomeRepository(db);
+            }
+        }
+
+        public IHomeGalleryRepository HomeGalleryRepository
+        {
+            get
+            {
+                return new HomeGalleryRepository(db);
+            }
+        }
+
+        public IGardenWithVilaRepository GardenWithVilaRepository
+        {
+            get
+            {
+                return new GardenWithVilaRepository(db);
+            }
+        }
+
+        public IHomeAnbarRepository HomeAnbarRepository
+        {
+            get
+            {
+                return new HomeAnbarRepository(db);
+            }
+        }
+
+        public IHomeApartemanRepository HomeApartemanRepository
+        {
+            get
+            {
+                return new ApartemanRepository(db);
+            }
+        }
+
+        public IHomeEdariRepository HomeEdariRepository
+        {
+            get
+            {
+                return new EdariRepository(db);
+            }
+        }
+
+        public IHomeGardenRepository HomeGardenRepository
+        {
+            get
+            {
+                return new GardenRepository(db);
+            }
+        }
+
+        public IHomeKolangiRepository HomeKolangiRepository
+        {
+            get
+            {
+                return new KolangiRepository(db);
+            }
+        }
+
+        public IHomeWithGardenRepository HomeWithGardenRepository
+        {
+            get
+            {
+                return new HomeWithGardenRepository(db);
+            }
+        }
+
+        public IMaghazeRepository MaghazeRepository
+        {
+            get
+            {
+                return new MaghazeRepository(db);
+            }
+        }
+
+        public IMoshtghelatRepository MoshtghelatRepository
+        {
+            get
+            {
+                return new MoshtagelatRepository(db);
+            }
+        }
+
+        public IVilaRepository VilaRepository
+        {
+            get
+            {
+                return new VilaRepository(db);
+            }
+        }
+
+        public IZaminRepository ZaminRepository
+        {
+            get
+            {
+                return new ZaminRepository(db);
+            }
+        }
+
+        #endregion
+
+        public ICostSettingRepository CostSettingRepository
+        {
+            get
+            {
+                return new CostSettingRepository(db);
+            }
+        }
+        public IMetrazSettingRepository MetrazSettingRepository
+        {
+            get
+            {
+                return new MetrazSettingRepository(db);
+            }
+        }
+        public IVadieSettingRepository VadieSettingRepository
+        {
+            get
+            {
+                return new VadieSettingRepository(db);
+            }
+        }
+        public IEjareSettingRepository EjareSettingRepository
+        {
+            get
+            {
+                return new EjareSettingRepository(db);
+            }
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainLayer.Location;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -19,6 +20,8 @@ namespace DomainLayer
         [ForeignKey(nameof(RegionId))]
         public virtual Region Region { get; set; }
         #endregion
+
+        public virtual ICollection<Nahie> Nahies { get; set; }
 
     }
 }

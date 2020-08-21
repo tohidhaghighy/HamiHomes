@@ -58,9 +58,24 @@ namespace DataLayer.Migrations
 
                     b.Property<bool>("Active");
 
+                    b.Property<string>("BackgroundImage")
+                        .HasMaxLength(500);
+
+                    b.Property<bool>("CanAdd");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Email");
+
+                    b.Property<int>("ExperienceYear");
+
                     b.Property<string>("Family")
                         .IsRequired()
                         .HasMaxLength(50);
+
+                    b.Property<string>("Image")
+                        .HasMaxLength(500);
 
                     b.Property<string>("Mobile")
                         .IsRequired()
@@ -83,6 +98,350 @@ namespace DataLayer.Migrations
                     b.ToTable("Adviser");
                 });
 
+            modelBuilder.Entity("DomainLayer.AmlakDivar", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MelkType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlakDivar");
+                });
+
+            modelBuilder.Entity("DomainLayer.AmlakEmtiaz", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MelkType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlakEmtiaz");
+                });
+
+            modelBuilder.Entity("DomainLayer.AmlakEskeleton", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MelkType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlakEskeleton");
+                });
+
+            modelBuilder.Entity("DomainLayer.AmlakJahatVahed", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MelkType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlakJahatVahed");
+                });
+
+            modelBuilder.Entity("DomainLayer.AmlakKaf", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Itemid");
+
+                    b.Property<int>("MelkType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlakKaf");
+                });
+
+            modelBuilder.Entity("DomainLayer.AmlakKitchen", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MelkType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlakKitchen");
+                });
+
+            modelBuilder.Entity("DomainLayer.AmlakMelkStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MelkType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlakMelkStatus");
+                });
+
+            modelBuilder.Entity("DomainLayer.AmlakMogheiatMelk", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MelkType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlakMogheiatMelk");
+                });
+
+            modelBuilder.Entity("DomainLayer.AmlakMoshaat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MelkType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlakMoshaat");
+                });
+
+            modelBuilder.Entity("DomainLayer.AmlakMoshakhase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MelkType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlakMoshakhase");
+                });
+
+            modelBuilder.Entity("DomainLayer.AmlakNema", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MelkType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlakNema");
+                });
+
+            modelBuilder.Entity("DomainLayer.AmlakNoeZamin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MelkType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlakNoeZamin");
+                });
+
+            modelBuilder.Entity("DomainLayer.AmlakParking", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MelkType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlakParking");
+                });
+
+            modelBuilder.Entity("DomainLayer.AmlakPishraftStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MelkType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlakPishraftStatus");
+                });
+
+            modelBuilder.Entity("DomainLayer.AmlakSaghf", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MelkType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlakSaghf");
+                });
+
+            modelBuilder.Entity("DomainLayer.AmlakSanadStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MelkType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlakSanadStatus");
+                });
+
+            modelBuilder.Entity("DomainLayer.AmlakTasisatGarmaieshi", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MelkType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlakTasisatGarmaieshi");
+                });
+
+            modelBuilder.Entity("DomainLayer.AmlakWC", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MelkType");
+
+                    b.Property<string>("Name");
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AmlakWC");
+                });
+
             modelBuilder.Entity("DomainLayer.City", b =>
                 {
                     b.Property<int>("Id")
@@ -102,6 +461,706 @@ namespace DataLayer.Migrations
                     b.ToTable("City");
                 });
 
+            modelBuilder.Entity("DomainLayer.CostSetting", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Cost");
+
+                    b.Property<long>("CostChance");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CostSetting");
+                });
+
+            modelBuilder.Entity("DomainLayer.EjareSetting", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Cost");
+
+                    b.Property<long>("CostChance");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EjareSetting");
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Anbar", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("HomeEmtiaz")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("HomeId");
+
+                    b.Property<int>("MetrazhBena");
+
+                    b.Property<int>("Metrazhzamin");
+
+                    b.Property<string>("NegahbaniName")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("NegahbaniPhone")
+                        .HasMaxLength(500);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Anbars");
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Aparteman", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Ghadroalsahm")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("HomeEmtiaz")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("HomeId");
+
+                    b.Property<string>("Homedivar")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homejahatevahed")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homekaf")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homekitchen")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homemogheiat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homemoshaat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homemoshakhase")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homenema")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homeparking")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homesanad")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Hometasisat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homevaziate")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homewc")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("MetrazhBena");
+
+                    b.Property<int>("Metrazhzamin");
+
+                    b.Property<string>("NegahbaniName")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("NegahbaniPhone")
+                        .HasMaxLength(500);
+
+                    b.Property<int>("Tabaghe");
+
+                    b.Property<int>("Tedadkoltabaghat");
+
+                    b.Property<int>("Tedadkolvahedha");
+
+                    b.Property<int>("Tedadvaheddartabaghe");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Apartemans");
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Edari", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("HomeEmtiaz")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("HomeId");
+
+                    b.Property<string>("Homekaf")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homemogheiat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homenema")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homeparking")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homesanad")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Hometasisat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homevaziate")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homewc")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("MetrazhBena");
+
+                    b.Property<string>("NegahbaniName")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("NegahbaniPhone")
+                        .HasMaxLength(500);
+
+                    b.Property<int>("Tabaghe");
+
+                    b.Property<int>("TedadOtagh");
+
+                    b.Property<int>("Tedadkoltabaghat");
+
+                    b.Property<int>("Tedadkolvahedha");
+
+                    b.Property<int>("Tedadvaheddartabaghe");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Edaries");
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Garden", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("HomeEmtiaz")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("HomeId");
+
+                    b.Property<int>("Metrazhzamin");
+
+                    b.Property<string>("NegahbaniName")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("NegahbaniPhone")
+                        .HasMaxLength(500);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Gardenes");
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.GardenWithVila", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Ghadroalsahm")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("HomeEmtiaz")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("HomeId");
+
+                    b.Property<string>("Homedivar")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homekaf")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homekitchen")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homemogheiat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homemoshaat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homemoshakhase")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homenema")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homeparking")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homesanad")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Hometasisat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homevaziate")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homewc")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("MetrazhBena");
+
+                    b.Property<int>("Metrazhzamin");
+
+                    b.Property<string>("NegahbaniName")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("NegahbaniPhone")
+                        .HasMaxLength(500);
+
+                    b.Property<int>("Tabaghe");
+
+                    b.Property<int>("TedadOtagh");
+
+                    b.Property<int>("Tedadkoltabaghat");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("gardenWithVilas");
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Home", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(500);
+
+                    b.Property<int?>("AdvisorId");
+
+                    b.Property<int>("Bath");
+
+                    b.Property<int>("Bed");
+
+                    b.Property<int>("BuildYear");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(10);
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Gpsx")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Gpsy")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("HomeMapImage")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("Image")
+                        .HasMaxLength(1000);
+
+                    b.Property<bool>("IsPrivate");
+
+                    b.Property<bool>("IsShow");
+
+                    b.Property<string>("Mobile")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("OwnerName")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Phone")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("ThreeDView")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Home");
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.HomeGallery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("HomeId");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HomeId");
+
+                    b.ToTable("HomeGallery");
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.HomewithGarden", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Arzegozar");
+
+                    b.Property<int>("Arzemelk");
+
+                    b.Property<string>("HomeEmtiaz")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("HomeId");
+
+                    b.Property<string>("Homedivar")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homekaf")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homekitchen")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homemogheiat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homemoshakhase")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homenema")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homeparking")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homesanad")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Hometasisat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homevaziate")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homewc")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("MetrazhBena");
+
+                    b.Property<int>("Metrazhzamin");
+
+                    b.Property<int>("Tedadkoltabaghat");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HomewithGardens");
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Kolangi", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Arzegozar");
+
+                    b.Property<int>("Arzemelk");
+
+                    b.Property<string>("HomeEmtiaz")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("HomeId");
+
+                    b.Property<string>("Homemogheiat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homemoshakhase")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homesanad")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homevaziate")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("Metrazhbena");
+
+                    b.Property<int>("Metrazhzamin");
+
+                    b.Property<string>("NegahbaniName")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("NegahbaniPhone")
+                        .HasMaxLength(500);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Kolangis");
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Maghaze", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DahaneMaghaze");
+
+                    b.Property<string>("HomeEmtiaz")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("HomeId");
+
+                    b.Property<string>("Homedivar")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homemogheiat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homemoshakhase")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homeparking")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homesanad")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homevaziatemelk")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homewc")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("MetrazhKafMaghaze");
+
+                    b.Property<int>("Metrazhanbar");
+
+                    b.Property<int>("Metrazhbalkon");
+
+                    b.Property<string>("NegahbaniName")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("NegahbaniPhone")
+                        .HasMaxLength(500);
+
+                    b.Property<int>("Tabaghe");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Maghazes");
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Moshtghelat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Arzegozar");
+
+                    b.Property<int>("Arzemelk");
+
+                    b.Property<string>("Ghadroalsahm")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("HomeEmtiaz")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("HomeId");
+
+                    b.Property<string>("Homedivar")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homekaf")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homekitchen")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homemogheiat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homemoshaat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homemoshakhase")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homenema")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homeparking")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homesanad")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Hometasisat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homevaziate")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homewc")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("MetrazhBena");
+
+                    b.Property<int>("Metrazhzamin");
+
+                    b.Property<string>("NegahbaniName")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("NegahbaniPhone")
+                        .HasMaxLength(500);
+
+                    b.Property<int>("Tabaghe");
+
+                    b.Property<int>("Tedadkoltabaghat");
+
+                    b.Property<int>("Tedadkolvahedha");
+
+                    b.Property<int>("Tedadvaheddartabaghe");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Moshtghelats");
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Vila", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("HomeEmtiaz")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("HomeId");
+
+                    b.Property<string>("Homedivar")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homekaf")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homekitchen")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homemogheiat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homemoshaat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homemoshakhase")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homenema")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homeparking")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homesanad")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Hometasisat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homevaziate")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homewc")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("MetrazhBena");
+
+                    b.Property<int>("Metrazhzamin");
+
+                    b.Property<string>("NegahbaniName")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("NegahbaniPhone")
+                        .HasMaxLength(500);
+
+                    b.Property<int>("Tedadkoltabaghat");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Vilas");
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Zamin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Arzegozar");
+
+                    b.Property<int>("Arzemelk");
+
+                    b.Property<string>("HomeEmtiaz")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("HomeId");
+
+                    b.Property<string>("Homemogheiat")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homesanad")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Homevaziate")
+                        .HasMaxLength(1000);
+
+                    b.Property<int>("Metrazhzamin");
+
+                    b.Property<string>("NegahbaniName")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("NegahbaniPhone")
+                        .HasMaxLength(500);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Zamins");
+                });
+
             modelBuilder.Entity("DomainLayer.HomeFacility", b =>
                 {
                     b.Property<int>("Id")
@@ -111,9 +1170,15 @@ namespace DataLayer.Migrations
                     b.Property<string>("Icon")
                         .HasMaxLength(500);
 
+                    b.Property<int>("MelkType");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50);
+
+                    b.Property<bool>("Selected");
+
+                    b.Property<int>("TypeHome");
 
                     b.HasKey("Id");
 
@@ -138,40 +1203,96 @@ namespace DataLayer.Migrations
                     b.ToTable("HomeGroup");
                 });
 
+            modelBuilder.Entity("DomainLayer.Location.Mahalle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Gpsx")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Gpsy")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<int>("NahieId");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NahieId");
+
+                    b.ToTable("Mahale");
+                });
+
+            modelBuilder.Entity("DomainLayer.Location.Nahie", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CityId");
+
+                    b.Property<string>("Gpsx")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Gpsy")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.ToTable("Nahie");
+                });
+
             modelBuilder.Entity("DomainLayer.Log", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("LogController");
+                    b.Property<string>("LogController")
+                        .IsRequired();
 
-                    b.Property<string>("LogText");
+                    b.Property<string>("LogText")
+                        .IsRequired();
 
-                    b.Property<string>("LogView");
+                    b.Property<string>("LogView")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
                     b.ToTable("Log");
                 });
 
-            modelBuilder.Entity("DomainLayer.Magzine", b =>
+            modelBuilder.Entity("DomainLayer.Magzine.Magazine", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Date")
-                        .IsRequired()
-                        .HasMaxLength(100);
+                    b.Property<DateTime>("Date");
 
-                    b.Property<string>("Image");
+                    b.Property<string>("Image")
+                        .HasMaxLength(500);
 
-                    b.Property<DateTime>("InsertDate");
-
-                    b.Property<bool>("Is_Show");
-
-                    b.Property<int>("MagzineTypeId");
+                    b.Property<int>("MagazinGroupId");
 
                     b.Property<string>("Tags")
                         .HasMaxLength(500);
@@ -183,33 +1304,49 @@ namespace DataLayer.Migrations
                         .IsRequired()
                         .HasMaxLength(100);
 
-                    b.Property<string>("Video");
+                    b.Property<string>("UrlTour360")
+                        .HasMaxLength(500);
+
+                    b.Property<int>("ViewerCount");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MagzineTypeId");
+                    b.HasIndex("MagazinGroupId");
 
-                    b.ToTable("Magzine");
+                    b.ToTable("Magazin");
                 });
 
-            modelBuilder.Entity("DomainLayer.MagzineType", b =>
+            modelBuilder.Entity("DomainLayer.Magzine.MagazinGroup", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Icon")
-                        .HasMaxLength(500);
-
-                    b.Property<int?>("MagzineTypeId");
-
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100);
+                        .HasMaxLength(50);
+
+                    b.Property<int?>("ParentId");
 
                     b.HasKey("Id");
 
-                    b.ToTable("MagzineType");
+                    b.ToTable("MagazinGroup");
+                });
+
+            modelBuilder.Entity("DomainLayer.MetrazSetting", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Metraz");
+
+                    b.Property<int>("MetrazChance");
+
+                    b.Property<int>("TypeMetraz");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MetrazSetting");
                 });
 
             modelBuilder.Entity("DomainLayer.Region", b =>
@@ -313,6 +1450,21 @@ namespace DataLayer.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("DomainLayer.VadieSetting", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Cost");
+
+                    b.Property<long>("CostChance");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VadieSetting");
+                });
+
             modelBuilder.Entity("DomainLayer.City", b =>
                 {
                     b.HasOne("DomainLayer.Region", "Region")
@@ -321,11 +1473,35 @@ namespace DataLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("DomainLayer.Magzine", b =>
+            modelBuilder.Entity("DomainLayer.Home.HomeGallery", b =>
                 {
-                    b.HasOne("DomainLayer.MagzineType", "MagzineType")
-                        .WithMany("Magzines")
-                        .HasForeignKey("MagzineTypeId")
+                    b.HasOne("DomainLayer.Home.Home", "Home")
+                        .WithMany("HomeGalleries")
+                        .HasForeignKey("HomeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainLayer.Location.Mahalle", b =>
+                {
+                    b.HasOne("DomainLayer.Location.Nahie", "Nahie")
+                        .WithMany("Mahalles")
+                        .HasForeignKey("NahieId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainLayer.Location.Nahie", b =>
+                {
+                    b.HasOne("DomainLayer.City", "City")
+                        .WithMany("Nahies")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainLayer.Magzine.Magazine", b =>
+                {
+                    b.HasOne("DomainLayer.Magzine.MagazinGroup", "MagazinGroup")
+                        .WithMany("Magazines")
+                        .HasForeignKey("MagazinGroupId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

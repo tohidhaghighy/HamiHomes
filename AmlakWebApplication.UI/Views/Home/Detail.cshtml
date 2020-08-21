@@ -1,0 +1,527 @@
+﻿@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_DetailLayout.cshtml";
+}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<style>
+    #backchagner {
+        box-shadow: inset 0px 80px 30px rgba(10, 10, 10, 0.35);
+        background-image: url(/img/back2.jpg);
+        height: 400px;
+        width: 100%;
+        background-size: 100% 100%;
+        animation-name: zoomin;
+        animation-duration: 4s;
+        background-position: center center;
+    }
+
+    @@keyframes zoomin {
+        from {
+            background-size: 100% 100%;
+        }
+
+        to {
+            background-size: 110% 110%;
+        }
+    }
+
+    @@keyframes zoomout {
+        from {
+            background-size: 100% 100%;
+        }
+
+        to {
+            background-size: 110% 110%;
+        }
+    }
+
+    .zoom {
+        transition: transform .2s; /* Animation */
+        margin: 0 auto;
+        overflow: hidden;
+    }
+
+        .zoom:hover {
+            transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        }
+
+    .sticky {
+        position: -webkit-sticky;
+        position: fixed;
+        left: 8%;
+        top: 200px;
+        z-index: 1000;
+    }
+
+    body {
+        font-family: IRANSans !important;
+        font-weight: 300;
+    }
+
+    h1, h2, h3, h4, h5, a, input, textarea {
+        font-family: IRANSans !important;
+        font-weight: bold;
+    }
+
+    h6, option {
+        font-family: sahel;
+        font-weight: bold;
+    }
+    .overlay{
+        background-color:rgba(0, 0, 0, 0.61);
+    }
+    .numberCircle {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    background: rgba(60, 58, 58, 0.25);
+    color: black;
+    text-align: center;
+    display:inline;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+</style>
+
+<div class="mainback" id="backchagner">
+    <div class="overlay">
+        <div class="" style="padding-top:20px;padding-left:8%;padding-right:8%;">
+            <div class="row">
+                <div class="col-lg-6 col-sm-12 col-md-6">
+                    <div class="text-center">
+                        <h5 style="padding:10px;background-color:rgba(178, 174, 174, 0.50);border-radius:20px;color:white;width:200px;float:right;">باغ و باغچه</h5>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-sm-12 col-md-6">
+                    <div class="text-center">
+                        <h5 style="padding:10px;background-color:rgba(139, 137, 137, 0.50);border-radius:20px;color:white;">آذربایجان غربی ارومیه خیابان استادان</h5>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container"></div>
+
+            <!----------footer------>
+        </div>
+
+        <div class="" style="padding-top:30px;padding-left:8%;padding-right:8%;">
+            <div class="row">
+                <div class="col-lg-8 col-sm-12 col-md-8">
+
+                    <div class="">
+                        <h2 style="padding:10px;color:white;">خانه لوکس برادران</h2>
+                    </div>
+
+                    <div class="">
+                        <h5 style="padding:10px;color:white;width:100%;">این خانه با ویو مناسب و امکاناتی کم نظیر انتخاب مناسبی برای خانواده های</h5>
+                    </div>
+                    <div class="row" style="padding:10px;">
+                        <div class="col-4 text-center">
+                            <p class="font-xs-ad" style="font-size:15px;color:white;float:right;"><img src="/img/bed.png" style="width:25px;height:25px;padding-left:10px;" /> 2 اتاق</p>
+
+                        </div>
+                        <div class="col-4 text-center">
+                            <p class="font-xs-ad" style="font-size:15px;color:white;float:right;"><img src="/img/bath.png" style="width:25px;height:25px;padding-left:10px;" /> 2 حمام</p>
+
+                        </div>
+                        <div class="col-4 text-center">
+                            <p class="font-xs-ad" style="font-size:15px;color:white;float:right;"><img src="/img/Resize-icon.png" style="width:25px;height:25px;padding-left:10px;" /> 120 متر </p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-sm-12 col-md-4">
+
+                    <div style="background-color:#FFF;border-radius:10px;color:white;width:300px;float:left;" class="sticky">
+                        <div class="row">
+                            <div class="col-9" style="padding-top:10px;">
+                                <h5 style="color:#ca062b;padding-right:25px;">قیمت</h5>
+                                <div class="">
+                                    <h3 style="color:rgba(116, 113, 113, 0.75);text-align:left;padding-left:5px;">12,000,000 </h3>
+                                </div>
+                            </div>
+                            <div class="col-3" style="padding-top:10px;">
+                                <img src="~/img/decrease.png" width="25" height="25" style="text-align:center;margin:10px;" />
+                                <div>
+                                    <h6 style="color:rgba(116, 113, 113, 0.75);text-align:right;padding-right:5px;"> تومان</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="margin-top:1px;margin-bottom:1px;"/>
+                        <div class="row">
+                            <div class="col-5" style="padding-top:10px;">
+                                <div class="text-center">
+                                    <img src="~/img/back2.jpg" style="border-radius:40px;width:80px;height:80px;text-align:center;align-content:center;" />
+                                </div>
+                                
+                            </div>
+                            <div class="col-7" style="padding-top:10px;padding-bottom:10px;">
+                                <p style="text-align:right;color:gray;width:100%;margin-bottom:2px;font-weight:bold;">نام مشاور</p>
+                                <p style="text-align:right;color:black;width:100%;font-size:18px;font-weight:bold;margin-bottom:7px;">آرتین افشار</p>
+                                <p style="text-align:right;color:gray;display:inline;font-size:12px;font-weight:bold;">شماره تماس</p>
+                                <p style="text-align:right;color:gray;display:inline;font-size:12px;border-radius:20px;padding:5px;font-weight:bold;" class="border">09144967941</p>
+                            </div>
+                        </div>
+                        <div style="background-color:red;height:60px;width:100%;border-radius:0px 0px 10px 10px;">
+                            <div class="text-center">
+                                <h5 style="padding-top:15px;color:#FFF;">تماس با مشاور جهت خرید</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="container"></div>
+
+            <!----------footer------>
+        </div>
+    </div>
+
+</div>
+
+<div class="" style="margin-top:-80px;margin-bottom:40px;padding-left:8%;padding-right:8%;">
+    <div class="row">
+        <div class="col-lg-8 col-sm-12 col-md-8">
+            <div class="row">
+                <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px">
+                    <img src="~/img/back4.jpg" class="zoom"  style="width:100%;height:250px;border-radius:10px;" />
+                </div>
+                <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px;">
+                    <img src="~/img/back4.jpg" class="zoom"  style="width:100%;height:250px;border-radius:10px;filter: blur(4px);" />
+                    <div style="position:absolute;top:40%;right:30%;">
+                        <h4 class="text-center" style="color:white;">10 +</h4>
+                        <h4 class="text-center" style="color:white;">عکس بیشتر</h4>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px;">
+                    <img src="~/img/back4.jpg" class="zoom"  style="width:70%;height:150px;border-radius:10px;"/>
+                </div>
+            </div>
+
+            <div class="row" id="showlist" style="padding-top:20px;">
+                <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px">
+                    <img src="~/img/back4.jpg" class="zoom" style="width:100%;height:250px;border-radius:10px;" />
+                </div>
+                <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px">
+                    <img src="~/img/back4.jpg" class="zoom" style="width:100%;height:250px;border-radius:10px;" />
+                </div>
+                <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px">
+                    <img src="~/img/back4.jpg" class="zoom" style="width:100%;height:250px;border-radius:10px;" />
+                </div>
+            </div>
+
+            <div class="row">
+                <a class="btn btn-default btn-block" style="padding-top:10px;border:0px;background-color:transparent;width:100%;color:rgba(0, 0, 0, 0.81)" onclick="showallimages()"><p style="display:inline">عکس های بیشتر</p><img src="~/img/down.png" style="width:30px;height:30px;display:inline"/></a>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-md-12">
+                    <iframe style="width:100%;z-index:10;border-radius:10px;padding-top:10px;" height="300" src="https://www.3dvista.com/samples/new_york_loft.html" frameborder="0" allowfullscreen allow="xr-spatial-tracking" onclick="show3d()"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-sm-12 col-md-4">
+
+        </div>
+
+    </div>
+
+    <hr />
+    <div class="" style="margin-top:10px;margin-bottom:40px;">
+        <h3 style="padding:10px;color:black;">خانه لوکس برادران</h3>
+        <h5 style="padding:10px;color:black;width:100%;">این خانه با ویو مناسب و امکاناتی کم نظیر انتخاب مناسبی برای خانواده های</h5>
+        <h6 style="padding:10px;color:darkred;width:100%;">توضیحات بیشتر</h6>
+        
+        <div class="row" style="padding:10px;">
+            <div class="text-center">
+                <p class="font-xs-ad" style="font-size:15px;color:black;padding:10px;"><img src="/img/bed.png" style="width:25px;height:25px;" /> 2 اتاق</p>
+
+            </div>
+            <div class="text-center">
+                <p class="font-xs-ad" style="font-size:15px;color:black;padding:10px;"><img src="/img/bath.png" style="width:25px;height:25px;" /> 2 حمام</p>
+
+            </div>
+            <div class="text-center">
+                <p class="font-xs-ad" style="font-size:15px;color:black;padding:10px;"><img src="/img/Resize-icon.png" style="width:25px;height:25px;" /> 120 متر </p>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="" style="padding-top:50px;padding-bottom:50px;padding-left:8%;padding-right:8%;">
+    <h3 style="padding:10px;color:black;">امکانات ملک</h3>
+    <div class="row">
+        <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+        <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">این خانه با ویو مناسب و امکاناتی کم نظیر انتخاب مناسبی برای خانواده های</h5>
+    </div>
+    <div class="row">
+        <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+        <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">این خانه با ویو مناسب و امکاناتی کم نظیر انتخاب مناسبی برای خانواده های</h5>
+    </div>
+    <div class="row">
+        <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+        <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">این خانه با ویو مناسب و امکاناتی کم نظیر انتخاب مناسبی برای خانواده های</h5>
+    </div>
+
+    <!----------footer------>
+</div>
+
+<div style="height:40px;background-color:black">
+    <h5 style="text-align:center;color:white;padding-top:8px;">محل قرارگیری ملک بر روی نقشه</h5>
+</div>
+<div id="map" style="width:100%;height:400px;">
+
+</div>
+<div style="height:40px;background-color:black">
+    <h5 style="text-align:center;color:white;padding-top:8px;"> خیابان سعدی خیابان باباطاهر کوچه 5 پلاک 10</h5>
+</div>
+
+<div class="" style="padding-top:50px;padding-bottom:50px;background-color:#FFF;padding-left:8%;padding-right:8%;">
+    <div class="row">
+        <div class="col-12">
+            <h3 style="color:rgba(119, 116, 116, 0.70);padding-bottom:20px;width:100%;" class="text-center">املاک مشابه</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12 zoom" style="padding:10px;">
+            <div class="card">
+                <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
+                <div class="card-block p-3">
+                    <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
+                    <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
+                </div>
+                <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
+                <div class="row" style="padding:10px;">
+                    <div class="col-4 text-center">
+                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
+
+                    </div>
+                    <div class="col-4 text-center">
+                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
+
+                    </div>
+                    <div class="col-4 text-center">
+                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 zoom" style="padding:10px;">
+            <div class="card">
+                <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
+                <div class="card-block p-3">
+                    <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
+                    <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
+                </div>
+                <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
+                <div class="row" style="padding:10px;">
+                    <div class="col-4 text-center">
+                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
+
+                    </div>
+                    <div class="col-4 text-center">
+                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
+
+                    </div>
+                    <div class="col-4 text-center">
+                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 zoom" style="padding:10px;">
+            <div class="card">
+                <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
+                <div class="card-block p-3">
+                    <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
+                    <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
+                </div>
+                <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
+                <div class="row" style="padding:10px;">
+                    <div class="col-4 text-center">
+                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
+
+                    </div>
+                    <div class="col-4 text-center">
+                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
+
+                    </div>
+                    <div class="col-4 text-center">
+                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="" style="padding-top:50px;padding-bottom:50px;background-color:#FFF;padding-left:8%;padding-right:8%;">
+    <div class="row">
+        <div class="col-12">
+            <h3 style="color:rgba(119, 116, 116, 0.70);padding-bottom:40px;width:100%;" class="text-center">اطلاعات بازار مسکن</h3>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12" style="padding:10px;">
+                <select class="selectpicker form-control" data-live-search="true" style="align-content:center;border-radius:20px;">
+                    <option value="1">سن بنا : همه</option>
+                    <option value="1">سن بنا : 2 سال</option>
+                    <option value="2">سن بنا : 4 سال</option>
+                    <option value="3">سن بنا : 6 سال</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12" style="padding:10px;">
+                <select class="selectpicker form-control" data-live-search="true" style="align-content:center;border-radius:20px;">
+                    <option value="1">مدت زمان : 2 ماه</option>
+                    <option value="2">مدت زمان : 4 ماه</option>
+                    <option value="3">مدت زمان : 6 ماه</option>
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12" style="padding:10px;">
+                <select class="selectpicker form-control" data-live-search="true" style="align-content:center;border-radius:20px;">
+                    <option value="1">متراژ : همه</option>
+                    <option value="1">متراژ : 30 متر</option>
+                    <option value="1">متراژ : 40 متر</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <canvas id="myChart" height="100"></canvas>
+    </div>
+    <div class="row" style="padding-top:10px;">
+        <div class="col-12">
+            <h4 style="color:rgba(119, 116, 116, 0.70);padding-bottom:40px;width:100%;display:inline;padding-left:20px;">مناطق :</h4>
+            <span class="text-dark rounded-circle px-3 py-1 mx-2 h3 " style="background-color:rgba(152, 152, 152, 0.55);cursor:pointer;" >1</span>
+            <span class="text-dark rounded-circle px-3 py-1 mx-2 h3 " style="background-color:rgba(152, 152, 152, 0.55);cursor:pointer;">2</span>
+            <span class="text-dark rounded-circle px-3 py-1 mx-2 h3 " style="background-color:rgba(152, 152, 152, 0.55);cursor:pointer;">3</span>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+
+
+<script>
+    var map = L.map('map').setView([37.553278571293816, 45.07666215851912], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var LeafIcon = L.Icon.extend({
+        options: {
+            iconSize: [30, 30]
+        }
+    });
+
+    var greenIcon = new LeafIcon({ iconUrl: '/img/logo2.png' });
+
+    var marker;
+
+    marker = new L.Marker([37.553278571293816, 45.07666215851912], { icon: greenIcon });
+    marker.addTo(map).on('click', function (e) {
+        map.setView([37.553278571293816, 45.07666215851912], 14);
+    });
+
+    $('#showlist').hide();
+
+    function showallimages() {
+        var x = document.getElementById("showlist");
+
+        if (x.style.display === "none") {
+            $("#showlist").slideDown(1000);
+        } else {
+            $("#showlist").slideUp(1000);
+        }
+
+    }
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ['فروردین', 'اردیبهست', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'دی'],
+        datasets: [{
+            label: 'منطقه 3',
+            backgroundColor: 'rgba(251, 246, 246, 0.00)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5, 2, 20, 30, 45]
+        },{
+            label: 'منطقه 2',
+            backgroundColor: 'rgba(151, 200, 146, 0.00)',
+            borderColor: 'rgb(200, 199, 132)',
+            data: [0, 3, 1, 20, 30, 15, 4]
+            },
+        {
+            label: 'منطقه 1',
+            backgroundColor: 'rgba(251, 246, 246, 0.00)',
+            borderColor: 'rgb(155, 9, 232)',
+            data: [5, 6, 10,30, 50, 3, 7]
+        }]
+    },
+
+    // Configuration options go here
+    options: {
+        responsive: true,
+            elements: {
+                point:{
+                    radius: 0
+                }
+            },
+            title: {
+                display: true,
+                text: ''
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'ماه'
+                    },
+                    ticks: {
+                        maxTicksLimit: 10,
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'قیمت'
+                    },
+                    ticks: {
+                        callback: function(value, index, values) {
+                            return (100*value) + '%';
+                        }
+                    }
+                }]
+            }
+    }
+});
+
+
+    function show3d() {
+        window.location.href = "https://www.3dvista.com/samples/new_york_loft.html";
+    }
+</script>

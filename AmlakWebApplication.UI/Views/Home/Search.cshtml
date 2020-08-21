@@ -1,0 +1,365 @@
+﻿
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_SearchLayout.cshtml";
+}
+
+<style>
+    .zoom {
+        padding: 20px;
+        transition: transform .2s; /* Animation */
+        margin: 0 auto;
+        overflow: hidden;
+    }
+
+        .zoom:hover {
+            transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        }
+
+    .content {
+        overflow: hidden;
+        width: 100%;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+
+    .font-xs-b {
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 700;
+    }
+
+    .font-xs-ad {
+        color: #9c99b6;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 700;
+    }
+
+    option {
+        color: black;
+    }
+
+</style>
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12" style="height:100%">
+        <div id="map" style="width:100%;height:700px;">
+
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12">
+        <div id="search">
+            <div class="row">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-6" style="border-left: 1px solid rgba(169, 167, 167, 0.60);">
+                            <div class="container">
+                                <div class="text-center" style="padding-top:10px;">
+                                    <p style="font-size:14px;font-weight:bold;color:#9c99b6;">  متراژ : 1 - 120 متر</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6" style="border-left: 1px solid rgba(169, 167, 167, 0.60);">
+                            <div class="container">
+                                <div class="text-center" style="padding-top:10px;">
+                                    <p style="font-size:14px;font-weight:bold;color:#9c99b6;">  قیمت : 1 - 12000000 تومان</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <hr style="margin-top:0px;margin-bottom:0px;" />
+            <div class="row" style="overflow-y:scroll;">
+                <div class="container">
+                    <div class="dropdown" style="direction:rtl;float:left;padding-left:20px;" id="dropdownlist">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color:rgba(0, 0, 0, 0.00);color:black;border:0px;margin-top:10px;">
+                            <p class="d-inline" style="font-size:16px;font-weight:bold;">جدیدترین ها</p>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="text-center"><a href="#">گران ترین</a></li>
+                            <li class="text-center"><a href="#">پربازدید ترین</a></li>
+                            <li class="text-center"><a href="#">ارزان ترین</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown" style="direction:rtl;float:left;padding-left:30px;margin-top:15px;" id="hidefilter">
+                        <a onclick="hidefilter()" class="btn">
+                            مخفی کردن <img src="/img/top.png" style="width:25px;height:25px;" />
+                        </a>
+
+                    </div>
+                    <div class="text-center" style="direction:rtl;float:right;padding-right:20px;padding-top:20px;">
+                        <img src="/img/filter.png" style="width:25px;height:25px;cursor:pointer;" onclick="searchbox()" />
+                    </div>
+                    <div class="text-center" style="direction:rtl;float:right;padding-right:20px;padding-top:20px;">
+                        <p> خیابان ارتش کوچه وکیل اباد </p>
+                    </div>
+                </div>
+
+                <hr style="margin-top:0px;margin-bottom:0px;" />
+
+
+                <div class="container">
+                    <div class="container" style="overflow-y: scroll;height:540px;" id="">
+                        <div id="searchboxtoggle">
+                            <div class="row" style="margin-left: 3px;margin-right: 3px;">
+                                <div class="col-lg-6 col-md-6 col-sm-12 zoom" style="padding-left:10px;">
+                                    <div class="card">
+                                        <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
+                                        <div class="card-block p-3">
+                                            <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
+                                            <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
+                                        </div>
+                                        <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
+                                        <div class="row" style="padding:10px;">
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
+
+                                            </div>
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
+
+                                            </div>
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 zoom" style="padding-left:10px;">
+                                    <div class="card">
+                                        <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
+                                        <div class="card-block p-3">
+                                            <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
+                                            <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
+                                        </div>
+                                        <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
+                                        <div class="row" style="padding:10px;">
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
+
+                                            </div>
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
+
+                                            </div>
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row" style="margin-left: 3px;margin-right: 3px;margin-top:5px;">
+                                <div class="col-lg-6 col-md-6 col-sm-12 zoom" style="padding-left:10px;">
+                                    <div class="card">
+                                        <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
+                                        <div class="card-block p-3">
+                                            <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
+                                            <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
+                                        </div>
+                                        <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
+                                        <div class="row" style="padding:10px;">
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
+
+                                            </div>
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
+
+                                            </div>
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 zoom" style="padding-left:10px;">
+                                    <div class="card">
+                                        <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
+                                        <div class="card-block p-3">
+                                            <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
+                                            <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
+                                        </div>
+                                        <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
+                                        <div class="row" style="padding:10px;">
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
+
+                                            </div>
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
+
+                                            </div>
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row" style="margin-left: 3px;margin-right: 3px;margin-top:5px;">
+                                <div class="col-lg-6 col-md-6 col-sm-12 zoom" style="padding-left:10px;">
+                                    <div class="card">
+                                        <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
+                                        <div class="card-block p-3">
+                                            <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
+                                            <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
+                                        </div>
+                                        <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
+                                        <div class="row" style="padding:10px;">
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
+
+                                            </div>
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
+
+                                            </div>
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 zoom" style="padding-left:10px;">
+                                    <div class="card">
+                                        <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
+                                        <div class="card-block p-3">
+                                            <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
+                                            <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
+                                        </div>
+                                        <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
+                                        <div class="row" style="padding:10px;">
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
+
+                                            </div>
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
+
+                                            </div>
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div id="showfilterbox">
+                            @await Html.PartialAsync("_SearchBox")
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+
+
+
+
+<script>
+
+    $("#showfilterbox").hide();
+    $("#hidefilter").hide();
+    var map = L.map('map').setView([37.553278571293816, 45.07666215851912], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var LeafIcon = L.Icon.extend({
+        options: {
+            iconSize: [30, 30]
+        }
+    });
+
+    var greenIcon = new LeafIcon({ iconUrl: '/img/house.png' });
+
+
+    var marker;
+    marker = new L.Marker([37.553278571293816, 45.07666215851912], { icon: greenIcon });
+    marker.addTo(map).on('click', function (e) {
+        alert("start zoom");
+    });
+
+    marker = new L.Marker([37.503278571293816, 45.07666215851912], { icon: greenIcon });
+    marker.addTo(map).on('click', function (e) {
+        alert("start zoom");
+    });
+
+    marker = new L.Marker([37.503278571293816, 45.05666215851912], { icon: greenIcon });
+    marker.addTo(map).on('click', function (e) {
+        alert("start zoom");
+    });
+
+
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+
+    document.getElementById("map").style.height = h - 50 + "px";
+    document.getElementById("scrollbox").style.height = h + "px";
+
+    if (w < 600) {
+        document.getElementById("bodyid").style.overflowX = "auto";
+        document.getElementById("bodyid").style.overflowY = "auto";
+
+    }
+
+
+
+
+    function searchbox() {
+        var x = document.getElementById("searchboxtoggle");
+
+        if (x.style.display === "none") {
+            $("#showfilterbox").slideUp(1000);
+            x.style.display = "block";
+            $("#dropdownlist").show();
+            $("#hidefilter").hide();
+
+        } else {
+            $("#showfilterbox").slideDown(1000);
+            x.style.display = "none";
+            $("#dropdownlist").hide();
+            $("#hidefilter").show();
+
+        }
+    }
+
+
+    function hidefilter() {
+        var x = document.getElementById("searchboxtoggle");
+        $("#showfilterbox").slideUp(1000);
+        x.style.display = "block";
+        $("#dropdownlist").show();
+        $("#hidefilter").hide();
+    }
+
+</script>
+

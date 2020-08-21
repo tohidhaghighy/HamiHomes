@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Managment.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        داشبرد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Tools/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">تبدیل عکس به ادرس </li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>ابزار تبدیل</h4>
+    در این قسمت میتوانید عکس خود را اپلود کنید و به شما یک ادرس در سایت میدهد و از ان ادرس میتوانید در سایت استفاده کنید
+</div>
+
+<div class="container">
+    <div class="box box-danger">
+        <div class="box-header">
+            <h3 class="box-title">عکس جدید</h3>
+        </div>
+        <form asp-action="CreateItem"  enctype="multipart/form-data">
+            <div class="box-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
+
+                
+                <div class="form-group">
+                    <label>عکس مورد نظر خود را انتخاب کنید</label>
+                    <input type="file" name="Image" id="Image" placeholder="عکس  ">
+                    <span class="text-danger"></span>
+                </div>
+
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">تبدیل به آدرس</button>
+                </div>
+
+            </div>
+        </form>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+</div>
+
+
+<div class="container">
+    <div class="box box-danger">
+        <div class="box-header text-center" id="url">
+            <h4>ادرس عکس در زیر قرار میگیرد :</h4>
+            <hr />
+            <a class="btn btn-link" style="margin-top:30px;font-size:17px;" id="urlsite" href="@ViewData["Image"]">@ViewData["Image"]</a>
+        </div>
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+</div>

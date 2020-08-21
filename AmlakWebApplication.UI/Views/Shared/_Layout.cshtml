@@ -1,74 +1,227 @@
 ﻿<!DOCTYPE html>
-<html>
+<html dir="rtl" lang="fa-IR">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - AmlakWebApplication.UI</title>
+    <title>حامی هوم</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+
+
     </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+    <link rel="stylesheet" href="~/css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <!--javascript-->
+    <script src="js/custom-js.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="~/js/multiselect/js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet" href="~/js/multiselect/css/bootstrap-multiselect.css" type="text/css" />
+    <link href="~/css/Custom.css" rel="stylesheet" />
+
+    <style>
+        .padd {
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+
+        option {
+            color: black;
+        }
+        .dropdown-menu{
+            min-width: 12rem;
+            
+        }
+        select {
+    text-align: center;
+    text-align-last: center;
+    -moz-text-align-last: center;
+}
+        .select-btn{
+            color:black;
+        }
+
+        .select-btn :hover{
+            color:#e4002b;
+        }
+        .multiselect-container{
+            height:200px;
+            overflow-y:scroll;
+            overflow-x:scroll;
+        }
+        .dropdown-item{
+            display:inline;
+        }
+        .card{
+            cursor:pointer;
+        }
+    </style>
 </head>
-<body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">AmlakWebApplication.UI</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
+<body style="overflow-x:hidden;">
+
+
+    @RenderBody()
+
+
+
+
+    <!-- Footer -->
+    <footer class="page-footer font-small unique-color-dark">
+
+        <div style="background-color: rgba(0, 0, 0, 0.58);">
+            <div class="container">
+
+                <!-- Grid row-->
+                <div class="row py-4 d-flex align-items-center">
+
+                    <!-- Grid column -->
+                    <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                        <h6 class="mb-0" style="color:white;">در شبکه اجتماعی ما را دنبال کنید</h6>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-6 col-lg-7 text-center text-md-right" id="icons">
+
+                        <!-- Facebook -->
+                        <a class="fb-ic">
+                            <i class="fab fa-facebook-f white-text mr-4 coloricon"> </i>
+                        </a>
+                        <!-- Twitter -->
+                        <a class="tw-ic">
+                            <i class="fab fa-twitter white-text mr-4 coloricon"> </i>
+                        </a>
+                        <!-- Google +-->
+                        <a class="gplus-ic">
+                            <i class="fab fa-google-plus-g white-text mr-4 coloricon"> </i>
+                        </a>
+                        <!--Linkedin -->
+                        <a class="li-ic">
+                            <i class="fab fa-linkedin-in white-text mr-4 coloricon"> </i>
+                        </a>
+                        <!--Instagram-->
+                        <a class="ins-ic">
+                            <i class="fab fa-instagram white-text coloricon"> </i>
+                        </a>
+
+                    </div>
+                    <!-- Grid column -->
+
+                </div>
+                <!-- Grid row-->
+
             </div>
         </div>
-    </nav>
 
-    <partial name="_CookieConsentPartial" />
+        <!-- Footer Links -->
+        <div class="container text-center text-md-left mt-5">
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 1399 - AmlakWebApplication.UI</p>
-        </footer>
-    </div>
+            <!-- Grid row -->
+            <div class="row mt-3">
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+                    <!-- Content -->
+                    <h6 class="text-uppercase font-weight-bold">درباره ما</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        اطلاعات مختصری در مورد شرکت در اینجا نوشته میشود
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                    <!-- Links -->
+                    <h6 class="text-uppercase font-weight-bold">پر بازدید ها</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <a href="#!">پیمانکاران</a>
+                    </p>
+                    <p>
+                        <a href="#!">رهن و اجاره </a>
+                    </p>
+                    <p>
+                        <a href="#!">فروش</a>
+                    </p>
+                    <p>
+                        <a href="#!">ساخت</a>
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                    <!-- Links -->
+                    <h6 class="text-uppercase font-weight-bold">اخبار جدید</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <a href="#!">قیمت خرید</a>
+                    </p>
+                    <p>
+                        <a href="#!">خبر جدید در مورد املاک</a>
+                    </p>
+                    <p>
+                        <a href="#!">دکوراسیون داخلی </a>
+                    </p>
+                    <p>
+                        <a href="#!">طراحی سنتی ساختمان</a>
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+                    <!-- Links -->
+                    <h6 class="text-uppercase font-weight-bold">ارتباط با ما</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <i class="fas fa-home mr-3"></i> خیابان حسنی
+                    </p>
+                    <p>
+                        <i class="fas fa-envelope mr-3"></i> info@hamihomes.com
+                    </p>
+                    <p>
+                        <i class="fas fa-phone mr-3"></i> +989144967941
+                    </p>
+                    <p>
+                        <i class="fas fa-print mr-3"></i> +98354874458
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+
+
+
+        <!-- Footer Links -->
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+            © 2020 Copyright:
+            <a href=""> طراحی شده توسط گروه نرم افزاری طرح و تصویر</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+    <!-- Footer -->
+    
+
+
 
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>

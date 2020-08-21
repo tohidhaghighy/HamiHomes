@@ -1,0 +1,63 @@
+﻿@model DomainLayer.CostSetting
+@{
+    ViewData["Title"] = "CreateCost";
+    Layout = "~/Views/Shared/_Managment.cshtml";
+}
+
+
+
+<section class="content-header">
+    <h1>
+        داشبرد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/CostSetting/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">قیمت جدید </li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>درج قیمت جدید</h4>
+
+</div>
+
+<div class="container">
+    <div class="box box-danger">
+        <div class="box-header">
+            <h3 class="box-title">قیمت جدید</h3>
+        </div>
+        <form asp-action="CreateItemCost">
+            <div class="box-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
+
+                <div class="form-group">
+                    <label>قیمت نمایشی</label>
+                    <input asp-for="Cost" type="text" class="form-control" placeholder="قیمت نمایشی">
+                    <span asp-validation-for="Cost" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>قیمت </label>
+                    <input asp-for="CostChance" type="number" class="form-control" placeholder="قیمت">
+                    <span asp-validation-for="CostChance" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">درج قیمت جدید</button>
+                </div>
+
+            </div>
+        </form>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

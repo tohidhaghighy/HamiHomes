@@ -1,0 +1,436 @@
+﻿@model ViewModelLayer.Home.HomeProperty
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Managment.cshtml";
+}
+
+<link href="~/js/leaflet/leaflet.css" rel="stylesheet" />
+<script src="~/js/leaflet/leaflet.js"></script>
+<script src="~/js/ckeditor/ckeditor.js"></script>
+
+
+<section class="content-header">
+    <h1>
+        داشبرد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/HomeManagment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">خانه جدید </li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>درج خانه جدید</h4>
+    در اینجا میتوانید مرحله اول درج اطلاعات خانه یا ویلا یا ... را وارد کنید
+    و برای خانه گالری و یا روی نقشه مکان ان را و یا ادرس نقشه پانوراما ان را وارد کنید
+
+</div>
+
+<div class="container">
+    <div class="box box-danger">
+        <div class="box-header">
+            <h3 class="box-title">خانه جدید</h3>
+        </div>
+
+        <div class="container" style="padding-top:50px;padding-bottom:50px;">
+            <div class="row">
+                <div class="col-lg-3 col-md-2 col-xs-0 thumb">
+
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb text-center">
+                    <h4 class="">عکس خانه</h4>
+                    <a class="fancybox img-hover-zoom" rel="ligthbox" href="~/images/@Model.Home.Image">
+                        @{
+                            if (Model.Home.Image != null)
+                            {
+                                <img src="~/images/@Model.Home.Image" class="img img-circle" alt=" " style="width:150px; height:150px;">
+                            }
+                            else
+                            {
+                                <img src="~/images/def.jpg" class="img img-circle" alt=" " style="width:150px; height:150px;">
+                            }
+                        }
+                    </a>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb text-center">
+                    <h4 class="">عکس پلان خانه</h4>
+                    <a class="fancybox img-hover-zoom" rel="ligthbox" href="~/images/@Model.Home.HomeMapImage">
+                        @{
+                            if (Model.Home.HomeMapImage != null)
+                            {
+                                <img src="~/images/@Model.Home.HomeMapImage" class="img img-circle" alt=" " style="width:150px; height:150px;">
+                            }
+                            else
+                            {
+                                <img src="~/images/def.jpg" class="img img-circle" alt=" " style="width:150px; height:150px;">
+                            }
+                        }
+
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-2 col-xs-0 thumb">
+                    
+                </div>
+            </div>
+        </div>
+
+        <form asp-action="UpdateItem" enctype="multipart/form-data">
+            <div class="box-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
+
+                <input asp-for="Home.Id" type="number" class="form-control" style="display:none;">
+                <input asp-for="Home.Image" type="text" class="form-control" style="display:none;">
+                <input asp-for="Home.HomeMapImage" type="number" class="form-control" style="display:none;">
+                <div class="form-group">
+                    <label>نوع خانه</label>
+                    <a class="btn" style="background-color:#e4002b;color:white" id="aparteman" onclick="apartemanclick()">آپارتمان</a>
+                    <a class="btn" style="background-color:#808080;color:white" id="homewithgarden" onclick="homewithgardenclick()"> خانه حیاط دار</a>
+                    <a class="btn" style="background-color:#808080;color:white" id="ground" onclick="groundclick()">زمین</a>
+                    <a class="btn" style="background-color:#808080;color:white" id="kolangi" onclick="kolangiclick()">کلنگی</a>
+                    <a class="btn" style="background-color:#808080;color:white" id="bussiness" onclick="bussinessclick()">اداری</a>
+                    <a class="btn" style="background-color:#808080;color:white" id="store" onclick="storeclick()">مغازه</a>
+                    <a class="btn" style="background-color:#808080;color:white" id="mostaghelat" onclick="mostaghelatclick()">مستغلات</a>
+                    <a class="btn" style="background-color:#808080;color:white" id="anbar" onclick="anbarclick()">انبار و سوله</a>
+                    <a class="btn" style="background-color:#808080;color:white" id="villa" onclick="villaclick()">ویلا</a>
+                    <a class="btn" style="background-color:#808080;color:white" id="garden" onclick="gardenclick()">باغ و باغچه</a>
+                    <input name="typehome" id="typehome" type="number" style="display:none;" value="1">
+                </div>
+
+                <div class="row" style="display:none;">
+                    <div class="form-group">
+                        <label>محور افقی</label>
+                        <input asp-for="Home.Gpsx" id="gpsx" type="text" class="form-control" placeholder="محور افقی ">
+                        <span asp-validation-for="Home.Gpsx" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>محور عموری</label>
+                        <input asp-for="Home.Gpsy" id="gpsy" type="text" class="form-control" placeholder="محور عموری ">
+                        <span asp-validation-for="Home.Gpsy" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <br />
+
+                        <div class="custom-select" style="width:100%;padding:10px;">
+                            <select style="width:100%;padding:10px;" id="cityselect" name="cityselect" onchange="checkcityval()">
+                                <option value="0">شهر را انتخاب کن :</option>
+                                @{
+                                    foreach (var item in Model.Cities)
+                                    {
+                                        <option value="@item.Id">@item.Region.Name  @item.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <br />
+
+                        <div class="custom-select" style="width:100%;padding:10px;">
+                            <select style="width:100%;padding:10px;" id="Mantagheselect" name="Mantagheselect" onchange="checkmantagheval()">
+                                <option value="0">محله را انتخاب کن :</option>
+                                @{
+                                    foreach (var item in Model.Mahalles)
+                                    {
+                                        <option value="@item.Id" onclick="setgps(@item.Gpsx, @item.Gpsy,16)">@item.Name  @item.Nahie.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <br />
+
+                    </div>
+                    <div class="col-lg-8">
+                        <div id="map" style="width:100%;height:300px;">
+
+                        </div>
+                    </div>
+                </div>
+                <input asp-for="Home.Address" type="text" class="form-control" placeholder="آدرس" style="display:none;">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label>آدرس</label>
+                            <input name="addressshow" id="addressshow" type="text" class="form-control" placeholder="آدرس" disabled="disabled" value="@Model.Home.Address">
+                            <span asp-validation-for="Home.Address" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>خیابان و کوچه</label>
+                            <input id="txtkuche" name="txtkuche" type="text" class="form-control" placeholder="خیابان و کوچه">
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label>تعداد اتاق</label>
+                            <input asp-for="Home.Bed" type="number" class="form-control" placeholder="تعداد اتاق" value="1">
+                            <span asp-validation-for="Home.Bed" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-2">
+                            <label>تعداد حمام</label>
+                            <input asp-for="Home.Bath" type="number" class="form-control" placeholder="تعداد حمام" value="1">
+                            <span asp-validation-for="Home.Bath" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-2">
+                            <label>سال ساخت</label>
+                            <input asp-for="Home.BuildYear" type="number" class="form-control" placeholder="سال ساخت" value="1399">
+                            <span asp-validation-for="Home.BuildYear" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label>نام مالک</label>
+                            <input asp-for="Home.OwnerName" type="text" class="form-control" placeholder="نام صاحب خانه">
+                            <span asp-validation-for="Home.OwnerName" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>شماره تلفن</label>
+                            <input asp-for="Home.Phone" type="number" class="form-control" placeholder=" شماره تلفن">
+                            <span asp-validation-for="Home.Phone" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>شماره موبایل</label>
+                            <input asp-for="Home.Mobile" type="number" class="form-control" placeholder="شماره موبایل">
+                            <span asp-validation-for="Home.Mobile" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label>آدرس تور مجازی</label>
+                    <input asp-for="Home.ThreeDView" type="text" class="form-control" placeholder="آدرس نقشه پانوراما">
+                    <span asp-validation-for="Home.ThreeDView" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>توضیحات</label>
+                    <textarea asp-for="Home.Description" id="editortext" cols="80" rows="10">توضیحات خانه</textarea>
+                    <span asp-validation-for="Home.Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>شخصی باشد - با تیک زدن این قسمت این خانه فقط به شما قابل نمایش خواهد بود</label>
+                    <input asp-for="Home.IsPrivate" type="checkbox" class="">
+                    <span asp-validation-for="Home.IsPrivate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>عکس خانه</label>
+                    <input name="homeImage" id="homeImage" type="file" placeholder="عکس">
+                    <span asp-validation-for="Home.Image" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>نقشه عمران خانه</label>
+                    <input name="pelanImage" id="pelanImage" type="file" />
+                    <span asp-validation-for="Home.HomeMapImage" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">درج خانه جدید - رفتن به مرحله بعد </button>
+                </div>
+
+            </div>
+        </form>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+</div>
+
+<script>
+    var map = L.map('map').setView([@Model.Home.Gpsx, @Model.Home.Gpsy], 15);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var LeafIcon = L.Icon.extend({
+        options: {
+            iconSize: [30, 30]
+        }
+    });
+
+    var greenIcon = new LeafIcon({ iconUrl: '/js/leaflet/icon.png' });
+
+
+    var marker;
+    marker = new L.Marker([@Model.Home.Gpsx, @Model.Home.Gpsy], { icon: greenIcon });
+    marker.addTo(map);
+
+
+    map.on("click", function (e) {
+        if (marker) {
+            map.removeLayer(marker);
+        }
+
+        marker = new L.Marker(e.latlng, { icon: greenIcon });
+        $('#gpsx').val(e.latlng.lat);
+        $('#gpsy').val(e.latlng.lng);
+        marker.addTo(map);
+    });
+
+    CKEDITOR.replace('editortext');
+    $('.textarea').wysihtml5();
+
+
+    function apartemanclick() {
+        defaultbtn();
+        document.getElementById("aparteman").style.backgroundColor = "#e4002b";
+        $('#typehome').val("1");
+    }
+
+    function homewithgardenclick() {
+        defaultbtn();
+        document.getElementById("homewithgarden").style.backgroundColor = "#e4002b";
+        $('#typehome').val("2");
+    }
+
+    function groundclick() {
+        defaultbtn();
+        document.getElementById("ground").style.backgroundColor = "#e4002b";
+        $('#typehome').val("3");
+    }
+
+    function kolangiclick() {
+        defaultbtn();
+        document.getElementById("kolangi").style.backgroundColor = "#e4002b";
+        $('#typehome').val("4");
+    }
+
+    function bussinessclick() {
+        defaultbtn();
+        document.getElementById("bussiness").style.backgroundColor = "#e4002b";
+        $('#typehome').val("5");
+    }
+
+    function storeclick() {
+        defaultbtn();
+        document.getElementById("store").style.backgroundColor = "#e4002b";
+        $('#typehome').val("6");
+    }
+
+    function mostaghelatclick() {
+        defaultbtn();
+        document.getElementById("mostaghelat").style.backgroundColor = "#e4002b";
+        $('#typehome').val("7");
+    }
+
+    function anbarclick() {
+        defaultbtn();
+        document.getElementById("anbar").style.backgroundColor = "#e4002b";
+        $('#typehome').val("8");
+    }
+
+    function villaclick() {
+        defaultbtn();
+        document.getElementById("villa").style.backgroundColor = "#e4002b";
+        $('#typehome').val("9");
+    }
+
+
+    function gardenclick() {
+        defaultbtn();
+        document.getElementById("garden").style.backgroundColor = "#e4002b";
+        $('#typehome').val("10");
+    }
+
+
+    function defaultbtn() {
+        document.getElementById("aparteman").style.backgroundColor = "#808080";
+        document.getElementById("garden").style.backgroundColor = "#808080";
+        document.getElementById("homewithgarden").style.backgroundColor = "#808080";
+        document.getElementById("ground").style.backgroundColor = "#808080";
+        document.getElementById("kolangi").style.backgroundColor = "#808080";
+        document.getElementById("bussiness").style.backgroundColor = "#808080";
+        document.getElementById("store").style.backgroundColor = "#808080";
+        document.getElementById("mostaghelat").style.backgroundColor = "#808080";
+        document.getElementById("anbar").style.backgroundColor = "#808080";
+        document.getElementById("villa").style.backgroundColor = "#808080";
+    }
+
+    function checkcityval() {
+        var cityselect = document.getElementById("cityselect");
+        var opt = cityselect.options[cityselect.selectedIndex];
+
+        var x = document.getElementById("Home_Address").value;
+        var address = document.getElementById("addressshow").value;
+
+        $("#Mantagheselect").show();
+        document.getElementById("Home_Address").value = opt.text;
+        document.getElementById("addressshow").value = opt.text;
+
+    }
+
+    function checkmantagheval() {
+        var Mantagheselect = document.getElementById("Mantagheselect");
+        var opt = Mantagheselect.options[Mantagheselect.selectedIndex];
+
+        var x = document.getElementById("Home_Address").value;
+        var address = document.getElementById("addressshow").value;
+
+        $("#mahalleselect").show();
+        document.getElementById("Home_Address").value = x + " " + opt.text;
+        document.getElementById("addressshow").value = x + " " + opt.text;
+    }
+
+    function checkmahalleval() {
+        var mahalleselect = document.getElementById("mahalleselect");
+        var opt = mahalleselect.options[mahalleselect.selectedIndex];
+
+
+        var x = document.getElementById("Home_Address").value;
+        map.setZoom(16);
+        document.getElementById("Home_Address").value = x + " " + opt.text;
+    }
+
+
+
+    function sendtoserver() {
+        var gpsx = $('#gpsx').val();
+        var gpsy = $('#gpsy').val();
+        $.ajax({
+            url: 'https://map.ir/reverse/no?lat=' + gpsx + '&lon=' + gpsy,
+            type: 'GET',
+            headers: { 'key': 'x-api-key', 'value': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjAwYmI0M2UxMGIxNTE4ZjBjNmM5MWRjNTg0ODI5ODM5OWIxOGY4YjlmOTEwMmYyODdjOGNiNDMxZDUwZmM5NTgwN2NhNGE5N2YwOTFlMjgxIn0.eyJhdWQiOiIxMDI4NyIsImp0aSI6IjAwYmI0M2UxMGIxNTE4ZjBjNmM5MWRjNTg0ODI5ODM5OWIxOGY4YjlmOTEwMmYyODdjOGNiNDMxZDUwZmM5NTgwN2NhNGE5N2YwOTFlMjgxIiwiaWF0IjoxNTk2MDk3MTk5LCJuYmYiOjE1OTYwOTcxOTksImV4cCI6MTU5ODY4OTE5OSwic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.D72_lhlqLfYLWzU39Vht_UD-OokirrPZIsOmGDZVHhsD-5ha9DF7WaU7FJA-H3RhVYJJccYl5fL5ik6dooPiap8yL3mBIJO6QLGO5ZdN3Y_kQqjsgJlrUTtLcJ-fmAKjJFEdcgiP0ofcGkjGinEtJPNRNoGRlbhXX75neXlheJ2FQBvdNhdXRIbyBGOJZkPGHOurUWHtxOeGZzuu5WpJ3wphdHJhoQdfTZIMFNe-OO-s7UnUhGB2PUs6noqH6zVrAJpLwCG2IaYwTFl6uD7L7agAiAhFEm31zY7I7pDj8PKCWIfIKRC-FmwMlhGmx_vBWe5OpW5ezGoupEIaTn52_Q','type':'text' },
+            success: function (data) {
+                alert(data);
+            },
+            failure: function (result) {
+                alert('Error: ' + result);
+            }
+        });
+        }
+
+
+    function setgps(x, y,zoom) {
+        map.setView([x, y], zoom);
+        if (marker) {
+            map.removeLayer(marker);
+        }
+
+        marker = new L.Marker([x,y], { icon: greenIcon });
+        $('#gpsx').val(x);
+        $('#gpsy').val(y);
+        marker.addTo(map);
+    }
+
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

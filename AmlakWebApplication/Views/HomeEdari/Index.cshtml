@@ -1,0 +1,112 @@
+﻿@model List<DomainLayer.Home.Edari>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Managment.cshtml";
+}
+
+
+<link href="~/css/alert/sweetalert.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<script src="~/css/alert/sweetalert.js"></script>
+
+<style>
+    tr:nth-child(even) {
+        background: rgba(126, 136, 241, 0.59)
+    }
+</style>
+
+
+<section class="content-header">
+    <h1>
+        داشبرد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/HomeEdari/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">مدیریت ساختمان اداری  </li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>مدریت ساختمان اداری </h4>
+    در اینجا میتوانید لیست ساختمان های اداری درج شده را ببینید و اطلاعات ان را ویرایش و یا حذف کنید
+
+</div>
+
+
+
+<p style="margin-right:50px;">
+    <a href="/HomeManagment/Create" class="btn btn-default">افزودن ساختمان اداری جدید</a>
+</p>
+
+<div class="row" style="padding:50px;">
+    <div class="col-md-12 box">
+        <div class="table-responsive box-body">
+            <table id="mytable" class="table table-bordered table-hover" style="background-color:white;">
+                <thead>
+                    <tr>
+                        <th class="text-center">متراژ بنا</th>
+                        <th class="text-center">طبقه</th>
+                        <th class="text-center">تعداد کل طبقات</th>
+                        <th class="text-center">تعداد کل واحد ها</th>
+                        <th class="text-center">تعداد واحد در طبقه</th>
+                        <th class="text-center">نام نگهبان </th>
+                        <th class="text-center">شماره نگهبان</th>
+                        <th class="text-center">حذف</th>
+                    </tr>
+                </thead>
+                <tbody id="listofarticle">
+                    @await Html.PartialAsync("_ListAjax", Model)
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+
+    function deleteitem(id) {
+        swal({
+            title: "آیا میخواهید حذف شود؟",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "بله حذف شود",
+            cancelButtonText: "خیر",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+                    sendtoservertodelete(id);
+
+                } else {
+                    swal("صرف نظر", "حذف نشد", "error");
+                }
+            });
+    }
+
+    function sendtoservertodelete(id) {
+        $.ajax({
+            type: "Post",
+            url: '/HomeEdari/Delete',
+            data: { id: id },
+            success: function (data) {
+                window.location.reload();
+            }
+        });
+    }
+
+    function updateitem(id) {
+        window.location.href = "/HomeManagment/Update?id=" + id;
+    }
+
+    function map(url) {
+        window.location.href = url;
+        }
+</script>

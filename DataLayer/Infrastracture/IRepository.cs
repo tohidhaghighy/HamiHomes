@@ -19,6 +19,7 @@ namespace DataLayer.Infrastracture
         
         IEnumerable<TEntity> GetMany(Expression<Func<TEntity, bool>> where);
         Task<List<TEntity>> GetManyAsyncWithInclude(string children);
+        IEnumerable<TEntity> GetAllWithWhereandInclude(string children, Expression<Func<TEntity, bool>> where);
         Task<List<TEntity>> GetAllAsync();
         Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> where);
         Task<TEntity> GetFirstAsync();

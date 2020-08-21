@@ -7,3 +7,15 @@ C:\Users\tohid\Source\Repos\AmlakWebApplication\DomainLayer\bin\Debug\netcoreapp
 C:\Users\tohid\Source\Repos\AmlakWebApplication\DomainLayer\obj\Debug\netcoreapp2.1\DomainLayer.csprojAssemblyReference.cache
 C:\Users\tohid\Source\Repos\AmlakWebApplication\DomainLayer\obj\Debug\netcoreapp2.1\DomainLayer.dll
 C:\Users\tohid\Source\Repos\AmlakWebApplication\DomainLayer\obj\Debug\netcoreapp2.1\DomainLayer.pdb
+D:\Projects\AmlakWebApplication\DomainLayer\bin\Debug\netcoreapp2.1\DomainLayer.deps.json
+D:\Projects\AmlakWebApplication\DomainLayer\bin\Debug\netcoreapp2.1\DomainLayer.dll
+D:\Projects\AmlakWebApplication\DomainLayer\bin\Debug\netcoreapp2.1\DomainLayer.pdb
+D:\Projects\AmlakWebApplication\DomainLayer\bin\Debug\netcoreapp2.1\Utilities.dll
+D:\Projects\AmlakWebApplication\DomainLayer\bin\Debug\netcoreapp2.1\Utilities.pdb
+D:\Projects\AmlakWebApplication\DomainLayer\obj\Debug\netcoreapp2.1\DomainLayer.csprojAssemblyReference.cache
+D:\Projects\AmlakWebApplication\DomainLayer\obj\Debug\netcoreapp2.1\DomainLayer.csproj.CoreCompileInputs.cache
+D:\Projects\AmlakWebApplication\DomainLayer\obj\Debug\netcoreapp2.1\DomainLayer.AssemblyInfoInputs.cache
+D:\Projects\AmlakWebApplication\DomainLayer\obj\Debug\netcoreapp2.1\DomainLayer.AssemblyInfo.cs
+D:\Projects\AmlakWebApplication\DomainLayer\obj\Debug\netcoreapp2.1\DomainLayer.csproj.CopyComplete
+D:\Projects\AmlakWebApplication\DomainLayer\obj\Debug\netcoreapp2.1\DomainLayer.dll
+D:\Projects\AmlakWebApplication\DomainLayer\obj\Debug\netcoreapp2.1\DomainLayer.pdb

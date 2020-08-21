@@ -1,0 +1,279 @@
+﻿@model ViewModelLayer.Home.HomeFacilities
+@{
+    ViewData["Title"] = "CreateFacility";
+    Layout = "~/Views/Shared/_Managment.cshtml";
+}
+
+<style>
+    input {
+  display:none;
+}
+    
+
+    label {
+        padding: 15px 30px 15px 30px;
+        border: 2px solid #fff;
+        border-radius: 100px;
+        color: #fff;
+        background-color: #6a8494;
+        box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+        cursor: pointer;
+        user-select: none;
+        transition: background-color .2s, box-shadow .2s;
+    }
+
+        label::before {
+            content: '';
+            display:none;
+            top: 10px;
+            bottom: 10px;
+            left: 10px;
+            width: 32px;
+            border: 3px solid #fff;
+            border-radius: 100px;
+            transition: background-color .2s;
+        }
+
+        label:hover, input:focus + label {
+            box-shadow: 0 0 20px rgba(0, 0, 0, .6);
+        }
+
+    input:checked + label {
+        background-color: #ab576c;
+    }
+
+        input:checked + label::before {
+            background-color: #fff;
+        }
+</style>
+<section class="content-header">
+    <h1>
+        داشبرد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/HomeManagment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">خانه جدید </li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>درج اطلاعات خانه</h4>
+    در اینجا میتوانید مرحله دوم درج اطلاعات خانه یا ویلا یا ... را وارد کنید
+    و اطلاعات خانه را وارد کنید
+
+</div>
+
+<div class="container">
+    <div class="box box-danger">
+        <div class="box-header">
+            <h3 class="box-title">درج اطلاعات خانه</h3>
+        </div>
+        <form asp-action="CreateFacilityItem">
+
+            <div class="box-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
+
+                <div class="form-group">
+                    <h4>موقعیت ملک :</h4>
+                    <br />
+
+                    @for (var i = 0; i < Model.AmlakMogheiatMelk.Count; i++)
+                    {
+                        <input type="checkbox" asp-for="@Model.AmlakMogheiatMelk[i].Selected" />
+                        <label asp-for="@Model.AmlakMogheiatMelk[i].Selected">@Model.AmlakMogheiatMelk[i].Name</label>
+                        <input type="hidden" asp-for="@Model.AmlakMogheiatMelk[i].Id" />
+                        <input type="hidden" asp-for="@Model.AmlakMogheiatMelk[i].Name" />
+                    }
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    <h4> جهت واحد :</h4><br />
+                    @for (var i = 0; i < Model.AmlakJahatVahedes.Count; i++)
+                    {
+                        <input type="checkbox" asp-for="@Model.AmlakJahatVahedes[i].Selected" />
+                        <label asp-for="@Model.AmlakJahatVahedes[i].Selected">@Model.AmlakJahatVahedes[i].Name</label>
+                        <input type="hidden" asp-for="@Model.AmlakJahatVahedes[i].Id" />
+                        <input type="hidden" asp-for="@Model.AmlakJahatVahedes[i].Name" />
+                    }
+                </div>
+
+                <hr />
+
+
+                <div class="form-group">
+                    <h4> مشخصه ملک :</h4><br />
+                    @for (var i = 0; i < Model.AmlakMoshakhase.Count; i++)
+                    {
+                        <input type="checkbox" asp-for="@Model.AmlakMoshakhase[i].Selected" />
+                        <label asp-for="@Model.AmlakMoshakhase[i].Selected">@Model.AmlakMoshakhase[i].Name</label>
+                        <input type="hidden" asp-for="@Model.AmlakMoshakhase[i].Id" />
+                        <input type="hidden" asp-for="@Model.AmlakMoshakhase[i].Name" />
+                    }
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    <h4> نمای ساختمان :</h4><br />
+                    @for (var i = 0; i < Model.AmlakNema.Count; i++)
+                    {
+                        
+                        <input type="checkbox" asp-for="@Model.AmlakNema[i].Selected" />
+                        <label asp-for="@Model.AmlakNema[i].Selected">@Model.AmlakNema[i].Name</label>
+                        <input type="hidden" asp-for="@Model.AmlakNema[i].Id" />
+                        <input type="hidden" asp-for="@Model.AmlakNema[i].Name" />
+                    }
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    <h4> مشاعات :</h4><br />
+                    @for (var i = 0; i < Model.AmlakMoshaat.Count; i++)
+                    {
+                        <input type="checkbox" asp-for="@Model.AmlakMoshaat[i].Selected" />
+                        <label asp-for="@Model.AmlakMoshaat[i].Selected">@Model.AmlakMoshaat[i].Name</label>
+                        <input type="hidden" asp-for="@Model.AmlakMoshaat[i].Id" />
+                        <input type="hidden" asp-for="@Model.AmlakMoshaat[i].Name" />
+                    }
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    <h4> تاسیسات گرمایشی و سرمایشی :</h4><br />
+                    @for (var i = 0; i < Model.AmlakTasisatGarmaieshi.Count; i++)
+                    {
+                        <input type="checkbox" asp-for="@Model.AmlakTasisatGarmaieshi[i].Selected" />
+                        <label asp-for="@Model.AmlakTasisatGarmaieshi[i].Selected">@Model.AmlakTasisatGarmaieshi[i].Name</label>
+                        <input type="hidden" asp-for="@Model.AmlakTasisatGarmaieshi[i].Id" />
+                        <input type="hidden" asp-for="@Model.AmlakTasisatGarmaieshi[i].Name" />
+                    }
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    <h4> پوشش کف :</h4><br />
+                    @for (var i = 0; i < Model.AmlakKafes.Count; i++)
+                    {
+                        <input type="checkbox" asp-for="@Model.AmlakKafes[i].Selected" />
+                        <label asp-for="@Model.AmlakKafes[i].Selected">@Model.AmlakKafes[i].Name</label>
+                        <input type="hidden" asp-for="@Model.AmlakKafes[i].Id" />
+                        <input type="hidden" asp-for="@Model.AmlakKafes[i].Name" />
+                    }
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    <h4> آشپزخانه :</h4><br />
+                    @for (var i = 0; i < Model.AmlakKitchenes.Count; i++)
+                    {
+                <input type="checkbox" asp-for="@Model.AmlakKitchenes[i].Selected" />
+                        <label asp-for="@Model.AmlakKitchenes[i].Selected">@Model.AmlakKitchenes[i].Name</label>
+                        <input type="hidden" asp-for="@Model.AmlakKitchenes[i].Id" />
+                        <input type="hidden" asp-for="@Model.AmlakKitchenes[i].Name" />
+                    }
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    <h4> سرویس بهداشتی و حمام  :</h4><br />
+                    @for (var i = 0; i < Model.AmlakWC.Count; i++)
+                    {
+                        <input type="checkbox" asp-for="@Model.AmlakWC[i].Selected" />
+                        <label asp-for="@Model.AmlakWC[i].Selected">@Model.AmlakWC[i].Name</label>
+                        <input type="hidden" asp-for="@Model.AmlakWC[i].Id" />
+                        <input type="hidden" asp-for="@Model.AmlakWC[i].Name" />
+                    }
+                </div>
+
+
+                <hr />
+
+                <div class="form-group">
+                    <h4> نوع دیوار  :</h4><br />
+                    @for (var i = 0; i < Model.AmlakDivars.Count; i++)
+                    {
+                        <input type="checkbox" asp-for="@Model.AmlakDivars[i].Selected" />
+                        <label asp-for="@Model.AmlakDivars[i].Selected">@Model.AmlakDivars[i].Name</label>
+                        <input type="hidden" asp-for="@Model.AmlakDivars[i].Id" />
+                        <input type="hidden" asp-for="@Model.AmlakDivars[i].Name" />
+                    }
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    <h4> نوع و تعداد پارکینگ  :</h4><br />
+                    @for (var i = 0; i < Model.AmlakParking.Count; i++)
+                    {
+                        <input type="checkbox" asp-for="@Model.AmlakParking[i].Selected" />
+                        <label asp-for="@Model.AmlakParking[i].Selected">@Model.AmlakParking[i].Name</label>
+                        <input type="hidden" asp-for="@Model.AmlakParking[i].Id" />
+                        <input type="hidden" asp-for="@Model.AmlakParking[i].Name" />
+                    }
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    <h4> وضعیت ملک  :</h4><br />
+                    @for (var i = 0; i < Model.AmlakMelkStatus.Count; i++)
+                    {
+                        <input type="checkbox" asp-for="@Model.AmlakMelkStatus[i].Selected" />
+                        <label asp-for="@Model.AmlakMelkStatus[i].Selected">@Model.AmlakMelkStatus[i].Name</label>
+                        <input type="hidden" asp-for="@Model.AmlakMelkStatus[i].Id" />
+                        <input type="hidden" asp-for="@Model.AmlakMelkStatus[i].Name" />
+                    }
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    <h4> امتیاز  :</h4><br />
+                    @for (var i = 0; i < Model.AmlakEmtiazes.Count; i++)
+                    {
+                        <input type="checkbox" asp-for="@Model.AmlakEmtiazes[i].Selected" />
+                        <label asp-for="@Model.AmlakEmtiazes[i].Selected">@Model.AmlakEmtiazes[i].Name</label>
+                        <input type="hidden" asp-for="@Model.AmlakEmtiazes[i].Id" />
+                        <input type="hidden" asp-for="@Model.AmlakEmtiazes[i].Name" />
+                    }
+                </div>
+
+                <hr />
+
+
+                <div class="form-group">
+                    <h4> وضعیت سند  :</h4><br />
+                    @for (var i = 0; i < Model.AmlakSanadStatus.Count; i++)
+                    {
+                        <input type="checkbox" asp-for="@Model.AmlakSanadStatus[i].Selected" />
+                        <label asp-for="@Model.AmlakSanadStatus[i].Selected">@Model.AmlakSanadStatus[i].Name</label>
+                        <input type="hidden" asp-for="@Model.AmlakSanadStatus[i].Id" />
+                        <input type="hidden" asp-for="@Model.AmlakSanadStatus[i].Name" />
+                    }
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">درج اطلاعات خانه - رفتن به مرحله بعد </button>
+                </div>
+
+            </div>
+        </form>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

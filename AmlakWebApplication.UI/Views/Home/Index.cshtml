@@ -1,94 +1,1160 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model ViewModelLayer.UI.MainPage
+<style>
+    .districts-list-item {
+        direction: rtl;
+        width: 100%;
+        background-color: #fdfdfd;
+        max-width: 430px;
+        border-radius: 4px;
+        box-shadow: 0 0 5px rgba(0,0,0,.05);
+        padding: .9rem 1.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 6px;
+        cursor: pointer;
+        transition: all .1s ease-in-out;
+    }
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how to build ASP.NET apps that can run anywhere.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
+        .districts-list-item:hover {
+            box-shadow: 0 5px 5px rgba(88, 88, 88, 0.20);
+        }
+
+    .dropdown-item {
+        font-family: sahel;
+    }
+
+    .dropdown-menu {
+        font-size: 1rem;
+    }
+</style>
+
+<div id="boxbackgroundmain" class="mainback" style="box-shadow:inset 0px 80px 30px rgba(10, 10, 10, 0.35)">
+    <div class="overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-12" style="border-radius: 0px 0px 0px 20px; margin-top:30px;">
+                    <div class="row">
+                        <nav class="navbar navbar-expand-md navbar-light">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mynavbar">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="mynavbar">
+                                <ul class="navbar-nav list-unstyled card-columns">
+                                    <li class="nav-item">
+                                        <a href="#" class="text-red-hover nav-link mr-1"><img src="img/logo2.png" style="width:40px;height:40px;" /></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="text-red-hover nav-link mr-1"><p class="text-center" style="color:#FFF;padding:10px"> ارزیابی قیمت </p></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class=" nav-link mx-1"><p class="text-center" style="color:#FFF;padding:10px"> اخبار </p></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link mx-1 "> <p class="text-center" style="color:#FFF;padding:10px"> قوانین   </p></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="#" class="nav-link mx-1 "><p class="text-center" style="color:#FFF;background-color:#ca062b;padding:10px;border-radius: 10px 10px 10px 10px;"> املاک ترکیه </p> </a>
+                                    </li>
+                                    <!--<li class="nav-item">
+                                        <a href="#" class="nav-link mx-1 "><p class="text-center" style="color:#FFF;padding:10px"> اجاره باغات کشاورزی </p> </a>
+                                    </li>-->
+
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 d-none d-sm-block" style="background-color:rgba(0, 0, 0, 0.00);margin-top:6px;font-size:17px;">
+                    <div class="row float-right">
+                        <a href="/Account/Login" class="text-center btnchange1" style="margin-left:5px;">ورود</a>
+                        <a href="/Account/Register" class="text-center border btnchange" style="margin-left:25px;margin-right:15px;"><p style="font-size:17px;margin-left:15px;margin-right:15px;margin-bottom:0px;">   ثبت نام </p>  </a>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="item">
-            <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    There are powerful new features in Visual Studio for building modern web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
+
+
+        <div class="container" style="">
+            <div class="row">
+                <div class="col-lg-10 col-sm-12 col-md-10 padd">
+                    <div style="background-color:rgba(0,0,0,0.6);border-radius: 4px 4px 4px 4px;" id="backblack">
+                        <div class="container" style="margin-bottom:10px;">
+                            <div class="row mt-5" style="padding-top:10px;">
+                                <div class="" style="padding-left:5px;padding-right:20px;" id="btnbuydiv">
+                                    <a href="#" class="btn-block text-center btnsearch new_way" id="btnbuy" style="font-size:17px;" onclick="buyitems()">خرید</a>
+                                </div>
+                                <div class="" style="padding-left:5px;" id="btnrentdiv">
+                                    <a href="#" class="btn-block text-center btnsearch" id="btnrent" style="font-size:17px;" onclick="rentitems()">رهن و اجاره</a>
+                                </div>
+                                <div class="" style="padding-left:5px;" id="btnsakhtdiv">
+                                    <a href="#" class="btn-block text-center btnsearch" id="btnsakht" style="font-size:17px;" onclick="mosharekatitems()">ساخت و ساز</a>
+                                </div>
+                                <div class="" style="padding-left:5px;" id="btnselldiv">
+                                    <a href="#" class="btn-block text-center btnsearch" id="btnsell" style="font-size:17px;" onclick="sellitems()"> فروخته شده</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12 col-md-12">
+                                    <div class="input-group" style="border-radius: 10px 10px 10px 10px;">
+                                        <div id="searchbox">
+                                            <a class="btn btn-light" style="background-color:white;border:7px solid white;border-radius:0px;height:70px;border-radius: 0px 10px 10px 0px;">
+                                                <img src="img/pin.png" style="height:35px;padding-top:5px;" class="img-rounded" alt="نقشه">
+                                            </a>
+
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="منطقه ... محله ... " style="border-color:white;height:70px;" id="searchinput">
+                                        <div class="input-group-append" style="margin-right:2px;">
+                                            <a class="btn center-block" style="background-color:#e4002b;padding:10px;color:white;border-radius: 10px 0px 0px 10px;padding-top:20px;font-weight:bold;width:150px;font-size:20px;" onclick="gotosearch()">پیدا کن !</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container" style="padding-bottom:0px;margin-bottom:0px;" id="buysearch">
+                            <div class="row" style="padding-top:5px; margin-top:5px;">
+                                <div class="dropdown" style="margin-right:40px;">
+                                    <div class="dropdown">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="buyhometypebtn" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true" style="background-color:rgba(0, 0, 0, 0.00);color:white;border:0px;width">
+                                            نوع ملک
+
+                                        </a>
+                                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;">
+
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="buyhometype(1,'آپارتمان')">آپارتمان</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="buyhometype(2,'خانه حیاط دار')">خانه حیاط دار</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="buyhometype(3,'زمین')">زمین</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="buyhometype(4,'کلنگی')">کلنگی</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="buyhometype(5,'اداری')">اداری</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="buyhometype(6,'مغازه')">مغازه</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="buyhometype(7,'مستغلات')">مستغلات</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="buyhometype(8,'انبار و سوله')">انبار و سوله</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="buyhometype(9,'باغ و باغچه')">باغ و باغچه</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="buyhometype(10,'ویلا')">ویلا</a><br />
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="dropdown" style="margin-right:2px;">
+                                    <div class="dropdown">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="buymincostbtn" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true" style="background-color:rgba(0, 0, 0, 0.00);color:white;border:0px;width">
+                                            حداقل قیمت
+
+                                        </a>
+                                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;">
+                                            @{
+                                                foreach (var item in Model.CostSetting)
+                                                {
+                                                    <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="buymincost('@item.Cost',@item.Id)">@item.Cost</a><br />
+                                                }
+
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dropdown" style="margin-right:2px;">
+                                    <div class="dropdown">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="buymaxcostbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:white;border:0px;width">
+                                            حداکثر قیمت
+                                        </a>
+                                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;">
+                                            @{
+                                                foreach (var item in Model.CostSetting)
+                                                {
+                                                    <a class="btn select-btn dropdown-item" style="font-size:15px;" onclick="buymaxcost('@item.Cost',@item.Id)">@item.Cost</a><br />
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dropdown" style="margin-right:2px;">
+                                    <div class="dropdown">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="buyminmetrbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:white;border:0px;width">
+                                            حداقل متراژ
+                                        </a>
+                                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;" id="buyminmetrazcombo">
+                                            @{
+                                                foreach (var item in Model.MetrazSetting.Where(a => a.TypeMetraz == 1))
+                                                {
+                                                    <a class="btn select-btn dropdown-item" style="font-size:15px;" onclick="buyminmetr(@item.Id,'@item.Metraz')">@item.Metraz</a><br />
+                                                }
+                                            }
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dropdown" style="margin-right:2px;">
+                                    <div class="dropdown">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="buymaxmetrbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:white;border:0px;width">
+                                            حداکثر متراژ
+                                        </a>
+                                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;" id="buymaxmetrazcombo">
+                                            @{
+                                                foreach (var item in Model.MetrazSetting.Where(a => a.TypeMetraz == 1))
+                                                {
+                                                    <a class="btn select-btn dropdown-item" style="font-size:15px;" onclick="buymaxmetr(@item.Id,'@item.Metraz')">@item.Metraz</a><br />
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container" style="padding-bottom:0px;margin-bottom:0px;display:none;margin-top:10px;" id="rentsearch">
+                            <div class="row" style="padding-top:10px; width:100%;">
+                                <div class="text-center"></div>
+                                <div class="dropdown" style="margin-right:40px;">
+                                    <div class="dropdown">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="renthometypebtn" data-toggle="dropdown" aria-haspopup="false" aria-expanded="true" style="background-color:rgba(0, 0, 0, 0.00);color:white;border:0px;width">
+                                            نوع ملک
+
+                                        </a>
+                                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;">
+
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="renthometype(1,'آپارتمان')">آپارتمان</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="renthometype(2,'خانه حیاط دار')">خانه حیاط دار</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="renthometype(3,'زمین')">زمین</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="renthometype(4,'کلنگی')">کلنگی</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="renthometype(5,'اداری')">اداری</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="renthometype(6,'مغازه')">مغازه</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="renthometype(7,'مستغلات')">مستغلات</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="renthometype(8,'انبار و سوله')">انبار و سوله</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="renthometype(9,'باغ و باغچه')">باغ و باغچه</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;font-family:sahel;" onclick="renthometype(10,'ویلا')">ویلا</a><br />
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="dropdown" style="">
+                                    <div class="dropdown show">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="rentminmetrbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:white;border:0px;width">
+                                            حداقل متراژ
+                                        </a>
+                                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;" id="rentminmetrazcombo">
+                                            @{
+                                                foreach (var item in Model.MetrazSetting.Where(a => a.TypeMetraz == 1))
+                                                {
+                                                    <a class="btn select-btn dropdown-item" style="font-size:15px;" onclick="rentminmetr(@item.Id,'@item.Metraz')">@item.Metraz</a><br />
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dropdown" style="">
+                                    <div class="dropdown show">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="rentmaxmetrbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:white;border:0px;width">
+                                            حداکثر متراژ
+                                        </a>
+                                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;" id="rentmaxmetrazcombo">
+                                            @{
+                                                foreach (var item in Model.MetrazSetting.Where(a => a.TypeMetraz == 1))
+                                                {
+                                                    <a class="btn select-btn dropdown-item" style="font-size:15px;" onclick="rentmaxmetr(@item.Id,'@item.Metraz')">@item.Metraz</a><br />
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dropdown" style="">
+                                    <div class="dropdown show">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="vadiemincostbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:white;border:0px;width">
+                                            حداقل ودیعه
+                                        </a>
+                                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;">
+                                            @{
+                                                foreach (var item in Model.VadieSetting)
+                                                {
+                                                    <a class="btn select-btn dropdown-item" style="font-size:15px;" onclick="vadiemincost('@item.Cost',@item.Id)">@item.Cost</a><br />
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dropdown" style="">
+                                    <div class="dropdown show">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="vadiemaxcostbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:white;border:0px;width">
+                                            حداکثر ودیعه
+                                        </a>
+                                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;">
+                                            @{
+                                                foreach (var item in Model.VadieSetting)
+                                                {
+                                                    <a class="btn select-btn dropdown-item" style="font-size:15px;" onclick="vadiemaxcost('@item.Cost',@item.Id)">@item.Cost</a><br />
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dropdown" style="">
+                                    <div class="dropdown show">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="ejaremincostbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:white;border:0px;width">
+                                            حداقل اجاره
+                                        </a>
+                                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;">
+                                            @{
+                                                foreach (var item in Model.EjareSetting)
+                                                {
+                                                    <a class="btn select-btn dropdown-item" style="font-size:15px;" onclick="ejaremincost('@item.Cost',@item.Id)">@item.Cost</a><br />
+                                                }
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dropdown" style="">
+                                    <div class="dropdown show">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="ejaremaxcostbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:white;border:0px;width">
+                                            حداکثر اجاره
+                                        </a>
+                                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;">
+                                            @{
+                                                foreach (var item in Model.EjareSetting)
+                                                {
+                                                    <a class="btn select-btn dropdown-item" style="font-size:15px;" onclick="ejaremaxcost('@item.Cost',@item.Id)">@item.Cost</a><br />
+                                                }
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="container" style="padding-bottom:0px;margin-bottom:0px;display:none;" id="mosharekatsearch">
+                            <div class="row" style="padding-top:10px; width:100%; ">
+
+                                <div style="margin-right:40px;padding-top:8px;">
+                                    <a class="th-without-select" href="#" role="button" id="dropdownMenuLink" style="color:white;font-size:15px;font-weight:bold;">
+                                        سازندگان
+                                    </a>
+
+                                </div>
+
+                                <div class="dropdown" style="margin-right:20px;width:160px;">
+                                    <div class="dropdown show">
+                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="mosharekatbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:white;border:0px;width">
+                                            مشارکت در ساخت
+                                        </a>
+                                        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:150px;overflow-y:scroll;overflow-x:scroll;">
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;" onclick="mosharekat('زمین',1)">زمین</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;" onclick="mosharekat('سازنده',2)">سازنده</a><br />
+                                            <a class="btn select-btn dropdown-item" style="font-size:15px;" onclick="mosharekat('سرمایه گذار',3)">سرمایه گذار</a><br />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div style="margin-right:20px;padding-top:8px;">
+                                    <a class="th-without-select" href="#" role="button" id="dropdownMenuLink" style="color:white;font-size:15px;font-weight:bold;">
+                                        دکوراسیون
+                                    </a>
+
+                                </div>
+
+
+                                <div style="margin-right:20px;padding-top:8px;">
+                                    <a class="th-without-select" href="#" role="button" id="dropdownMenuLink" style="color:white;font-size:15px;font-weight:bold;">
+                                        پیمانکاران
+                                    </a>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-2 col-sm-12 col-md-2 padd">
+                    <div style="background-color:rgba(0,0,0,0.6);border-radius: 4px 4px 4px 4px;padding-bottom:30px;" id="btnsepordan">
+                        <div class="container text-center " style="margin-top:48px;">
+                            <br>
+                            <br>
+                            <a href="#" class="text-center btnchange" style="padding:10px;border-radius: 7px 7px 7px 7px;border: 2px solid white;font-size:20px;"> سپردن ملک  </a>
+                        </div>
+
+                        <div class="container" style="margin-top:30px;">
+                            <p class="text-center" style="color:white;padding-top:10px;font-size:15px;">مشخصات ملک خود را ثبت کنید </p>
+                        </div>
+
+                    </div>
+
+
+                </div>
             </div>
+
+
+            <div class="container"></div>
+
+            <!----------footer------>
         </div>
-        <div class="item">
-            <img src="~/images/banner3.svg" alt="Microsoft Azure" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
+
     </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
+
 </div>
 
-<div class="row">
-    <div class="col-md-3">
-        <h2>Application uses</h2>
-        <ul>
-            <li>Sample pages using ASP.NET Core MVC</li>
-            <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-        </ul>
+<div class="row" style="padding-top:50px;padding-bottom:50px; background-color:#f0f7fd;">
+    <div class="container">
+        <div class="container row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="text-center">
+                    <img src="~/img/360.png" style="width:100px;height:100px;" />
+                </div>
+                <div class="text-center" style="padding-top:20px;">
+                    <h2 class="text-center" style="color:#646464;font-weight:500;font-size:23px;">امکان بازدید مجازی با تکنولوژی 360 </h2>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-3">
-        <h2>How to</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398600">Add a Controller and View</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Overview</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Run &amp; Deploy</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
-        </ul>
-    </div>
+
 </div>
+
+<iframe style="width:100%;z-index:10;" height="480" src="https://www.3dvista.com/samples/new_york_loft.html" frameborder="0" allowfullscreen allow="xr-spatial-tracking"></iframe>
+
+<div class="row" style="padding-top:50px;;padding-bottom:50px; background-color:#f0f7fd;">
+    <div class="container">
+        <div class="container row">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="text-center">
+                    <img src="~/img/home cash icon.png" style="width:100px;height:100px;" />
+                </div>
+                <div class="text-center" style="padding-top:20px;">
+                    <h2 class="text-center" style="color:#646464;font-weight:500;font-size:23px;">قیمت گذاری آنلاین </h2>
+                </div>
+                <div class="text-center" style="padding-top:10px;">
+                    <h6 class="text-center" style="color:#646464;font-weight:700;line-height: 1.8;">مشخصات ملک خود را وارد کنید تا قیمت ملک شما محاسبه و نمایش داده شود </h6>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="text-center">
+                    <img src="~/img/zarebin icon.png" style="width:100px;height:100px;" />
+                </div>
+                <div class="text-center" style="padding-top:20px;">
+                    <h2 class="text-center" style="color:#646464;font-weight:500;font-size:23px;"> جستجوی پیشرفته </h2>
+                </div>
+                <div class="text-center" style="padding-top:10px;line-height: 1.6;">
+                    <h6 class="text-center" style="color:#646464;font-weight:700;line-height: 1.8;">با استفاده از فیلتر های پیشرفته در کمترین زمان ممکن ملک مورد نظر خود را بیابید </h6>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="text-center">
+                    <img src="~/img/home icon.png" style="width:100px;height:100px;" />
+                </div>
+                <div class="text-center" style="padding-top:20px;">
+                    <h2 class="text-center" style="color:#646464;font-weight:500;font-size:23px;">سازندگان </h2>
+                </div>
+                <div class="text-center" style="padding-top:10px;line-height: 1.6; ">
+                    <h6 class="text-center" style="color:#646464;font-weight:700;line-height: 1.8;">نمایش مشخصات و پروژه های سازندگان برتر  </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="container" style="padding-top:50px;">
+    <div class="text-center">
+        <h2 class="text-center" style="color:#646464;font-weight:500;font-size:28px;">محله های محبوب </h2>
+    </div>
+    <div class="text-center" style="padding-top:5px;">
+        <p class="text-center" style="font-size: 80%;font-weight:400; color: #9b9b9b !important;">دسترسی سریع به محبوب‌ترین محله‌ها از طریق لینک‌های زیر</p>
+    </div>
+    <div class="text-center" style="padding-top:5px;">
+        <img src="~/img/downic.png" style="" />
+    </div>
+
+    <div class="row" style="padding-top:20px;padding-bottom:50px;">
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="text-center">
+                <h6 class="text-center" style="color:#646464;font-weight:700;">خرید و فروش در ارومیه </h6>
+            </div>
+
+            <div class="text-center" style="padding-top:20px;">
+                <a href="#">
+                    <div class="row districts-list-item">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;float:right;">دانشکده  </h6>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;color:#ff0000;float:left;"> 52053 </h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+            <div class="text-center" style="padding-top:3px;">
+                <a href="#">
+                    <div class="row districts-list-item">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;float:right;">ارشاد  </h6>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;color:#ff0000;float:left;"> 52053 </h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="text-center" style="padding-top:3px;">
+                <a href="#">
+                    <div class="row districts-list-item">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;float:right;">سعدی  </h6>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;color:#ff0000;float:left;"> 521 </h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="text-center" style="padding-top:3px;">
+                <a href="#">
+                    <div class="row districts-list-item">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;float:right;">حسنی  </h6>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;color:#ff0000;float:left;"> 52053 </h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="text-center">
+                <h6 class="text-center" style="color:#646464;font-weight:700;">رهن و اجاره در ارومیه </h6>
+            </div>
+
+            <div class="text-center" style="padding-top:20px;">
+                <a href="#">
+                    <div class="row districts-list-item">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;float:right;">دانشکده  </h6>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;color:#ff0000;float:left;"> 52053 </h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+            <div class="text-center" style="padding-top:3px;">
+                <a href="#">
+                    <div class="row districts-list-item">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;float:right;">سعدی  </h6>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;color:#ff0000;float:left;"> 52053 </h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="text-center" style="padding-top:3px;">
+                <a href="#">
+                    <div class="row districts-list-item">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;float:right;">حسنی  </h6>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;color:#ff0000;float:left;"> 52053 </h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="text-center" style="padding-top:3px;">
+                <a href="#">
+                    <div class="row districts-list-item">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;float:right;">شیخ تپه  </h6>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;color:#ff0000;float:left;"> 123 </h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="text-center">
+                <h6 class="text-center" style="color:#646464;font-weight:700;">ساخت و ساز در ارومیه </h6>
+            </div>
+
+            <div class="text-center" style="padding-top:20px;">
+                <a href="#">
+                    <div class="row districts-list-item">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;float:right;">شیخ تپه  </h6>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;color:#ff0000;float:left;"> 52053 </h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+            <div class="text-center" style="padding-top:3px;">
+                <a href="#">
+                    <div class="row districts-list-item">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;float:right;">بهداری  </h6>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;color:#ff0000;float:left;"> 52053 </h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="text-center" style="padding-top:3px;">
+                <a href="#">
+                    <div class="row districts-list-item">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;float:right;">دانشکده  </h6>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;color:#ff0000;float:left;"> 52053 </h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="text-center" style="padding-top:3px;">
+                <a href="#">
+                    <div class="row districts-list-item">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;float:right;">سعدی  </h6>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;color:#ff0000;float:left;"> 52053 </h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="text-center">
+                <h6 class="text-center" style="color:#646464;font-weight:700;">فروخته شده در ارومیه </h6>
+            </div>
+
+            <div class="text-center" style="padding-top:20px;">
+                <a href="#">
+                    <div class="row districts-list-item">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;float:right;">سعدی  </h6>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;color:#ff0000;float:left;"> 52053 </h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+            <div class="text-center" style="padding-top:3px;">
+                <a href="#">
+                    <div class="row districts-list-item">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;float:right;">رودکی  </h6>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;color:#ff0000;float:left;"> 52053 </h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="text-center" style="padding-top:3px;">
+                <a href="#">
+                    <div class="row districts-list-item">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;float:right;">بهداری  </h6>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;color:#ff0000;float:left;"> 52053 </h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+            <div class="text-center" style="padding-top:3px;">
+                <a href="#">
+                    <div class="row districts-list-item">
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;float:right;">دانشکده  </h6>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center">
+                                <h6 style="color:#646464;font-weight:700;color:#ff0000;float:left;font-family:sahel;"> 52053 </h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var witchmenu = 1;
+    var minmetr = 0;
+    var maxmetr = 0;
+    var mincost = 0;
+    var maxcost = 0;
+    var minejare = 0;
+    var maxejare = 0;
+    var selectitem = "";
+    var hometypebuy = 0;
+    var hometyperent = 0;
+
+
+    var buminmetrbana = "";
+    var bumaxmetrbana = "";
+    var rentminmetrbana = "";
+    var rentmaxmetrbana = "";
+    var buminmetrzamin = "";
+    var bumaxmetrzamin = "";
+    var rentminmetrzamin = "";
+    var rentmaxmetrzamin = "";
+
+     function getmetrazbana() {
+            $.ajax({
+                type: "Post",
+                url: '/Home/GetMetrazbana',
+                success: function (data) {
+                    buminmetrbana = data.buyminmetraz;
+                    bumaxmetrbana = data.buymaxmetraz;
+                    rentminmetrbana = data.rentminmetraz;
+                    rentmaxmetrbana = data.rentmaxmetraz;
+                }
+            });
+    }
+
+    function getmetrazzamin() {
+            $.ajax({
+                type: "Post",
+                url: '/Home/GetMetrazzamin',
+                success: function (data) {
+                    buminmetrzamin = data.buyminmetraz;
+                    bumaxmetrzamin = data.buymaxmetraz;
+                    rentminmetrzamin = data.rentminmetraz;
+                    rentmaxmetrzamin = data.rentmaxmetraz;
+                }
+            });
+        }
+
+    $(document).ready(function () {
+        $('#typehomebuy').multiselect();
+        $('#typehomerent').multiselect();
+        getmetrazbana();
+        getmetrazzamin();
+    });
+    setInterval(function () {
+        var images = ["url('img/back2.jpg')", "url('img/back3.jpg')", "url('img/back4.jpg')"];
+        var rand = Math.floor(Math.random() * images.length);
+
+        document.getElementById('boxbackgroundmain').style.backgroundImage = images[rand];
+
+    }, 10000);
+
+    $(function () {
+        $(document).scroll(function () {
+            var $nav = $(".navbar-fixed-top");
+            $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+        });
+
+        var backblack = document.getElementById("backblack");
+        backblack.style.paddingBottom = "3px";
+
+        var searchHeight = document.getElementById('backblack').offsetHeight;
+        var sepordanheight = document.getElementById('btnsepordan');
+        var searchimg = document.getElementById('searchbox').offsetWidth;
+        var searchinput = document.getElementById('searchinput').offsetWidth;
+
+        var w = window.innerWidth;
+        if (w > 549) {
+
+            var buybtn = document.getElementById("btnbuy");
+            var rentbtn = document.getElementById("btnrent");
+            var sakhtbtn = document.getElementById("btnsakht");
+            var sellbtn = document.getElementById("btnsell");
+
+            buybtn.style.width = (searchimg + searchinput - 20) / 4 + "px";
+            rentbtn.style.width = (searchimg + searchinput - 20) / 4 + "px";
+            sakhtbtn.style.width = (searchimg + searchinput - 20) / 4 + "px";
+            sellbtn.style.width = (searchimg + searchinput - 20) / 4 + "px";
+
+        } else {
+            var buybtn = document.getElementById("btnbuydiv");
+            var rentbtn = document.getElementById("btnrentdiv");
+            var sakhtbtn = document.getElementById("btnsakhtdiv");
+            var sellbtn = document.getElementById("btnselldiv");
+
+            buybtn.classList.add("col-lg-2 col-md-2 col-sm-2");
+            rentbtn.classList.add("col-lg-2 col-md-2 col-sm-2");
+            sakhtbtn.classList.add("col-lg-2 col-md-2 col-sm-2");
+            sellbtn.classList.add("col-lg-2 col-md-2 col-sm-2");
+
+        }
+
+        var searchHeight = document.getElementById('backblack').offsetHeight;
+        var sepordanheight = document.getElementById('btnsepordan');
+        sepordanheight.style.height = searchHeight + "px";
+
+
+    });
+
+    function buyitems() {
+        witchmenu = 1;
+        var buy = document.getElementById("buysearch");
+        var rent = document.getElementById("rentsearch");
+        var mosharekat = document.getElementById("mosharekatsearch");
+        buy.style.display = "block";
+        rent.style.display = "none";
+        mosharekat.style.display = "none";
+
+        var buybtn = document.getElementById("btnbuy");
+        var rentbtn = document.getElementById("btnrent");
+        var sakhtbtn = document.getElementById("btnsakht");
+        var sellbtn = document.getElementById("btnsell");
+        buybtn.style.backgroundColor = "#e4002b";
+        buybtn.style.color = "#FFF";
+        rentbtn.style.backgroundColor = "rgba(51,63,72,0.8)";
+        rentbtn.style.color = "#FFF";
+        sakhtbtn.style.backgroundColor = "rgba(51,63,72,0.8)";
+        sakhtbtn.style.color = "#FFF";
+        sellbtn.style.backgroundColor = "rgba(51,63,72,0.8)";
+        sellbtn.style.color = "#FFF";
+        removepin();
+        buybtn.classList.add("new_way");
+
+        var backblack = document.getElementById("backblack");
+        backblack.style.paddingBottom = "3px";
+
+        var searchHeight = document.getElementById('backblack').offsetHeight;
+        var sepordanheight = document.getElementById('btnsepordan');
+        sepordanheight.style.height = searchHeight + "px";
+
+    }
+
+    function rentitems() {
+        witchmenu = 2;
+        var buy = document.getElementById("buysearch");
+        var rent = document.getElementById("rentsearch");
+        var mosharekat = document.getElementById("mosharekatsearch");
+        buy.style.display = "none";
+        rent.style.display = "block";
+        mosharekat.style.display = "none";
+
+        var buybtn = document.getElementById("btnbuy");
+        var rentbtn = document.getElementById("btnrent");
+        var sakhtbtn = document.getElementById("btnsakht");
+        var sellbtn = document.getElementById("btnsell");
+        buybtn.style.backgroundColor = "rgba(51,63,72,0.8)";
+        buybtn.style.color = "#FFF";
+        rentbtn.style.backgroundColor = "#e4002b";
+        rentbtn.style.color = "#FFF";
+        sakhtbtn.style.backgroundColor = "rgba(51,63,72,0.8)";
+        sakhtbtn.style.color = "#FFF";
+        sellbtn.style.backgroundColor = "rgba(51,63,72,0.8)";
+        sellbtn.style.color = "#FFF";
+        removepin();
+        rentbtn.classList.add("new_way");
+
+        var backblack = document.getElementById("backblack");
+        backblack.style.paddingBottom = "3px";
+
+        var searchHeight = document.getElementById('backblack').offsetHeight;
+        var sepordanheight = document.getElementById('btnsepordan');
+        sepordanheight.style.height = searchHeight + "px";
+    }
+
+    function mosharekatitems() {
+        witchmenu = 3;
+        var buy = document.getElementById("buysearch");
+        var rent = document.getElementById("rentsearch");
+        var mosharekat = document.getElementById("mosharekatsearch");
+        buy.style.display = "none";
+        rent.style.display = "none";
+        mosharekat.style.display = "block";
+
+        var buybtn = document.getElementById("btnbuy");
+        var rentbtn = document.getElementById("btnrent");
+        var sakhtbtn = document.getElementById("btnsakht");
+        var sellbtn = document.getElementById("btnsell");
+        buybtn.style.backgroundColor = "rgba(51,63,72,0.8)";
+        buybtn.style.color = "#FFF";
+        rentbtn.style.backgroundColor = "rgba(51,63,72,0.8)";
+        rentbtn.style.color = "#FFF";
+        sakhtbtn.style.backgroundColor = "#e4002b";
+        sakhtbtn.style.color = "#FFF";
+        sellbtn.style.backgroundColor = "rgba(51,63,72,0.8)";
+        sellbtn.style.color = "#FFF";
+        removepin();
+        sakhtbtn.classList.add("new_way");
+
+        var backblack = document.getElementById("backblack");
+        backblack.style.paddingBottom = "3px";
+
+        var searchHeight = document.getElementById('backblack').offsetHeight;
+        var sepordanheight = document.getElementById('btnsepordan');
+        sepordanheight.style.height = searchHeight + "px";
+    }
+
+    function sellitems() {
+        witchmenu = 4;
+        var buy = document.getElementById("buysearch");
+        var rent = document.getElementById("rentsearch");
+        var mosharekat = document.getElementById("mosharekatsearch");
+        buy.style.display = "none";
+        rent.style.display = "none";
+        mosharekat.style.display = "none";
+
+        var buybtn = document.getElementById("btnbuy");
+        var rentbtn = document.getElementById("btnrent");
+        var sakhtbtn = document.getElementById("btnsakht");
+        var sellbtn = document.getElementById("btnsell");
+        buybtn.style.backgroundColor = "rgba(51,63,72,0.8)";
+        buybtn.style.color = "#FFF";
+        rentbtn.style.backgroundColor = "rgba(51,63,72,0.8)";
+        rentbtn.style.color = "#FFF";
+        sakhtbtn.style.backgroundColor = "rgba(51,63,72,0.8)";
+        sakhtbtn.style.color = "#FFF";
+        sellbtn.style.backgroundColor = "#e4002b";
+        sellbtn.style.color = "#FFF";
+        removepin();
+        sellbtn.classList.add("new_way");
+
+        var backblack = document.getElementById("backblack");
+        backblack.style.paddingBottom = "30px";
+
+        var searchHeight = document.getElementById('backblack').offsetHeight;
+        var sepordanheight = document.getElementById('btnsepordan');
+        sepordanheight.style.height = searchHeight + "px";
+    }
+
+
+    function removepin() {
+        var buybtn = document.getElementById("btnbuy");
+        var rentbtn = document.getElementById("btnrent");
+        var sakhtbtn = document.getElementById("btnsakht");
+        var sellbtn = document.getElementById("btnsell");
+        buybtn.classList.remove("new_way");
+        rentbtn.classList.remove("new_way");
+        sakhtbtn.classList.remove("new_way");
+        sellbtn.classList.remove("new_way");
+    }
+    
+    function buyhometype(id, text) {
+        hometypebuy = id;
+        var buybtn = document.getElementById("buyhometypebtn");
+        buybtn.innerHTML = text;
+        if (id == 3 || id == 4 || id == 9) {
+            $('#buyminmetrazcombo').empty();
+            $('#buymaxmetrazcombo').empty();
+            $('#buyminmetrazcombo').append(buminmetrzamin);
+            $('#buymaxmetrazcombo').append(bumaxmetrzamin);
+        }
+        else {
+            $('#buyminmetrazcombo').empty();
+            $('#buymaxmetrazcombo').empty();
+            $('#buyminmetrazcombo').append(buminmetrbana);
+            $('#buymaxmetrazcombo').append(bumaxmetrbana);
+        }
+    };
+
+    function renthometype(id, text) {
+        hometyperent = id;
+        var buybtn = document.getElementById("renthometypebtn");
+        buybtn.innerHTML = text;
+        if (id == 3 || id == 4 || id == 9) {
+            $('#rentminmetrazcombo').empty();
+            $('#rentmaxmetrazcombo').empty();
+            $('#rentminmetrazcombo').append(rentminmetrzamin);
+            $('#rentmaxmetrazcombo').append(rentmaxmetrzamin);
+        }
+        else {
+            $('#rentminmetrazcombo').empty();
+            $('#rentmaxmetrazcombo').empty();
+            $('#rentminmetrazcombo').append(rentminmetrbana);
+            $('#rentmaxmetrazcombo').append(rentmaxmetrbana);
+        }
+    };
+
+    function buymincost(text, id) {
+        mincost = id;
+        var buybtn = document.getElementById("buymincostbtn");
+        buybtn.innerHTML = text;
+    };
+
+    function buymaxcost(text, id) {
+        maxcost = id;
+        var buybtn = document.getElementById("buymaxcostbtn");
+        buybtn.innerHTML = text;
+    }
+
+    function buyminmetr(id,text) {
+        minmetr = id;
+        var buybtn = document.getElementById("buyminmetrbtn");
+        buybtn.innerHTML = text;
+    }
+
+    function buymaxmetr(id,text) {
+        maxmetr = id;
+        var buybtn = document.getElementById("buymaxmetrbtn");
+        buybtn.innerHTML = text;
+    }
+
+    function rentminmetr(id,text) {
+        minmetr = id;
+        var buybtn = document.getElementById("rentminmetrbtn");
+        buybtn.innerHTML = text;
+    }
+
+    function rentmaxmetr(id,text) {
+        maxmetr = id;
+        var buybtn = document.getElementById("rentmaxmetrbtn");
+        buybtn.innerHTML = text;
+    }
+
+    function vadiemincost(text, id) {
+        mincost = id;
+        var buybtn = document.getElementById("vadiemincostbtn");
+        buybtn.innerHTML = text;
+    }
+
+    function vadiemaxcost(text, id) {
+        maxcost = id;
+        var buybtn = document.getElementById("vadiemaxcostbtn");
+        buybtn.innerHTML = text;
+    }
+
+    function ejaremincost(text, id) {
+        minejare = id;
+        var buybtn = document.getElementById("ejaremincostbtn");
+        buybtn.innerHTML = text;
+    }
+
+    function ejaremaxcost(text, id) {
+        maxejare = id;
+        var buybtn = document.getElementById("ejaremaxcostbtn");
+        buybtn.innerHTML = text;
+    }
+
+    function mosharekat(text, id) {
+        var buybtn = document.getElementById("mosharekatbtn");
+        buybtn.innerHTML = text;
+    }
+
+    function gotosearch() {
+
+        if (witchmenu == 1) {
+            window.location.href = "/Search/SearchList?menu=" + witchmenu + "&mincost=" + mincost + "&maxcost=" + maxcost + "&minmetr=" + minmetr + "&maxmetr=" + maxmetr + "&minejare=" + minejare + "&maxejare=" + maxejare + "&selectitem=" + hometypebuy+"&typehome=1";
+            
+        }
+        else if (witchmenu == 2) {
+            window.location.href = "/Search/SearchList?menu=" + witchmenu + "&mincost=" + mincost + "&maxcost=" + maxcost + "&minmetr=" + minmetr + "&maxmetr=" + maxmetr + "&minejare=" + minejare + "&maxejare=" + maxejare + "&selectitem=" + hometyperent+"&typehome=2";
+        }
+        else if (witchmenu == 3) {
+
+        }
+        else if (witchmenu == 4) {
+
+        }
+
+    }
+</script>

@@ -12,3 +12,17 @@ C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\bin\Release\netco
 C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\obj\Release\netcoreapp2.1\ViewModelLayer.csproj.CopyComplete
 C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\bin\Release\netcoreapp2.1\Utilities.dll
 C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\bin\Release\netcoreapp2.1\Utilities.pdb
+D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Release\netcoreapp2.1\ViewModelLayer.deps.json
+D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Release\netcoreapp2.1\ViewModelLayer.dll
+D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Release\netcoreapp2.1\ViewModelLayer.pdb
+D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Release\netcoreapp2.1\DomainLayer.dll
+D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Release\netcoreapp2.1\Utilities.dll
+D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Release\netcoreapp2.1\DomainLayer.pdb
+D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Release\netcoreapp2.1\Utilities.pdb
+D:\Projects\AmlakWebApplication\ViewModelLayer\obj\Release\netcoreapp2.1\ViewModelLayer.csprojAssemblyReference.cache
+D:\Projects\AmlakWebApplication\ViewModelLayer\obj\Release\netcoreapp2.1\ViewModelLayer.csproj.CoreCompileInputs.cache
+D:\Projects\AmlakWebApplication\ViewModelLayer\obj\Release\netcoreapp2.1\ViewModelLayer.AssemblyInfoInputs.cache
+D:\Projects\AmlakWebApplication\ViewModelLayer\obj\Release\netcoreapp2.1\ViewModelLayer.AssemblyInfo.cs
+D:\Projects\AmlakWebApplication\ViewModelLayer\obj\Release\netcoreapp2.1\ViewModelLayer.csproj.CopyComplete
+D:\Projects\AmlakWebApplication\ViewModelLayer\obj\Release\netcoreapp2.1\ViewModelLayer.dll
+D:\Projects\AmlakWebApplication\ViewModelLayer\obj\Release\netcoreapp2.1\ViewModelLayer.pdb

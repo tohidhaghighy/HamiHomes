@@ -1,0 +1,43 @@
+﻿
+
+
+<link href="~/js/leaflet/leaflet.css" rel="stylesheet" />
+<script src="~/js/leaflet/leaflet.js"></script>
+
+<div id="map" style="width:100%;height:700px;">
+
+</div>
+
+
+<script>
+    var map = L.map('map').setView([37.553278571293816, 45.07666215851912], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var LeafIcon = L.Icon.extend({
+        options: {
+            iconSize: [30, 30]
+        }
+    });
+
+    var greenIcon = new LeafIcon({ iconUrl: '/js/leaflet/icon.png' });
+
+
+    var marker;
+    map.on("click", function (e) {
+        if (marker) {
+            map.removeLayer(marker);
+        }
+
+        marker = new L.Marker(e.latlng, { icon: greenIcon });
+        $('#gpsx').val(e.latlng.lat);
+        $('#gpsy').val(e.latlng.lng);
+        marker.addTo(map);
+    });
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
