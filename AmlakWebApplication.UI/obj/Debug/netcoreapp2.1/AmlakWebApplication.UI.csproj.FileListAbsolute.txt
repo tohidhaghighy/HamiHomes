@@ -56,3 +56,6 @@ D:\Projects\AmlakWebApplication\AmlakWebApplication.UI\obj\Debug\netcoreapp2.1\R
 D:\Projects\AmlakWebApplication\AmlakWebApplication.UI\obj\Debug\netcoreapp2.1\Razor\Views\Search\SearchList.g.cshtml.cs
 D:\Projects\AmlakWebApplication\AmlakWebApplication.UI\obj\Debug\netcoreapp2.1\Razor\Views\Account\Login.g.cshtml.cs
 D:\Projects\AmlakWebApplication\AmlakWebApplication.UI\obj\Debug\netcoreapp2.1\Razor\Views\Account\Register.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication.UI\obj\Debug\netcoreapp2.1\Razor\Views\Adviser\Index.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication.UI\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_AdviserLayout.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication.UI\obj\Debug\netcoreapp2.1\Razor\Views\Search\_SearchList.g.cshtml.cs

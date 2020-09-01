@@ -72,5 +72,10 @@ namespace DomainLayer.Home
 
         public int HomeId { get; set; }
 
+        #region Foregnkey
+
+        [ForeignKey(nameof(HomeId))]
+        public virtual Home Home { get; set; }
+        #endregion
     }
 }

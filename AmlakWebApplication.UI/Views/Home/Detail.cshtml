@@ -1,9 +1,31 @@
-﻿@{
+﻿@model ViewModelLayer.Detail.Detailpage
+@{
     ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_DetailLayout.cshtml";
 }
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <style>
+     .content {
+        overflow: hidden;
+        width: 100%;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+
+    .font-xs-b {
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 700;
+    }
+
+    .font-xs-ad {
+        color: #9c99b6;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 700;
+    }
+
     #backchagner {
         box-shadow: inset 0px 80px 30px rgba(10, 10, 10, 0.35);
         background-image: url(/img/back2.jpg);
@@ -67,23 +89,50 @@
         font-family: sahel;
         font-weight: bold;
     }
-    .overlay{
-        background-color:rgba(0, 0, 0, 0.61);
-    }
-    .numberCircle {
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    padding: 8px;
-    background: rgba(60, 58, 58, 0.25);
-    color: black;
-    text-align: center;
-    display:inline;
-    font-size:18px;
-    font-weight:bold;
-    cursor:pointer;
-}
 
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.61);
+    }
+
+    .numberCircle {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+        background: rgba(60, 58, 58, 0.25);
+        color: black;
+        text-align: center;
+        display: inline;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+
+    .rotate90 {
+        transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+    }
+
+    .rotate180 {
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        transition-duration: 1.5s;
+        -webkit-transition-duration:1s;
+    }
+
+    .rotate270 {
+        transform: rotate(270deg);
+        -webkit-transform: rotate(270deg);
+        -ms-transform: rotate(270deg);
+    }
+
+    h1, h2, h3, h4, h5, a, input, textarea {
+    font-family: sahel !important;
+    font-weight: bold;
+}
 </style>
 
 <div class="mainback" id="backchagner">
@@ -92,13 +141,13 @@
             <div class="row">
                 <div class="col-lg-6 col-sm-12 col-md-6">
                     <div class="text-center">
-                        <h5 style="padding:10px;background-color:rgba(178, 174, 174, 0.50);border-radius:20px;color:white;width:200px;float:right;">باغ و باغچه</h5>
+                        <h5 style="padding:10px;background-color:rgba(178, 174, 174, 0.50);border-radius:20px;color:white;width:200px;float:right;">@ViewData["hometype"]</h5>
                     </div>
                 </div>
 
                 <div class="col-lg-6 col-sm-12 col-md-6">
                     <div class="text-center">
-                        <h5 style="padding:10px;background-color:rgba(139, 137, 137, 0.50);border-radius:20px;color:white;">آذربایجان غربی ارومیه خیابان استادان</h5>
+                        <h5 style="padding:10px;background-color:rgba(139, 137, 137, 0.50);border-radius:20px;color:white;">@Model.home.Address</h5>
                     </div>
                 </div>
             </div>
@@ -114,23 +163,28 @@
                 <div class="col-lg-8 col-sm-12 col-md-8">
 
                     <div class="">
-                        <h2 style="padding:10px;color:white;">خانه لوکس برادران</h2>
+                        <h2 style="padding:10px;color:white;">@ViewData["hometype"] @Model.home.OwnerName</h2>
                     </div>
 
                     <div class="">
-                        <h5 style="padding:10px;color:white;width:100%;">این خانه با ویو مناسب و امکاناتی کم نظیر انتخاب مناسبی برای خانواده های</h5>
+                        <h5 style="padding:10px;color:white;width:100%;">
+                            @Html.Raw(Model.home.Description)
+                        </h5>
                     </div>
                     <div class="row" style="padding:10px;">
-                        <div class="col-4 text-center">
-                            <p class="font-xs-ad" style="font-size:15px;color:white;float:right;"><img src="/img/bed.png" style="width:25px;height:25px;padding-left:10px;" /> 2 اتاق</p>
+                        @if (Model.home.Hometype == 1 || Model.home.Hometype == 2 || Model.home.Hometype == 7)
+                        {
+                            <div class="col-4 text-center">
+                                <p class="font-xs-ad" style="font-size:15px;color:white;float:right;"><img src="/img/bed.png" style="width:25px;height:25px;padding-left:10px;" /> @Model.home.Bed اتاق</p>
 
-                        </div>
-                        <div class="col-4 text-center">
-                            <p class="font-xs-ad" style="font-size:15px;color:white;float:right;"><img src="/img/bath.png" style="width:25px;height:25px;padding-left:10px;" /> 2 حمام</p>
+                            </div>
+                            <div class="col-4 text-center">
+                                <p class="font-xs-ad" style="font-size:15px;color:white;float:right;"><img src="/img/bath.png" style="width:25px;height:25px;padding-left:10px;" /> @Model.home.Bath حمام</p>
 
-                        </div>
+                            </div>
+                        }
                         <div class="col-4 text-center">
-                            <p class="font-xs-ad" style="font-size:15px;color:white;float:right;"><img src="/img/Resize-icon.png" style="width:25px;height:25px;padding-left:10px;" /> 120 متر </p>
+                            <p class="font-xs-ad" style="font-size:15px;color:white;float:right;"><img src="/img/Resize-icon.png" style="width:25px;height:25px;padding-left:10px;" /> @Model.contract.Metraz متر </p>
                         </div>
 
                     </div>
@@ -143,7 +197,7 @@
                             <div class="col-9" style="padding-top:10px;">
                                 <h5 style="color:#ca062b;padding-right:25px;">قیمت</h5>
                                 <div class="">
-                                    <h3 style="color:rgba(116, 113, 113, 0.75);text-align:left;padding-left:5px;">12,000,000 </h3>
+                                    <h3 style="color:rgba(116, 113, 113, 0.75);text-align:left;padding-left:5px;" id="costwithspliter">@Model.contract.SellCOst </h3>
                                 </div>
                             </div>
                             <div class="col-3" style="padding-top:10px;">
@@ -153,26 +207,38 @@
                                 </div>
                             </div>
                         </div>
-                        <hr style="margin-top:1px;margin-bottom:1px;"/>
+                        <hr style="margin-top:1px;margin-bottom:1px;" />
                         <div class="row">
-                            <div class="col-5" style="padding-top:10px;">
-                                <div class="text-center">
-                                    <img src="~/img/back2.jpg" style="border-radius:40px;width:80px;height:80px;text-align:center;align-content:center;" />
-                                </div>
-                                
+                            <div class="col-5" style="padding-top:5px;">
+                                @{
+                                    if (Model.contract.Adviser.Image != "" && Model.contract.Adviser.Image != null)
+                                    {
+                                        <div class="text-center">
+                                            <img src="http://panel.hamihomes.com/images/@Model.contract.Adviser.Image" style="border-radius:40px;width:70px;height:70px;text-align:center;align-content:center;" />
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="text-center">
+                                            <img src="http://panel.hamihomes.com/images/def.jpg" style="border-radius:40px;width:70px;height:70px;text-align:center;align-content:center;" />
+                                        </div>
+                                    }
+
+                                }
+
+
                             </div>
                             <div class="col-7" style="padding-top:10px;padding-bottom:10px;">
-                                <p style="text-align:right;color:gray;width:100%;margin-bottom:2px;font-weight:bold;">نام مشاور</p>
-                                <p style="text-align:right;color:black;width:100%;font-size:18px;font-weight:bold;margin-bottom:7px;">آرتین افشار</p>
+                                <p style="text-align:right;color:black;width:100%;font-size:18px;font-weight:bold;margin-bottom:7px;">@Model.contract.Adviser.Name  @Model.contract.Adviser.Family</p>
                                 <p style="text-align:right;color:gray;display:inline;font-size:12px;font-weight:bold;">شماره تماس</p>
-                                <p style="text-align:right;color:gray;display:inline;font-size:12px;border-radius:20px;padding:5px;font-weight:bold;" class="border">09144967941</p>
+                                <a style="text-align:right;color:gray;display:inline;font-size:12px;border-radius:10px;padding:5px;font-weight:bold;cursor:pointer" class="border" onclick="shownumber('@Model.contract.Adviser.Mobile')" id="numberofadviser">09*********</a>
                             </div>
                         </div>
-                        <div style="background-color:red;height:60px;width:100%;border-radius:0px 0px 10px 10px;">
+                        <a class="btn btn-danger" style="background-color:red;height:60px;width:100%;border-radius:0px 0px 10px 10px;" href="/Adviser?adviserid=@Model.contract.AdviserId">
                             <div class="text-center">
-                                <h5 style="padding-top:15px;color:#FFF;">تماس با مشاور جهت خرید</h5>
+                                <h5 style="padding-top:10px;color:#FFF;">پروفایل مشاور</h5>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
@@ -191,40 +257,58 @@
     <div class="row">
         <div class="col-lg-8 col-sm-12 col-md-8">
             <div class="row">
-                <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px">
-                    <img src="~/img/back4.jpg" class="zoom"  style="width:100%;height:250px;border-radius:10px;" />
-                </div>
+                @{
+                    if (Model.gallery.Count > 1)
+                    {
+
+                        <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px">
+                            <img src="http://panel.hamihomes.com/images/@Model.gallery[0].Url" class="zoom" style="width:100%;height:200px;border-radius:10px;" />
+                        </div>
+
+                    }
+                }
+
                 <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px;">
-                    <img src="~/img/back4.jpg" class="zoom"  style="width:100%;height:250px;border-radius:10px;filter: blur(4px);" />
+                    <img src="http://panel.hamihomes.com/images/@Model.gallery[0].Url" class="zoom" style="width:100%;height:200px;border-radius:10px;filter: blur(4px);" />
                     <div style="position:absolute;top:40%;right:30%;">
                         <h4 class="text-center" style="color:white;">10 +</h4>
                         <h4 class="text-center" style="color:white;">عکس بیشتر</h4>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px;">
-                    <img src="~/img/back4.jpg" class="zoom"  style="width:70%;height:150px;border-radius:10px;"/>
-                </div>
+                @if (Model.home.HomeMapImage != null && Model.home.HomeMapImage != "")
+                {
+                    <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px;">
+                        <img src="http://panel.hamihomes.com/images/@Model.home.HomeMapImage" class="zoom" style="width:70%;height:150px;border-radius:10px;" />
+                    </div>
+                }
+
             </div>
 
             <div class="row" id="showlist" style="padding-top:20px;">
-                <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px">
-                    <img src="~/img/back4.jpg" class="zoom" style="width:100%;height:250px;border-radius:10px;" />
-                </div>
-                <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px">
-                    <img src="~/img/back4.jpg" class="zoom" style="width:100%;height:250px;border-radius:10px;" />
-                </div>
-                <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px">
-                    <img src="~/img/back4.jpg" class="zoom" style="width:100%;height:250px;border-radius:10px;" />
-                </div>
+                @{
+                    if (Model.gallery.Count > 1)
+                    {
+                        foreach (var item in Model.gallery.Skip(1))
+                        {
+                            <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px">
+                                <img src="http://panel.hamihomes.com/images/@item.Url" class="zoom" style="width:100%;height:200px;border-radius:10px;" />
+                            </div>
+                        }
+                    }
+                }
             </div>
 
             <div class="row">
-                <a class="btn btn-default btn-block" style="padding-top:10px;border:0px;background-color:transparent;width:100%;color:rgba(0, 0, 0, 0.81)" onclick="showallimages()"><p style="display:inline">عکس های بیشتر</p><img src="~/img/down.png" style="width:30px;height:30px;display:inline"/></a>
+                <a class="btn btn-default btn-block" style="padding-top:10px;border:0px;background-color:transparent;width:100%;color:rgba(0, 0, 0, 0.81)" onclick="showallimages()"><p style="display:inline" id="maximagetext">بیشتر</p><img src="~/img/down.png" style="width:20px;height:20px;display:inline" id="imgdownshow" /></a>
             </div>
             <div class="row">
-                <div class="col-lg-12 col-sm-12 col-md-12">
-                    <iframe style="width:100%;z-index:10;border-radius:10px;padding-top:10px;" height="300" src="https://www.3dvista.com/samples/new_york_loft.html" frameborder="0" allowfullscreen allow="xr-spatial-tracking" onclick="show3d()"></iframe>
-                </div>
+                @if (Model.home.ThreeDView != "" && Model.home.ThreeDView!=null)
+                {
+                    <div class="col-lg-12 col-sm-12 col-md-12">
+                        <iframe style="width:100%;z-index:10;border-radius:10px;padding-top:10px;" height="300" src="@Model.home.ThreeDView" frameborder="0" allowfullscreen allow="xr-spatial-tracking" onclick="show3d()"></iframe>
+                    </div>
+                }
+
             </div>
         </div>
 
@@ -236,21 +320,24 @@
 
     <hr />
     <div class="" style="margin-top:10px;margin-bottom:40px;">
-        <h3 style="padding:10px;color:black;">خانه لوکس برادران</h3>
-        <h5 style="padding:10px;color:black;width:100%;">این خانه با ویو مناسب و امکاناتی کم نظیر انتخاب مناسبی برای خانواده های</h5>
-        <h6 style="padding:10px;color:darkred;width:100%;">توضیحات بیشتر</h6>
-        
+        <h3 style="padding:10px;color:black;">@ViewData["hometype"] @Model.home.OwnerName</h3>
+        <h5 style="padding:10px;color:black;width:100%;">@Model.home.Description</h5>
+        @*<h6 style="padding:10px;color:darkred;width:100%;">توضیحات بیشتر</h6>*@
+
         <div class="row" style="padding:10px;">
-            <div class="text-center">
-                <p class="font-xs-ad" style="font-size:15px;color:black;padding:10px;"><img src="/img/bed.png" style="width:25px;height:25px;" /> 2 اتاق</p>
+            @if (Model.home.Hometype == 1 || Model.home.Hometype == 2 || Model.home.Hometype == 7)
+            {
+                <div class="text-center">
+                    <p class="font-xs-ad" style="font-size:15px;color:black;padding:10px;"><img src="/img/bed.png" style="width:25px;height:25px;" /> @Model.home.Bed اتاق</p>
 
-            </div>
-            <div class="text-center">
-                <p class="font-xs-ad" style="font-size:15px;color:black;padding:10px;"><img src="/img/bath.png" style="width:25px;height:25px;" /> 2 حمام</p>
+                </div>
+                <div class="text-center">
+                    <p class="font-xs-ad" style="font-size:15px;color:black;padding:10px;"><img src="/img/bath.png" style="width:25px;height:25px;" /> @Model.home.Bath حمام</p>
 
-            </div>
+                </div>
+            }
             <div class="text-center">
-                <p class="font-xs-ad" style="font-size:15px;color:black;padding:10px;"><img src="/img/Resize-icon.png" style="width:25px;height:25px;" /> 120 متر </p>
+                <p class="font-xs-ad" style="font-size:15px;color:black;padding:10px;"><img src="/img/Resize-icon.png" style="width:25px;height:25px;" /> @Model.contract.Metraz متر </p>
             </div>
 
         </div>
@@ -259,118 +346,585 @@
 </div>
 
 <div class="" style="padding-top:50px;padding-bottom:50px;padding-left:8%;padding-right:8%;">
-    <h3 style="padding:10px;color:black;">امکانات ملک</h3>
-    <div class="row">
-        <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
-        <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">این خانه با ویو مناسب و امکاناتی کم نظیر انتخاب مناسبی برای خانواده های</h5>
-    </div>
-    <div class="row">
-        <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
-        <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">این خانه با ویو مناسب و امکاناتی کم نظیر انتخاب مناسبی برای خانواده های</h5>
-    </div>
-    <div class="row">
-        <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
-        <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">این خانه با ویو مناسب و امکاناتی کم نظیر انتخاب مناسبی برای خانواده های</h5>
-    </div>
+    <h3 style="padding:10px;color:black;">امکانات @ViewData["hometype"]</h3>
+    @{
+        if (Model.home.Hometype == 1)
+        {
+            if (Model.aparteman.Homejahatevahed != null && Model.aparteman.Homejahatevahed != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">جهت واحد : @Model.aparteman.Homejahatevahed</h5>
+                </div>
+            }
 
+            if (Model.aparteman.Homemogheiat != null && Model.aparteman.Homemogheiat != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">موقعیت ملک : @Model.aparteman.Homemogheiat</h5>
+                </div>
+            }
+            if (Model.aparteman.Homemoshakhase != null && Model.aparteman.Homemoshakhase != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">مشخصه ملک : @Model.aparteman.Homemoshakhase</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Homenema != null && Model.aparteman.Homenema != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">نما : @Model.aparteman.Homenema</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Hometasisat != null && Model.aparteman.Hometasisat != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">تاسسیسات : @Model.aparteman.Hometasisat</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Homekaf != null && Model.aparteman.Homekaf != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">کف  : @Model.aparteman.Homekaf</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Homekitchen != null && Model.aparteman.Homekitchen != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">آشپزخانه  : @Model.aparteman.Homekitchen</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Homewc != null && Model.aparteman.Homewc != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">سرویس بهداشتی  : @Model.aparteman.Homewc</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Homedivar != null && Model.aparteman.Homedivar != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">دیوار  : @Model.aparteman.Homedivar</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Homeparking != null && Model.aparteman.Homeparking != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">پارکینگ  : @Model.aparteman.Homeparking</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Homevaziate != null && Model.aparteman.Homevaziate != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">شرایط ویژه  : @Model.aparteman.Homevaziate</h5>
+                </div>
+            }
+
+            if (Model.aparteman.HomeEmtiaz != null && Model.aparteman.HomeEmtiaz != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">امتیاز  : @Model.aparteman.HomeEmtiaz</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Homesanad != null && Model.aparteman.Homesanad != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">سند ملک  : @Model.aparteman.Homesanad</h5>
+                </div>
+            }
+
+        }
+        else if (Model.home.Hometype == 2)
+        {
+            if (Model.aparteman.Homemogheiat != null && Model.aparteman.Homemogheiat != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">موقعیت ملک : @Model.homewithgarden.Homemogheiat</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Homemoshakhase != null && Model.aparteman.Homemoshakhase != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">مشخصه ملک : @Model.homewithgarden.Homemoshakhase</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Homenema != null && Model.aparteman.Homenema != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">نما : @Model.homewithgarden.Homenema</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Hometasisat != null && Model.aparteman.Hometasisat != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">تاسسیسات : @Model.homewithgarden.Hometasisat</h5>
+                </div>
+            }
+
+
+            if (Model.aparteman.Homekaf != null && Model.aparteman.Homekaf != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">کف  : @Model.homewithgarden.Homekaf</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Homekitchen != null && Model.aparteman.Homekitchen != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">آشپزخانه  : @Model.homewithgarden.Homekitchen</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Homewc != null && Model.aparteman.Homewc != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">سرویس بهداشتی  : @Model.homewithgarden.Homewc</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Homedivar != null && Model.aparteman.Homedivar != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);"> دیوار  : @Model.homewithgarden.Homedivar</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Homeparking != null && Model.aparteman.Homeparking != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">پارکینگ   : @Model.homewithgarden.Homeparking</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Homevaziate != null && Model.aparteman.Homevaziate != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">شرایط ویژه   : @Model.homewithgarden.Homevaziate</h5>
+                </div>
+            }
+
+            if (Model.aparteman.HomeEmtiaz != null && Model.aparteman.HomeEmtiaz != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">امتیاز   : @Model.homewithgarden.HomeEmtiaz</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Homesanad != null && Model.aparteman.Homesanad != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">سند   : @Model.homewithgarden.Homesanad</h5>
+                </div>
+            }
+
+        }
+        else if (Model.home.Hometype == 3)
+        {
+            if (Model.aparteman.Homemogheiat != null && Model.aparteman.Homemogheiat != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">موقعیت ملک : @Model.zamin.Homemogheiat</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Homevaziate != null && Model.aparteman.Homevaziate != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">شرایط ویژه   : @Model.zamin.Homevaziate</h5>
+                </div>
+            }
+
+            if (Model.aparteman.HomeEmtiaz != null && Model.aparteman.HomeEmtiaz != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">امتیاز   : @Model.zamin.HomeEmtiaz</h5>
+                </div>
+            }
+
+            if (Model.aparteman.Homesanad != null && Model.aparteman.Homesanad != "")
+            {
+                <div class="row">
+                    <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                    <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">سند   : @Model.zamin.Homesanad</h5>
+                </div>
+            }
+
+
+        }
+        else if (Model.home.Hometype == 4)
+        {
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">موقعیت ملک : @Model.kolangi.Homemogheiat</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">مشخصه ملک : @Model.kolangi.Homemoshakhase</h5>
+            </div>
+
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">شرایط ویژه   : @Model.kolangi.Homevaziate</h5>
+            </div>
+
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">امتیاز   : @Model.kolangi.HomeEmtiaz</h5>
+            </div>
+
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">سند   : @Model.kolangi.Homesanad</h5>
+            </div>
+
+        }
+        else if (Model.home.Hometype == 5)
+        {
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">موقعیت ملک : @Model.edari.Homemogheiat</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">نما : @Model.edari.Homenema</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">تاسسیسات : @Model.edari.Hometasisat</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">کف  : @Model.edari.Homekaf</h5>
+            </div>
+
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">سرویس بهداشتی  : @Model.edari.Homewc</h5>
+            </div>
+
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">پارکینگ   : @Model.edari.Homeparking</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">شرایط ویژه   : @Model.edari.Homevaziate</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">امتیاز   : @Model.edari.HomeEmtiaz</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">سند   : @Model.edari.Homesanad</h5>
+            </div>
+
+        }
+        else if (Model.home.Hometype == 6)
+        {
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">موقعیت ملک : @Model.maghaze.Homemogheiat</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">مشخصه ملک : @Model.maghaze.Homemoshakhase</h5>
+            </div>
+
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">سرویس بهداشتی  : @Model.maghaze.Homewc</h5>
+            </div>
+
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">پارکینگ   : @Model.maghaze.Homeparking</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">دیوار   : @Model.maghaze.Homedivar</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">امتیاز   : @Model.maghaze.HomeEmtiaz</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">سند   : @Model.maghaze.Homesanad</h5>
+            </div>
+
+        }
+        else if (Model.home.Hometype == 7)
+        {
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">موقعیت ملک : @Model.moshtghelat.Homemogheiat</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">مشخصه ملک : @Model.moshtghelat.Homemoshakhase</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">نما : @Model.moshtghelat.Homenema</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">تاسسیسات : @Model.moshtghelat.Hometasisat</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">کف  : @Model.moshtghelat.Homekaf</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">آشپزخانه  : @Model.moshtghelat.Homekitchen</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">سرویس بهداشتی  : @Model.moshtghelat.Homewc</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);"> دیوار  : @Model.moshtghelat.Homedivar</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">پارکینگ   : @Model.moshtghelat.Homeparking</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">شرایط ویژه   : @Model.moshtghelat.Homevaziate</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">امتیاز   : @Model.moshtghelat.HomeEmtiaz</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">سند   : @Model.moshtghelat.Homesanad</h5>
+            </div>
+
+        }
+        else if (Model.home.Hometype == 8)
+        {
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">موقعیت ملک : @Model.anbar.MoghiateMelk</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">وضعیت سند : @Model.anbar.SanadStatus</h5>
+            </div>
+
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">امتیاز   : @Model.anbar.HomeEmtiaz</h5>
+            </div>
+
+        }
+        else if (Model.home.Hometype == 9)
+        {
+
+
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">امتیاز   : @Model.garden.HomeEmtiaz</h5>
+            </div>
+
+        }
+        else if (Model.home.Hometype == 10)
+        {
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">موقعیت ملک : @Model.vila.Homemogheiat</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">مشخصه ملک : @Model.vila.Homemoshakhase</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">نما : @Model.vila.Homenema</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">تاسسیسات : @Model.vila.Hometasisat</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">کف  : @Model.vila.Homekaf</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">آشپزخانه  : @Model.vila.Homekitchen</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">سرویس بهداشتی  : @Model.vila.Homewc</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);"> دیوار  : @Model.vila.Homedivar</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">پارکینگ   : @Model.vila.Homeparking</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">شرایط ویژه   : @Model.vila.Homevaziate</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">امتیاز   : @Model.vila.HomeEmtiaz</h5>
+            </div>
+            <div class="row">
+                <i class="fa fa-check" style="color:green;display:inline;padding:10px;"></i>
+                <h5 style="padding:10px;color:rgba(10, 10, 10, 0.70);">سند   : @Model.vila.Homesanad</h5>
+            </div>
+
+        }
+    }
     <!----------footer------>
 </div>
 
 <div style="height:40px;background-color:black">
     <h5 style="text-align:center;color:white;padding-top:8px;">محل قرارگیری ملک بر روی نقشه</h5>
 </div>
-<div id="map" style="width:100%;height:400px;">
+<div id="map" style="width:100%;height:400px;" data-aos="fade-left">
 
 </div>
 <div style="height:40px;background-color:black">
-    <h5 style="text-align:center;color:white;padding-top:8px;"> خیابان سعدی خیابان باباطاهر کوچه 5 پلاک 10</h5>
+    <h5 style="text-align:center;color:white;padding-top:8px;"> @Model.home.Address</h5>
 </div>
 
-<div class="" style="padding-top:50px;padding-bottom:50px;background-color:#FFF;padding-left:8%;padding-right:8%;">
+<div class="" style="padding-top:50px;padding-bottom:50px;background-color:#FFF;padding-left:8%;padding-right:8%;" data-aos="fade-right">
     <div class="row">
         <div class="col-12">
             <h3 style="color:rgba(119, 116, 116, 0.70);padding-bottom:20px;width:100%;" class="text-center">املاک مشابه</h3>
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-12 zoom" style="padding:10px;">
-            <div class="card">
-                <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
-                <div class="card-block p-3">
-                    <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
-                    <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
+        @{
+            foreach (var item in Model.Samehome)
+            {
+                string s = "آپارتمان";
+                if (item.Home.Hometype == 2)
+                {
+                    s = "خانه حیاط دار";
+                }
+                else if (item.Home.Hometype == 3)
+                {
+                    s = "زمین";
+                }
+                else if (item.Home.Hometype == 4)
+                {
+                    s = "کلنگی";
+                }
+                else if (item.Home.Hometype == 5)
+                {
+                    s = "اداری";
+                }
+                else if (item.Home.Hometype == 6)
+                {
+                    s = "مغازه";
+                }
+                else if (item.Home.Hometype == 7)
+                {
+                    s = "مستقلات";
+                }
+                else if (item.Home.Hometype == 8)
+                {
+                    s = "انبار";
+                }
+                else if (item.Home.Hometype == 9)
+                {
+                    s = "باغ";
+                }
+                else if (item.Home.Hometype == 10)
+                {
+                    s = "ویلا ";
+                }
+                <div class="col-lg-3 col-md-3 col-sm-4 zoom" style="padding-left:10px;padding-bottom:10px">
+                    <a href="/Home/Detail?homeid=@item.Home.Id&contractid=@item.Id&hometype=@s">
+                        <div class="card">
+                            <img class="card-img-top" src="http://panel.hamihomes.com/images/@item.Home.Image" style="height:200px;" alt="خانه ارومیه">
+                            <div class="card-block p-3">
+
+                                <h4 class="card-title font-xs-b ">@s @item.Home.OwnerName </h4>
+                                <p class="card-text content font-xs-ad">@item.Home.Address</p>
+                            </div>
+                            <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
+                            <div class="row" style="padding:10px;">
+                                @if (item.Home.Hometype == 1 || item.Home.Hometype == 2 || item.Home.Hometype == 7)
+                                {
+                                    <div class="col-4 text-center">
+                                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" />@item.Home.Bed اتاق</p>
+
+                                    </div>
+                                    <div class="col-4 text-center">
+                                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> @item.Home.Bath حمام</p>
+
+                                    </div>
+                                }
+
+                                <div class="col-4 text-center">
+                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> @item.Metraz متر </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </a>
                 </div>
-                <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
-                <div class="row" style="padding:10px;">
-                    <div class="col-4 text-center">
-                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
+            }
 
-                    </div>
-                    <div class="col-4 text-center">
-                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
-
-                    </div>
-                    <div class="col-4 text-center">
-                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 zoom" style="padding:10px;">
-            <div class="card">
-                <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
-                <div class="card-block p-3">
-                    <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
-                    <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
-                </div>
-                <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
-                <div class="row" style="padding:10px;">
-                    <div class="col-4 text-center">
-                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
-
-                    </div>
-                    <div class="col-4 text-center">
-                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
-
-                    </div>
-                    <div class="col-4 text-center">
-                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12 zoom" style="padding:10px;">
-            <div class="card">
-                <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
-                <div class="card-block p-3">
-                    <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
-                    <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
-                </div>
-                <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
-                <div class="row" style="padding:10px;">
-                    <div class="col-4 text-center">
-                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
-
-                    </div>
-                    <div class="col-4 text-center">
-                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
-
-                    </div>
-                    <div class="col-4 text-center">
-                        <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
+        }
     </div>
 
 </div>
 
 
-<div class="" style="padding-top:50px;padding-bottom:50px;background-color:#FFF;padding-left:8%;padding-right:8%;">
+<div class="" style="padding-top:50px;padding-bottom:50px;background-color:#FFF;padding-left:8%;padding-right:8%;" data-aos="fade-up">
     <div class="row">
         <div class="col-12">
             <h3 style="color:rgba(119, 116, 116, 0.70);padding-bottom:40px;width:100%;" class="text-center">اطلاعات بازار مسکن</h3>
@@ -408,7 +962,7 @@
     <div class="row" style="padding-top:10px;">
         <div class="col-12">
             <h4 style="color:rgba(119, 116, 116, 0.70);padding-bottom:40px;width:100%;display:inline;padding-left:20px;">مناطق :</h4>
-            <span class="text-dark rounded-circle px-3 py-1 mx-2 h3 " style="background-color:rgba(152, 152, 152, 0.55);cursor:pointer;" >1</span>
+            <span class="text-dark rounded-circle px-3 py-1 mx-2 h3 " style="background-color:rgba(152, 152, 152, 0.55);cursor:pointer;">1</span>
             <span class="text-dark rounded-circle px-3 py-1 mx-2 h3 " style="background-color:rgba(152, 152, 152, 0.55);cursor:pointer;">2</span>
             <span class="text-dark rounded-circle px-3 py-1 mx-2 h3 " style="background-color:rgba(152, 152, 152, 0.55);cursor:pointer;">3</span>
         </div>
@@ -420,7 +974,11 @@
 
 
 <script>
-    var map = L.map('map').setView([37.553278571293816, 45.07666215851912], 13);
+    var cost = document.getElementById("costwithspliter").innerText;
+    cost = separateNum(cost);
+    document.getElementById("costwithspliter").innerHTML = cost;
+
+    var map = L.map('map').setView([@Model.home.Gpsx, @Model.home.Gpsy], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -436,20 +994,25 @@
 
     var marker;
 
-    marker = new L.Marker([37.553278571293816, 45.07666215851912], { icon: greenIcon });
+    marker = new L.Marker([@Model.home.Gpsx, @Model.home.Gpsy], { icon: greenIcon });
     marker.addTo(map).on('click', function (e) {
-        map.setView([37.553278571293816, 45.07666215851912], 14);
+        map.setView([@Model.home.Gpsx, @Model.home.Gpsy], 14);
     });
 
     $('#showlist').hide();
-
+    var angle = 0;
     function showallimages() {
         var x = document.getElementById("showlist");
-
+        var text = document.getElementById("maximagetext");
+        var image = document.getElementById("imgdownshow");
         if (x.style.display === "none") {
             $("#showlist").slideDown(1000);
+            text.innerText = "کمتر";
+            image.className = "rotate180";
         } else {
             $("#showlist").slideUp(1000);
+            text.innerText = "بیشتر";
+            image.classList.remove("rotate180");
         }
 
     }
@@ -523,5 +1086,24 @@ var chart = new Chart(ctx, {
 
     function show3d() {
         window.location.href = "https://www.3dvista.com/samples/new_york_loft.html";
-    }
+        }
+
+
+    function shownumber(number) {
+        document.getElementById("numberofadviser").innerHTML = number;
+        }
+
+    function separateNum(value) {
+        /* seprate number input 3 number */
+        var nStr = value + '';
+        nStr = nStr.replace(/\,/g, "");
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+            return x1 + x2;
+        }
 </script>

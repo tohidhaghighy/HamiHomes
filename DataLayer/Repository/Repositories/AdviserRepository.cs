@@ -19,7 +19,7 @@ namespace DataLayer.Repository.Repositories
             this.db = (this.db ?? (AmlakDbContext)db);
         }
 
-        public async Task<bool> Login(string username, string password)
+        public async Task<Adviser> Login(string username, string password)
         {
             verifyhash = new VerifyHash();
             var find = await GetManyAsync(a => a.Username == username && a.Active == true);
@@ -29,11 +29,11 @@ namespace DataLayer.Repository.Repositories
                 {
                     if (verifyhash.IsValidPassword(password, item.Password))
                     {
-                        return true;
+                        return item;
                     }
                 }
             }
-            return false;
+            return null;
         }
 
         public async Task<bool> ChangeCheck(int id)

@@ -308,6 +308,9 @@
         "frameworks": {
           "netcoreapp2.1": {
             "projectReferences": {
+              "D:\\Projects\\AmlakWebApplication\\DataLayer\\DataLayer.csproj": {
+                "projectPath": "D:\\Projects\\AmlakWebApplication\\DataLayer\\DataLayer.csproj"
+              },
               "D:\\Projects\\AmlakWebApplication\\DomainLayer\\DomainLayer.csproj": {
                 "projectPath": "D:\\Projects\\AmlakWebApplication\\DomainLayer\\DomainLayer.csproj"
               }

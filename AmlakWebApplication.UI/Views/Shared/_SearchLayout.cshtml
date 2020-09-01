@@ -1,11 +1,36 @@
 ﻿<!DOCTYPE html>
 <html dir="rtl" lang="fa-IR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>حامی هوم</title>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv="Content-Language" content="fa" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان" />
+    <meta name="author" content="توحید حقیقی" />
+    <meta name="keywords" content="توحید حقیقی ,حامی هوم , خرید ملک , سپردن ملک, خرید ,فروش, اجاره , سپردن,جستجو ملک, خانه,اپارتمان,ویلا,حیاط باغ دار,باغ و باغچه, انبار" />
+    <meta name="" content="توحید حقیقی" />
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Hami Homes - حامی هوم</title>
+    <link rel="icon" type="image/x-icon" href="~/img/logo2.png" />
+
+
+
+    <meta name="twitter:site" content="Hami Homes - حامی هوم">
+    <meta name="twitter:title" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان">
+    <meta name="twitter:description" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان">
+    <meta name="twitter:creator" content="توحید حقیقی">
+    <meta name="twitter:image:src" content="~/img/logo2.png">
+
+    <meta itemprop="name" content="Hami Homes - حامی هوم">
+    <meta itemprop="description" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان">
+    <meta itemprop="image" content="~/img/logo2.png">
+
+    <meta property="og:title" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان" />
+    <meta property="og:type" content="personal page" />
+    <meta property="og:url" content="~/img/logo2.png" />
+    <meta property="og:image" content="~/img/logo2.png" />
+    <meta property="og:description" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان" />
+    <meta property="og:site_name" content="Hami Homes - حامی هوم" />
 
 
 
@@ -91,13 +116,6 @@
             outline: none;
         }
 
-        @@media only screen and (min-width: 800px) {
-            body {
-                overflow-x: hidden;
-                overflow-y: hidden;
-            }
-        }
-
         .padd {
             padding-left: 3px;
             padding-right: 3px;
@@ -134,12 +152,24 @@
         .dropdown-item {
             display: inline;
         }
-        .card{
-            cursor:pointer;
+
+        .card {
+            cursor: pointer;
         }
-        .border-down{
-        border-bottom: 3px solid red;
-    }
+
+        .border-down {
+            border-bottom: 3px solid red;
+        }
+
+        .border-hide {
+            border-bottom: 0px solid red;
+        }
+
+        .atl_services {
+            width: 88.5%;
+            border: 1px solid GREY;
+            box-shadow: 0px 0px 3px GREY;
+        }
     </style>
 </head>
 <body id="bodyid">
@@ -156,18 +186,18 @@
                                 <div class="collapse navbar-collapse" id="mynavbar">
                                     <ul class="navbar-nav list-unstyled card-columns">
                                         <li class="nav-item">
-                                            <a href="#" class="text-red-hover nav-link mr-1"><img src="~/img/logo2.png" style="width:40px;height:40px;margin-top:5px;" /></a>
+                                            <a href="/" class="text-red-hover nav-link mr-1"><img src="~/img/logo2.png" style="width:40px;height:40px;margin-top:5px;" /></a>
                                         </li>
-                                        <li class="nav-item nav-hover" style="padding:5px;" id="buyheadershow">
+                                        <li class="nav-item nav-hover" style="padding:5px;" id="buyheadershow" onclick="changecolor(1)">
                                             <a href="#" class="text-red-hover nav-link mr-1"><p class="text-center" style="color:black;padding-top:15px;font-family: IRANSans !important;font-weight:bold;"> خرید و فروش  </p></a>
                                         </li>
-                                        <li class="nav-item nav-hover" style="padding:5px;" id="rentheadershow">
+                                        <li class="nav-item nav-hover" style="padding:5px;" id="rentheadershow" onclick="changecolor(2)">
                                             <a href="#" class=" nav-link mx-1"><p class="text-center" style="color:black;padding-top:15px;font-family: IRANSans !important;font-weight:bold;"> رهن و اجاره </p></a>
                                         </li>
-                                        <li class="nav-item nav-hover" style="padding:5px;" id="buildheadershow">
+                                        <li class="nav-item nav-hover" style="padding:5px;" id="buildheadershow" onclick="changecolor(3)">
                                             <a href="#" class="nav-link mx-1 "> <p class="text-center" style="color:black;padding-top:15px;font-family: IRANSans !important;font-weight:bold;"> ساخت و ساز   </p></a>
                                         </li>
-                                        <li class="nav-item nav-hover" style="padding:5px; border-left:1px outset rgba(209, 207, 207, 0.75);" id="soldheadershow">
+                                        <li class="nav-item nav-hover" style="padding:5px; border-left:1px outset rgba(209, 207, 207, 0.75);" id="soldheadershow" onclick="changecolor(4)">
                                             <a href="#" class="nav-link mx-1 "><p class="text-center" style="color:black;padding-top:15px;font-family: IRANSans !important;font-weight:bold;"> فروخته شده </p> </a>
                                         </li>
                                         <li class="nav-item" style="padding-bottom:5px;">
@@ -177,7 +207,8 @@
                                                     <img src="~/img/search.png" style="width:25px;height:25px;margin-top:20px;padding:1px;" />
                                                 </div>
 
-                                                <input type="text" class="form-control" placeholder="منطقه ... محله ... " style="border-color:white;height:70px;padding-bottom:5px;outline: none;background-color:#f8f9fa;" id="searchinput">
+                                                <input type="text" class="form-control" placeholder="منطقه ... محله ... " style="border-color:white;height:70px;padding-bottom:5px;outline: none;background-color:#f8f9fa;" id="searchinput" list="defaultEmails">
+                                                <datalist id="defaultEmails" class="atl_services"></datalist>
                                             </div>
 
                                         </li>
@@ -206,12 +237,62 @@
 
     </div>
     <script>
+    var typemelk = 0;
+        $(document).ready(function () {
+            listdata();
+        });
+
+
+        function listdata() {
+            $.ajax({
+                type: "Post",
+                url: '/Home/Getdatalist',
+                success: function (data) {
+                    $("#defaultEmails").empty();
+                    $("#defaultEmails").append(data);
+                }
+            });
+            }
+
+    function changecolor(color) {
+        var buyheadershow = document.getElementById("buyheadershow");
+        buyheadershow.classList.remove("border-down");
+        var rentheadershow = document.getElementById("rentheadershow");
+        rentheadershow.classList.remove("border-down");
+        var buildheadershow = document.getElementById("buildheadershow");
+        buildheadershow.classList.remove("border-down");
+        var soldheadershow = document.getElementById("soldheadershow");
+        soldheadershow.classList.remove("border-down");
+        if (color == 1) {
+            $("#buyheadershow").addClass("border-down");
+            typemelk = 1;
+        } else if (color==2) {
+            $("#rentheadershow").addClass("border-down");
+            typemelk = 2;
+        }else if (color==3) {
+            $("#buildheadershow").addClass("border-down");
+            typemelk = 3;
+        }else if (color==4) {
+            $("#soldheadershow").addClass("border-down");
+            typemelk = 4;
+        }
+    }
+
 
     </script>
 
 
 
     @RenderSection("Scripts", required: false)
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-176930890-1"></script>
+    <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-176930890-1');
+    </script>
 
 </body>
 </html>

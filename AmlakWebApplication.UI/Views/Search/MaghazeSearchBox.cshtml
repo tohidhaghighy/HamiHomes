@@ -26,20 +26,19 @@
                     <div class="col-4">
                         <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                             <label style="margin-left:10px;width:100px;font-size:14px;"> کف مغازه</label>
-                            <input type="number" class="form-control" value="1" placeholder="متراژ کف مغازه" style="width:70px;" />
+                            <input type="number" min="0" class="form-control" value="1" placeholder="متراژ کف مغازه" style="width:70px;" id="metrazhkaf"/>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                             <label style="margin-left:10px;width:100px;font-size:14px;">دهنه مغازه</label>
-                            <input type="number" class="form-control" value="1" placeholder="دهنه مغازه" style="width:70px;" />
+                            <input type="number" min="0" class="form-control" value="1" placeholder="دهنه مغازه" style="width:70px;" id="metrazhdahane"/>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                             <label style="margin-left:10px;width:100px;font-size:14px;"> انبار تجاری</label>
-                            <input type="number" class="form-control
-                               " value="1" placeholder="متراژ انبار تجاری" style="width:70px;" />
+                            <input type="number" min="0" class="form-control" value="1" placeholder="متراژ انبار تجاری" style="width:70px;" id="anbarmetrazh"/>
                         </div>
                     </div>
                 </div>
@@ -57,7 +56,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" data-live-search="true">
+                <select class="selectpicker" multiple data-live-search="true" id="moghiat">
                     @foreach (var item in Model.AmlakMogheiatMelk)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -77,7 +76,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" multiple data-live-search="true">
+                <select class="selectpicker" multiple data-live-search="true" id="moshakhase">
                     @foreach (var item in Model.AmlakMoshakhase)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -96,7 +95,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" data-live-search="true">
+                <select class="selectpicker" data-live-search="true" id="sanad">
                     @foreach (var item in Model.AmlakSanadStatus)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -115,7 +114,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" data-live-search="true">
+                <select class="selectpicker" data-live-search="true" id="vizhe">
                     @foreach (var item in Model.AmlakMelkStatus)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -126,10 +125,24 @@
     </div>
     <hr>
 
-    <a class="btn btn-success btn-block" style="color:white;">جستجو املاک</a>
+    <a class="btn btn-success btn-block" style="color:white;margin-bottom:100px;" onclick="searchitemmaghaze()">جستجو املاک</a>
 </div>
 
 
 <script>
     $('.selectpicker').selectpicker();
+
+    function searchitemmaghaze() {
+         var moghiate = $("#moghiat").val();
+         var vizhe = $("#vizhe").val();
+         var sanad = $("#sanad").val();
+         var moshakhase = $("#moshakhase").val();
+         var anbarmetrazh = document.getElementById("anbarmetrazh").value;
+         var metrazhkaf = document.getElementById("metrazhkaf").value;
+         var metrazhdahane = document.getElementById("metrazhdahane").value;
+         var rentbuy = document.getElementById("rentbuytextbox").value;
+        $("#searchboxtoggle").empty();
+        $('#searchboxtoggle').load('/Search/SearchMaghazePartial?hometype=' + hometype + '&minmetr=' + minmetr + '&maxmetr=' + maxmetr + '&mincost=' + mincost + '&maxcost=' + maxcost + '&anbarmetrazh=' + anbarmetrazh + '&metrazhkaf=' + metrazhkaf + '&rentbuy=' + rentbuy  + '&moghiat=' + moghiate  + '&vizhe=' + vizhe + '&sanad=' + sanad + '&moshakhase=' + moshakhase + '&metrazhdahane='+metrazhdahane);
+        $("#searchboxtoggle").show();
+    }
 </script>

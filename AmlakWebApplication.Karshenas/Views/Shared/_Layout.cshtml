@@ -1,0 +1,351 @@
+﻿<!DOCTYPE html>
+<html dir="rtl" lang="fa-IR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>حامی هوم</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Language" content="fa" />
+
+    <environment include="Development">
+
+
+    </environment>
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+    <link rel="stylesheet" href="~/css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!--javascript-->
+    <script src="js/custom-js.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script type="text/javascript" src="~/js/multiselect/js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet" href="~/js/multiselect/css/bootstrap-multiselect.css" type="text/css" />
+    <link href="~/css/Custom.css" rel="stylesheet" />
+
+    <style>
+
+
+        .nav-hover:hover {
+            border-bottom: 3px solid red;
+        }
+
+        .btnchange {
+            -webkit-transition: color 1s; /* For Safari 3.0 to 6.0 */
+            transition: color 1s; /* For modern browsers */
+            border-radius: 10px 10px 10px 10px;
+            margin-top: 10px;
+            color: black;
+            padding: 10px;
+        }
+
+            .btnchange:hover {
+                background: #ca062b;
+                color: white;
+            }
+
+        .btnchange1 {
+            -webkit-transition: color 1s; /* For Safari 3.0 to 6.0 */
+            transition: color 1s; /* For modern browsers */
+            border-radius: 10px 10px 10px 10px;
+            margin-top: 10px;
+            color: black;
+            padding: 10px;
+        }
+
+            .btnchange1:hover {
+                color: #000000;
+            }
+
+        .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl, .col-xl-auto {
+            position: relative;
+            width: 100%;
+            min-height: 1px;
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+
+        .padd {
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+
+        option {
+            color: black;
+        }
+
+        .dropdown-menu {
+            min-width: 12rem;
+        }
+
+        select {
+            text-align: center;
+            text-align-last: center;
+            -moz-text-align-last: center;
+        }
+
+        .select-btn {
+            color: black;
+        }
+
+            .select-btn :hover {
+                color: #e4002b;
+            }
+
+        .multiselect-container {
+            height: 200px;
+            overflow-y: scroll;
+            overflow-x: scroll;
+        }
+
+        .dropdown-item {
+            display: inline;
+        }
+
+        .card {
+            cursor: pointer;
+        }
+
+        .border-down {
+            border-bottom: 3px solid red;
+        }
+    </style>
+</head>
+<body id="bodyid">
+
+
+    <div style="background-color:#f8f9fa;margin-top:50px;">
+        @RenderBody()
+
+    </div>
+
+    <footer class="page-footer font-small unique-color-dark">
+
+        <div style="background-color: rgba(0, 0, 0, 0.58);">
+            <div class="container">
+
+                <!-- Grid row-->
+                <div class="row py-4 d-flex align-items-center">
+
+                    <!-- Grid column -->
+                    <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+                        <h6 class="mb-0" style="color:white;">در شبکه اجتماعی ما را دنبال کنید</h6>
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-6 col-lg-7 text-center text-md-right" id="icons">
+
+                        <!-- Facebook -->
+                        <a class="fb-ic">
+                            <i class="fab fa-facebook-f white-text mr-4 coloricon"> </i>
+                        </a>
+                        <!-- Twitter -->
+                        <a class="tw-ic">
+                            <i class="fab fa-twitter white-text mr-4 coloricon"> </i>
+                        </a>
+                        <!-- Google +-->
+                        <a class="gplus-ic">
+                            <i class="fab fa-google-plus-g white-text mr-4 coloricon"> </i>
+                        </a>
+                        <!--Linkedin -->
+                        <a class="li-ic">
+                            <i class="fab fa-linkedin-in white-text mr-4 coloricon"> </i>
+                        </a>
+                        <!--Instagram-->
+                        <a class="ins-ic">
+                            <i class="fab fa-instagram white-text coloricon"> </i>
+                        </a>
+
+                    </div>
+                    <!-- Grid column -->
+
+                </div>
+                <!-- Grid row-->
+
+            </div>
+        </div>
+
+        <!-- Footer Links -->
+        <div class="container text-center text-md-left mt-5">
+
+            <!-- Grid row -->
+            <div class="row mt-3">
+
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+                    <!-- Content -->
+                    <h6 class="text-uppercase font-weight-bold">درباره ما</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        اطلاعات مختصری در مورد شرکت در اینجا نوشته میشود
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                    <!-- Links -->
+                    <h6 class="text-uppercase font-weight-bold">پر بازدید ها</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <a href="#!">پیمانکاران</a>
+                    </p>
+                    <p>
+                        <a href="#!">رهن و اجاره </a>
+                    </p>
+                    <p>
+                        <a href="#!">فروش</a>
+                    </p>
+                    <p>
+                        <a href="#!">ساخت</a>
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                    <!-- Links -->
+                    <h6 class="text-uppercase font-weight-bold">اخبار جدید</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <a href="#!">قیمت خرید</a>
+                    </p>
+                    <p>
+                        <a href="#!">خبر جدید در مورد املاک</a>
+                    </p>
+                    <p>
+                        <a href="#!">دکوراسیون داخلی </a>
+                    </p>
+                    <p>
+                        <a href="#!">طراحی سنتی ساختمان</a>
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+                    <!-- Links -->
+                    <h6 class="text-uppercase font-weight-bold">ارتباط با ما</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p>
+                        <i class="fas fa-home mr-3"></i> خیابان حسنی
+                    </p>
+                    <p>
+                        <i class="fas fa-envelope mr-3"></i> info@hamihomes.com
+                    </p>
+                    <p>
+                        <i class="fas fa-phone mr-3"></i> +989144967941
+                    </p>
+                    <p>
+                        <i class="fas fa-print mr-3"></i> +98354874458
+                    </p>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+
+
+
+        <!-- Footer Links -->
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+            © 2020 Copyright:
+            <a href=""> طراحی شده توسط گروه نرم افزاری طرح و تصویر</a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <script>
+        AOS.init();
+        $(document).ready(function () {
+            listdata();
+            $("#menusub").hide();
+            $("#showwhenscroll").hide();
+            AOS.init();
+
+        });
+
+        $(document).scroll(function () {
+            var y = $(this).scrollTop();
+            if (y > 500) {
+                $('#showwhenscroll').slideDown();
+            } else {
+                $('#showwhenscroll').slideUp();
+            }
+        });
+        function listdata() {
+            $.ajax({
+                type: "Post",
+                url: '/Home/Getdatalist',
+                success: function (data) {
+                    $("#defaultEmails").empty();
+                    $("#defaultEmails").append(data);
+                }
+            });
+        }
+
+
+        function changecolor(color) {
+            var buyheadershow = document.getElementById("buyheadershow");
+            buyheadershow.classList.remove("border-down");
+            var rentheadershow = document.getElementById("rentheadershow");
+            rentheadershow.classList.remove("border-down");
+            var buildheadershow = document.getElementById("buildheadershow");
+            buildheadershow.classList.remove("border-down");
+            var soldheadershow = document.getElementById("soldheadershow");
+            soldheadershow.classList.remove("border-down");
+            if (color == 1) {
+                $("#buyheadershow").addClass("border-down");
+                typemelk = 1;
+            } else if (color == 2) {
+                $("#rentheadershow").addClass("border-down");
+                typemelk = 2;
+            } else if (color == 3) {
+                $("#buildheadershow").addClass("border-down");
+                typemelk = 3;
+            } else if (color == 4) {
+                $("#soldheadershow").addClass("border-down");
+                typemelk = 4;
+            }
+        }
+
+        function showhidemenu() {
+            var x = document.getElementById("menusub");
+
+            if (x.style.display === "none") {
+                $("#menusub").slideDown(100);
+
+            } else {
+                $("#menusub").slideUp(100);
+
+            }
+        }
+
+        function shownumberhide() {
+            document.getElementById("btnnumberphonehide").innerHTML = "<span class='fa fa-phone' style='padding:5px;'></span> 09144967941";
+        }
+    </script>
+
+
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

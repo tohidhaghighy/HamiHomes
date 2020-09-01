@@ -62,13 +62,15 @@
 
     .dropdown-item {
         font-family: sahel;
+        display:inline-block;
     }
 
     .dropdown-menu {
         font-size: 1rem;
     }
-</style>
 
+</style>
+<input class="hidden" style="display:none" value="@ViewData["type"]" id="rentbuytextbox"/>
 <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-12" style="height:100%">
         <div id="map" style="width:100%;height:700px;">
@@ -108,7 +110,7 @@
                         <div class="col-lg-3 col-md-3 col-sm-12" style="border-left: 1px solid rgba(169, 167, 167, 0.60);">
                             <div class="container" onclick="showmetritem()" style="cursor:pointer;">
                                 <div class="text-center" style="padding-top:10px;">
-                                    <p style="font-size:14px;font-weight:bold;color:black;display:inline">  متراژ : @Model.ShowItems.MinMetr  - @Model.ShowItems.MaxMetr </p>
+                                    <p style="font-size:14px;font-weight:bold;color:black;display:inline" id="changablemetrazwithcombo">  متراژ : @Model.ShowItems.MinMetr  - @Model.ShowItems.MaxMetr </p>
                                     <span class="fa fa-caret-down"></span>
                                 </div>
                             </div>
@@ -116,7 +118,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12" style="border-left: 1px solid rgba(169, 167, 167, 0.60);">
                             <div class="container" onclick="showcostitem()" style="cursor:pointer;">
                                 <div class="text-center" style="padding-top:10px;">
-                                    <p style="font-size:14px;font-weight:bold;color:black;display:inline">  قیمت : @Model.ShowItems.Mincost - @Model.ShowItems.Maxcost </p>
+                                    <p style="font-size:14px;font-weight:bold;color:black;display:inline"  id="changablecostwithcombo">  قیمت : @Model.ShowItems.Mincost - @Model.ShowItems.Maxcost </p>
                                     <span class="fa fa-caret-down"></span>
                                 </div>
                             </div>
@@ -256,174 +258,7 @@
                 <div class="container">
                     <div class="container" style="overflow-y: scroll;height:540px;" id="">
                         <div id="searchboxtoggle">
-                            <div class="row" style="margin-left: 3px;margin-right: 3px;">
-                                <div class="col-lg-6 col-md-6 col-sm-12 zoom" style="padding-left:10px;">
-                                    <a href="/Home/Detail">
-                                        <div class="card">
-                                            <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
-                                            <div class="card-block p-3">
-                                                <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
-                                                <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
-                                            </div>
-                                            <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
-                                            <div class="row" style="padding:10px;">
-                                                <div class="col-4 text-center">
-                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
-
-                                                </div>
-                                                <div class="col-4 text-center">
-                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
-
-                                                </div>
-                                                <div class="col-4 text-center">
-                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 zoom" style="padding-left:10px;">
-                                    <a href="/Home/Detail">
-                                        <div class="card">
-                                            <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
-                                            <div class="card-block p-3">
-                                                <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
-                                                <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
-                                            </div>
-                                            <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
-                                            <div class="row" style="padding:10px;">
-                                                <div class="col-4 text-center">
-                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
-
-                                                </div>
-                                                <div class="col-4 text-center">
-                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
-
-                                                </div>
-                                                <div class="col-4 text-center">
-                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-
-                            </div>
-
-                            <div class="row" style="margin-left: 3px;margin-right: 3px;margin-top:5px;">
-                                <div class="col-lg-6 col-md-6 col-sm-12 zoom" style="padding-left:10px;">
-                                    <a href="/Home/Detail">
-                                        <div class="card">
-                                            <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
-                                            <div class="card-block p-3">
-                                                <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
-                                                <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
-                                            </div>
-                                            <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
-                                            <div class="row" style="padding:10px;">
-                                                <div class="col-4 text-center">
-                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
-
-                                                </div>
-                                                <div class="col-4 text-center">
-                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
-
-                                                </div>
-                                                <div class="col-4 text-center">
-                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 zoom" style="padding-left:10px;">
-                                    <a href="/Home/Detail">
-                                        <div class="card">
-                                            <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
-                                            <div class="card-block p-3">
-                                                <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
-                                                <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
-                                            </div>
-                                            <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
-                                            <div class="row" style="padding:10px;">
-                                                <div class="col-4 text-center">
-                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
-
-                                                </div>
-                                                <div class="col-4 text-center">
-                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
-
-                                                </div>
-                                                <div class="col-4 text-center">
-                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-
-                            </div>
-
-                            <div class="row" style="margin-left: 3px;margin-right: 3px;margin-top:5px;">
-                                <div class="col-lg-6 col-md-6 col-sm-12 zoom" style="padding-left:10px;">
-                                    <a href="/Home/Detail">
-                                        <div class="card">
-                                            <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
-                                            <div class="card-block p-3">
-                                                <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
-                                                <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
-                                            </div>
-                                            <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
-                                            <div class="row" style="padding:10px;">
-                                                <div class="col-4 text-center">
-                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
-
-                                                </div>
-                                                <div class="col-4 text-center">
-                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
-
-                                                </div>
-                                                <div class="col-4 text-center">
-                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 zoom" style="padding-left:10px;">
-                                    <a href="/Home/Detail">
-                                        <div class="card">
-                                            <img class="card-img-top" src="/img/back2.jpg" alt="Card image cap">
-                                            <div class="card-block p-3">
-                                                <h4 class="card-title font-xs-b ">خانه سلطانی</h4>
-                                                <p class="card-text content font-xs-ad">خیابان سعدی ابتدای اقایی کوچه شهدا پلاک 10</p>
-                                            </div>
-                                            <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
-                                            <div class="row" style="padding:10px;">
-                                                <div class="col-4 text-center">
-                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" /> 2 اتاق</p>
-
-                                                </div>
-                                                <div class="col-4 text-center">
-                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> 2 حمام</p>
-
-                                                </div>
-                                                <div class="col-4 text-center">
-                                                    <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> 120 متر </p>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </a>
-                                    
-                                </div>
-
-                            </div>
+                            @await Html.PartialAsync("_SearchList",Model.Homes)
                         </div>
                         <div id="showfilterbox">
 
@@ -438,18 +273,21 @@
 
 
 </div>
-<script>
-    @ViewData["type"] =
-</script>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 
-
-
-
 <script>
-
+    var minmetr = "";
+    var maxmetr = "";
+    var mincost = "";
+    var maxcost = "";
+    var minmetrtext = "";
+    var maxmetrtext = "";
+    var mincosttext = "";
+    var maxcosttext = "";
+    var hometype=0;
+    var rentbuy=0;
     var buminmetrbana = "";
     var bumaxmetrbana = "";
     var buminmetrzamin = "";
@@ -457,7 +295,7 @@
     function getmetrazbana() {
             $.ajax({
                 type: "Post",
-                url: '/Home/GetMetrazbana',
+                url: '/Home/GetMetrazbanapage2',
                 success: function (data) {
                     buminmetrbana = data.buyminmetraz;
                     bumaxmetrbana = data.buymaxmetraz;
@@ -468,7 +306,7 @@
     function getmetrazzamin() {
             $.ajax({
                 type: "Post",
-                url: '/Home/GetMetrazzamin',
+                url: '/Home/GetMetrazzaminoage2',
                 success: function (data) {
                     buminmetrzamin = data.buyminmetraz;
                     bumaxmetrzamin = data.buymaxmetraz;
@@ -490,8 +328,10 @@
 
     if (@ViewData["type"]== 1) {
         $("#buyheadershow").addClass("border-down");
+        rentbuy = 1;
     } else {
         $("#rentheadershow").addClass("border-down");
+        rentbuy = 2;
     }
     var map = L.map('map').setView([37.553278571293816, 45.07666215851912], 13);
 
@@ -505,8 +345,8 @@
         }
     });
 
-    var greenIcon = new LeafIcon({ iconUrl: '/img/house.png' });
-
+    var greenIcon = new LeafIcon({ iconUrl: '/img/green.png' });
+    var redIcon = new LeafIcon({ iconUrl: '/img/house.png' });
 
     var marker;
      @foreach (var item in Model.ShowItems.ListNahie)
@@ -515,6 +355,15 @@
                marker = new L.Marker([@item.Gpsx, @item.Gpsy], { icon: greenIcon });
                marker.addTo(map).on('click', function (e) {
                map.setView([@item.Gpsx,@item.Gpsy], 14);
+              });
+            </text>
+        }
+     @foreach (var item in Model.Homes)
+        {
+            <text>
+               marker = new L.Marker([@item.Home.Gpsx, @item.Home.Gpsy], { icon: redIcon });
+               marker.addTo(map).on('click', function (e) {
+               map.setView([@item.Home.Gpsx,@item.Home.Gpsy], 14);
               });
             </text>
         }
@@ -566,7 +415,7 @@
         var buybtn = document.getElementById("showtypehome");
         buybtn.innerHTML = text;
         showpartial(id);
-
+        hometype = id;
         if (id == 3 || id == 4 || id == 9) {
             $('#minmetrazcombo').empty();
             $('#maxmetrazcombo').empty();
@@ -584,34 +433,34 @@
     function showpartial(id) {
         $("#showfilterbox").empty();
         if (id==1) {
-            $('#showfilterbox').load('/Search/GetApartemanPartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $('#showfilterbox').load('/Search/GetApartemanPartial?buyrent=@ViewData["type"]&hometype='+id);
             $("#showfilterbox").show();
         } else if (id==2) {
-            $('#showfilterbox').load('/Search/GetHomeWithGardenPartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $('#showfilterbox').load('/Search/GetHomeWithGardenPartial?buyrent=@ViewData["type"]&hometype='+id);
             $("#showfilterbox").show();
         } else if (id==3) {
-            $('#showfilterbox').load('/Search/ZaminPartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $('#showfilterbox').load('/Search/ZaminPartial?buyrent=@ViewData["type"]&hometype='+id);
             $("#showfilterbox").show();
         } else if (id==4) {
-            $('#showfilterbox').load('/Search/KolangiPartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $('#showfilterbox').load('/Search/KolangiPartial?buyrent=@ViewData["type"]&hometype='+id);
             $("#showfilterbox").show();
         } else if (id==5) {
-            $('#showfilterbox').load('/Search/EdariPartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $('#showfilterbox').load('/Search/EdariPartial?buyrent=@ViewData["type"]&hometype='+id);
             $("#showfilterbox").show();
         } else if (id==6) {
-            $('#showfilterbox').load('/Search/MaghazePartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $('#showfilterbox').load('/Search/MaghazePartial?buyrent=@ViewData["type"]&hometype='+id);
             $("#showfilterbox").show();
         } else if (id==7) {
-            $('#showfilterbox').load('/Search/MostaghelatPartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $('#showfilterbox').load('/Search/MostaghelatPartial?buyrent=@ViewData["type"]&hometype='+id);
             $("#showfilterbox").show();
         } else if (id==8) {
-            $('#showfilterbox').load('/Search/GetAnbarPartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $('#showfilterbox').load('/Search/GetAnbarPartial?buyrent=@ViewData["type"]&hometype='+id);
             $("#showfilterbox").show();
         } else if (id==9) {
-            $('#showfilterbox').load('/Search/GardenPartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $('#showfilterbox').load('/Search/GardenPartial?buyrent=@ViewData["type"]&hometype='+id);
             $("#showfilterbox").show();
         } else if (id==10) {
-            $('#showfilterbox').load('/Search/VillaPartial?buyrent=@ViewData["type"]&hometype=@Model.ShowItems.MelknameId');
+            $('#showfilterbox').load('/Search/VillaPartial?buyrent=@ViewData["type"]&hometype='+id);
             $("#showfilterbox").show();
         }
         $('#selectpicker').multiselect();
@@ -629,20 +478,37 @@
         $("#showcostsub").slideDown();
         }
 
+    var minmetr = 0;
+    var maxmetr = 0;
+    var mincost = 0;
+    var maxcost = 0;
 
     function showminmetraz(text,id) {
-         document.getElementById("minmetrsearch").innerHTML=text;
+        document.getElementById("minmetrsearch").innerHTML = text;
+        minmetr = id;
+        minmetrtext = text;
+        document.getElementById("changablemetrazwithcombo").innerHTML ="متراژ :"+ minmetrtext + " - " + maxmetrtext;
+        
         }
 
     function showmaxmetraz(text,id) {
-         document.getElementById("maxmetrsearch").innerHTML=text;
+        document.getElementById("maxmetrsearch").innerHTML = text;
+        maxmetr = id;
+        maxmetrtext = text;
+        document.getElementById("changablemetrazwithcombo").innerHTML ="متراژ :"+  minmetrtext + " - " + maxmetrtext;
         }
     function showmincost(text, id) {
-        document.getElementById("mincostsearch").innerHTML=text;
+        document.getElementById("mincostsearch").innerHTML = text;
+        mincost = id;
+        mincosttext = text;
+        document.getElementById("changablecostwithcombo").innerHTML = "قیمت :" + mincosttext + " - " + maxcosttext;
         }
 
     function showmaxcost(text,id) {
-         document.getElementById("maxcostsearch").innerHTML=text;
+        document.getElementById("maxcostsearch").innerHTML = text;
+        maxcost = id;
+        maxcosttext = text;
+        document.getElementById("changablecostwithcombo").innerHTML = "قیمت :" + mincosttext + " - " + maxcosttext;
     }
 </script>
 

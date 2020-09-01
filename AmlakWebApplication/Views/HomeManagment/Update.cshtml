@@ -169,37 +169,22 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-lg-2">
-                            <label>تعداد اتاق</label>
-                            <input asp-for="Home.Bed" type="number" class="form-control" placeholder="تعداد اتاق" value="1">
-                            <span asp-validation-for="Home.Bed" class="text-danger"></span>
+                        <div class="col-lg-3">
+                            <label>کد پستی</label>
+                            <input asp-for="Home.Postalcode" type="text" class="form-control" placeholder="کد پستی" value="1">
+                            <span asp-validation-for="Home.Postalcode" class="text-danger"></span>
                         </div>
-                        <div class="col-lg-2">
-                            <label>تعداد حمام</label>
-                            <input asp-for="Home.Bath" type="number" class="form-control" placeholder="تعداد حمام" value="1">
-                            <span asp-validation-for="Home.Bath" class="text-danger"></span>
-                        </div>
-                        <div class="col-lg-2">
-                            <label>سال ساخت</label>
-                            <input asp-for="Home.BuildYear" type="number" class="form-control" placeholder="سال ساخت" value="1399">
-                            <span asp-validation-for="Home.BuildYear" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <label>نام مالک</label>
                             <input asp-for="Home.OwnerName" type="text" class="form-control" placeholder="نام صاحب خانه">
                             <span asp-validation-for="Home.OwnerName" class="text-danger"></span>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <label>شماره تلفن</label>
                             <input asp-for="Home.Phone" type="number" class="form-control" placeholder=" شماره تلفن">
                             <span asp-validation-for="Home.Phone" class="text-danger"></span>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <label>شماره موبایل</label>
                             <input asp-for="Home.Mobile" type="number" class="form-control" placeholder="شماره موبایل">
                             <span asp-validation-for="Home.Mobile" class="text-danger"></span>

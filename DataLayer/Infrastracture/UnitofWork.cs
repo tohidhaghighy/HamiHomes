@@ -1,11 +1,13 @@
 ﻿using DataLayer.Repository.Interfaces;
 using DataLayer.Repository.Interfaces.AmlakSetting;
+using DataLayer.Repository.Interfaces.Contract;
 using DataLayer.Repository.Interfaces.Home;
 using DataLayer.Repository.Interfaces.Location;
 using DataLayer.Repository.Interfaces.Magazin;
 using DataLayer.Repository.Interfaces.Setting;
 using DataLayer.Repository.Repositories;
 using DataLayer.Repository.Repositories.AmlakSetting;
+using DataLayer.Repository.Repositories.Contract;
 using DataLayer.Repository.Repositories.Home;
 using DataLayer.Repository.Repositories.Location;
 using DataLayer.Repository.Repositories.Magazin;
@@ -520,6 +522,14 @@ namespace DataLayer.Infrastracture
             get
             {
                 return new EjareSettingRepository(db);
+            }
+        }
+
+        public IContractRepository ContractRepository
+        {
+            get
+            {
+                return new ContractRepository(db);
             }
         }
 

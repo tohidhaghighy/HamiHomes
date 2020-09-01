@@ -61,6 +61,8 @@ namespace DataLayer.Migrations
                     b.Property<string>("BackgroundImage")
                         .HasMaxLength(500);
 
+                    b.Property<string>("BuyTakhasos");
+
                     b.Property<bool>("CanAdd");
 
                     b.Property<string>("Description")
@@ -88,6 +90,8 @@ namespace DataLayer.Migrations
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(500);
+
+                    b.Property<string>("RentTakhasos");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -461,6 +465,39 @@ namespace DataLayer.Migrations
                     b.ToTable("City");
                 });
 
+            modelBuilder.Entity("DomainLayer.Contract.Contract", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AdviserId");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<int>("HomeId");
+
+                    b.Property<int>("Metraz");
+
+                    b.Property<long>("RentCOst");
+
+                    b.Property<long>("SellCOst");
+
+                    b.Property<bool>("SelledOrRented");
+
+                    b.Property<int>("TypContract");
+
+                    b.Property<long>("Vadie");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdviserId");
+
+                    b.HasIndex("HomeId");
+
+                    b.ToTable("Contractes");
+                });
+
             modelBuilder.Entity("DomainLayer.CostSetting", b =>
                 {
                     b.Property<int>("Id")
@@ -497,6 +534,10 @@ namespace DataLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Arzegozar");
+
+                    b.Property<int>("Arzemelk");
+
                     b.Property<string>("HomeEmtiaz")
                         .HasMaxLength(1000);
 
@@ -506,13 +547,19 @@ namespace DataLayer.Migrations
 
                     b.Property<int>("Metrazhzamin");
 
+                    b.Property<string>("MoghiateMelk");
+
                     b.Property<string>("NegahbaniName")
                         .HasMaxLength(500);
 
                     b.Property<string>("NegahbaniPhone")
                         .HasMaxLength(500);
 
+                    b.Property<string>("SanadStatus");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("HomeId");
 
                     b.ToTable("Anbars");
                 });
@@ -528,6 +575,8 @@ namespace DataLayer.Migrations
 
                     b.Property<string>("HomeEmtiaz")
                         .HasMaxLength(1000);
+
+                    b.Property<string>("HomeFacilities");
 
                     b.Property<int>("HomeId");
 
@@ -590,6 +639,8 @@ namespace DataLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("HomeId");
+
                     b.ToTable("Apartemans");
                 });
 
@@ -648,6 +699,8 @@ namespace DataLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("HomeId");
+
                     b.ToTable("Edaries");
                 });
 
@@ -671,6 +724,8 @@ namespace DataLayer.Migrations
                         .HasMaxLength(500);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HomeId");
 
                     b.ToTable("Gardenes");
                 });
@@ -743,6 +798,8 @@ namespace DataLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("HomeId");
+
                     b.ToTable("gardenWithVilas");
                 });
 
@@ -757,6 +814,8 @@ namespace DataLayer.Migrations
                         .HasMaxLength(500);
 
                     b.Property<int?>("AdvisorId");
+
+                    b.Property<int>("Bana");
 
                     b.Property<int>("Bath");
 
@@ -784,6 +843,10 @@ namespace DataLayer.Migrations
                     b.Property<string>("HomeMapImage")
                         .HasMaxLength(500);
 
+                    b.Property<int>("Hometype");
+
+                    b.Property<int>("HometypeId");
+
                     b.Property<string>("Image")
                         .HasMaxLength(1000);
 
@@ -799,8 +862,13 @@ namespace DataLayer.Migrations
                         .IsRequired()
                         .HasMaxLength(200);
 
+                    b.Property<int>("Parking");
+
                     b.Property<string>("Phone")
                         .HasMaxLength(100);
+
+                    b.Property<string>("Postalcode")
+                        .IsRequired();
 
                     b.Property<string>("ThreeDView")
                         .HasMaxLength(500);
@@ -885,6 +953,8 @@ namespace DataLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("HomeId");
+
                     b.ToTable("HomewithGardens");
                 });
 
@@ -926,6 +996,8 @@ namespace DataLayer.Migrations
                         .HasMaxLength(500);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HomeId");
 
                     b.ToTable("Kolangis");
                 });
@@ -979,6 +1051,8 @@ namespace DataLayer.Migrations
                     b.Property<int>("Tabaghe");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HomeId");
 
                     b.ToTable("Maghazes");
                 });
@@ -1057,6 +1131,8 @@ namespace DataLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("HomeId");
+
                     b.ToTable("Moshtghelats");
                 });
 
@@ -1121,6 +1197,8 @@ namespace DataLayer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("HomeId");
+
                     b.ToTable("Vilas");
                 });
 
@@ -1157,6 +1235,8 @@ namespace DataLayer.Migrations
                         .HasMaxLength(500);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HomeId");
 
                     b.ToTable("Zamins");
                 });
@@ -1473,10 +1553,110 @@ namespace DataLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("DomainLayer.Contract.Contract", b =>
+                {
+                    b.HasOne("DomainLayer.Adviser", "Adviser")
+                        .WithMany("Contracts")
+                        .HasForeignKey("AdviserId");
+
+                    b.HasOne("DomainLayer.Home.Home", "Home")
+                        .WithMany("Contracts")
+                        .HasForeignKey("HomeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Anbar", b =>
+                {
+                    b.HasOne("DomainLayer.Home.Home", "Home")
+                        .WithMany("Anbar")
+                        .HasForeignKey("HomeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Aparteman", b =>
+                {
+                    b.HasOne("DomainLayer.Home.Home", "Home")
+                        .WithMany("Aparteman")
+                        .HasForeignKey("HomeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Edari", b =>
+                {
+                    b.HasOne("DomainLayer.Home.Home", "Home")
+                        .WithMany("Edari")
+                        .HasForeignKey("HomeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Garden", b =>
+                {
+                    b.HasOne("DomainLayer.Home.Home", "Home")
+                        .WithMany("Garden")
+                        .HasForeignKey("HomeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.GardenWithVila", b =>
+                {
+                    b.HasOne("DomainLayer.Home.Home", "Home")
+                        .WithMany("GardenWithVila")
+                        .HasForeignKey("HomeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("DomainLayer.Home.HomeGallery", b =>
                 {
                     b.HasOne("DomainLayer.Home.Home", "Home")
                         .WithMany("HomeGalleries")
+                        .HasForeignKey("HomeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.HomewithGarden", b =>
+                {
+                    b.HasOne("DomainLayer.Home.Home", "Home")
+                        .WithMany("HomewithGarden")
+                        .HasForeignKey("HomeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Kolangi", b =>
+                {
+                    b.HasOne("DomainLayer.Home.Home", "Home")
+                        .WithMany("Kolangi")
+                        .HasForeignKey("HomeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Maghaze", b =>
+                {
+                    b.HasOne("DomainLayer.Home.Home", "Home")
+                        .WithMany("Maghaze")
+                        .HasForeignKey("HomeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Moshtghelat", b =>
+                {
+                    b.HasOne("DomainLayer.Home.Home", "Home")
+                        .WithMany("Moshtghelat")
+                        .HasForeignKey("HomeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Vila", b =>
+                {
+                    b.HasOne("DomainLayer.Home.Home", "Home")
+                        .WithMany("Vila")
+                        .HasForeignKey("HomeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DomainLayer.Home.Zamin", b =>
+                {
+                    b.HasOne("DomainLayer.Home.Home", "Home")
+                        .WithMany("Zamin")
                         .HasForeignKey("HomeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

@@ -21,7 +21,10 @@ namespace DomainLayer.Home
         public int Tedadkolvahedha { get; set; }
         public int Tedadvaheddartabaghe { get; set; }
 
-        
+
+      
+
+
         [MaxLength(500, ErrorMessage = "نباید از 500 حرف بیشتر باشد")]
         public string NegahbaniName { get; set; }
 
@@ -70,9 +73,15 @@ namespace DomainLayer.Home
 
         [MaxLength(1000, ErrorMessage = "نباید از 1000 حرف بیشتر باشد")]
         public string Homesanad { get; set; }
+        public string HomeFacilities { get; set; }
 
         public int HomeId { get; set; }
 
+        #region Foregnkey
+
+        [ForeignKey(nameof(HomeId))]
+        public virtual Home Home { get; set; }
+        #endregion
 
     }
 }

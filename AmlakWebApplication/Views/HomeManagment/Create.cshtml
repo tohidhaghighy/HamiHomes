@@ -113,8 +113,8 @@
                             <span asp-validation-for="Home.Address" class="text-danger"></span>
                         </div>
                         <div class="col-lg-4">
-                            <label>خیابان و کوچه</label>
-                            <input id="txtkuche" name="txtkuche" type="text" class="form-control" placeholder="خیابان و کوچه">
+                            <label>پلاک</label>
+                            <input id="txtkuche" name="txtkuche" type="text" class="form-control" placeholder="پلاک">
                         </div>
 
                     </div>
@@ -123,44 +123,53 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-lg-2">
-                            <label>تعداد اتاق</label>
-                            <input asp-for="Home.Bed" type="number" class="form-control" placeholder="تعداد اتاق" value="1">
-                            <span asp-validation-for="Home.Bed" class="text-danger"></span>
+                        <div class="col-lg-3">
+                            <label>کد پستی</label>
+                            <input asp-for="Home.Postalcode" type="number" class="form-control" placeholder="کد پستی" value="1" onkeyup="if(this.value<0){this.value= this.value * -1}">
+                            <span asp-validation-for="Home.Postalcode" class="text-danger"></span>
                         </div>
-                        <div class="col-lg-2">
-                            <label>تعداد حمام</label>
-                            <input asp-for="Home.Bath" type="number" class="form-control" placeholder="تعداد حمام" value="1">
-                            <span asp-validation-for="Home.Bath" class="text-danger"></span>
-                        </div>
-                        <div class="col-lg-2">
-                            <label>سال ساخت</label>
-                            <input asp-for="Home.BuildYear" type="number" class="form-control" placeholder="سال ساخت" value="1399">
-                            <span asp-validation-for="Home.BuildYear" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <label>نام مالک</label>
                             <input asp-for="Home.OwnerName" type="text" class="form-control" placeholder="نام صاحب خانه">
                             <span asp-validation-for="Home.OwnerName" class="text-danger"></span>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <label>شماره تلفن</label>
-                            <input asp-for="Home.Phone" type="number" class="form-control" placeholder=" شماره تلفن">
+                            <input asp-for="Home.Phone" type="number" class="form-control"  value="044" placeholder=" شماره تلفن" onkeyup="if(this.value<0){this.value= this.value * -1}">
                             <span asp-validation-for="Home.Phone" class="text-danger"></span>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-3">
                             <label>شماره موبایل</label>
-                            <input asp-for="Home.Mobile" type="number" class="form-control" placeholder="شماره موبایل">
+                            <input asp-for="Home.Mobile" type="number" class="form-control"  value="09" placeholder="شماره موبایل" onkeyup="if(this.value<0){this.value= this.value * -1}">
                             <span asp-validation-for="Home.Mobile" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
 
+                <div class="form-group" id="showanotheritems">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label>تعداد اتاق</label>
+                            <input asp-for="Home.Bed" type="number" class="form-control" placeholder="تعداد اتاق" value="1" onkeyup="if(this.value<0){this.value= this.value * -1}">
+                            <span asp-validation-for="Home.Bed" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-3">
+                            <label>تعداد سرویس بهداشتی</label>
+                            <input asp-for="Home.Bath" type="number" class="form-control" value="1"  placeholder="تعداد سرویس بهداشتی">
+                            <span asp-validation-for="Home.Bath" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-3">
+                            <label>تعداد پارکینگ</label>
+                            <input asp-for="Home.Parking" type="number" class="form-control" value="1"  placeholder=" تعداد پارکینگ" onkeyup="if(this.value<0){this.value= this.value * -1}">
+                            <span asp-validation-for="Home.Parking" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-3">
+                            <label>عمر بنا</label>
+                            <input asp-for="Home.Bana" type="number" class="form-control" value="1"  placeholder=" عمر بنا" onkeyup="if(this.value<0){this.value= this.value * -1}">
+                            <span asp-validation-for="Home.Bana" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label>آدرس تور مجازی</label>
@@ -181,13 +190,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label>عکس خانه</label>
+                    <label>عکس خانه - اجباری</label>
                     <input name="homeImage" id="homeImage" type="file" placeholder="عکس">
                     <span asp-validation-for="Home.Image" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <label>نقشه عمران خانه</label>
+                    <label> نقشه عمران خانه - اختیاری</label>
                     <input name="pelanImage" id="pelanImage" type="file" />
                     <span asp-validation-for="Home.HomeMapImage" class="text-danger"></span>
                 </div>
@@ -205,6 +214,8 @@
 </div>
 
 <script>
+
+
     var map = L.map('map').setView([37.553278571293816, 45.07666215851912], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -219,7 +230,7 @@
 
     var greenIcon = new LeafIcon({ iconUrl: '/js/leaflet/icon.png' });
 
-
+    
     var marker;
     map.on("click", function (e) {
         if (marker) {
@@ -229,6 +240,7 @@
         marker = new L.Marker(e.latlng, { icon: greenIcon });
         $('#gpsx').val(e.latlng.lat);
         $('#gpsy').val(e.latlng.lng);
+        sendtoserver();
         marker.addTo(map);
     });
 
@@ -240,54 +252,63 @@
         defaultbtn();
         document.getElementById("aparteman").style.backgroundColor = "#e4002b";
         $('#typehome').val("1");
+        $("#showanotheritems").slideDown(1000);
     }
 
     function homewithgardenclick() {
         defaultbtn();
         document.getElementById("homewithgarden").style.backgroundColor = "#e4002b";
         $('#typehome').val("2");
+        $("#showanotheritems").slideDown(1000);
     }
 
     function groundclick() {
         defaultbtn();
         document.getElementById("ground").style.backgroundColor = "#e4002b";
         $('#typehome').val("3");
+        $("#showanotheritems").slideUp(1000);
     }
 
     function kolangiclick() {
         defaultbtn();
         document.getElementById("kolangi").style.backgroundColor = "#e4002b";
         $('#typehome').val("4");
+        $("#showanotheritems").slideUp(1000);
     }
 
     function bussinessclick() {
         defaultbtn();
         document.getElementById("bussiness").style.backgroundColor = "#e4002b";
         $('#typehome').val("5");
+        $("#showanotheritems").slideDown(1000);
     }
 
     function storeclick() {
         defaultbtn();
         document.getElementById("store").style.backgroundColor = "#e4002b";
         $('#typehome').val("6");
+        $("#showanotheritems").slideUp(1000);
     }
 
     function mostaghelatclick() {
         defaultbtn();
         document.getElementById("mostaghelat").style.backgroundColor = "#e4002b";
         $('#typehome').val("7");
+        $("#showanotheritems").slideDown(1000);
     }
 
     function anbarclick() {
         defaultbtn();
         document.getElementById("anbar").style.backgroundColor = "#e4002b";
         $('#typehome').val("8");
+        $("#showanotheritems").slideUp(1000);
     }
 
     function villaclick() {
         defaultbtn();
         document.getElementById("villa").style.backgroundColor = "#e4002b";
         $('#typehome').val("9");
+        $("#showanotheritems").slideDown(1000);
     }
 
     
@@ -295,6 +316,7 @@
         defaultbtn();
         document.getElementById("garden").style.backgroundColor = "#e4002b";
         $('#typehome').val("10");
+        $("#showanotheritems").slideUp(1000);
     }
 
 
@@ -340,13 +362,10 @@
         var mahalleselect = document.getElementById("mahalleselect");
         var opt = mahalleselect.options[mahalleselect.selectedIndex];
 
-
         var x = document.getElementById("Home_Address").value;
         map.setZoom(16);
         document.getElementById("Home_Address").value = x + " " + opt.text;
     }
-
-
 
     function sendtoserver() {
         var gpsx = $('#gpsx').val();
@@ -354,9 +373,11 @@
         $.ajax({
             url: 'https://map.ir/reverse/no?lat=' + gpsx + '&lon=' + gpsy,
             type: 'GET',
-            headers: { 'key': 'x-api-key', 'value': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjAwYmI0M2UxMGIxNTE4ZjBjNmM5MWRjNTg0ODI5ODM5OWIxOGY4YjlmOTEwMmYyODdjOGNiNDMxZDUwZmM5NTgwN2NhNGE5N2YwOTFlMjgxIn0.eyJhdWQiOiIxMDI4NyIsImp0aSI6IjAwYmI0M2UxMGIxNTE4ZjBjNmM5MWRjNTg0ODI5ODM5OWIxOGY4YjlmOTEwMmYyODdjOGNiNDMxZDUwZmM5NTgwN2NhNGE5N2YwOTFlMjgxIiwiaWF0IjoxNTk2MDk3MTk5LCJuYmYiOjE1OTYwOTcxOTksImV4cCI6MTU5ODY4OTE5OSwic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.D72_lhlqLfYLWzU39Vht_UD-OokirrPZIsOmGDZVHhsD-5ha9DF7WaU7FJA-H3RhVYJJccYl5fL5ik6dooPiap8yL3mBIJO6QLGO5ZdN3Y_kQqjsgJlrUTtLcJ-fmAKjJFEdcgiP0ofcGkjGinEtJPNRNoGRlbhXX75neXlheJ2FQBvdNhdXRIbyBGOJZkPGHOurUWHtxOeGZzuu5WpJ3wphdHJhoQdfTZIMFNe-OO-s7UnUhGB2PUs6noqH6zVrAJpLwCG2IaYwTFl6uD7L7agAiAhFEm31zY7I7pDj8PKCWIfIKRC-FmwMlhGmx_vBWe5OpW5ezGoupEIaTn52_Q','type':'text' },
+            headers: { 'x-api-key': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjAwYmI0M2UxMGIxNTE4ZjBjNmM5MWRjNTg0ODI5ODM5OWIxOGY4YjlmOTEwMmYyODdjOGNiNDMxZDUwZmM5NTgwN2NhNGE5N2YwOTFlMjgxIn0.eyJhdWQiOiIxMDI4NyIsImp0aSI6IjAwYmI0M2UxMGIxNTE4ZjBjNmM5MWRjNTg0ODI5ODM5OWIxOGY4YjlmOTEwMmYyODdjOGNiNDMxZDUwZmM5NTgwN2NhNGE5N2YwOTFlMjgxIiwiaWF0IjoxNTk2MDk3MTk5LCJuYmYiOjE1OTYwOTcxOTksImV4cCI6MTU5ODY4OTE5OSwic3ViIjoiIiwic2NvcGVzIjpbImJhc2ljIl19.D72_lhlqLfYLWzU39Vht_UD-OokirrPZIsOmGDZVHhsD-5ha9DF7WaU7FJA-H3RhVYJJccYl5fL5ik6dooPiap8yL3mBIJO6QLGO5ZdN3Y_kQqjsgJlrUTtLcJ-fmAKjJFEdcgiP0ofcGkjGinEtJPNRNoGRlbhXX75neXlheJ2FQBvdNhdXRIbyBGOJZkPGHOurUWHtxOeGZzuu5WpJ3wphdHJhoQdfTZIMFNe-OO-s7UnUhGB2PUs6noqH6zVrAJpLwCG2IaYwTFl6uD7L7agAiAhFEm31zY7I7pDj8PKCWIfIKRC-FmwMlhGmx_vBWe5OpW5ezGoupEIaTn52_Q'},
             success: function (data) {
-                alert(data);
+                document.getElementById("addressshow").value = data.address; 
+                document.getElementById("Home_Postalcode").value = data.postal_code;
+                document.getElementById("Home_Address").value = data.address;
             },
             failure: function (result) {
                 alert('Error: ' + result);
@@ -374,6 +395,7 @@
         marker = new L.Marker([x,y], { icon: greenIcon });
         $('#gpsx').val(x);
         $('#gpsy').val(y);
+        sendtoserver();
         marker.addTo(map);
     }
 

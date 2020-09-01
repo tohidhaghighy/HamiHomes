@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataLayer.Infrastracture;
 using DomainLayer;
+using DomainLayer.Enums;
 using DomainLayer.Home;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,29 +23,31 @@ namespace AmlakWebApplication.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.MoshtghelatRepository.GetAllAsync());
+            return View(await _context.MoshtghelatRepository.GetManyAsyncWithInclude("Home"));
         }
 
-        public async Task<IActionResult> Create(int homeid)
+        public async Task<IActionResult> Create(int homeid, int hometype, int contracttype)
         {
             var mostaghelat = new MostaghelatFacility();
-            mostaghelat.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetAllAsync();
-            mostaghelat.AmlakDivars = await _context.AmlakDivarRepository.GetAllAsync();
-            mostaghelat.AmlakEskeletones = await _context.AmlakSkeletonRepository.GetAllAsync();
-            mostaghelat.AmlakJahatVahedes = await _context.AmlakJahatvahedRepository.GetAllAsync();
-            mostaghelat.AmlakKafes = await _context.AmlakKafRepository.GetAllAsync();
-            mostaghelat.AmlakKitchenes = await _context.AmlakKitchenRepository.GetAllAsync();
-            mostaghelat.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetAllAsync();
-            mostaghelat.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetAllAsync();
-            mostaghelat.AmlakMoshaat = await _context.AmlakMoshaatRepository.GetAllAsync();
-            mostaghelat.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetAllAsync();
-            mostaghelat.AmlakNema = await _context.AmlakNemaRepository.GetAllAsync();
-            mostaghelat.AmlakParking = await _context.AmlakParkingRepository.GetAllAsync();
-            mostaghelat.AmlakPishraftStatus = await _context.AmlakPishraftStatusRepository.GetAllAsync();
-            mostaghelat.AmlakSaghf = await _context.AmlakSaghfRepository.GetAllAsync();
-            mostaghelat.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetAllAsync();
-            mostaghelat.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetAllAsync();
-            mostaghelat.AmlakWC = await _context.AmlakWcRepository.GetAllAsync();
+            var typehomeid = (MelkType)hometype;
+            var contracttypeid = (TypeHome)contracttype;
+            mostaghelat.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            mostaghelat.AmlakDivars = await _context.AmlakDivarRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            mostaghelat.AmlakEskeletones = await _context.AmlakSkeletonRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            mostaghelat.AmlakJahatVahedes = await _context.AmlakJahatvahedRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            mostaghelat.AmlakKafes = await _context.AmlakKafRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            mostaghelat.AmlakKitchenes = await _context.AmlakKitchenRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            mostaghelat.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            mostaghelat.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            mostaghelat.AmlakMoshaat = await _context.AmlakMoshaatRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            mostaghelat.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            mostaghelat.AmlakNema = await _context.AmlakNemaRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            mostaghelat.AmlakParking = await _context.AmlakParkingRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            mostaghelat.AmlakPishraftStatus = await _context.AmlakPishraftStatusRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            mostaghelat.AmlakSaghf = await _context.AmlakSaghfRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            mostaghelat.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            mostaghelat.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            mostaghelat.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
             ViewData["Id"] = homeid;
             return View(mostaghelat);
         }

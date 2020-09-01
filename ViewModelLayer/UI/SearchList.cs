@@ -19,5 +19,6 @@ namespace ViewModelLayer.UI
         public List<AmlakNoeZamin> AmlakNoeZamin { get; set; }
         public List<HomeFacility> HomeFacility { get; set; }
         public MainPage MainPage { get; set; }
+        public List<DomainLayer.Contract.Contract> Homes { get; set; }
     }
 }

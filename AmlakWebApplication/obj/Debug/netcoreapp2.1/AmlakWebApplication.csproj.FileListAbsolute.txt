@@ -222,3 +222,10 @@ D:\Projects\AmlakWebApplication\AmlakWebApplication\obj\Debug\netcoreapp2.1\Razo
 D:\Projects\AmlakWebApplication\AmlakWebApplication\obj\Debug\netcoreapp2.1\Razor\Views\CostSetting\Ejare.g.cshtml.cs
 D:\Projects\AmlakWebApplication\AmlakWebApplication\obj\Debug\netcoreapp2.1\Razor\Views\CostSetting\Vadie.g.cshtml.cs
 D:\Projects\AmlakWebApplication\AmlakWebApplication\obj\Debug\netcoreapp2.1\Razor\Views\AmlakSettingManagment\Kaf.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication\obj\Debug\netcoreapp2.1\Razor\Views\ContractManagment\Index.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication\obj\Debug\netcoreapp2.1\Razor\Views\ContractManagment\Create.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication\obj\Debug\netcoreapp2.1\Razor\Views\ContractManagment\Update.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication\obj\Debug\netcoreapp2.1\Razor\Views\ContractManagment\_ListAjax.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication\obj\Debug\netcoreapp2.1\Razor\Views\Rezome\Index.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication\obj\Debug\netcoreapp2.1\Razor\Views\AdvisorManagment\AmlakList.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication\obj\Debug\netcoreapp2.1\Razor\Views\AdvisorManagment\_ListRezomeAjax.g.cshtml.cs

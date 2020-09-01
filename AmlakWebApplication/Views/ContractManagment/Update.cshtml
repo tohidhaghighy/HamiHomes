@@ -1,0 +1,160 @@
+﻿@model ViewModelLayer.Contract.Contractlist
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Managment.cshtml";
+}
+
+
+
+<section class="content-header">
+    <h1>
+        داشبرد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/ContractManagment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">قرارداد @ViewData["type"] جدید </li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>درج قرارداد جدید</h4>
+
+</div>
+
+<div class="container" onload="hideall">
+    <div class="box box-danger">
+        <div class="box-header">
+            <h3 class="box-title">قرارداد جدید</h3>
+        </div>
+        <form asp-action="UpdateItem">
+            <div class="box-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
+                <input class="hidden" asp-for="Contract.HomeId" value="@ViewData["homeid"]" />
+                <input class="hidden" asp-for="Contract.Id" value="@Model.Contract.Id" />
+                <input class="hidden" name="hometype" id="hometype" value="@ViewData["hometype"]" />
+                @{
+                    string s = "خرید و فروش";
+                    if (Model.Contract.TypContract == DomainLayer.Enums.TypeHome.Rent)
+                    {
+                        s = "رهن و اجاره";
+                    }
+                    else if (Model.Contract.TypContract == DomainLayer.Enums.TypeHome.build)
+                    {
+                        s = "ساخت وساز";
+                    }
+                    else if (Model.Contract.TypContract == DomainLayer.Enums.TypeHome.Selled)
+                    {
+                        s = "فروخته شده";
+                    }
+                    else if (Model.Contract.TypContract == DomainLayer.Enums.TypeHome.Rented)
+                    {
+                        s = "اجاره داده شده";
+                    }
+                    else if (Model.Contract.TypContract == DomainLayer.Enums.TypeHome.builded)
+                    {
+                        s = "ساخته شده";
+                    }
+                }
+                <label> نوع قرارداد  @s  تنظیم شده ایا میخواهید تغییر دهید</label>
+                <div class="form-group">
+                    <label> نوع قرارداد </label>
+                    <select asp-for="Contract.TypContract" id="" class="form-control" style="width:30%">
+                        <option value="1" onclick="sell()" style="text-align:center">خرید و فروش</option>
+                        <option value="2" onclick="rent()" style="text-align:center">رهن و اجاره</option>
+                        <option value="3" onclick="build()" style="text-align:center">ساخت و ساز</option>
+                        <option value="4" onclick="Sell()" style="text-align:center">فروخته شده</option>
+                        <option value="5" onclick="rent()" style="text-align:center">اجاره داده شده</option>
+                        <option value="6" onclick="build()" style="text-align:center">ساخته شده</option>
+                    </select>
+                </div>
+                <div id="buy">
+                    <div class="form-group">
+                        <label>قیمت پیشنهادی ( تومان ) - به عدد</label>
+                        <input id="costbuy" name="costbuy" type="text" value="@Model.Contract.SellCOst" class="form-control" placeholder=" قیمت پیشنهادی" style="width:30%" value="0" onkeyup="separateNum(this.value,this);" />
+                    </div>
+                </div>
+                <div id="rent" style="display:none">
+                    <div class="form-group">
+                        <label>قیمت رهن  ( تومان ) - به عدد</label>
+                        <input id="costrahn" name="costrahn" type="text" value="@Model.Contract.Vadie" class="form-control" placeholder="قیمت رهن" style="width:30%" value="0" onkeyup="separateNum(this.value,this);" />
+                    </div>
+                    <div class="form-group">
+                        <label>قیمت اجاره  ( تومان ) - به عدد</label>
+                        <input id="costejare" name="costejare" type="text" value="@Model.Contract.RentCOst" class="form-control" placeholder="قیمت اجاره" style="width:30%" value="0" onkeyup="separateNum(this.value,this);" />
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label>متراژ  ( متر ) - به عدد</label>
+                    <input asp-for="Contract.Metraz" type="number" class="form-control" placeholder=" متراژ" style="width:30%" value="0">
+                    <span asp-validation-for="Contract.Metraz" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>به @Model.Contract.Adviser.Name @Model.Contract.Adviser.Family واگذار شده آیا میخواهید تغییر دهید : </label>
+                    <select asp-for="Contract.AdviserId" id="" class="form-control" style="width:30%">
+                        @{
+                            foreach (var item in Model.Advisers)
+                            {
+                                <option value="@item.Id" style="text-align:center">@item.Name  @item.Family</option>
+                            }
+                        }
+
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">درج قرارداد جدید و رفتن به مرحله بعد</button>
+                </div>
+
+            </div>
+        </form>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+</div>
+
+<script>
+
+    function sell() {
+        $("#buy").show();
+        $("#rent").hide();
+    }
+
+    function rent() {
+        $("#buy").hide();
+        $("#rent").show();
+    }
+
+    function build() {
+        $("#buy").hide();
+        $("#rent").hide();
+        }
+
+     function separateNum(value, input) {
+        /* seprate number input 3 number */
+        var nStr = value + '';
+        nStr = nStr.replace(/\,/g, "");
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        if (input !== undefined) {
+
+            input.value = x1 + x2;
+        } else {
+            return x1 + x2;
+        }
+        }
+
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

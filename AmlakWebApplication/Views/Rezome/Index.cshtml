@@ -1,0 +1,296 @@
+﻿@model ViewModelLayer.AdvisorManagment.MainAdvisor
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Managment.cshtml";
+}
+
+<style>
+    tr:nth-child(even) {
+        background: rgba(126, 136, 241, 0.59)
+    }
+    a{
+        cursor:pointer;
+    }
+</style>
+
+
+<section class="content-header">
+    <h1>
+        داشبرد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/Rezome/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">رزومه   </li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>مدریت رزومه </h4>
+</div>
+
+<div class="row">
+    <div class="container">
+        <div class="col-lg-2 col-xs-4">
+            <a href="/AdvisorManagment/AmlakList?type=4&id=@Model.Adviser.Id">
+                <div class="small-box bg-primary">
+                    <div class="inner">
+                        <h3>@Model.soldCount<sup style="font-size: 20px"></sup></h3>
+
+                        <p>فروخته شده</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-lg-2 col-xs-4">
+            <a href="/AdvisorManagment/AmlakList?type=5&id=@Model.Adviser.Id">
+                <div class="small-box bg-lime">
+                    <div class="inner">
+                        <h3>@Model.rentedCount<sup style="font-size: 20px"></sup></h3>
+
+                        <p>اجاره داده شده</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-lg-2 col-xs-4">
+            <a href="/AdvisorManagment/AmlakList?type=6&id=@Model.Adviser.Id">
+                <div class="small-box bg-gray">
+                    <div class="inner">
+                        <h3>@Model.buildedCount<sup style="font-size: 20px"></sup></h3>
+                        <p>ساخته شده ها</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                </div>
+            </a>
+           
+        </div>
+
+        <div class="col-lg-2 col-xs-4">
+            <a href="/AdvisorManagment/AmlakList?type=1&id=@Model.Adviser.Id">
+                <div class="small-box bg-purple">
+                    <div class="inner">
+                        <h3>@Model.sellCount<sup style="font-size: 20px"></sup></h3>
+                        <p>خرید و فروش</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                </div>
+            </a>
+            
+        </div>
+
+        <div class="col-lg-2 col-xs-4">
+            <a href="/AdvisorManagment/AmlakList?type=2&id=@Model.Adviser.Id">
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3>@Model.rentCount<sup style="font-size: 20px"></sup></h3>
+
+                        <p>رهن و اجاره</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                </div>
+            </a>
+           
+        </div>
+
+        <div class="col-lg-2 col-xs-4">
+            <a href="/AdvisorManagment/AmlakList?type=3&id=@Model.Adviser.Id">
+                <div class="small-box bg-red">
+                    <div class="inner">
+                        <h3>@Model.buildCount<sup style="font-size: 20px"></sup></h3>
+
+                        <p>ساخت و ساز</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                </div>
+            </a>
+            
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="box box-danger">
+        <div class="box-header">
+            <h3 class="box-title">اطلاعات کارشناس</h3>
+        </div>
+
+        <div class="container" style="padding-top:50px;padding-bottom:50px;">
+            <div class="row">
+                <div class="col-lg-3 col-md-2 col-xs-0 thumb">
+
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb text-center">
+                    <h4 class="">عکس کارشناس</h4>
+                    <a class="fancybox img-hover-zoom" rel="ligthbox" href="#">
+                        @if (Model.Adviser.Image != null)
+                        {
+                            <img src="~/images/@Model.Adviser.Image" class="img img-circle" alt=" " style="width:150px; height:150px;">
+                        }
+                        else
+                        {
+                            <img src="~/images/def.jpg" class="img img-circle" alt=" " style="width:150px; height:150px;">
+                        }
+
+
+                    </a>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb text-center">
+                    <h4 class="">عکس پشت زمینه</h4>
+                    <a class="fancybox img-hover-zoom" rel="ligthbox" href="#">
+
+                        @if (Model.Adviser.BackgroundImage != null)
+                        {
+                            <img src="~/images/@Model.Adviser.BackgroundImage" class="img img-circle" alt=" " style="width:150px; height:150px;">
+                        }
+                        else
+                        {
+                            <img src="~/images/def.jpg" class="img img-circle" alt=" " style="width:150px; height:150px;">
+                        }
+
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-2 col-xs-0 thumb">
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+    <div class="container">
+        <div class="box box-danger">
+            <div class="box-header">
+                <h3 class="box-title">ویرایش مشاور </h3>
+            </div>
+            <form asp-action="UpdateItem" enctype="multipart/form-data">
+
+                <div class="box-body">
+                    <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
+                    <input asp-for="Adviser.Id" class="hidden" style="display:none;" value="@Model.Adviser.Id"/>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>نام</label>
+                                <input asp-for="Adviser.Name" type="text" class="form-control" placeholder="نام">
+                                <span asp-validation-for="Adviser.Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>نام خانوادگی</label>
+                                <input asp-for="Adviser.Family" type="text" class="form-control" placeholder="نام خانوادگی">
+                                <span asp-validation-for="Adviser.Family" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>موبایل</label>
+                                <input asp-for="Adviser.Mobile" type="number" class="form-control" placeholder="موبایل">
+                                <span asp-validation-for="Adviser.Mobile" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>چند سال سابقه</label>
+                                <input asp-for="Adviser.ExperienceYear" type="number" class="form-control" placeholder="چند سال سابقه">
+                                <span asp-validation-for="Adviser.ExperienceYear" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>ایمیل</label>
+                                <input asp-for="Adviser.Email" type="email" class="form-control" placeholder="ایمیل">
+                                <span asp-validation-for="Adviser.Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>توضیحات</label>
+                        <textarea asp-for="Adviser.Description" type="text" class="form-control" rows="6" placeholder="توضیحات"></textarea>
+                        <span asp-validation-for="Adviser.Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>تخصص در فروش</label>
+                        <textarea asp-for="Adviser.BuyTakhasos" type="text" class="form-control" rows="6" placeholder="تخصص در فروش"></textarea>
+                        <span asp-validation-for="Adviser.Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>تخصص در اجاره</label>
+                        <textarea asp-for="Adviser.RentTakhasos" type="text" class="form-control" rows="6" placeholder="تخصص در اجاره"></textarea>
+                        <span asp-validation-for="Adviser.Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>نام کاربری </label>
+                                <input asp-for="Adviser.Username" type="text" class="form-control" placeholder="نام کاربری">
+                                <span asp-validation-for="Adviser.Username" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label>پسورد</label>
+                                <input asp-for="Adviser.Password" type="password" class="form-control" placeholder="پسورد">
+                                <span asp-validation-for="Adviser.Password" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>عکس کارشناس</label>
+                        <input asp-for="Adviser.Image" type="file" placeholder="عکس کارشناس" id="Image" name="Image">
+                        <span asp-validation-for="Adviser.Image" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>عکس پس زمینه کارشناس</label>
+                        <input asp-for="Adviser.BackgroundImage" type="file" id="BackgroundImage" name="BackgroundImage"/>
+                        <span asp-validation-for="Adviser.BackgroundImage" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">ویرایش مشاور </button>
+                    </div>
+
+                </div>
+            </form>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+        <!-- /.box -->
+    </div>
+</div>

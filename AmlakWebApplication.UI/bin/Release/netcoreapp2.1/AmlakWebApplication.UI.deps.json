@@ -434,6 +434,7 @@
       },
       "ViewModelLayer/1.0.0": {
         "dependencies": {
+          "DataLayer": "1.0.0",
           "DomainLayer": "1.0.0"
         },
         "runtime": {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DataLayer.Infrastracture;
+using DomainLayer.Contract;
 using DomainLayer.Enums;
 using Microsoft.AspNetCore.Mvc;
 using ViewModelLayer.Search;
@@ -25,8 +26,59 @@ namespace AmlakWebApplication.UI.Controllers
         {
             ViewData["type"] = typehome;
             var searchlist = new SearchList();
-            searchlist.ShowItems = await ConvertItems(mincost, maxcost, minmetr, maxmetr, minejare, maxejare, selectitem);
+            var find = await ConvertItems(mincost, maxcost, minmetr, maxmetr, minejare, maxejare, selectitem);
+            searchlist.ShowItems = find;
             searchlist.MainPage = await GetListMetrCost();
+            if (typehome==1)
+            {
+                if (maxcost!=0)
+                {
+                    searchlist.Homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Buy && a.SellCOst > find.MinCostPrice && a.SellCOst < find.MaxCostPrice && a.Home.IsShow==true).ToList();
+                }
+                else
+                {
+                    searchlist.Homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Buy && a.SellCOst > find.MinCostPrice && a.Home.IsShow == true).ToList();
+                }
+                
+            }
+            else if (typehome==2)
+            {
+                if (maxcost!=0 && maxejare!=0)
+                {
+                    searchlist.Homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Rent && a.RentCOst > find.MinEjareCostPrice && a.RentCOst < find.MaxEjarecostPrice && a.Vadie > find.MinCostPrice && a.Vadie < find.MaxCostPrice && a.Home.IsShow == true).ToList();
+                }
+                else if (maxcost!=0 && maxejare==0)
+                {
+                    searchlist.Homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Rent && a.RentCOst > find.MinEjareCostPrice && a.Vadie > find.MinCostPrice && a.Vadie < find.MaxCostPrice && a.Home.IsShow == true).ToList();
+                }
+                else if (maxcost==0 && maxejare!=0)
+                {
+                    searchlist.Homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Rent && a.RentCOst > find.MinEjareCostPrice && a.RentCOst < find.MaxEjarecostPrice && a.Vadie > find.MinCostPrice && a.Home.IsShow == true).ToList();
+                }
+                else if (maxcost==0 && maxejare==0)
+                {
+                    searchlist.Homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Rent && a.RentCOst > find.MinEjareCostPrice && a.Vadie > find.MinCostPrice && a.Home.IsShow == true).ToList();
+                }
+               
+            }
+            else if (typehome==3)
+            {
+                searchlist.Homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Selled && a.Home.IsShow == true).ToList();
+            }
+
+            if (selectitem!=0)
+            {
+                if (maxmetr!=0)
+                {
+                    searchlist.Homes = searchlist.Homes.Where(a => a.Home.Hometype == selectitem && a.Metraz >= minmetr && a.Metraz <= maxmetr).ToList();
+                }
+                else
+                {
+                    searchlist.Homes = searchlist.Homes.Where(a => a.Home.Hometype == selectitem && a.Metraz >= minmetr).ToList();
+                }
+                
+            }
+            
             return View(searchlist);
         }
         public async Task<PartialViewResult> GetApartemanPartial(int buyrent,int hometype)
@@ -208,6 +260,7 @@ namespace AmlakWebApplication.UI.Controllers
             {
                 var findmincost = await _context.CostSettingRepository.GetAsync(a=>a.Id==mincost);
                 items.Mincost = findmincost.Cost.ToString();
+                items.MinCostPrice = findmincost.CostChance;
             }
 
             items.Maxcost = "0";
@@ -215,6 +268,7 @@ namespace AmlakWebApplication.UI.Controllers
             {
                 var findmaxcost = await _context.CostSettingRepository.GetAsync(a => a.Id == maxcost);
                 items.Maxcost = findmaxcost.Cost.ToString();
+                items.MaxCostPrice = findmaxcost.CostChance;
             }
 
             items.MinEjarecost = "0";
@@ -222,6 +276,7 @@ namespace AmlakWebApplication.UI.Controllers
             {
                 var findminejarecost = await _context.CostSettingRepository.GetAsync(a => a.Id == minejare);
                 items.MinEjarecost = findminejarecost.Cost.ToString();
+                items.MinEjareCostPrice = findminejarecost.CostChance;
             }
 
             items.MaxEjarecost = "0";
@@ -229,6 +284,7 @@ namespace AmlakWebApplication.UI.Controllers
             {
                 var findmaxEjarecost = await _context.CostSettingRepository.GetAsync(a => a.Id == maxejare);
                 items.MaxEjarecost = findmaxEjarecost.Cost.ToString();
+                items.MaxEjarecostPrice = findmaxEjarecost.CostChance;
             }
 
             items.MinMetr = "0";
@@ -269,6 +325,144 @@ namespace AmlakWebApplication.UI.Controllers
             main.EjareSetting = main.EjareSetting.OrderBy(a => a.CostChance).ToList();
             main.VadieSetting = main.VadieSetting.OrderBy(a => a.CostChance).ToList();
             return main;
+        }
+
+        public async Task<PartialViewResult> SearchAnbarPartial(int hometype,int minmetr,int maxmetr,int mincost,int maxcost,int arzebana, int arzegozar, string sanad,string moghiat,string rentbuy)
+        {
+            var homes = await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
+            var homecontracts = new List<Contract>();
+            foreach (var item in homes)
+            {
+                if (item.HomeId!=null)
+                {
+                    var findanbars = _context.HomeAnbarRepository.GetById(item.HomeId);
+                    if (findanbars!=null)
+                    {
+                        if (moghiat==null)
+                        {
+                            moghiat = "";
+                        }
+                        if (findanbars.Arzegozar>=arzegozar && findanbars.Arzemelk>=arzebana && findanbars.MoghiateMelk.Contains(moghiat) && findanbars.SanadStatus.Contains(sanad))
+                        {
+                            homecontracts.Add(item);
+                        }
+                    }
+                }
+            }
+            
+            
+            return PartialView("_SearchList", homecontracts);
+        }
+
+        public async Task<PartialViewResult> SearchApartemanPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int bed, int parking,int wc,int bana, string wclist, string moghiat,string kitchen, string tasisat,string melkstatus,string sanad, string moshakhase, string rentbuy)
+        {
+            var homes =await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
+            var homecontracts = new List<Contract>();
+            return PartialView("_SearchList", homecontracts);
+        }
+
+        public async Task<PartialViewResult> SearchEdariPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int bed, int parking, int wc, int bana, string wclist, string moghiat , string tasisat, string vaziat, string sanad, string rentbuy)
+        {
+            var homes = await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
+            var homecontracts = new List<Contract>();
+            return PartialView("_SearchList", homecontracts);
+        }
+
+        public async Task<PartialViewResult> SearchGardenPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int bed,int arzemelk, string moghiat, string vaziat, string sanad, string rentbuy)
+        {
+            var homes = await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
+            var homecontracts = new List<Contract>();
+            return PartialView("_SearchList", homecontracts);
+        }
+
+        public async Task<PartialViewResult> SearchHomewithGardenPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int bed,int arzemelk,string wclist, string moghiat , string sanad , string kitchen , string tasisat , string vizhe , string moshakhase, string rentbuy)
+        {
+            var homes = await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
+            var homecontracts = new List<Contract>();
+            return PartialView("_SearchList", homecontracts);
+        }
+
+        public async Task<PartialViewResult> SearchKolangiPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int arzemelk, int arzegozar, string moghiat, string sanad, string vizhe, string moshakhase,string nozamin, string rentbuy)
+        {
+            var homes = await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
+            var homecontracts = new List<Contract>();
+            return PartialView("_SearchList", homecontracts);
+        }
+
+        public async Task<PartialViewResult> SearchMaghazePartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int metrazhkaf, int metrazhdahane,int anbarmetrazh, string moghiat, string sanad, string vizhe, string moshakhase, string rentbuy)
+        {
+            var homes = await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
+            var homecontracts = new List<Contract>();
+            return PartialView("_SearchList", homecontracts);
+        }
+
+        public async Task<PartialViewResult> SearchMostaghelatPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int bed, int parking, int wc, int bana, int metrazhkaf, int metrazhdahane, int arzemelk, string wclist, string moghiat, string kitchen, string tasisat, string nozamin, string sanad, string moshakhase,string vizhe, string rentbuy)
+        {
+            var homes = await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
+            var homecontracts = new List<Contract>();
+            return PartialView("_SearchList", homecontracts);
+        }
+
+        public async Task<PartialViewResult> SearchVillaPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int bed, int wc, int bana, int arzemelk, string wclist, string moghiat, string kitchen, string tasisat, string sanad, string moshakhase, string vizhe, string rentbuy)
+        {
+            var homes = await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
+            var homecontracts = new List<Contract>();
+            return PartialView("_SearchList", homecontracts);
+        }
+
+        public async Task<PartialViewResult> SearchZaminPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int arzemelk, int arzegozar, string moghiat, string sanad, string moshakhase, string vizhe,string nozamin, string rentbuy)
+        {
+            var homes = await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
+            var homecontracts = new List<Contract>();
+            return PartialView("_SearchList", homecontracts);
+        }
+
+        public async Task<List<Contract>> Returnhomefunction(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, string rentbuy)
+        {
+            var homes = new List<Contract>();
+            var find = await ConvertItems(mincost, maxcost, minmetr, maxmetr, mincost, maxcost, hometype);
+            if (rentbuy == "1")
+            {
+                if (maxcost != 0)
+                {
+                    homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Buy && a.SellCOst > find.MinCostPrice && a.SellCOst < find.MaxCostPrice && a.Home.IsShow == true).ToList();
+                }
+                else
+                {
+                    homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Buy && a.SellCOst > find.MinCostPrice && a.Home.IsShow == true).ToList();
+                }
+
+            }
+            else if (rentbuy == "2")
+            {
+                if (maxcost != 0)
+                {
+                    homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Rent && a.RentCOst > find.MinEjareCostPrice && a.RentCOst < find.MaxEjarecostPrice && a.Vadie > find.MinCostPrice && a.Vadie < find.MaxCostPrice && a.Home.IsShow == true).ToList();
+                }
+                else
+                {
+                    homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Rent && a.RentCOst > find.MinEjareCostPrice && a.Vadie > find.MinCostPrice && a.Home.IsShow == true).ToList();
+                }
+
+            }
+            else if (rentbuy == "3")
+            {
+                homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Selled && a.Home.IsShow == true).ToList();
+            }
+
+            if (hometype != 0)
+            {
+                if (maxmetr != 0)
+                {
+                    homes = homes.Where(a => a.Home.Hometype == hometype && a.Metraz >= Convert.ToInt32(find.MinMetr) && a.Metraz <= Convert.ToInt32(find.MaxMetr)).ToList();
+                }
+                else
+                {
+                    homes = homes.Where(a => a.Home.Hometype == hometype && a.Metraz >= Convert.ToInt32(find.MinMetr)).ToList();
+                }
+
+            }
+            return homes;
         }
     }
 }

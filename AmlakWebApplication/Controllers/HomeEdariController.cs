@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataLayer.Infrastracture;
 using DomainLayer;
+using DomainLayer.Enums;
 using DomainLayer.Home;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,24 +23,26 @@ namespace AmlakWebApplication.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.HomeEdariRepository.GetAllAsync());
+            return View(await _context.HomeEdariRepository.GetManyAsyncWithInclude("Home"));
         }
 
-        public async Task<IActionResult> Create(int homeid)
+        public async Task<IActionResult> Create(int homeid, int hometype, int contracttype)
         {
             var Edari = new EdariFacility();
-            Edari.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetAllAsync();
-            Edari.AmlakEskeletones = await _context.AmlakSkeletonRepository.GetAllAsync();
-            Edari.AmlakKafes = await _context.AmlakKafRepository.GetAllAsync();
-            Edari.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetAllAsync();
-            Edari.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetAllAsync();
-            Edari.AmlakNema = await _context.AmlakNemaRepository.GetAllAsync();
-            Edari.AmlakParking = await _context.AmlakParkingRepository.GetAllAsync();
-            Edari.AmlakPishraftStatus = await _context.AmlakPishraftStatusRepository.GetAllAsync();
-            Edari.AmlakSaghf = await _context.AmlakSaghfRepository.GetAllAsync();
-            Edari.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetAllAsync();
-            Edari.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetAllAsync();
-            Edari.AmlakWC = await _context.AmlakWcRepository.GetAllAsync();
+            var contracttypeid = (TypeHome)hometype;
+            var typehomeid = (MelkType)contracttype;
+            Edari.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakEskeletones = await _context.AmlakSkeletonRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakKafes = await _context.AmlakKafRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakNema = await _context.AmlakNemaRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakParking = await _context.AmlakParkingRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakPishraftStatus = await _context.AmlakPishraftStatusRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakSaghf = await _context.AmlakSaghfRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
             ViewData["Id"] = homeid;
             return View(Edari);
         }

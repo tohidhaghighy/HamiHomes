@@ -1,4 +1,4 @@
-﻿@model List<DomainLayer.Home.Home>
+﻿@model ViewModelLayer.HomeManagment.MainSearch
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Managment.cshtml";
@@ -57,35 +57,40 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal">
+        <div class="form-horizontal">
             <div class="box-body">
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">کد ملک</label>
 
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputEmail3" placeholder="کد ملک">
+                        <input type="text" class="form-control" id="code" name="code" placeholder="کد ملک">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label">محله</label>
                     <div class="col-sm-10">
                         <select class="form-control select2 text-center btn-block" data-placeholder="   محلات را انتخاب کن  "
-                                style="width: 100%;direction:rtl;float:right;" name="homewc" id="homewc">
-                            <option value="سعدی">سعدی</option>
-                            <option value="رودکی">رودکی</option>
-                            <option value="سعدی">سعدی</option>
-                            <option value="سعدی">سعدی</option>
-                            <option value="سعدی">سعدی</option>
+                                style="width: 100%;direction:rtl;float:right;" name="mahale" id="mahale">
+                            @foreach (var item in Model.Mahalles)
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
                         </select>
                     </div>
                 </div>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-                <button type="submit" class="btn btn-info pull-right">جستجو</button>
+                <a class="btn btn-info pull-right" onclick="searchhome()">جستجو</a>
             </div>
             <!-- /.box-footer -->
-        </form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="container">
+        <h3 class="text-center">ملک های تایید نشده</h3>
     </div>
 </div>
 
@@ -96,20 +101,20 @@
                 <table id="mytable" class="table table-bordered table-hover" style="background-color:white;">
                     <thead>
                         <tr>
+                            <th class="text-center">تایید شده ؟</th>
                             <th class="text-center">عکس</th>
                             <th class="text-center">زمان انتشار</th>
                             <th class="text-center">عمومی / خصوصی</th>
                             <th class="text-center">ادرس</th>
-                            <th class="text-center">سال ساخت</th>
-                            <th class="text-center">اتاق خواب</th>
-                            <th class="text-center">حمام</th>
+                            <th class="text-center">کد پستی</th>
+                            <th class="text-center">لیست قراردادها</th>
                             <th class="text-center">گالری تصاویر</th>
                             <th class="text-center">نقشه 3 یعدی</th>
                             <th class="text-center">حذف</th>
                         </tr>
                     </thead>
-                    <tbody id="listofarticle">
-                        @await Html.PartialAsync("_ListAjax", Model)
+                    <tbody id="showfilterbox">
+                        @await Html.PartialAsync("_ListAjax", Model.Homes)
                     </tbody>
 
                 </table>
@@ -168,4 +173,23 @@
     function gallery(id) {
         window.location.href = "/HomeGalleryManagment/Index?homeid=" + id;
         }
+
+    function Changecheck(id) {
+         $.ajax({
+            type: "Post",
+            url: '/HomeManagment/CheckChange',
+            data: { id: id },
+            success: function (data) {
+                window.location.reload();
+            }
+        });
+        }
+
+    function searchhome() {
+        var mahale = $("#mahale").val();
+        var code = $("#code").val();
+        $("#showfilterbox").empty();
+        $('#showfilterbox').load('/HomeManagment/GetHomePartial?code=' + code + '&mahale=' + mahale);
+        $("#showfilterbox").show();
+    }
 </script>

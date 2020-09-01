@@ -129,6 +129,16 @@ namespace DataLayer.Infrastracture
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        public Task<int> GetCount()
+        {
+            return DbSet.CountAsync();
+        }
+
+        public virtual IEnumerable<TEntity> GetByIdwithinclude(string children)
+        {
+             return DbSet.Include(children).ToList();
+        }
         #endregion
     }
 }

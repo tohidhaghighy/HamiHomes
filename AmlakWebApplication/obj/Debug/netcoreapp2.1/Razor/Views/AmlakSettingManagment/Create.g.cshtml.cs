@@ -98,12 +98,12 @@ using ViewModelLayer;
             WriteLiteral(" جدید</h4>\r\n\r\n</div>\r\n\r\n<div class=\"container\">\r\n    <div class=\"box box-danger\">\r\n        <div class=\"box-header\">\r\n            <h3 class=\"box-title\">تنظیمات جدید</h3>\r\n        </div>\r\n        ");
             EndContext();
             BeginContext(719, 1664, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "41fa89077b8e440ea5e957f31fc63f86", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8738ae8c362944debf0912470c191944", async() => {
                 BeginContext(749, 54, true);
                 WriteLiteral("\r\n            <div class=\"box-body\">\r\n                ");
                 EndContext();
                 BeginContext(803, 70, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9cdef135448848e8bc73def376a0bf55", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("div", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "35035bf2dd714395a56d8a09496c31f0", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_ValidationSummaryTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.ValidationSummaryTagHelper>();
@@ -147,7 +147,7 @@ WriteAttributeValue("", 961, ViewData["Settingtype"], 961, 24, false);
                 WriteLiteral("                                ");
                 EndContext();
                 BeginContext(1324, 44, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "294f3c8db45d47598221ce47381be928", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b4639957f8884a43b6c390962144f369", async() => {
                     BeginContext(1350, 9, false);
 #line 44 "D:\Projects\AmlakWebApplication\AmlakWebApplication\Views\AmlakSettingManagment\Create.cshtml"
                                                     Write(item.Name);
@@ -199,7 +199,7 @@ WriteAttributeValue("", 961, ViewData["Settingtype"], 961, 24, false);
                 WriteLiteral("                                ");
                 EndContext();
                 BeginContext(1818, 44, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1cbb406adf674ad7be2e1bf00687b985", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "672512a3b30d43468ff1bc9cb40d1fca", async() => {
                     BeginContext(1844, 9, false);
 #line 55 "D:\Projects\AmlakWebApplication\AmlakWebApplication\Views\AmlakSettingManagment\Create.cshtml"
                                                     Write(item.Name);

@@ -5,6 +5,7 @@ using DomainLayer.Magzine;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Text;
 
 namespace DataLayer
@@ -42,6 +43,7 @@ namespace DataLayer
 
         public DbSet<Home> Homes { get; set; }
         public DbSet<HomeGallery> HomeGalleries { get; set; }
+        public DbSet<DomainLayer.Contract.Contract> Contractes { get; set; }
 
         #region home
 

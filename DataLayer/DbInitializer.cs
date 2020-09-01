@@ -19,7 +19,6 @@ namespace DataLayer
                 // DB has been seeded
             }
 
-
             var users = new Admin[]
            {
             new Admin{Name="tarh o tasvir",Family="",Username="tarhotasvir",Password="o6d2N9TJbZw/jk4nityejFom+VuWVXAwKCIaMh2qSXEiSlbZqbIDTw==",Active=true,AdminType=DomainLayer.Enums.AdminType.GoldenAdmin}

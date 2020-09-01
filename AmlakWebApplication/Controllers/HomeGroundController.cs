@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataLayer.Infrastracture;
 using DomainLayer;
+using DomainLayer.Enums;
 using DomainLayer.Home;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,16 +23,18 @@ namespace AmlakWebApplication.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ZaminRepository.GetAllAsync());
+            return View(await _context.ZaminRepository.GetManyAsyncWithInclude("Home"));
         }
 
-        public async Task<IActionResult> Create(int homeid)
+        public async Task<IActionResult> Create(int homeid, int hometype, int contracttype)
         {
             var Ground = new ZaminFacility();
-            Ground.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetAllAsync();
-            Ground.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetAllAsync();
-            Ground.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetAllAsync();
-            Ground.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetAllAsync();
+            var typehomeid = (TypeHome)hometype;
+            var contracttypeid = (MelkType)contracttype;
+            Ground.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetManyAsync(a => a.TypeHome == typehomeid && a.MelkType == contracttypeid);
+            Ground.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.TypeHome == typehomeid && a.MelkType == contracttypeid);
+            Ground.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.TypeHome == typehomeid && a.MelkType == contracttypeid);
+            Ground.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.TypeHome == typehomeid && a.MelkType == contracttypeid);
             ViewData["Id"] = homeid;
             return View(Ground);
         }

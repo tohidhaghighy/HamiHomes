@@ -25,8 +25,12 @@ namespace DomainLayer
 
         [MaxLength(1000, ErrorMessage = "باید کمتر از 1000 کلمه باشد")]
         public string Description { get; set; }
+        public string BuyTakhasos { get; set; }
+        public string RentTakhasos { get; set; }
 
         public Boolean Active { get; set; }
         public Boolean CanAdd { get; set; }
+
+        public virtual ICollection<Contract.Contract> Contracts { get; set; }
     }
 }

@@ -1,0 +1,58 @@
+﻿@model List<DomainLayer.Contract.Contract>
+@{
+    if (Model.Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+    <tr>
+        <td class="text-center" style="padding:10px;">
+            @{ string s = "";
+                if (item.TypContract == DomainLayer.Enums.TypeHome.Buy)
+                {
+                    s = "خرید و فروش";
+                }
+                else if (item.TypContract == DomainLayer.Enums.TypeHome.Rent)
+                {
+                    s = "رهن و اجاره";
+                }
+                else if (item.TypContract == DomainLayer.Enums.TypeHome.build)
+                {
+                    s = "ساخت و ساز";
+                }
+                else if (item.TypContract == DomainLayer.Enums.TypeHome.builded)
+                {
+                    s = "ساخته شده";
+                }
+                else if (item.TypContract == DomainLayer.Enums.TypeHome.Rented)
+                {
+                    s = "اجاره داده شده";
+                }
+                else if (item.TypContract == DomainLayer.Enums.TypeHome.Selled)
+                {
+                    s = "فروخته شده";
+                }
+            }
+            @s
+        </td>
+        <td class="text-center" style="padding:10px;">
+            @item.SellCOst
+        </td>
+        <td class="text-center" style="padding:10px;">
+            @item.RentCOst - @item.Vadie
+        </td>
+        <td class="text-center" style="padding:10px;">
+            @item.Metraz
+        </td>
+        <td class="text-center" style="padding:10px;">
+            @item.Adviser.Name  @item.Adviser.Family
+        </td>
+        <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="ویرایش"><a class="btn btn-primary btn-xs" href="/ContractManagment/Update?contractid=@item.Id&homeid=@item.HomeId">ویرایش</a></p></td>
+        <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="حذف"><a class="btn btn-danger btn-xs" onclick="deleteitem(@item.Id)"><i class="ion ion-ios-trash"></i></a></p></td>
+    </tr>
+        }
+
+    }
+
+}
+
+

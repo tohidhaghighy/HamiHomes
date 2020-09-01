@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataLayer.Infrastracture;
 using DomainLayer;
+using DomainLayer.Enums;
 using DomainLayer.Home;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,20 +23,22 @@ namespace AmlakWebApplication.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.MaghazeRepository.GetAllAsync());
+            return View(await _context.MaghazeRepository.GetManyAsyncWithInclude("Home"));
         }
 
-        public async Task<IActionResult> Create(int homeid)
+        public async Task<IActionResult> Create(int homeid, int hometype, int contracttype)
         {
             var maghaze = new MaghazeFacility();
-            maghaze.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetAllAsync();
-            maghaze.AmlakDivars = await _context.AmlakDivarRepository.GetAllAsync();
-            maghaze.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetAllAsync();
-            maghaze.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetAllAsync();
-            maghaze.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetAllAsync();
-            maghaze.AmlakParking = await _context.AmlakParkingRepository.GetAllAsync();
-            maghaze.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetAllAsync();
-            maghaze.AmlakWC = await _context.AmlakWcRepository.GetAllAsync();
+            var typehomeid = (MelkType)hometype;
+            var contracttypeid = (TypeHome)contracttype;
+            maghaze.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            maghaze.AmlakDivars = await _context.AmlakDivarRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            maghaze.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            maghaze.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            maghaze.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            maghaze.AmlakParking = await _context.AmlakParkingRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            maghaze.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            maghaze.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
             ViewData["Id"] = homeid;
             return View(maghaze);
         }

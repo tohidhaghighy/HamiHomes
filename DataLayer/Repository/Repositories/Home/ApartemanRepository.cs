@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DataLayer.Repository.Repositories.Home
 {
@@ -15,5 +16,6 @@ namespace DataLayer.Repository.Repositories.Home
             this.db = (this.db ?? (AmlakDbContext)db);
         }
 
+        
     }
 }

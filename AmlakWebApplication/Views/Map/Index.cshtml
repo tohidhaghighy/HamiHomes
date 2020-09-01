@@ -1,4 +1,4 @@
-﻿
+﻿@model List<DomainLayer.Home.Home>
 
 
 <link href="~/js/leaflet/leaflet.css" rel="stylesheet" />
@@ -10,7 +10,7 @@
 
 
 <script>
-    var map = L.map('map').setView([37.553278571293816, 45.07666215851912], 13);
+   var map = L.map('map').setView([37.553278571293816, 45.07666215851912], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -22,20 +22,40 @@
         }
     });
 
-    var greenIcon = new LeafIcon({ iconUrl: '/js/leaflet/icon.png' });
-
+    var greenIcon = new LeafIcon({ iconUrl: '/img/green.png' });
+    var redIcon = new LeafIcon({ iconUrl: '/img/house.png' });
 
     var marker;
-    map.on("click", function (e) {
-        if (marker) {
-            map.removeLayer(marker);
-        }
+     @foreach (var item in Model)
+     {
+         if (item.IsShow)
+         {
+              <text>
+               marker = new L.Marker([@item.Gpsx, @item.Gpsy], { icon: redIcon });
+               marker.addTo(map).on('click', function (e) {
+                   map.setView([@item.Gpsx,@item.Gpsy], 14);
+                   showdetail(@item.Id);
+                   map.tileLayer("@item.Address");
+               });
+            </text>
+         }
+         else
+         {
+              <text>
+               marker = new L.Marker([@item.Gpsx, @item.Gpsy], { icon: greenIcon });
+               marker.addTo(map).on('click', function (e) {
+                   map.setView([@item.Gpsx,@item.Gpsy], 14);
+                   showdetail(@item.Id);
+                   map.tileLayer("@item.Address");
+               });
+            </text>
+         }
 
-        marker = new L.Marker(e.latlng, { icon: greenIcon });
-        $('#gpsx').val(e.latlng.lat);
-        $('#gpsy').val(e.latlng.lng);
-        marker.addTo(map);
-    });
+     }
+
+    function showdetail(id) {
+        window.open("/HomeManagment/Update?id=" + id, '_blank');
+    }
 </script>
 
 @section Scripts {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataLayer.Infrastracture;
 using DomainLayer;
+using DomainLayer.Enums;
 using DomainLayer.Home;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,29 +23,31 @@ namespace AmlakWebApplication.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.HomeApartemanRepository.GetAllAsync());
+            return View(await _context.HomeApartemanRepository.GetManyAsyncWithInclude("Home"));
         }
 
-        public async Task<IActionResult> Create(int homeid)
+        public async Task<IActionResult> Create(int homeid, int hometype, int contracttype)
         {
             var aparteman = new ApartemanFacility();
-            aparteman.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetAllAsync();
-            aparteman.AmlakDivars = await _context.AmlakDivarRepository.GetAllAsync();
-            aparteman.AmlakEskeletones = await _context.AmlakSkeletonRepository.GetAllAsync();
-            aparteman.AmlakJahatVahedes = await _context.AmlakJahatvahedRepository.GetAllAsync();
-            aparteman.AmlakKafes = await _context.AmlakKafRepository.GetAllAsync();
-            aparteman.AmlakKitchenes = await _context.AmlakKitchenRepository.GetAllAsync();
-            aparteman.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetAllAsync();
-            aparteman.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetAllAsync();
-            aparteman.AmlakMoshaat = await _context.AmlakMoshaatRepository.GetAllAsync();
-            aparteman.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetAllAsync();
-            aparteman.AmlakNema = await _context.AmlakNemaRepository.GetAllAsync();
-            aparteman.AmlakParking = await _context.AmlakParkingRepository.GetAllAsync();
-            aparteman.AmlakPishraftStatus = await _context.AmlakPishraftStatusRepository.GetAllAsync();
-            aparteman.AmlakSaghf = await _context.AmlakSaghfRepository.GetAllAsync();
-            aparteman.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetAllAsync();
-            aparteman.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetAllAsync();
-            aparteman.AmlakWC = await _context.AmlakWcRepository.GetAllAsync();
+            var contracttypeid = (TypeHome)hometype;
+            var typehomeid = (MelkType)contracttype;
+            aparteman.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            aparteman.AmlakDivars = await _context.AmlakDivarRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            aparteman.AmlakEskeletones = await _context.AmlakSkeletonRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            aparteman.AmlakJahatVahedes = await _context.AmlakJahatvahedRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            aparteman.AmlakKafes = await _context.AmlakKafRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            aparteman.AmlakKitchenes = await _context.AmlakKitchenRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            aparteman.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            aparteman.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            aparteman.AmlakMoshaat = await _context.AmlakMoshaatRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            aparteman.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            aparteman.AmlakNema = await _context.AmlakNemaRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            aparteman.AmlakParking = await _context.AmlakParkingRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            aparteman.AmlakPishraftStatus = await _context.AmlakPishraftStatusRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            aparteman.AmlakSaghf = await _context.AmlakSaghfRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            aparteman.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            aparteman.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            aparteman.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
             ViewData["Id"] = homeid;
             return View(aparteman);
         }

@@ -26,26 +26,26 @@
                     <div class="col-4">
                         <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                             <label style="margin-left:10px;width:100px;"> اتاق خواب</label>
-                            <input type="number" class="form-control" value="1" placeholder=" اتاق خواب" style="width:50px;" />
+                            <input type="number" min="0" class="form-control" value="1" placeholder=" اتاق خواب" style="width:50px;" id="bed"/>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                             <label style="margin-left:10px;width:100px;"> پارکینگ</label>
-                            <input type="number" class="form-control" value="1" placeholder=" پارکینگ" style="width:50px;" />
+                            <input type="number" min="0" class="form-control" value="1" placeholder=" پارکینگ" style="width:50px;" id="parking"/>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                             <label style="margin-left:10px;width:100px;font-size:14px;"> سرویس بهداشتی</label>
-                            <input type="number" class="form-control" value="1" placeholder=" سرویس بهداشتی" style="width:50px;" />
+                            <input type="number" min="0" class="form-control" value="1" placeholder=" سرویس بهداشتی" style="width:50px;" id="wc"/>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-inline" style="padding-top:10px;margin-right:2px;">
-                        <label style="margin-left:10px;width:100px;"> سرویس بهداشتی</label>
-                        <select class="selectpicker" multiple data-live-search="true">
+                        <label style="margin-left:10px;width:100px;font-size:14px;"> سرویس بهداشتی</label>
+                        <select class="selectpicker" multiple data-live-search="true" id="wclist">
                             @foreach (var item in Model.AmlakWC)
                             {
                                 <option value="@item.Id">@item.Name</option>
@@ -70,7 +70,7 @@
                 <div class="">
                     <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                         <label style="margin-left:10px;width:150px;">حداکثر عمر بنا</label>
-                        <input type="number" class="form-control" value="1" placeholder="عمر بنا" style="width:100px;" />
+                        <input type="number" min="0" class="form-control" value="1" placeholder="عمر بنا" style="width:100px;" id="bana"/>
                     </div>
                 </div>
 
@@ -88,7 +88,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" data-live-search="true">
+                <select class="selectpicker" data-live-search="true" id="moghiat">
                     @foreach (var item in Model.AmlakMogheiatMelk)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -109,7 +109,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" data-live-search="true">
+                <select class="selectpicker" data-live-search="true" id="sanad">
                     @foreach (var item in Model.AmlakSanadStatus)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -128,7 +128,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" data-live-search="true">
+                <select class="selectpicker" data-live-search="true" id="vaziat" multiple>
                     @foreach (var item in Model.AmlakMelkStatus)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -147,7 +147,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" multiple data-live-search="true">
+                <select class="selectpicker" multiple data-live-search="true" id="tasisat">
                     @foreach (var item in Model.AmlakTasisatGarmaieshi)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -166,7 +166,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" multiple data-live-search="true" style="width:100%;">
+                <select class="selectpicker" multiple data-live-search="true" style="width:100%;" id="facility">
                     @foreach (var item in Model.HomeFacility)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -177,10 +177,27 @@
     </div>
     <hr>
 
-    <a class="btn btn-success btn-block" style="color:white;">جستجو املاک</a>
+    <a class="btn btn-success btn-block" style="color:white;margin-bottom:100px;" onclick="searchitemedari()">جستجو املاک</a>
 </div>
 
 
 <script>
     $('.selectpicker').selectpicker();
+
+    function searchitemedari() {
+        var wclist = $("#wclist").val();
+        var moghiate = $("#moghiat").val(); 
+        var vaziat = $("#vaziat").val();
+        var tasisat = $("#tasisat").val();
+        var sanad = $("#sanad").val();
+        var bed = document.getElementById("bed").value;
+        var parking = document.getElementById("parking").value;
+        var wc = document.getElementById("wc").value;
+        var bana=document.getElementById("bana").value;
+        var rentbuy = document.getElementById("rentbuytextbox").value;
+        $("#searchboxtoggle").empty();
+        $('#searchboxtoggle').load('/Search/SearchEdariPartial?hometype=' + hometype + '&minmetr=' + minmetr + '&maxmetr=' + maxmetr + '&mincost=' + mincost + '&maxcost=' + maxcost + '&bed=' + bed + '&parking=' + parking + '&rentbuy=' + rentbuy + '&wc=' + wc + '&bana=' + bana + '&vaziat=' + vaziat + '&tasisat=' + tasisat + '&moghiat=' + moghiate + '&wclist=' + wclist + '&sanad=' + sanad );
+        $("#searchboxtoggle").show();
+    }
+
 </script>

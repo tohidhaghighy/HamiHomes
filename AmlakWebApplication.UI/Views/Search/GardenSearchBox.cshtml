@@ -17,14 +17,14 @@
         <div class="row">
             <div class="col-3">
                 <div class="" style="padding-right:30px;padding-top:10px;">
-                    <p style="font-weight:bold;font-size:16px;width:100px;">عرض انبار </p>
+                    <p style="font-weight:bold;font-size:16px;width:100px;">عرض ملک </p>
                 </div>
             </div>
             <div class="col-9">
                 <div class="">
                     <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                         <label style="margin-left:10px;width:100px;">عرض ملک</label>
-                        <input type="number" class="form-control" value="1" placeholder="عرض ملک" style="width:100px;" />
+                        <input type="number" min="0" class="form-control" value="1" placeholder="عرض ملک" style="width:100px;" id="arzemelk"/>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" data-live-search="true">
+                <select class="selectpicker" data-live-search="true" id="moghiat">
                     @foreach (var item in Model.AmlakMogheiatMelk)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" data-live-search="true">
+                <select class="selectpicker" data-live-search="true" id="sanad">
                     @foreach (var item in Model.AmlakSanadStatus)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" data-live-search="true">
+                <select class="selectpicker" data-live-search="true" id="vaziat">
                     @foreach (var item in Model.AmlakMelkStatus)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -94,10 +94,21 @@
     </div>
     <hr>
 
-    <a class="btn btn-success btn-block" style="color:white;">جستجو املاک</a>
+    <a class="btn btn-success btn-block" style="color:white;margin-bottom:100px;" onclick="searchitemgarden()">جستجو املاک</a>
 </div>
 
 
 <script>
     $('.selectpicker').selectpicker();
+
+    function searchitemgarden() {
+        var moghiate = $("#moghiat").val(); 
+        var vaziat = $("#vaziat").val();
+        var sanad = $("#sanad").val();
+        var arzemelk = document.getElementById("arzemelk").value;
+        var rentbuy = document.getElementById("rentbuytextbox").value;
+        $("#searchboxtoggle").empty();
+        $('#searchboxtoggle').load('/Search/SearchGardenPartial?hometype=' + hometype + '&minmetr=' + minmetr + '&maxmetr=' + maxmetr + '&mincost=' + mincost + '&maxcost=' + maxcost + '&arzemelk=' + arzemelk + '&rentbuy=' + rentbuy + '&vaziat=' + vaziat + '&moghiat=' + moghiate + '&sanad=' + sanad );
+        $("#searchboxtoggle").show();
+    }
 </script>

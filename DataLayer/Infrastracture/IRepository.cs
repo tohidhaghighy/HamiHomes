@@ -14,6 +14,7 @@ namespace DataLayer.Infrastracture
         void Delete(TEntity entity);
         void Delete(Expression<Func<TEntity, bool>> where);
         TEntity GetById(object Id);
+        IEnumerable<TEntity> GetByIdwithinclude(string children);
         IEnumerable<TEntity> GetAll();
         TEntity Get(Expression<Func<TEntity, bool>> where);
         
@@ -24,5 +25,6 @@ namespace DataLayer.Infrastracture
         Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> where);
         Task<TEntity> GetFirstAsync();
         Task<List<TEntity>> GetManyAsync(Expression<Func<TEntity, bool>> where);
+        Task<int> GetCount();
     }
 }

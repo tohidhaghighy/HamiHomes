@@ -30,33 +30,50 @@
             <div class="box-body">
                 <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
 
-                <div class="form-group">
-                    <label>نام</label>
-                    <input asp-for="Name" type="text" class="form-control" placeholder="نام">
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label>نام خانوادگی</label>
-                    <input asp-for="Family" type="text" class="form-control" placeholder="نام خانوادگی">
-                    <span asp-validation-for="Family" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label>موبایل</label>
-                    <input asp-for="Mobile" type="text" class="form-control" placeholder="موبایل">
-                    <span asp-validation-for="Mobile" class="text-danger"></span>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>نام</label>
+                            <input asp-for="Name" type="text" class="form-control" placeholder="نام">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>نام خانوادگی</label>
+                            <input asp-for="Family" type="text" class="form-control" placeholder="نام خانوادگی">
+                            <span asp-validation-for="Family" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>موبایل</label>
+                            <input asp-for="Mobile" type="number" class="form-control" placeholder="موبایل">
+                            <span asp-validation-for="Mobile" class="text-danger"></span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label>چند سال سابقه</label>
-                    <input asp-for="ExperienceYear" type="number" class="form-control" placeholder="چند سال سابقه">
-                    <span asp-validation-for="ExperienceYear" class="text-danger"></span>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>چند سال سابقه</label>
+                            <input asp-for="ExperienceYear" type="number" class="form-control" placeholder="چند سال سابقه">
+                            <span asp-validation-for="ExperienceYear" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>ایمیل</label>
+                            <input asp-for="Email" type="email" class="form-control" placeholder="ایمیل">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label>ایمیل</label>
-                    <input asp-for="Email" type="email" class="form-control" placeholder="ایمیل" >
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
 
                 <div class="form-group">
                     <label>توضیحات</label>
@@ -65,16 +82,35 @@
                 </div>
 
                 <div class="form-group">
-                    <label>نام کاربری </label>
-                    <input asp-for="Username" type="text" class="form-control" placeholder="نام کاربری">
-                    <span asp-validation-for="Username" class="text-danger"></span>
+                    <label>تخصص در فروش</label>
+                    <textarea asp-for="BuyTakhasos" type="text" class="form-control" rows="2" placeholder="تخصص در فروش"></textarea>
+                    <span asp-validation-for="BuyTakhasos" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <label>پسورد</label>
-                    <input asp-for="Password" type="password" class="form-control" placeholder="پسورد">
-                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <label>تخصص در اجاره</label>
+                    <textarea asp-for="RentTakhasos" type="text" class="form-control" rows="2" placeholder="تخصص در اجاره"></textarea>
+                    <span asp-validation-for="RentTakhasos" class="text-danger"></span>
                 </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>نام کاربری </label>
+                            <input asp-for="Username" type="text" class="form-control" placeholder="نام کاربری">
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>پسورد</label>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="پسورد">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+
 
                 <div class="form-group">
                     <label>عکس کارشناس</label>

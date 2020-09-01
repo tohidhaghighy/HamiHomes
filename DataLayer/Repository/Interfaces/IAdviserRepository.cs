@@ -9,7 +9,7 @@ namespace DataLayer.Repository.Interfaces
 {
     public interface IAdviserRepository : IRepository<Adviser>
     {
-        Task<bool> Login(string username, string password);
+        Task<Adviser> Login(string username, string password);
         Task<bool> ChangeCheck(int id);
     }
 }

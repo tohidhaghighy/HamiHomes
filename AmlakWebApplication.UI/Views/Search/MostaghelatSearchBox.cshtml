@@ -25,27 +25,27 @@
                     <div class="col-4">
                         <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                             <label style="margin-left:10px;width:100px;"> اتاق خواب</label>
-                            <input type="number" class="form-control" value="1" placeholder=" اتاق خواب" style="width:50px;" />
+                            <input type="number" min="0" class="form-control" value="1" placeholder=" اتاق خواب" style="width:50px;" id="bed"/>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                             <label style="margin-left:10px;width:100px;"> پارکینگ</label>
-                            <input type="number" class="form-control" value="1" placeholder=" پارکینگ" style="width:50px;" />
+                            <input type="number" min="0" class="form-control" value="1" placeholder=" پارکینگ" style="width:50px;" id="parking"/>
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                             <label style="margin-left:10px;width:100px;font-size:14px;"> سرویس بهداشتی</label>
-                            <input type="number" class="form-control" value="1" placeholder=" سرویس بهداشتی" style="width:50px;" />
+                            <input type="number" min="0" class="form-control" value="1" placeholder=" سرویس بهداشتی" style="width:50px;" id="wc"/>
                         </div>
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="form-inline" style="padding-top:10px;margin-right:2px;">
-                        <label style="margin-left:10px;width:100px;"> سرویس بهداشتی</label>
-                        <select class="selectpicker" multiple data-live-search="true">
+                        <label style="margin-left:10px;width:100px;font-size:14px;"> سرویس بهداشتی</label>
+                        <select class="selectpicker" multiple data-live-search="true" id="wclist">
                             @foreach (var item in Model.AmlakWC)
                             {
                                 <option value="@item.Id">@item.Name</option>
@@ -71,13 +71,13 @@
                     <div class="col-6">
                         <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                             <label style="margin-left:10px;width:150px;"> عمر بنا</label>
-                            <input type="number" class="form-control" value="1" placeholder="عمر بنا" style="width:100px;" />
+                            <input type="number" min="0" class="form-control" value="1" placeholder="عمر بنا" style="width:100px;" id="bana"/>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                             <label style="margin-left:10px;width:150px;">متراژ کف مغازه</label>
-                            <input type="number" class="form-control" value="1" placeholder="متراژ کف مغازه" style="width:100px;" />
+                            <input type="number" min="0" class="form-control" value="1" placeholder="متراژ کف مغازه" style="width:100px;" id="metrazhkaf"/>
                         </div>
                     </div>
 
@@ -87,13 +87,13 @@
                     <div class="col-6">
                         <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                             <label style="margin-left:10px;width:150px;">دهنه مغازه</label>
-                            <input type="number" class="form-control" value="1" placeholder="دهنه مغازه" style="width:100px;" />
+                            <input type="number" min="0" class="form-control" value="1" placeholder="دهنه مغازه" style="width:100px;" id="metrazhdahane"/>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                             <label style="margin-left:10px;width:150px;">عرض ملک</label>
-                            <input type="number" class="form-control" value="1" placeholder="عرض ملک" style="width:100px;" />
+                            <input type="number" min="0" class="form-control" value="1" placeholder="عرض ملک" style="width:100px;" id="arzemelk"/>
                         </div>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" data-live-search="true">
+                <select class="selectpicker" data-live-search="true" id="moghiat">
                     @foreach (var item in Model.AmlakMogheiatMelk)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -131,7 +131,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" data-live-search="true">
+                <select class="selectpicker" multiple data-live-search="true" id="nozamin">
                     @foreach (var item in Model.AmlakNoeZamin)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -150,7 +150,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" multiple data-live-search="true">
+                <select class="selectpicker" multiple data-live-search="true" id="moshakhase">
                     @foreach (var item in Model.AmlakMoshakhase)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -169,7 +169,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" data-live-search="true">
+                <select class="selectpicker" data-live-search="true" id="sanad">
                     @foreach (var item in Model.AmlakSanadStatus)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -188,7 +188,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" data-live-search="true">
+                <select class="selectpicker" multiple data-live-search="true" id="vizhe">
                     @foreach (var item in Model.AmlakMelkStatus)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -207,7 +207,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" multiple data-live-search="true">
+                <select class="selectpicker" multiple data-live-search="true" id="tasisat">
                     @foreach (var item in Model.AmlakTasisatGarmaieshi)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -226,7 +226,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" multiple data-live-search="true">
+                <select class="selectpicker" multiple data-live-search="true" id="kitchen">
                     @foreach (var item in Model.AmlakKitchen)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -245,7 +245,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" multiple data-live-search="true" style="width:100%;">
+                <select class="selectpicker" multiple data-live-search="true" style="width:100%;" id="facility">
                     @foreach (var item in Model.HomeFacility)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -256,10 +256,32 @@
     </div>
     <hr>
 
-    <a class="btn btn-success btn-block" style="color:white;">جستجو املاک</a>
+    <a class="btn btn-success btn-block" style="color:white;margin-bottom:100px;" onclick="searchitemmostaghelat()">جستجو املاک</a>
 </div>
 
 
 <script>
     $('.selectpicker').selectpicker();
+
+    function searchitemmostaghelat() {
+        var wclist = $("#wclist").val();
+        var moghiate = $("#moghiat").val(); 
+        var kitchen = $("#kitchen").val();
+        var tasisat = $("#tasisat").val();
+        var nozamin = $("#nozamin").val();
+        var sanad = $("#sanad").val(); 
+        var vizhe = $("#vizhe").val();
+        var moshakhase = $("#moshakhase").val(); 
+        var bed = document.getElementById("bed").value;
+        var parking = document.getElementById("parking").value;
+        var wc = document.getElementById("wc").value;
+        var bana = document.getElementById("bana").value; 
+        var metrazhkaf = document.getElementById("metrazhkaf").value; 
+        var metrazhdahane = document.getElementById("metrazhdahane").value;
+        var arzemelk=document.getElementById("arzemelk").value;
+        var rentbuy = document.getElementById("rentbuytextbox").value;
+        $("#searchboxtoggle").empty();
+        $('#searchboxtoggle').load('/Search/SearchMostaghelatPartial?hometype=' + hometype + '&minmetr=' + minmetr + '&maxmetr=' + maxmetr + '&mincost=' + mincost + '&maxcost=' + maxcost + '&bed=' + bed + '&parking=' + parking + '&rentbuy=' + rentbuy + '&wc=' + wc + '&bana=' + bana + '&metrazhkaf=' + metrazhkaf + '&metrazhdahane=' + metrazhdahane + '&arzemelk=' + arzemelk+ '&kitchen=' + kitchen + '&tasisat=' + tasisat + '&moghiat=' + moghiate + '&wclist=' + wclist + '&nozamin=' + nozamin + '&sanad=' + sanad + '&moshakhase=' + moshakhase + '&vizhe=' + vizhe);
+        $("#searchboxtoggle").show();
+    }
 </script>

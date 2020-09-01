@@ -5,25 +5,44 @@
     {
         foreach (var item in Model)
         {
-            <tr >
-                <td class="text-center" style="padding:10px;" onclick="updateitem(@item.HomeId)">>
-                    @item.MetrazhBena
-                </td>
-                <td class="text-center" style="padding:10px;" onclick="updateitem(@item.HomeId)">>
-                    @item.Metrazhzamin
-                </td>
-                <td class="text-center" style="padding:10px;" onclick="updateitem(@item.HomeId)">>
-                    @item.Tedadkoltabaghat
-                </td>
-                
-                <td class="text-center" style="padding:10px;" onclick="updateitem(@item.HomeId)">>
-                    @item.NegahbaniName
-                </td>
-                <td class="text-center" style="padding:10px;" onclick="updateitem(@item.HomeId)">>
-                    @item.NegahbaniPhone
-                </td>
-                <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="حذف"><a class="btn btn-danger btn-xs" onclick="deleteitem(@item.Id)"><i class="ion ion-ios-trash"></i></a></p></td>
-            </tr>
+    <tr>
+        <td class="text-center" style="padding:10px;">
+            @{
+                if (item.Home.IsShow)
+                {
+                    <input type="checkbox" checked="checked" onchange="Changecheck(@item.HomeId)" />
+                }
+                else
+                {
+                    <input type="checkbox" onchange="Changecheck(@item.HomeId)" />
+                }
+            }
+
+
+        </td>
+        <td class="text-center" style="padding:10px;" onclick="updateitem(@item.HomeId)">
+            >
+            @item.MetrazhBena
+        </td>
+        <td class="text-center" style="padding:10px;" onclick="updateitem(@item.HomeId)">
+            >
+            @item.Metrazhzamin
+        </td>
+        <td class="text-center" style="padding:10px;" onclick="updateitem(@item.HomeId)">
+            >
+            @item.Tedadkoltabaghat
+        </td>
+
+        <td class="text-center" style="padding:10px;" onclick="updateitem(@item.HomeId)">
+            >
+            @item.NegahbaniName
+        </td>
+        <td class="text-center" style="padding:10px;" onclick="updateitem(@item.HomeId)">
+            >
+            @item.NegahbaniPhone
+        </td>
+        <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="حذف"><a class="btn btn-danger btn-xs" onclick="deleteitem(@item.Id)"><i class="ion ion-ios-trash"></i></a></p></td>
+    </tr>
         }
 
     }

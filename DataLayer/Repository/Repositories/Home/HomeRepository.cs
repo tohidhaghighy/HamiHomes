@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DataLayer.Repository.Repositories.Home
 {
@@ -15,5 +16,24 @@ namespace DataLayer.Repository.Repositories.Home
             this.db = (this.db ?? (AmlakDbContext)db);
         }
 
+        public async Task<bool> ChangeCheck(int id)
+        {
+            var finduser = GetById(id);
+            if (finduser != null)
+            {
+                if (finduser.IsShow)
+                {
+                    finduser.IsShow = false;
+                }
+                else
+                {
+                    finduser.IsShow = true;
+                }
+                Update(finduser);
+                
+                return true;
+            }
+            return false;
+        }
     }
 }

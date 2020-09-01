@@ -33,7 +33,37 @@
 
 </div>
 
+<div class="row">
+    <div class="container">
+        <div class="col-lg-2 col-xs-4">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+                <div class="inner">
+                    <h3>@Model.Where(a => a.Home.IsShow == true).Count()<sup style="font-size: 20px"></sup></h3>
 
+                    <p>تایید شده ها</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-2 col-xs-4">
+            <!-- small box -->
+            <div class="small-box bg-primary">
+                <div class="inner">
+                    <h3>@Model.Where(a => a.Home.IsShow == false).Count()<sup style="font-size: 20px"></sup></h3>
+
+                    <p>تعداد جدید ها</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <p style="margin-right:50px;">
     <a href="/HomeVilaManagment/Create" class="btn btn-default">افزودن خانه حیاط دار جدید</a>
@@ -45,6 +75,7 @@
             <table id="mytable" class="table table-bordered table-hover" style="background-color:white;">
                 <thead>
                     <tr>
+                        <th class="text-center">تایید شده ؟</th>
                         <th class="text-center">متراژ بنا</th>
                         <th class="text-center">متراژ زمین</th>
                         <th class="text-center">تعداد کل طبقات  </th>
@@ -106,5 +137,17 @@
 
     function map(url) {
         window.location.href = url;
-        }
+    }
+
+
+    function Changecheck(id) {
+         $.ajax({
+            type: "Post",
+            url: '/HomeManagment/CheckChange',
+            data: { id: id },
+            success: function (data) {
+                window.location.reload();
+            }
+        });
+    }
 </script>

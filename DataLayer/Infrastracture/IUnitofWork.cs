@@ -1,5 +1,6 @@
 ﻿using DataLayer.Repository.Interfaces;
 using DataLayer.Repository.Interfaces.AmlakSetting;
+using DataLayer.Repository.Interfaces.Contract;
 using DataLayer.Repository.Interfaces.Home;
 using DataLayer.Repository.Interfaces.Location;
 using DataLayer.Repository.Interfaces.Magazin;
@@ -29,6 +30,7 @@ namespace DataLayer.Infrastracture
         IAdviserRepository AdviserRepository { get; }
         IMagazinRepository MagazinRepository { get; }
         IMagazinGroupRepository MagazinGroupRepository { get; }
+        IContractRepository ContractRepository { get; }
 
         #region Home
         IHomeRepository HomeRepository { get; }

@@ -25,17 +25,9 @@ namespace DomainLayer.Home
         [MaxLength(500, ErrorMessage = "نباید از 500 حرف بیشتر باشد")]
         public string Address { get; set; }
 
-        
+        [Required(ErrorMessage = "کد پستی خالی باشد")]
+        public string Postalcode { get; set; }
         public string Title { get; set; }
-
-        [Required(ErrorMessage = "نباید خالی باشد")]
-        public int BuildYear { get; set; }
-
-        [Required(ErrorMessage = "نباید خالی باشد")]
-        public int Bed { get; set; }
-
-        [Required(ErrorMessage = "نباید خالی باشد")]
-        public int Bath { get; set; }
 
         [MaxLength(500, ErrorMessage = "نباید از 500 حرف بیشتر باشد")]
         public string HomeMapImage { get; set; }
@@ -45,6 +37,19 @@ namespace DomainLayer.Home
 
         [MaxLength(1000, ErrorMessage = "نباید از 1000 حرف بیشتر باشد")]
         public string Description { get; set; }
+
+        [Required(ErrorMessage = "نباید خالی باشد")]
+        public int BuildYear { get; set; }
+
+        [Required(ErrorMessage = "نباید خالی باشد")]
+        public int Bed { get; set; }
+
+        [Required(ErrorMessage = "نباید خالی باشد")]
+        public int Bath { get; set; }
+        [Required(ErrorMessage = "نباید خالی باشد")]
+        public int Parking { get; set; }
+        [Required(ErrorMessage = "نباید خالی باشد")]
+        public int Bana { get; set; }
 
         public DateTime Date { get; set; }
 
@@ -75,9 +80,23 @@ namespace DomainLayer.Home
         public Boolean IsPrivate { get; set; }
 
         public int? AdvisorId { get; set; }
+        public int Hometype { get; set; }
+        public int HometypeId { get; set; }
 
 
         public virtual ICollection<HomeGallery> HomeGalleries { get; set; }
 
+        public virtual ICollection<Anbar> Anbar { get; set; }
+        public virtual ICollection<Aparteman> Aparteman { get; set; }
+        public virtual ICollection<Edari> Edari { get; set; }
+        public virtual ICollection<Garden> Garden { get; set; }
+        public virtual ICollection<GardenWithVila> GardenWithVila { get; set; }
+        public virtual ICollection<HomewithGarden> HomewithGarden { get; set; }
+        public virtual ICollection<Kolangi> Kolangi { get; set; }
+        public virtual ICollection<Maghaze> Maghaze { get; set; }
+        public virtual ICollection<Moshtghelat> Moshtghelat { get; set; }
+        public virtual ICollection<Vila> Vila { get; set; }
+        public virtual ICollection<Zamin> Zamin { get; set; }
+        public virtual ICollection<Contract.Contract> Contracts { get; set; }
     }
 }

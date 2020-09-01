@@ -1,4 +1,4 @@
-﻿@model List<DomainLayer.Home.Home>
+﻿@model ViewModelLayer.HomeManagment.MainSearch
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Managment.cshtml";
@@ -55,13 +55,127 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal">
+        <div class="form-horizontal">
             <div class="box-body">
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-1 control-label">نوع ملک</label>
+                    <div class="col-sm-4">
+                        <select class="form-control select2 text-center btn-block" data-placeholder="   محلات را انتخاب کن  "
+                                style="width: 100%;direction:rtl;float:right;" name="mahale" id="mahale">
+
+                            <option value="1">آپارتمان</option>
+                            <option value="2">خانه حیاط دار </option>
+                            <option value="3">زمین</option>
+                            <option value="4">کلنگی</option>
+                            <option value="5">اداری</option>
+                            <option value="6">مغازه </option>
+                            <option value="7">مستقلات</option>
+                            <option value="8">انبار</option>
+                            <option value="9">باغ</option>
+                            <option value="10">ویلا</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-1 control-label">محله</label>
+                    <div class="col-sm-4">
+                        <select class="form-control select2 text-center btn-block" multiple="multiple" data-placeholder="   محلات را انتخاب کن  "
+                                style="width: 100%;direction:rtl;float:right;" name="mahale" id="mahale">
+                            @foreach (var item in Model.Mahalles)
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-1 control-label">نوع قرارداد</label>
+                    <div class="col-sm-4">
+                        <select class="form-control select2 text-center btn-block" data-placeholder="   نوع قرارداد را انتخاب کن  "
+                                style="width: 100%;direction:rtl;float:right;" name="mahale" id="mahale">
+                            <option value="1">خرید و فروش</option>
+                            <option value="2">رهن و اجاره </option>
+                            <option value="3">ساخت و ساز</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-1 control-label">حداقل قیمت</label>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <select class="form-control select2 text-center btn-block" data-placeholder="   حداقل قیمت  "
+                                        style="width: 100%;direction:rtl;float:right;" name="mahale" id="mahale">
+                                    @foreach (var item in Model.CostSetting)
+                                    {
+                                        <option value="@item.CostChance">@item.Cost</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <label for="inputEmail3" class="col-sm-1 control-label">حداکثر قیمت</label>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <select class="form-control select2 text-center btn-block" data-placeholder="   حداکثر قیمت  "
+                                        style="width: 100%;direction:rtl;float:right;" name="mahale" id="mahale">
+                                    @foreach (var item in Model.CostSetting)
+                                    {
+                                        <option value="@item.CostChance">@item.Cost</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-1 control-label">حداقل متراژ</label>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <select class="form-control select2 text-center btn-block" data-placeholder="   حداقل متراژ را انتخاب کن  "
+                                        style="width: 100%;direction:rtl;float:right;" name="mahale" id="mahale">
+                                    @foreach (var item in Model.MetrazSetting)
+                                    {
+                                        <option value="@item.MetrazChance">@item.Metraz</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <label for="inputEmail3" class="col-sm-1 control-label">حداکثر متراژ</label>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <select class="form-control select2 text-center btn-block" data-placeholder="   حداکثر متراژ را انتخاب کن  "
+                                        style="width: 100%;direction:rtl;float:right;" name="mahale" id="mahale">
+                                    @foreach (var item in Model.MetrazSetting)
+                                    {
+                                        <option value="@item.MetrazChance">@item.Metraz</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-1 control-label">کد ملک</label>
 
                     <div class="col-sm-2">
-                        <input type="number" class="form-control" id="inputEmail3" placeholder="کد ملک">
+                        <input type="text" class="form-control" id="inputEmail3" placeholder="کد ملک">
                     </div>
                     <label for="inputEmail3" class="col-sm-2 control-label">تعداد اتاق خواب</label>
 
@@ -74,48 +188,20 @@
                         <input type="number" class="form-control" id="inputEmail3" placeholder="تعداد حمام">
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-1 control-label">حداقل قیمت</label>
 
-                    <div class="col-sm-2">
-                        <input type="number" class="form-control" id="inputEmail3" placeholder="حداقل قیمت">
-                    </div>
-                    <label for="inputEmail3" class="col-sm-2 control-label">حداکثر قیمت</label>
-
-                    <div class="col-sm-2">
-                        <input type="number" class="form-control" id="inputEmail3" placeholder="حداکثر قیمت">
-                    </div>
-
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-1 control-label">حداقل متراژ</label>
-
-                    <div class="col-sm-2">
-                        <input type="number" class="form-control" id="inputEmail3" placeholder="حداقل متراژ">
-                    </div>
-                    <label for="inputEmail3" class="col-sm-2 control-label">حداکثر متراژ</label>
-
-                    <div class="col-sm-2">
-                        <input type="number" class="form-control" id="inputEmail3" placeholder="حداکثر متراژ">
-                    </div>
-
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-1 control-label">محله</label>
-                    <div class="col-sm-10">
-                        <select class="form-control select2 text-center btn-block" multiple="multiple" data-placeholder="   محلات را انتخاب کن  "
-                                style="width: 100%;direction:rtl;float:right;" name="homewc" id="homewc">
-                            <option value="سعدی">سعدی</option>
-                        </select>
-                    </div>
-                </div>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-                <button type="submit" class="btn btn-info pull-right">جستجو</button>
+                <a  class="btn btn-info pull-right" onclick="searchitem()">جستجو</a>
             </div>
             <!-- /.box-footer -->
-        </form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="container">
+        <h3 class="text-center">ملک های تایید نشده</h3>
     </div>
 </div>
 
@@ -126,20 +212,20 @@
                 <table id="mytable" class="table table-bordered table-hover" style="background-color:white;">
                     <thead>
                         <tr>
+                            <th class="text-center">تایید شده ؟</th>
                             <th class="text-center">عکس</th>
                             <th class="text-center">زمان انتشار</th>
                             <th class="text-center">عمومی / خصوصی</th>
                             <th class="text-center">ادرس</th>
-                            <th class="text-center">سال ساخت</th>
-                            <th class="text-center">اتاق خواب</th>
-                            <th class="text-center">حمام</th>
+                            <th class="text-center">کد پستی</th>
+                            <th class="text-center">لیست قراردادها</th>
                             <th class="text-center">گالری تصاویر</th>
                             <th class="text-center">نقشه 3 یعدی</th>
                             <th class="text-center">حذف</th>
                         </tr>
                     </thead>
-                    <tbody id="listofarticle">
-                        @await Html.PartialAsync("_ListAjax", Model)
+                    <tbody id="showfilterbox">
+                        @await Html.PartialAsync("_ListAjax", Model.Homes)
                     </tbody>
 
                 </table>
@@ -198,4 +284,19 @@
     function gallery(id) {
         window.location.href = "/HomeGalleryManagment/Index?homeid=" + id;
         }
+
+    function Changecheck(id) {
+         $.ajax({
+            type: "Post",
+            url: '/HomeManagment/CheckChange',
+            data: { id: id },
+            success: function (data) {
+                window.location.reload();
+            }
+        });
+    }
+
+    function searchitem() {
+
+    }
 </script>

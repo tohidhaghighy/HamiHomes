@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataLayer.Infrastracture;
 using DomainLayer;
+using DomainLayer.Enums;
 using DomainLayer.Home;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,13 +23,15 @@ namespace AmlakWebApplication.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.HomeAnbarRepository.GetAllAsync());
+            return View(await _context.HomeAnbarRepository.GetManyAsyncWithInclude("Home"));
         }
 
-        public async Task<IActionResult> Create(int homeid)
+        public async Task<IActionResult> Create(int homeid,int hometype,int contracttype)
         {
             var anbar = new AnbarFacility();
-            anbar.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetAllAsync();
+            var typehomeid = (MelkType)hometype;
+            var contracttypeid = (TypeHome)contracttype;
+            anbar.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetManyAsync(a=>a.TypeHome == contracttypeid && a.MelkType == typehomeid);
             ViewData["Id"] = homeid;
             return View(anbar);
         }
@@ -63,7 +66,7 @@ namespace AmlakWebApplication.Controllers
                     };
                     _context.HomeAnbarRepository.Insert(anbar);
                     await _context.CommitAsync();
-                    return RedirectToAction("Index", "HomeGalleryManagment", new { homeid = facility.Anbar.HomeId });
+                    return RedirectToAction("Index", "HomeGalleryManagment", new { homeid = anbar.HomeId });
                 }
             }
             catch (DbUpdateException ex)
@@ -142,5 +145,6 @@ namespace AmlakWebApplication.Controllers
             return false;
         }
 
+        
     }
 }

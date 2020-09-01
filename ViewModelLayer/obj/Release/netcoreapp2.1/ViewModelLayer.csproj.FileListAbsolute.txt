@@ -26,3 +26,5 @@ D:\Projects\AmlakWebApplication\ViewModelLayer\obj\Release\netcoreapp2.1\ViewMod
 D:\Projects\AmlakWebApplication\ViewModelLayer\obj\Release\netcoreapp2.1\ViewModelLayer.csproj.CopyComplete
 D:\Projects\AmlakWebApplication\ViewModelLayer\obj\Release\netcoreapp2.1\ViewModelLayer.dll
 D:\Projects\AmlakWebApplication\ViewModelLayer\obj\Release\netcoreapp2.1\ViewModelLayer.pdb
+D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Release\netcoreapp2.1\DataLayer.dll
+D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Release\netcoreapp2.1\DataLayer.pdb

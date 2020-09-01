@@ -8,6 +8,7 @@ using AmlakWebApplication.UI.Models;
 using DataLayer.Infrastracture;
 using ViewModelLayer.UI;
 using DomainLayer;
+using ViewModelLayer.Detail;
 
 namespace AmlakWebApplication.UI.Controllers
 {
@@ -42,11 +43,61 @@ namespace AmlakWebApplication.UI.Controllers
             return View();
         }
 
-        public IActionResult Detail()
+        public async Task<IActionResult> Detail(int homeid,int contractid,string hometype)
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
+            var allinfo = new Detailpage();
+            allinfo.home =  _context.HomeRepository.GetById(homeid);
+            var find = _context.ContractRepository.GetByIdwithinclude("Adviser");
+            allinfo.contract = find.FirstOrDefault(a => a.Id == contractid);
+            allinfo.gallery =await _context.HomeGalleryRepository.GetManyAsync(a=>a.HomeId==homeid);
+            if (allinfo.home.Hometype==1)
+            {
+                allinfo.aparteman = _context.HomeApartemanRepository.GetMany(a=>a.HomeId==homeid).FirstOrDefault();
+            }
+            else if (allinfo.home.Hometype == 2)
+            {
+                allinfo.homewithgarden = _context.HomeWithGardenRepository.GetMany(a => a.HomeId == homeid).FirstOrDefault();
+            }
+            else if (allinfo.home.Hometype == 3)
+            {
+                allinfo.zamin = _context.ZaminRepository.GetMany(a => a.HomeId == homeid).FirstOrDefault();
+            }
+            else if (allinfo.home.Hometype == 4)
+            {
+                allinfo.kolangi = _context.HomeKolangiRepository.GetMany(a => a.HomeId == homeid).FirstOrDefault();
+            }
+            else if (allinfo.home.Hometype == 5)
+            {
+                allinfo.edari = _context.HomeEdariRepository.GetMany(a => a.HomeId == homeid).FirstOrDefault();
+            }
+            else if (allinfo.home.Hometype == 6)
+            {
+                allinfo.maghaze = _context.MaghazeRepository.GetMany(a => a.HomeId == homeid).FirstOrDefault();
+            }
+            else if (allinfo.home.Hometype == 7)
+            {
+                allinfo.moshtghelat = _context.MoshtghelatRepository.GetMany(a => a.HomeId == homeid).FirstOrDefault();
+            }
+            else if (allinfo.home.Hometype == 8)
+            {
+                allinfo.anbar = _context.HomeAnbarRepository.GetMany(a => a.HomeId == homeid).FirstOrDefault();
+            }
+            else if (allinfo.home.Hometype == 9)
+            {
+                allinfo.garden = _context.HomeGardenRepository.GetMany(a => a.HomeId == homeid).FirstOrDefault();
+            }
+            else if (allinfo.home.Hometype == 10)
+            {
+                allinfo.vila = _context.VilaRepository.GetMany(a => a.HomeId == homeid).FirstOrDefault();
+            }
+            var findallcontract = await _context.ContractRepository.GetManyAsyncWithInclude("Home");
+            if (findallcontract.Count()>4)
+            {
+                findallcontract = findallcontract.Take(4).ToList();
+            }
+            ViewData["hometype"] = hometype;
+            allinfo.Samehome = findallcontract;
+            return View(allinfo);
         }
 
         public IActionResult Contact()
@@ -95,6 +146,49 @@ namespace AmlakWebApplication.UI.Controllers
                 metraz.rentmaxmetraz += "<a class='btn select-btn dropdown-item' style='font-size:15px;font-family:sahel;' onclick=\"rentmaxmetr(" + item.Id + ",'" + item.Metraz + "');\">" + item.Metraz + "</a><br />";
             }
             return Json(metraz);
+        }
+
+
+        [HttpPost]
+        public async Task<JsonResult> GetMetrazbanapage2()
+        {
+            var metraz = new MetrazList();
+            var findmetr = await _context.MetrazSettingRepository.GetManyAsync(a => a.TypeMetraz == 1);
+            foreach (var item in findmetr)
+            {
+                metraz.buyminmetraz += "<a class='btn select-btn dropdown-item' style='font-size:15px;font-family:sahel;' onclick=\"showminmetraz('" + item.Metraz + "'," + item.Id + ");\">" + item.Metraz + "</a><br />";
+                metraz.buymaxmetraz += "<a class='btn select-btn dropdown-item' style='font-size:15px;font-family:sahel;' onclick=\"showmaxmetraz('" + item.Metraz + "'," + item.Id + ");\">" + item.Metraz + "</a><br />";
+                metraz.rentminmetraz += "<a class='btn select-btn dropdown-item' style='font-size:15px;font-family:sahel;' onclick=\"showminmetraz('" + item.Metraz + "'," + item.Id + ");\">" + item.Metraz + "</a><br />";
+                metraz.rentmaxmetraz += "<a class='btn select-btn dropdown-item' style='font-size:15px;font-family:sahel;' onclick=\"showmaxmetraz('" + item.Metraz + "'," + item.Id + ");\">" + item.Metraz + "</a><br />";
+            }
+            return Json(metraz);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> GetMetrazzaminoage2()
+        {
+            var metraz = new MetrazList();
+            var findmetr = await _context.MetrazSettingRepository.GetManyAsync(a => a.TypeMetraz == 2);
+            foreach (var item in findmetr)
+            {
+                metraz.buyminmetraz += "<a class='btn select-btn dropdown-item' style='font-size:15px;font-family:sahel;' onclick=\"showminmetraz('" + item.Metraz + "'," + item.Id + ");\">" + item.Metraz + "</a><br />";
+                metraz.buymaxmetraz += "<a class='btn select-btn dropdown-item' style='font-size:15px;font-family:sahel;' onclick=\"showmaxmetraz('" + item.Metraz + "'," + item.Id + ",);\">" + item.Metraz + "</a><br />";
+                metraz.rentminmetraz += "<a class='btn select-btn dropdown-item' style='font-size:15px;font-family:sahel;' onclick=\"showminmetraz('" + item.Metraz + "'," + item.Id + ");\">" + item.Metraz + "</a><br />";
+                metraz.rentmaxmetraz += "<a class='btn select-btn dropdown-item' style='font-size:15px;font-family:sahel;' onclick=\"showmaxmetraz('" + item.Metraz + "'," + item.Id + ");\">" + item.Metraz + "</a><br />";
+            }
+            return Json(metraz);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> Getdatalist()
+        {
+            string s= "";
+            var find = await _context.MahalleRepository.GetAllAsync();
+            foreach (var item in find)
+            {
+                s += "<option class='text-center' value=" + item.Name + " > " + item.Name + " </option>";
+            }
+            return Json(s);
         }
     }
 }

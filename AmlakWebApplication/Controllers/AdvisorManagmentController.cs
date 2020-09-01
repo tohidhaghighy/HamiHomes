@@ -5,10 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using DataLayer.Infrastracture;
 using DomainLayer;
+using DomainLayer.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Utilities.Hash;
+using ViewModelLayer.AdvisorManagment;
 
 namespace AmlakWebApplication.Controllers
 {
@@ -30,6 +32,13 @@ namespace AmlakWebApplication.Controllers
         public async Task<IActionResult> Create()
         {
             return View();
+        }
+
+        public async Task<IActionResult> AmlakList(int type,int id)
+        {
+            TypeHome hometype = (TypeHome)type; 
+            var find = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.AdviserId == id && a.TypContract == hometype);
+            return View(find);
         }
 
         [HttpPost]

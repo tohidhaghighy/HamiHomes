@@ -1,0 +1,925 @@
+﻿@model ViewModelLayer.Adviser.AdviserMain
+@{
+    ViewData["Title"] = "adviser";
+    Layout = "~/Views/Shared/_AdviserLayout.cshtml";
+}
+
+
+<style>
+     .content {
+        overflow: hidden;
+        width: 100%;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+
+    .font-xs-b {
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 700;
+    }
+
+    .font-xs-ad {
+        color: #9c99b6;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 700;
+    }
+    #backchagner {
+        box-shadow: inset 0px 80px 30px rgba(10, 10, 10, 0.35);
+        background-image: url(/img/back2.jpg);
+        height: 400px;
+        width: 100%;
+        background-size: 100% 100%;
+        animation-name: zoomin;
+        animation-duration: 4s;
+        background-position: center center;
+    }
+
+    @@keyframes zoomin {
+        from {
+            background-size: 100% 100%;
+        }
+
+        to {
+            background-size: 110% 110%;
+        }
+    }
+
+    @@keyframes zoomout {
+        from {
+            background-size: 100% 100%;
+        }
+
+        to {
+            background-size: 110% 110%;
+        }
+    }
+
+    .zoom {
+        transition: transform .2s; /* Animation */
+        margin: 0 auto;
+        overflow: hidden;
+    }
+
+        .zoom:hover {
+            transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        }
+
+    .sticky {
+        position: -webkit-sticky;
+        position: fixed;
+        left: 8%;
+        top: 200px;
+        z-index: 1000;
+    }
+
+    body {
+        font-family: IRANSans !important;
+        font-weight: 300;
+    }
+
+    h1, h2, h3, h4, h5, a, input, textarea {
+        font-family: IRANSans !important;
+        font-weight: bold;
+    }
+
+    h6, option {
+        font-family: sahel;
+        font-weight: bold;
+    }
+
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.61);
+    }
+
+    .numberCircle {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+        background: rgba(60, 58, 58, 0.25);
+        color: black;
+        text-align: center;
+        display: inline;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    #btnsms {
+        padding: 10px;
+        color: white;
+        width: 150px;
+    }
+
+        #btnsms:hover {
+            color: black;
+            background-color: white;
+        }
+
+    .border-number {
+        display: inline-grid;
+        margin: 15px;
+        margin-right: 5px;
+        cursor: pointer;
+        background: #c78910;
+        border-radius: 20px;
+        width: 40px;
+        color: white;
+        text-align: center
+    }
+
+    .card-signin {
+        border: 0;
+        border-radius: 1rem;
+        box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+    }
+
+        .card-signin .card-title {
+            margin-bottom: 2rem;
+            font-weight: 300;
+            font-size: 1.5rem;
+        }
+
+        .card-signin .card-body {
+            padding: 2rem;
+        }
+
+    .form-signin {
+        width: 100%;
+    }
+
+        .form-signin .btn {
+            font-size: 80%;
+            border-radius: 5rem;
+            letter-spacing: .1rem;
+            font-weight: bold;
+            padding: 1rem;
+            transition: all 0.2s;
+        }
+
+    .form-label-group {
+        position: relative;
+        margin-bottom: 1rem;
+    }
+</style>
+<div class="fixed-top" style="background-color:#f8f9fa;">
+    <div class="container" style="padding:5px;">
+        <div class="" style="padding-left:20px;padding-right:20px;">
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-12">
+                    <div class="row">
+                        <nav class="navbar navbar-expand-md navbar-light">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mynavbar">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="mynavbar">
+                                <ul class="navbar-nav list-unstyled card-columns">
+                                    <li class="nav-item">
+                                        <a href="#" class="text-red-hover nav-link mr-1"><img src="~/img/menu.png" style="width:40px;height:40px;margin-top:5px;margin-left:10px;" onclick="showhidemenu()" />حامی هوم</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 d-none d-sm-block" style="background-color:rgba(0, 0, 0, 0.00);font-size:17px;">
+                    <div class="row float-right" style="">
+                        <a href="/Account/Login" class="text-center btnchange1" style="margin-left:5px;">ورود</a>
+                        <a href="/Account/Register" class="text-center border btnchange" style="margin-left:25px;margin-right:15px;"><p style="font-size:17px;margin-left:5px;margin-right:5px;margin-bottom:0px;font-family: IRANSans !important;font-weight:bold;">   ثبت نام </p>  </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <hr style="margin-top:0px;margin-bottom:0px;" />
+    <div class="row" id="menusub">
+        <div class="container text-center" style="padding-bottom:20px;padding-top:20px;">
+            <a style="display:inline;margin:15px;cursor:pointer;" href="#">خرید و فروش</a>
+            <a style="display:inline; margin:15px;cursor:pointer" href="#">رهن و اجاره</a>
+            <a style="display:inline; margin:15px;cursor:pointer" href="#">ساخت و ساز</a>
+            <a style="display:inline;margin:15px;cursor:pointer" href="#">فروخته شده</a>
+        </div>
+    </div>
+    <div class="row" style="background-color:rgba(0, 0, 0, 0.80);direction:rtl" id="showwhenscroll">
+        <div class="container">
+            <div class="row" style="padding-top:0px;padding-bottom:0px;">
+                <div class="col-lg-1 col-sm-12 col-md-1">
+                    <div class="" style="padding-top:10px;">
+                        <img src="~/img/back2.jpg" style="border-radius:120px;width:90px;height:90px;text-align:center;align-content:center;padding:10px;" />
+                    </div>
+                </div>
+
+                <div class="col-lg-5 col-sm-12 col-md-5" style="padding-top:10px;">
+                    <div class="">
+                        <h5 style="padding:10px;color:white;">@Model.Adviser.Name  @Model.Adviser.Family</h5>
+                    </div>
+
+                    <div class="">
+                        <h6 style="padding:10px;color:white;width:100%;">@Model.Adviser.Description</h6>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12 col-md-6" style="padding-top:30px;padding-left:22px;">
+                    <a class="btn btn-default btn-primary" style="color:white;width:150px;padding:10px;float:left;margin-left:20px;" onclick="shownumberhide()" id="btnnumberphonehide"> <span class="fa fa-phone" style="padding:5px;"></span> تماس</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="mainback" id="backchagner">
+    <div class="overlay">
+        <div class="container">
+            <div class="" style="padding-top:70px;">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-12 col-md-6">
+                        <div class="">
+                            @if (Model.Adviser.Image != null && Model.Adviser.Image != "")
+                            {
+                                <img src="http://panel.hamihomes.com/images/@Model.Adviser.Image" class="border" style="border-radius:120px;width:200px;height:200px;text-align:center;align-content:center;" />
+                            }
+                            else
+                            {
+                                <img src="http://panel.hamihomes.com/images/def.jpg" class="border" style="border-radius:120px;width:200px;height:200px;text-align:center;align-content:center;" />
+                            }
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-sm-12 col-md-6" style="padding-top:50px;">
+                        <div class="">
+                            <h2 style="padding:10px;color:white;">@Model.Adviser.Name  @Model.Adviser.Family</h2>
+                        </div>
+
+                        <div class="">
+                            <h5 style="padding:10px;color:white;width:100%;">@Model.Adviser.Description</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding-top:10px;float:left;padding-left:8%;">
+
+                    <a class="btn btn-default btn-primary" style="color:white;width:150px;padding:10px;margin-right:20px;" onclick="shownumber('@Model.Adviser.Mobile')" id="btnnumberphone">
+                        <span class="fa fa-phone" style="padding:5px;"></span>
+                        تماس
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="container text-center" style="padding-top:40px;">
+        <h3 style="color:rgba(0, 0, 0, 0.70)">رزومه @Model.Adviser.Name  @Model.Adviser.Family</h3>
+    </div>
+    <div class="container text-center" style="padding-bottom:20px;padding-top:20px;">
+        @{
+            if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Selled).Count() > 0)
+            {
+                <a style="display:inline; margin:15px;cursor:pointer" href="#">فروخته شده</a>
+                <p class="border-number">@Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Selled).Count()</p>
+            }
+            if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Rented).Count() > 0)
+            {
+
+                <a style="display:inline; margin:15px;cursor:pointer" href="#">اجاره داده شده</a>
+                <p class="border-number" style="background:#ff0000">@Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Selled).Count()</p>
+            }
+            if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Buy).Count() > 0)
+            {
+
+                <a style="display:inline;margin:15px;cursor:pointer;" href="#">برای فروش</a>
+                <p class="border-number" style="background:#faa90a">@Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Buy).Count()</p>
+            }
+            if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Rent).Count() > 0)
+            {
+
+                <a style="display:inline; margin:15px;cursor:pointer" href="#">برای اجاره</a>
+                <p class="border-number" style="background:#ff0000">@Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Rent).Count()</p>
+            }
+            if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.build).Count() > 0)
+            {
+
+                <a style="display:inline; margin:15px;cursor:pointer" href="#">برای ساخت و ساز</a>
+                <p class="border-number">@Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.build).Count()</p>
+            }
+        }
+
+    </div>
+</div>
+
+
+<div id="map" style="width:100%;height:400px;">
+
+</div>
+
+@if (@Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Buy).Count() > 0)
+{
+    <div class="row" style="padding-top:40px;direction:ltr" data-aos="fade-right">
+        <div class="container">
+            <div class="row" style="padding-bottom:30px;">
+                <div class="col-lg-6 col-md-6 col-sm-12" style="padding-left:5px;padding-right:5px;">
+                    <div class="">
+                        <div class="" style="padding-top:0%;width:100%">
+                            <div class="card card-signin" style="background-color:white;border-radius:10px;">
+                                <div class="card-body">
+                                    <h5 class="" style="padding-bottom:10px;color:red;display:inline-block">مورد فروخته شده</h5>
+                                    <h5 class="" style="padding-bottom:10px;color:red;display:inline">@Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Selled).Count() </h5>
+                                    <hr />
+                                    <div class="row" style="direction:rtl;">
+                                        <div class="col-lg-2 col-sm-4 col-md-2">
+                                            <div class="">
+                                                <img src="~/img/housed.png" class="" style="width:70px;height:70px;text-align:center;align-content:center;" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-sm-4 col-md-6" style="padding-top:15px;">
+                                            <div class="">
+                                                <h5 style="padding:10px;color:red;">آپارتمان</h5>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-3 col-sm-4 col-md-3" style="padding-top:13px;">
+                                            <div class="">
+                                                <p class="border-number" style="background:rgba(167, 162, 162, 0.75);width:100px;color:white;padding:5px;">12 فروخته شده</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="direction:rtl;">
+                                        <div class="col-lg-2 col-sm-4 col-md-2">
+                                            <div class="">
+                                                <img src="~/img/housed.png" class="" style="width:70px;height:70px;text-align:center;align-content:center;" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-sm-4 col-md-6" style="padding-top:15px;">
+                                            <div class="">
+                                                <h5 style="padding:10px;color:red;">خانه حیاط دار</h5>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-3 col-sm-4 col-md-3" style="padding-top:13px;">
+                                            <div class="">
+                                                <p class="border-number" style="background:rgba(167, 162, 162, 0.75);width:100px;color:white;padding:5px;">12 فروخته شده</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="direction:rtl;">
+                                        <div class="col-lg-2 col-sm-4 col-md-2">
+                                            <div class="">
+                                                <img src="~/img/housed.png" class="" style="width:70px;height:70px;text-align:center;align-content:center;" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-sm-4 col-md-6" style="padding-top:15px;">
+                                            <div class="">
+                                                <h5 style="padding:10px;color:red;">ویلا</h5>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-3 col-sm-4 col-md-3" style="padding-top:13px;">
+                                            <div class="">
+                                                <p class="border-number" style="background:rgba(167, 162, 162, 0.75);width:100px;color:white;padding:5px;">12 فروخته شده</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <dvi class="row">
+                                        <div class="container text-center">
+                                            <a href="#listofbuy" class="border-number js-scroll-trigger" style="background:rgba(167, 162, 162, 0.75);width:100px;color:white;padding:5px;">+ 5 مورد دیگر</a>
+                                        </div>
+                                    </dvi>
+                                    <hr style="margin-top:-30px;" />
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12" style="padding-left:5px;padding-right:5px;">
+                    <div class="col-lg-12 col-sm-12 col-md-4" style="padding:10px;">
+                        <img src="~/img/back4.jpg" class="zoom" style="width:100%;height:130px;border-radius:5px;filter:grayscale(50%);" />
+                        <div style="position:absolute;top:20%;right:25%;">
+                            <h4 class="text-center" style="color:white;">14</h4>
+                            <h4 class="text-center" style="color:white;">خانه حیاط دار</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-sm-12 col-md-4" style="padding:10px;">
+                        <img src="~/img/back4.jpg" class="zoom" style="width:100%;height:130px;border-radius:5px;filter: grayscale(50%);" />
+                        <div style="position:absolute;top:20%;right:25%;">
+                            <h4 class="text-center" style="color:white;">14</h4>
+                            <h4 class="text-center" style="color:white;">خانه حیاط دار</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-sm-12 col-md-4" style="padding:10px;">
+                        <img src="~/img/back4.jpg" class="zoom" style="width:100%;height:130px;border-radius:5px;filter: grayscale(50%);" />
+                        <div style="position:absolute;top:20%;right:45%;">
+                            <h4 class="text-center" style="color:white;">13</h4>
+                            <h4 class="text-center" style="color:white;">ویلا</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12" style="padding-left:5px;padding-right:5px;">
+                    <div class="">
+                        <div class="" style="padding-top:0%;width:100%">
+                            <div class="card card-signin" style="background-color:white;border-radius:10px;">
+                                <div class="card-body" style="height:440px;">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-sm-12 col-md-6">
+                                            <div class="">
+                                                <img src="~/img/back2.jpg" class="border" style="border-radius:120px;width:70px;height:70px;text-align:center;align-content:center;" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-9 col-sm-12 col-md-9">
+                                            <div class="text-center">
+                                                <h6 style="padding:10px;color:black;">@Model.Adviser.Name @Model.Adviser.Family</h6>
+                                            </div>
+
+                                            <div class="text-center">
+                                                <h7 style="padding:10px;color:gray;width:100%;">@Model.Adviser.Description</h7>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    <dvi class="row">
+                                        <div class="container text-center">
+                                            <p style="color:black;padding:5px;text-align:center;font-weight:bold;">تخصص ها</p>
+                                        </div>
+                                    </dvi>
+                                    <dvi class="row">
+                                        <div class="container text-center">
+                                            <p style="color:black;padding:5px;text-align:right;">@Model.Adviser.BuyTakhasos</p>
+                                        </div>
+                                    </dvi>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <hr />
+}
+
+@if (@Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Rent).Count() > 0)
+{
+    <div class="row" style="padding-top:40px;direction:ltr" data-aos="fade-left">
+        <div class="container">
+            <div class="row" style="padding-bottom:30px;">
+                <div class="col-lg-6 col-md-6 col-sm-12" style="padding-left:5px;padding-right:5px;">
+                    <div class="">
+                        <div class="" style="padding-top:0%;width:100%">
+                            <div class="card card-signin" style="background-color:white;border-radius:10px;">
+                                <div class="card-body">
+
+                                    <h5 class="" style="padding-bottom:10px;color:red;display:inline-block">مورد اجاره داده شده</h5>
+                                    <h5 class="" style="padding-bottom:10px;color:red;display:inline">@Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Rented).Count() </h5>
+                                    <h6 class="" style="padding-bottom:10px;color:gray">در 12 ماه گذشته </h6>
+                                    <hr />
+                                    <div class="row" style="direction:rtl;">
+                                        <div class="col-lg-2 col-sm-4 col-md-2">
+                                            <div class="">
+                                                <img src="~/img/housed.png" class="" style="width:70px;height:70px;text-align:center;align-content:center;" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-sm-4 col-md-6" style="padding-top:15px;">
+                                            <div class="">
+                                                <h5 style="padding:10px;color:red;">آپارتمان</h5>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-3 col-sm-4 col-md-3" style="padding-top:13px;">
+                                            <div class="">
+                                                <p class="border-number" style="background:rgba(167, 162, 162, 0.75);width:150px;color:white;padding:5px;">12 اجاره داده شده</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="direction:rtl;">
+                                        <div class="col-lg-2 col-sm-4 col-md-2">
+                                            <div class="">
+                                                <img src="~/img/housed.png" class="" style="width:70px;height:70px;text-align:center;align-content:center;" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-sm-4 col-md-6" style="padding-top:15px;">
+                                            <div class="">
+                                                <h5 style="padding:10px;color:red;">خانه حیاط دار</h5>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-3 col-sm-4 col-md-3" style="padding-top:13px;">
+                                            <div class="">
+                                                <p class="border-number" style="background:rgba(167, 162, 162, 0.75);width:150px;color:white;padding:5px;">12 اجاره داده شده</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="direction:rtl;">
+                                        <div class="col-lg-2 col-sm-4 col-md-2">
+                                            <div class="">
+                                                <img src="~/img/housed.png" class="" style="width:70px;height:70px;text-align:center;align-content:center;" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6 col-sm-4 col-md-6" style="padding-top:15px;">
+                                            <div class="">
+                                                <h5 style="padding:10px;color:red;">ویلا</h5>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-3 col-sm-4 col-md-3" style="padding-top:13px;">
+                                            <div class="">
+                                                <p class="border-number" style="background:rgba(167, 162, 162, 0.75);width:150px;color:white;padding:5px;">12 اجاره داده شده</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <dvi class="row">
+                                        <div class="container text-center">
+                                            <a href="#listofrented" class="border-number js-scroll-trigger" style="background:rgba(167, 162, 162, 0.75);width:100px;color:white;padding:5px;">+ 5 مورد دیگر</a>
+                                        </div>
+                                    </dvi>
+                                    <hr style="margin-top:-30px;" />
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12" style="padding-left:5px;padding-right:5px;">
+                    <div class="col-lg-12 col-sm-12 col-md-4" style="padding:10px;">
+                        <img src="~/img/back4.jpg" class="zoom" style="width:100%;height:130px;border-radius:5px;filter:grayscale(50%);" />
+                        <div style="position:absolute;top:20%;right:25%;">
+                            <h4 class="text-center" style="color:white;">14</h4>
+                            <h4 class="text-center" style="color:white;">خانه حیاط دار</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-sm-12 col-md-4" style="padding:10px;">
+                        <img src="~/img/back4.jpg" class="zoom" style="width:100%;height:130px;border-radius:5px;filter: grayscale(50%);" />
+                        <div style="position:absolute;top:20%;right:25%;">
+                            <h4 class="text-center" style="color:white;">14</h4>
+                            <h4 class="text-center" style="color:white;">خانه حیاط دار</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-sm-12 col-md-4" style="padding:10px;">
+                        <img src="~/img/back4.jpg" class="zoom" style="width:100%;height:130px;border-radius:5px;filter: grayscale(50%);" />
+                        <div style="position:absolute;top:20%;right:45%;">
+                            <h4 class="text-center" style="color:white;">13</h4>
+                            <h4 class="text-center" style="color:white;">ویلا</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12" style="padding-left:5px;padding-right:5px;">
+                    <div class="">
+                        <div class="" style="padding-top:0%;width:100%">
+                            <div class="card card-signin" style="background-color:white;border-radius:10px;">
+                                <div class="card-body" style="height:440px;">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-sm-12 col-md-6">
+                                            <div class="">
+                                                <img src="~/img/back2.jpg" class="border" style="border-radius:120px;width:70px;height:70px;text-align:center;align-content:center;" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-9 col-sm-12 col-md-9">
+                                            <div class="text-center">
+                                                <h6 style="padding:10px;color:black;">@Model.Adviser.Name @Model.Adviser.Family</h6>
+                                            </div>
+
+                                            <div class="text-center">
+                                                <h7 style="padding:10px;color:gray;width:100%;">@Model.Adviser.Description</h7>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    <dvi class="row">
+                                        <div class="container text-center">
+                                            <p style="color:black;padding:5px;text-align:center;font-weight:bold;">تخصص ها</p>
+                                        </div>
+                                    </dvi>
+                                    <dvi class="row">
+                                        <div class="container text-center">
+                                            <p style="color:black;padding:5px;text-align:right;">@Model.Adviser.RentTakhasos</p>
+                                        </div>
+                                    </dvi>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <hr />
+}
+
+@if (@Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Buy).Count() > 0)
+{
+    <section id="listofbuy" data-aos="fade-up">
+        <div class="" style="padding-top:50px;padding-bottom:50px;background-color:#FFF;padding-left:8%;padding-right:8%;">
+            <div class="row">
+                <div class="col-12">
+                    <h3 style="color:rgba(119, 116, 116, 0.70);padding-bottom:20px;width:100%;" class="text-center">املاک فروخته شده</h3>
+                </div>
+            </div>
+            <div class="row">
+                @{
+                    foreach (var item in Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Buy).Take(8))
+                    {
+                        string s = "آپارتمان";
+                        if (item.Home.Hometype == 2)
+                        {
+                            s = "خانه حیاط دار";
+                        }
+                        else if (item.Home.Hometype == 3)
+                        {
+                            s = "زمین";
+                        }
+                        else if (item.Home.Hometype == 4)
+                        {
+                            s = "کلنگی";
+                        }
+                        else if (item.Home.Hometype == 5)
+                        {
+                            s = "اداری";
+                        }
+                        else if (item.Home.Hometype == 6)
+                        {
+                            s = "مغازه";
+                        }
+                        else if (item.Home.Hometype == 7)
+                        {
+                            s = "مستقلات";
+                        }
+                        else if (item.Home.Hometype == 8)
+                        {
+                            s = "انبار";
+                        }
+                        else if (item.Home.Hometype == 9)
+                        {
+                            s = "باغ";
+                        }
+                        else if (item.Home.Hometype == 10)
+                        {
+                            s = "ویلا ";
+                        }
+                        <div class="col-lg-3 col-md-3 col-sm-4 zoom" style="padding-left:10px;padding-bottom:10px">
+                            <a href="/Home/Detail?homeid=@item.Home.Id&contractid=@item.Id&hometype=@s">
+                                <div class="card">
+                                    <img class="card-img-top" src="http://panel.hamihomes.com/images/@item.Home.Image" style="height:200px;" alt="خانه ارومیه">
+                                    <div class="card-block p-3">
+
+                                        <h4 class="card-title font-xs-b ">@s @item.Home.OwnerName </h4>
+                                        <p class="card-text content font-xs-ad">@item.Home.Address</p>
+                                    </div>
+                                    <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
+                                    <div class="row" style="padding:10px;">
+                                        @if (item.Home.Hometype == 1 || item.Home.Hometype == 2 || item.Home.Hometype == 7)
+                                        {
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" />@item.Home.Bed اتاق</p>
+
+                                            </div>
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> @item.Home.Bath حمام</p>
+
+                                            </div>
+                                        }
+
+                                        <div class="col-4 text-center">
+                                            <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> @item.Metraz متر </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+
+                }
+            </div>
+            
+            <div class="row" style="padding-top:20px;">
+                <div class="container text-center">
+                    <a class="btn btn-success" style="padding:10px;color:white">موارد بیشتر</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <hr style="margin-top:0px;margin-bottom:0px;" />
+
+}
+
+@if (@Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Rent).Count() > 0)
+{
+    <section id="listofrented" data-aos="fade-up">
+        <div class="" style="padding-top:50px;padding-bottom:50px;background-color:#FFF;padding-left:8%;padding-right:8%;">
+            <div class="row">
+                <div class="col-12">
+                    <h3 style="color:rgba(119, 116, 116, 0.70);padding-bottom:20px;width:100%;" class="text-center">املاک اجاره داده شده</h3>
+                </div>
+            </div>
+            <div class="row">
+                @{
+                    foreach (var item in Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Rent).Take(4))
+                    {
+                        string s = "آپارتمان";
+                        if (item.Home.Hometype == 2)
+                        {
+                            s = "خانه حیاط دار";
+                        }
+                        else if (item.Home.Hometype == 3)
+                        {
+                            s = "زمین";
+                        }
+                        else if (item.Home.Hometype == 4)
+                        {
+                            s = "کلنگی";
+                        }
+                        else if (item.Home.Hometype == 5)
+                        {
+                            s = "اداری";
+                        }
+                        else if (item.Home.Hometype == 6)
+                        {
+                            s = "مغازه";
+                        }
+                        else if (item.Home.Hometype == 7)
+                        {
+                            s = "مستقلات";
+                        }
+                        else if (item.Home.Hometype == 8)
+                        {
+                            s = "انبار";
+                        }
+                        else if (item.Home.Hometype == 9)
+                        {
+                            s = "باغ";
+                        }
+                        else if (item.Home.Hometype == 10)
+                        {
+                            s = "ویلا ";
+                        }
+                        <div class="col-lg-3 col-md-3 col-sm-4 zoom" style="padding-left:10px;padding-bottom:10px">
+                            <a href="/Home/Detail?homeid=@item.Home.Id&contractid=@item.Id&hometype=@s">
+                                <div class="card">
+                                    <img class="card-img-top" src="http://panel.hamihomes.com/images/@item.Home.Image" style="height:200px;" alt="خانه ارومیه">
+                                    <div class="card-block p-3">
+
+                                        <h4 class="card-title font-xs-b ">@s @item.Home.OwnerName </h4>
+                                        <p class="card-text content font-xs-ad">@item.Home.Address</p>
+                                    </div>
+                                    <hr style="margin-top:0px;margin-bottom:0px;margin-left:10px;margin-right:10px;" />
+                                    <div class="row" style="padding:10px;">
+                                        @if (item.Home.Hometype == 1 || item.Home.Hometype == 2 || item.Home.Hometype == 7)
+                                        {
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bed.png" style="width:15px;height:15px;" />@item.Home.Bed اتاق</p>
+
+                                            </div>
+                                            <div class="col-4 text-center">
+                                                <p class="font-xs-ad" style="font-size:12px;"><img src="/img/bath.png" style="width:15px;height:15px;" /> @item.Home.Bath حمام</p>
+
+                                            </div>
+                                        }
+
+                                        <div class="col-4 text-center">
+                                            <p class="font-xs-ad" style="font-size:12px;"><img src="/img/Resize-icon.png" style="width:15px;height:15px;" /> @item.Metraz متر </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+
+                }
+            </div>
+            
+            <div class="row" style="padding-top:20px;">
+                <div class="container text-center">
+                    <a class="btn btn-success" style="padding:10px;color:white">موارد بیشتر</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+}
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+
+    <script>
+        var map = L.map('map').setView([37.553278571293816, 45.07666215851912], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var LeafIcon = L.Icon.extend({
+            options: {
+                iconSize: [30, 30]
+            }
+        });
+
+    var redIcon = new LeafIcon({ iconUrl: '/img/circle-red.png' });
+    var goldIcon = new LeafIcon({ iconUrl: '/img/circle-gold.png' });
+    var orangeIcon = new LeafIcon({ iconUrl: '/img/circle-orange.png' });
+
+    var marker;
+     @{
+         if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Selled).Count()>0)
+         {
+             foreach (var item in Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Selled))
+         {
+            <text>
+               marker = new L.Marker([@item.Home.Gpsx, @item.Home.Gpsy], { icon: redIcon });
+               marker.addTo(map).on('click', function (e) {
+               map.setView([@item.Home.Gpsx,@item.Home.Gpsy], 14);
+              });
+            </text>
+             }
+         }
+
+         if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Rented).Count()>0)
+         {
+             foreach (var item in Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Rented))
+         {
+            <text>
+               marker = new L.Marker([@item.Home.Gpsx, @item.Home.Gpsy], { icon: goldIcon });
+               marker.addTo(map).on('click', function (e) {
+               map.setView([@item.Home.Gpsx,@item.Home.Gpsy], 14);
+              });
+            </text>
+             }
+         }
+
+         if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Buy).Count()>0)
+         {
+             foreach (var item in Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Buy))
+         {
+            <text>
+               marker = new L.Marker([@item.Home.Gpsx, @item.Home.Gpsy], { icon: orangeIcon });
+               marker.addTo(map).on('click', function (e) {
+               map.setView([@item.Home.Gpsx,@item.Home.Gpsy], 14);
+              });
+            </text>
+             }
+         }
+
+          if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Rent).Count()>0)
+         {
+             foreach (var item in Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Rent))
+         {
+            <text>
+               marker = new L.Marker([@item.Home.Gpsx, @item.Home.Gpsy], { icon: redIcon });
+               marker.addTo(map).on('click', function (e) {
+               map.setView([@item.Home.Gpsx,@item.Home.Gpsy], 14);
+              });
+            </text>
+             }
+         }
+
+          if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.build).Count()>0)
+         {
+             foreach (var item in Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.build))
+         {
+            <text>
+               marker = new L.Marker([@item.Home.Gpsx, @item.Home.Gpsy], { icon: goldIcon });
+               marker.addTo(map).on('click', function (e) {
+               map.setView([@item.Home.Gpsx,@item.Home.Gpsy], 14);
+              });
+            </text>
+             }
+         }
+
+         }
+
+
+        function shownumber(number) {
+            document.getElementById("btnnumberphone").innerHTML = "<span class='fa fa-phone' style='padding:5px;'></span> " + number;
+        }
+
+    </script>

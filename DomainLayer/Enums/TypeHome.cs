@@ -9,5 +9,8 @@ namespace DomainLayer.Enums
         Buy=1,
         Rent=2,
         build=3,
+        Selled=4,
+        Rented=5,
+        builded=6,
     }
 }

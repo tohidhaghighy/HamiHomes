@@ -5,8 +5,22 @@
     {
         foreach (var item in Model)
         {
-    <tr onclick="updateitem(@item.Id)">
+    <tr>
         <td class="text-center" style="padding:10px;">
+            @{
+                if (item.IsShow)
+                {
+                    <input type="checkbox" checked="checked" onchange="Changecheck(@item.Id)" />
+                }
+                else
+                {
+                    <input type="checkbox" onchange="Changecheck(@item.Id)" />
+                }
+            }
+
+
+        </td>
+        <td class="text-center" style="padding:10px;" onclick="updateitem(@item.Id)">
             <a href="~/images/@item.Image"><img style="width:40px;height:40px;" src="~/images/@item.Image" /></a>
         </td>
         <td class="text-center" style="padding:10px;">
@@ -15,7 +29,7 @@
             }
             @s
         </td>
-        <td class="text-center" style="padding:10px;">
+        <td class="text-center" style="padding:10px;" onclick="updateitem(@item.Id)">
             @{
                 string isprivate = "عمومی";
                 if (item.IsPrivate)
@@ -25,19 +39,14 @@
             }
             @isprivate
         </td>
-        <td class="text-center" style="padding:10px;">
+        <td class="text-center" style="padding:10px;" onclick="updateitem(@item.Id)">
             @item.Address
         </td>
-        <td class="text-center" style="padding:10px;">
-            @item.BuildYear
+        <td class="text-center" style="padding:10px;" onclick="updateitem(@item.Id)">
+            @item.Postalcode
         </td>
-        <td class="text-center" style="padding:10px;">
-            @item.Bed
-        </td>
-        <td class="text-center" style="padding:10px;">
-            @item.Bath
-        </td>
-        <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="گالری تصاویر"><a href="/HomeGalleryManagment/Index?homeid=@item.Id" + id" class="btn btn-success btn-xs" >گالری تصاویر</a></p></td>
+        <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="لیست قراردادها"><a href="/ContractManagment/Index?homeid=@item.Id&hometype=@item.Hometype" + id" class="btn btn-danger btn-xs">لیست قرارداد ها</a></p></td>
+        <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="گالری تصاویر"><a href="/HomeGalleryManagment/Index?homeid=@item.Id" + id" class="btn btn-success btn-xs">گالری تصاویر</a></p></td>
         <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="نقشه 3 بعدی"><a class="btn btn-warning btn-xs" onclick="map('@item.ThreeDView')">360 درجه</a></p></td>
         <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="حذف"><a class="btn btn-danger btn-xs" onclick="deleteitem(@item.Id)"><i class="ion ion-ios-trash"></i></a></p></td>
     </tr>

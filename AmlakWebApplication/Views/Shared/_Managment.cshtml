@@ -286,9 +286,6 @@
                                 <a href="/HomeManagment/Index">
                                     <i class="fa fa-circle-o"></i>
                                     <span>جستجو املاک</span>
-                                    <span class="pull-left-container">
-                                        <span class="label label-primary pull-left">4</span>
-                                    </span>
                                 </a>
                             </li>
                             <li class="">
@@ -415,7 +412,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="active"><a href="/AmlakSettingManagment/Moshaat"><i class="fa fa-circle-o"></i> لیست مشاعات</a></li>
+                            @*<li class="active"><a href="/AmlakSettingManagment/Moshaat"><i class="fa fa-circle-o"></i> لیست مشاعات</a></li>*@
                             <li><a href="/AmlakSettingManagment/Wc"><i class="fa fa-circle-o"></i> سرویس بهداشتی و حمام</a></li>
                             <li><a href="/AmlakSettingManagment/Parking"><i class="fa fa-circle-o"></i> نوع و تعداد پارکینگ</a></li>
                             <li><a href="/AmlakSettingManagment/Emtiaz"><i class="fa fa-circle-o"></i> امتیاز</a></li>
@@ -492,14 +489,14 @@
 
                     <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-edit"></i> <span>مجله هامی هوم</span>
+                            <i class="fa fa-edit"></i> <span>مدیریت اخبار و قوانین</span>
                             <span class="pull-left-container">
                                 <i class="fa fa-angle-right pull-left"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/MagzineManagment"><i class="fa fa-circle-o"></i> مدیریت مجلات</a></li>
-                            <li><a href="/MagazinGroupManagment"><i class="fa fa-circle-o"></i> مدیریت دسته بندی مجلات</a></li>
+                            <li><a href="/MagzineManagment"><i class="fa fa-circle-o"></i> مدیریت اخبار و قوانین</a></li>
+                            <li><a href="/MagazinGroupManagment"><i class="fa fa-circle-o"></i> مدیریت دسته بندی پست ها</a></li>
                         </ul>
                     </li>
 
@@ -733,6 +730,9 @@
 
 
         $(function () {
+
+
+
             //Initialize Select2 Elements
             $('.select2').select2({
                 dir: "rtl"
@@ -798,7 +798,9 @@
             $('.timepicker').timepicker({
                 showInputs: false
             })
-        })
+        });
+
+
     </script>
     @RenderSection("Scripts", required: false)
 
