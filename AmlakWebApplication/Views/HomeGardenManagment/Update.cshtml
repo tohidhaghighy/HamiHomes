@@ -18,17 +18,17 @@
 </style>
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/HomeGardenManagment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
-        <li class="active">ویرایش باغ </li>
+        <li class="active">باغ جدید </li>
     </ol>
 </section>
 
 <div class="callout callout-info" style="margin-top:10px;">
-    <h4>ویرایش اطلاعات باغ</h4>
+    <h4>درج اطلاعات باغ</h4>
     در اینجا میتوانید مرحله دوم درج اطلاعات باغ را وارد کنید
 
 </div>
@@ -36,28 +36,15 @@
 <div class="container">
     <div class="box box-danger">
         <div class="box-header">
-            <h3 class="box-title">ویرایش اطلاعات باغ</h3>
+            <h3 class="box-title">درج اطلاعات باغ</h3>
         </div>
-        <form asp-action="UpdateItem">
+        <form asp-action="CreateFacilityItem">
 
             <div class="box-body">
                 <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
 
-                <input asp-for="Garden.Id" type="number" class="hidden">
-                <input asp-for="Garden.HomeId" type="number" class="hidden">
-
-                <div class="form-group">
-                    <div class="row">
-
-                        <div class="col-lg-2">
-                            <h4>متراژ زمین</h4>
-                            <input asp-for="Garden.Metrazhzamin" type="number" class="form-control" placeholder="متراژ زمین" value="1">
-                            <span asp-validation-for="Garden.Metrazhzamin" class="text-danger"></span>
-                        </div>
-
-
-                    </div>
-                </div>
+                <input name="HomeId" id="HomeId" type="number" class="hidden" value="@ViewData["Id"]">
+                <input name="Id" id="Id" type="number" class="hidden" value="@Model.Garden.Id">
 
                 <div class="form-group">
                     <div class="row">
@@ -68,7 +55,7 @@
                         </div>
                         <div class="col-lg-4">
                             <h4>شماره نگهبان</h4>
-                            <input asp-for="Garden.NegahbaniPhone" type="number" class="form-control" placeholder="شماره نگهبان">
+                            <input asp-for="Garden.NegahbaniPhone" type="text" class="form-control" placeholder="شماره نگهبان">
                             <span asp-validation-for="Garden.NegahbaniPhone" class="text-danger"></span>
                         </div>
                     </div>
@@ -82,7 +69,14 @@
                                     style="width: 100%;direction:rtl;float:right;" name="emtiaz" id="emtiaz">
                                 @for (var i = 0; i < Model.AmlakEmtiazes.Count; i++)
                                 {
-                                    <option value="@Model.AmlakEmtiazes[i].Name">@Model.AmlakEmtiazes[i].Name</option>
+                                    if (Model.Garden.HomeEmtiaz.Contains(Model.AmlakEmtiazes[i].Name))
+                                    {
+                                        <option value="@Model.AmlakEmtiazes[i].Name" selected="selected">@Model.AmlakEmtiazes[i].Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@Model.AmlakEmtiazes[i].Name">@Model.AmlakEmtiazes[i].Name</option>
+                                    }
                                 }
                             </select>
                         </div>

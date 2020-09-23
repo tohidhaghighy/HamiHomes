@@ -19,17 +19,19 @@
 
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="/HomeAnbarManagment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
-        <li class="active">ویرایش انبار </li>
+        <li><a href="/HomeManagment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">انبار جدید </li>
     </ol>
 </section>
 
 <div class="callout callout-info" style="margin-top:10px;">
-    <h4>ویرایش انبار</h4>
+    <h4>ویرایش اطلاعات انبار</h4>
+    در اینجا میتوانید مرحله دوم ویرایش اطلاعات انبار را وارد کنید
+    و اطلاعات انبار را وارد کنید
 
 </div>
 
@@ -43,22 +45,8 @@
             <div class="box-body">
                 <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
 
-                <input asp-for="Anbar.HomeId" type="number" class="hidden" value="@Model.Anbar.HomeId">
-
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <h4>متراژ بنا</h4>
-                            <input asp-for="Anbar.MetrazhBena" type="number" class="form-control" placeholder="متراژ بنا" value="1">
-                            <span asp-validation-for="Anbar.MetrazhBena" class="text-danger"></span>
-                        </div>
-                        <div class="col-lg-6">
-                            <h4>متراژ زمین</h4>
-                            <input asp-for="Anbar.Metrazhzamin" type="number" class="form-control" placeholder="متراژ زمین" value="1">
-                            <span asp-validation-for="Anbar.Metrazhzamin" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
+                <input name="HomeId" id="HomeId" type="number" class="hidden" value="@ViewData["Id"]">
+                <input name="Id" id="Id" type="number" class="hidden" value="@Model.Anbar.Id">
 
                 <div class="form-group">
                     <div class="row">
@@ -83,11 +71,18 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h4>امتیاز : </h4>
-                            <select class="form-control select2 text-center" multiple="multiple" data-placeholder="   انتخاب امتیازات  "
+                            <select class="form-control select2 text-center" multiple="multiple" data-placeholder="انتخاب امتیازات  "
                                     style="width: 100%;direction:rtl;float:right;" name="emtiaz" id="emtiaz">
                                 @for (var i = 0; i < Model.AmlakEmtiazes.Count; i++)
                                 {
-                                    <option value="@Model.AmlakEmtiazes[i].Name" selected>@Model.AmlakEmtiazes[i].Name</option>
+                                    if (Model.Anbar.HomeEmtiaz.Contains(Model.AmlakEmtiazes[i].Name))
+                                    {
+                                        <option value="@Model.AmlakEmtiazes[i].Name" selected="selected">@Model.AmlakEmtiazes[i].Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@Model.AmlakEmtiazes[i].Name">@Model.AmlakEmtiazes[i].Name</option>
+                                    }
                                 }
                             </select>
                         </div>
@@ -101,7 +96,7 @@
                 <hr />
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success"> ویرایش اطلاعات انبار - رفتن به مرحله بعد </button>
+                    <button type="submit" class="btn btn-success">درج اطلاعات انبار - رفتن به مرحله بعد </button>
                 </div>
 
             </div>

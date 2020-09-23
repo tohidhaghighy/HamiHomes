@@ -19,7 +19,7 @@
 </style>
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
@@ -49,34 +49,25 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-lg-2">
-                            <h4>متراژ بنا</h4>
-                            <input asp-for="Mostaghelat.MetrazhBena" type="number" class="form-control" placeholder="متراژ بنا" value="1">
-                            <span asp-validation-for="Mostaghelat.MetrazhBena" class="text-danger"></span>
-                        </div>
-                        <div class="col-lg-2">
-                            <h4>متراژ زمین</h4>
-                            <input asp-for="Mostaghelat.Metrazhzamin" type="number" class="form-control" placeholder="متراژ زمین" value="1">
-                            <span asp-validation-for="Mostaghelat.Metrazhzamin" class="text-danger"></span>
-                        </div>
+                        
                         <div class="col-lg-2">
                             <h4>قدر السهم</h4>
-                            <input asp-for="Mostaghelat.Ghadroalsahm" type="text" class="form-control" placeholder="قدر السهم">
+                            <input asp-for="Mostaghelat.Ghadroalsahm" type="text" min="0" class="form-control" placeholder="قدر السهم">
                             <span asp-validation-for="Mostaghelat.Ghadroalsahm" class="text-danger"></span>
                         </div>
                         <div class="col-lg-2">
                             <h4>طبقه</h4>
-                            <input asp-for="Mostaghelat.Tabaghe" type="number" class="form-control" placeholder="طبقه">
+                            <input asp-for="Mostaghelat.Tabaghe" type="number" min="0" class="form-control" placeholder="طبقه">
                             <span asp-validation-for="Mostaghelat.Tabaghe" class="text-danger"></span>
                         </div>
-                        <div class="col-lg-2">
-                            <h4>تعداد کل طبقات</h4>
-                            <input asp-for="Mostaghelat.Tedadkoltabaghat" type="number" class="form-control" placeholder="تعداد کل طبقات">
+                        <div class="col-lg-3">
+                            <h5>تعداد کل طبقات</h5>
+                            <input asp-for="Mostaghelat.Tedadkoltabaghat" type="number" min="0" class="form-control" placeholder="تعداد کل طبقات">
                             <span asp-validation-for="Mostaghelat.Tedadkoltabaghat" class="text-danger"></span>
                         </div>
-                        <div class="col-lg-2">
-                            <h4>تعداد کل واحد ها</h4>
-                            <input asp-for="Mostaghelat.Tedadkolvahedha" type="number" class="form-control" placeholder="تعداد کل واحد ها">
+                        <div class="col-lg-3">
+                            <h5>تعداد کل واحد ها</h5>
+                            <input asp-for="Mostaghelat.Tedadkolvahedha" type="number" min="0" class="form-control" placeholder="تعداد کل واحد ها">
                             <span asp-validation-for="Mostaghelat.Tedadkolvahedha" class="text-danger"></span>
                         </div>
                     </div>
@@ -86,19 +77,19 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-lg-2">
-                            <h4>تعداد واحد ها در طبقه</h4>
-                            <input asp-for="Mostaghelat.Tedadvaheddartabaghe" type="text" class="form-control" placeholder="تعداد واحد ها در طبقه">
+                        <div class="col-lg-3">
+                            <h5>تعداد واحد ها در طبقه</h5>
+                            <input asp-for="Mostaghelat.Tedadvaheddartabaghe" type="text" min="0" class="form-control" placeholder="تعداد واحد ها در طبقه">
                             <span asp-validation-for="Mostaghelat.Tedadvaheddartabaghe" class="text-danger"></span>
                         </div>
-                        <div class="col-lg-2">
-                            <h4>عرض گذر</h4>
-                            <input asp-for="Mostaghelat.Arzegozar" type="number" class="form-control" placeholder="عرض گذر">
+                        <div class="col-lg-3">
+                            <h5>عرض گذر</h5>
+                            <input asp-for="Mostaghelat.Arzegozar" type="number" min="0" class="form-control" placeholder="عرض گذر">
                             <span asp-validation-for="Mostaghelat.Arzegozar" class="text-danger"></span>
                         </div>
                         <div class="col-lg-2">
                             <h4>عرض ملک</h4>
-                            <input asp-for="Mostaghelat.Arzemelk" type="number" class="form-control" placeholder="عرض ملک">
+                            <input asp-for="Mostaghelat.Arzemelk" type="number" min="0" class="form-control" placeholder="عرض ملک">
                             <span asp-validation-for="Mostaghelat.Arzemelk" class="text-danger"></span>
                         </div>
 
@@ -115,7 +106,7 @@
                         </div>
                         <div class="col-lg-4">
                             <h4>شماره نگهبان</h4>
-                            <input asp-for="Mostaghelat.NegahbaniPhone" type="number" class="form-control" placeholder="شماره نگهبان">
+                            <input asp-for="Mostaghelat.NegahbaniPhone" type="text" class="form-control" placeholder="شماره نگهبان">
                             <span asp-validation-for="Mostaghelat.NegahbaniPhone" class="text-danger"></span>
                         </div>
                     </div>
@@ -127,7 +118,7 @@
                         <div class="">
                             <h4> نمای ساختمان :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Mostaghelat.Homenema" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Mostaghelat.Homenema" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakNema.Count; i++)
                                     {
                                         <option value="@Model.AmlakNema[i].Name">@Model.AmlakNema[i].Name</option>
@@ -141,7 +132,7 @@
                         <div class="">
                             <h4> موقعیت ملک :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Mostaghelat.Homemogheiat" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Mostaghelat.Homemogheiat" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakMogheiatMelk.Count; i++)
                                     {
                                         <option value="@Model.AmlakMogheiatMelk[i].Name">@Model.AmlakMogheiatMelk[i].Name</option>
@@ -177,7 +168,7 @@
                         <div class="">
                             <h4> تاسیسات گرمایشی و سرمایشی :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Mostaghelat.Hometasisat" onchange="checkcityval()">
+                                <select class="form-control select2" multiple style="padding:10px;width:100%;" asp-for="Mostaghelat.Hometasisat" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakTasisatGarmaieshi.Count; i++)
                                     {
                                         <option value="@Model.AmlakTasisatGarmaieshi[i].Name">@Model.AmlakTasisatGarmaieshi[i].Name</option>
@@ -191,7 +182,7 @@
                         <div class="">
                             <h4> پوشش کف :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Mostaghelat.Homeparking" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Mostaghelat.Homeparking" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakKafes.Count; i++)
                                     {
                                         <option value="@Model.AmlakKafes[i].Name">@Model.AmlakKafes[i].Name</option>
@@ -209,7 +200,7 @@
                         <div class="">
                             <h4> نوع دیوار  :</h4>
                             <div>
-                                <select style="padding:10px;width:100%;" asp-for="Mostaghelat.Homedivar" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Mostaghelat.Homedivar" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakDivars.Count; i++)
                                     {
                                         <option value="@Model.AmlakDivars[i].Name">@Model.AmlakDivars[i].Name</option>
@@ -257,9 +248,9 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="">
-                            <h4> نوع و تعداد پارکینگ :</h4>
+                            <h4> نوع پارکینگ :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Mostaghelat.Homeparking" onchange="checkcityval()">
+                                <select class="form-control select2" multiple style="padding:10px;width:100%;" asp-for="Mostaghelat.Homeparking" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakParking.Count; i++)
                                     {
                                         <option value="@Model.AmlakParking[i].Name">@Model.AmlakParking[i].Name</option>
@@ -310,7 +301,7 @@
                         <div class="">
                             <h4> وضعیت سند :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Mostaghelat.Homesanad" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Mostaghelat.Homesanad" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakSanadStatus.Count; i++)
                                     {
                                         <option value="@Model.AmlakSanadStatus[i].Name">@Model.AmlakSanadStatus[i].Name</option>
@@ -319,7 +310,18 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="col-lg-3">
+                        <div class="">
+                            <h4> امکانات  :</h4>
+                            <select class="form-control select2 text-center" multiple="multiple" data-placeholder="   انتخاب کن  "
+                                    style="width: 100%;direction:rtl;float:right;" name="HomeFacility" id="HomeFacility">
+                                @for (var i = 0; i < Model.HomeFacility.Count; i++)
+                                {
+                                    <option value="@Model.HomeFacility[i].Name">@Model.HomeFacility[i].Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                

@@ -700,6 +700,15 @@
           "lib/netstandard1.0/_._": {}
         }
       },
+      "SmsIrRestful/1.1.3": {
+        "type": "package",
+        "compile": {
+          "lib/SmsIrRestful.dll": {}
+        },
+        "runtime": {
+          "lib/SmsIrRestful.dll": {}
+        }
+      },
       "System.AppContext/4.1.0": {
         "type": "package",
         "dependencies": {
@@ -1269,6 +1278,7 @@
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
           "Microsoft.AspNetCore.Cryptography.KeyDerivation": "2.1.1",
+          "SmsIrRestful": "1.1.3",
           "System.Drawing.Common": "4.5.1"
         },
         "compile": {
@@ -2267,6 +2277,18 @@
         "lib/netstandard1.0/_._",
         "runtime.native.system.4.0.0.nupkg.sha512",
         "runtime.native.system.nuspec"
+      ]
+    },
+    "SmsIrRestful/1.1.3": {
+      "sha512": "ouYKkhQv0zLbdDIPw5Eagpod9828Fd2zQhqt2N2MMPHdCV7oHYuAvClSBS4Pru1MclEvH5mmLfE7cgeFZ9ea+w==",
+      "type": "package",
+      "path": "smsirrestful/1.1.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/SmsIrRestful.dll",
+        "smsirrestful.1.1.3.nupkg.sha512",
+        "smsirrestful.nuspec"
       ]
     },
     "System.AppContext/4.1.0": {
@@ -4588,5 +4610,17 @@
         "warn": true
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'SmsIrRestful 1.1.3' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.1'. This package may not be fully compatible with your project.",
+      "libraryId": "SmsIrRestful",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.1"
+      ]
+    }
+  ]
 }

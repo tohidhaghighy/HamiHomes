@@ -31,6 +31,16 @@ namespace AmlakWebApplication.Controllers
             return View(_context.MahalleRepository.GetAllWithWhereandInclude("Nahie",a =>a.NahieId==id));
         }
 
+        public async Task<IActionResult> ListDirection(int mahalleid)
+        {
+            var nahielist = new ViewModelLayer.City.NahieDirect();
+            nahielist.nahieid = mahalleid;
+            nahielist.NahieDirections = await _context.NahieDirectionRepository.GetManyAsync(a => a.Type == 1);
+            nahielist.OnlyThisNahieDirections = await _context.NahieDirectionRepository.GetManyAsync(a =>a.NahieId==mahalleid && a.Type == 1);
+            nahielist.Mahalle = await _context.MahalleRepository.GetAllAsync();
+            return View(nahielist);
+        }
+
         public async Task<IActionResult> Create(int id)
         {
             if (id == 0)
@@ -89,5 +99,32 @@ namespace AmlakWebApplication.Controllers
             return false;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> InsertDirection(int mahalleid, string gpsx, string gpsy)
+        {
+            try
+            {
+                var nahiedir = new NahieDirections();
+                nahiedir.Gpsx = gpsx;
+                nahiedir.Gpsy = gpsy;
+                nahiedir.NahieId = mahalleid;
+                nahiedir.Type = 1;
+                _context.NahieDirectionRepository.Insert(nahiedir);
+                await _context.CommitAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                //Log the error (uncomment ex variable name and write a log.
+                ModelState.AddModelError("", "با مدیر سایت تماس بگیرید مشکل سروری است");
+                _context.LogRepository.Insert(new Log()
+                {
+                    LogController = "NahieManagment",
+                    LogText = ex.ToString(),
+                    LogView = "CreateItem"
+                });
+
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

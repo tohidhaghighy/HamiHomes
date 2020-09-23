@@ -23,14 +23,25 @@ namespace AmlakWebApplication.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ZaminRepository.GetManyAsyncWithInclude("Home"));
+            var main = new ViewModelLayer.HomeManagment.MainSearch();
+            main.Contracts = _context.ContractRepository.GetAllWithWhereandTwoInclude("Home", "Adviser", a => a.Home.IsShow == false && a.Home.Hometype == 3).ToList();
+            main.Mahalles = await _context.MahalleRepository.GetAllAsync();
+            return View(main);
+        }
+
+        public async Task<IActionResult> ShowGrounds()
+        {
+            var main = new ViewModelLayer.HomeManagment.MainSearch();
+            main.Contracts = _context.ContractRepository.GetAllWithWhereandTwoInclude("Home", "Adviser", a => a.Home.IsShow == true && a.Home.Hometype == 3 && (a.TypContract == DomainLayer.Enums.TypeHome.Buy || a.TypContract == DomainLayer.Enums.TypeHome.Rent || a.TypContract == DomainLayer.Enums.TypeHome.build)).ToList();
+            main.Mahalles = await _context.MahalleRepository.GetAllAsync();
+            return View(main);
         }
 
         public async Task<IActionResult> Create(int homeid, int hometype, int contracttype)
         {
             var Ground = new ZaminFacility();
-            var typehomeid = (TypeHome)hometype;
-            var contracttypeid = (MelkType)contracttype;
+            var typehomeid = (TypeHome)contracttype;
+            var contracttypeid = (MelkType)hometype;
             Ground.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetManyAsync(a => a.TypeHome == typehomeid && a.MelkType == contracttypeid);
             Ground.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.TypeHome == typehomeid && a.MelkType == contracttypeid);
             Ground.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.TypeHome == typehomeid && a.MelkType == contracttypeid);
@@ -39,15 +50,23 @@ namespace AmlakWebApplication.Controllers
             return View(Ground);
         }
 
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Update(int homeid, int hometype, int contracttype)
         {
             var Ground = new ZaminFacility();
-            Ground.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetAllAsync();
-            Ground.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetAllAsync();
-            Ground.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetAllAsync();
-            Ground.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetAllAsync();
-            Ground.Zamin = _context.ZaminRepository.GetById(id);
-            return View(Ground);
+            var typehomeid = (TypeHome)contracttype;
+            var contracttypeid = (MelkType)hometype;
+            Ground.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetManyAsync(a => a.TypeHome == typehomeid && a.MelkType == contracttypeid);
+            Ground.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.TypeHome == typehomeid && a.MelkType == contracttypeid);
+            Ground.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.TypeHome == typehomeid && a.MelkType == contracttypeid);
+            Ground.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.TypeHome == typehomeid && a.MelkType == contracttypeid);
+            ViewData["Id"] = homeid;
+            var zaminone = await _context.ZaminRepository.GetManyAsync(a => a.HomeId == homeid);
+            if (zaminone != null)
+            {
+                Ground.Zamin = zaminone.FirstOrDefault();
+                return View(Ground);
+            }
+            return RedirectToAction("Create", new { homeid = homeid, hometype = hometype, contracttype = contracttype });
         }
 
         [HttpPost]
@@ -84,7 +103,7 @@ namespace AmlakWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateItem(Zamin zamin, string[] homestatus, string[] homeemtiaz)
+        public async Task<IActionResult> UpdateItem(Zamin zamin,int HomeId,int Id, string[] homestatus, string[] homeemtiaz)
         {
 
             try
@@ -93,6 +112,8 @@ namespace AmlakWebApplication.Controllers
                 {
                     zamin.Homevaziate = string.Join(" , ", homestatus);
                     zamin.HomeEmtiaz = string.Join(" , ", homeemtiaz);
+                    zamin.HomeId = HomeId;
+                    zamin.Id = Id;
                     _context.ZaminRepository.Update(zamin);
                     await _context.CommitAsync();
                     return RedirectToAction("Index", "HomeGalleryManagment", new { homeid = zamin.HomeId });

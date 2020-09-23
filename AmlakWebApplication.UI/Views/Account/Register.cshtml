@@ -1,4 +1,4 @@
-﻿
+﻿@model DomainLayer.User
 @{
     Layout = null;
 }
@@ -7,19 +7,48 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Register</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان" />
+    <meta name="author" content="توحید حقیقی" />
+    <meta name="keywords" content="توحید حقیقی ,حامی هوم , خرید ملک , سپردن ملک, خرید ,فروش, اجاره , سپردن,جستجو ملک, خانه,اپارتمان,ویلا,حیاط باغ دار,باغ و باغچه, انبار" />
+    <meta name="" content="توحید حقیقی" />
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Hami Homes - ثبت نام</title>
+    <link rel="icon" type="image/x-icon" href="~/img/logo2.png" />
+
+
+
+    <meta name="twitter:site" content="Hami Homes - حامی هوم">
+    <meta name="twitter:title" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان">
+    <meta name="twitter:description" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان">
+    <meta name="twitter:creator" content="توحید حقیقی">
+    <meta name="twitter:image:src" content="~/img/logo2.png">
+
+    <meta itemprop="name" content="Hami Homes - حامی هوم">
+    <meta itemprop="description" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان">
+    <meta itemprop="image" content="~/img/logo2.png">
+
+    <meta property="og:title" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان" />
+    <meta property="og:type" content="personal page" />
+    <meta property="og:url" content="~/img/logo2.png" />
+    <meta property="og:image" content="~/img/logo2.png" />
+    <meta property="og:description" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان" />
+    <meta property="og:site_name" content="Hami Homes - حامی هوم" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <link href="~/lib/login/all.css" rel="stylesheet" />
     <link href="~/css/Custom.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         :root {
             --input-padding-x: 1.5rem;
             --input-padding-y: .75rem;
         }
 
-      
+
 
         .card-signin {
             border: 0;
@@ -56,13 +85,14 @@
         }
 
         @@media only screen and (min-width: 600px) {
-  #cardview{
-      padding-right:30%
-  }
-  #subcardview{
-      width:60%
-  }
-}
+            #cardview {
+                padding-right: 30%
+            }
+
+            #subcardview {
+                width: 60%
+            }
+        }
     </style>
 </head>
 <body style="background-image:url(/img/houseback.png); background-repeat: no-repeat;background-size: cover;">
@@ -73,28 +103,44 @@
                 <div class="card card-signin my-5" style="background-color:white;border-radius:10px;" id="subcardview">
                     <div class="card-body">
                         <h3 class="text-center" style="padding-bottom:20px;">ثبت نام</h3>
-                        <form class="form-signin">
-                            <div class="form-label-group text-center">
-                                <input type="text" id="inputEmail" class="form-control" placeholder="نام کاربری" style="height:50px;text-align:center;font-size:15px;font-weight:bold" required>
+                        <form asp-action="Register" class="form-signin">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                            <span asp-validation-for="Mobile" class="text-danger"></span>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                            <div class="row " style="direction:ltr;">
+                                <div class="col-lg-6">
+                                    <div class="form-label-group text-center  has-feedback">
+                                        <input asp-for="Family" type="text" class="form-control" placeholder="نام خانوادگی" style="height:50px;text-align:center;font-size:15px;font-weight:bold" required>
+                                        <span class="glyphicon glyphicon-user form-control-feedback" style="padding-top:10px"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-label-group text-center  has-feedback">
+                                        <input asp-for="Name" type="text" class="form-control" placeholder="نام " style="height:50px;text-align:center;font-size:15px;font-weight:bold" required>
+                                        <span class="glyphicon glyphicon-user form-control-feedback" style="padding-top:10px"></span>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="form-label-group text-center">
-                                <input type="text" id="inputEmail" class="form-control" placeholder="موبایل" style="height:50px;text-align:center;font-size:15px;font-weight:bold" required>
+                            <div class="form-label-group text-center  has-feedback">
+                                <input asp-for="Username" type="text" class="form-control" placeholder="نام کاربری" style="height:50px;text-align:center;font-size:15px;font-weight:bold" required>
+                                <span class="glyphicon glyphicon-user form-control-feedback" style="padding-top:10px"></span>
                             </div>
-                            <div class="form-label-group text-center">
-                                <input type="text" id="inputEmail" class="form-control" placeholder="کد تایید" style="height:50px;text-align:center;font-size:15px;font-weight:bold" required>
+                            <div class="form-label-group text-center has-feedback">
+                                <input asp-for="Mobile" type="text" class="form-control" placeholder="موبایل" style="height:50px;text-align:center;font-size:15px;font-weight:bold" required>
+                                <span class="glyphicon glyphicon-phone form-control-feedback" style="padding-top:10px"></span>
+                            </div>
+                            <div class="form-label-group text-center has-feedback">
+                                <input asp-for="Password" type="password" class="form-control" placeholder="پسورد" style="height:50px;text-align:center;font-size:15px;font-weight:bold" required>
+                                <span class="glyphicon glyphicon-pencil form-control-feedback" style="padding-top:10px"></span>
+                            </div>
+                            <div class="form-label-group text-center has-feedback">
+                                <input name="repass" id="repass" type="password" class="form-control" placeholder="تکرار پسورد" style="height:50px;text-align:center;font-size:15px;font-weight:bold" required>
+                                <span class="glyphicon glyphicon-pencil form-control-feedback" style="padding-top:10px"></span>
                             </div>
 
-                            <div class="form-label-group text-center">
-                                <input type="password" id="inputPassword" class="form-control" placeholder="پسورد" style="height:50px;text-align:center;font-size:15px;font-weight:bold" required>
-                            </div>
-                            <div class="form-label-group text-center">
-                                <input type="password" id="inputPassword" class="form-control" placeholder="تکرار پسورد" style="height:50px;text-align:center;font-size:15px;font-weight:bold" required>
-                            </div>
-
-                            <div class="custom-control custom-checkbox mb-3" style="padding-bottom:10px;padding-top:10px;">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1" style="font-size:15px;font-weight:bold">مرا به یاد داشته باش ؟</label>
-                            </div>
                             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" style="font-size:15px;font-weight:bold">ثبت نام</button>
                             <a class="btn btn-lg btn-link btn-block text-uppercase" style="font-size:15px;font-weight:bold" href="/Account/Login">قبلا ثبت نام کرده ام</a>
                             <hr class="my-4">
@@ -104,5 +150,11 @@
             </div>
         </div>
     </div>
+    <script>
+         $(document).on("keydown", "input", function(e) {
+  if (e.which==13) e.preventDefault();
+});
+
+    </script>
 </body>
 </html>

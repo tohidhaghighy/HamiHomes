@@ -1,0 +1,188 @@
+﻿@model ViewModelLayer.Gallery.Gallery
+@{
+    ViewData["Title"] = "Gallery";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="~/css/alert/sweetalert.css" rel="stylesheet" />
+<script src="~/css/alert/sweetalert.js"></script>
+<style>
+    .green {
+        background-color: #6fb936;
+    }
+
+    .thumb {
+        margin-bottom: 30px;
+    }
+
+    .page-top {
+        margin-top: 85px;
+    }
+
+
+    img.zoom {
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
+        object-fit: cover;
+        -webkit-transition: all .3s ease-in-out;
+        -moz-transition: all .3s ease-in-out;
+        -o-transition: all .3s ease-in-out;
+        -ms-transition: all .3s ease-in-out;
+    }
+
+
+    .transition {
+        -webkit-transform: scale(1.2);
+        -moz-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+
+    .modal-header {
+        border-bottom: none;
+    }
+
+    .modal-title {
+        color: #000;
+    }
+
+    .modal-footer {
+        display: none;
+    }
+
+    .img-hover-zoom {
+        height: 200px; /* [1.1] Set it as per your need */
+    }
+
+        /* [2] Transition property for smooth transformation of images */
+        .img-hover-zoom img {
+            transition: transform .5s ease;
+        }
+
+        /* [3] Finally, transforming the image when container gets hovered */
+        .img-hover-zoom:hover img {
+            transform: scale(1.2);
+        }
+</style>
+
+<div class="text-center" style="background:rgba(202, 199, 199, 0.50)">
+    <h4 class="text-center" style="padding-top:80px;padding-bottom:10px;">اطلاعات ملک شما با موفقیت ثبت گردید پس از بررسی منتشر خواهد شد</h4>
+    <h6 class="text-center" style="padding-top:10px;padding-bottom:50px;color:rgba(41, 41, 41, 0.75)">برای بیشتر دیده شدن ملک خود در این قسمت میتوانید عکس اپلود کنید</h6>
+</div>
+
+<div class="container" style="margin-top:50px;">
+    <div class="box box-danger">
+        <form asp-action="UploadItem" enctype="multipart/form-data">
+            <div class="box-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
+
+                <div class="form-group">
+                    <input type="number" style="display:none;" value="">
+                </div>
+                <input type="number" placeholder="عکس خانه " value="@ViewData["Id"]" name="HomeId" id="HomeId" style="display:none;">
+                <input type="number" value="@Model.User.Id" name="userid" id="userid" style="display:none;">
+                <div class="form-group">
+                    <label>عکس</label>
+                    <input type="file" placeholder="عکس خانه " name="Image" id="Image">
+                    <span class="text-danger"></span>
+                </div>
+
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">درج عکس جدید</button>
+                </div>
+
+            </div>
+        </form>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+</div>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="">
+        <div class="" style="margin:30px;padding-bottom:100px;">
+
+            <div class="row">
+                @{
+                    foreach (var item in Model.ListGallery)
+                    {
+                        <div class="col-lg-3 col-md-4 col-xs-6" >
+                            <a class="" onclick="deleteitem(@item.Id)" style="margin:10px;">
+                                <img src="@item.Url" class="zoom img-fluid " alt="" style="padding:10px;">
+                            </a>
+                        </div>
+                    }
+                }
+
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        $(".fancybox").fancybox({
+            openEffect: "none",
+            closeEffect: "none"
+        });
+
+        $(".zoom").hover(function () {
+
+            $(this).addClass('transition');
+        }, function () {
+
+            $(this).removeClass('transition');
+        });
+    });
+
+
+    function deleteitem(id) {
+        swal({
+            title: "آیا میخواهید حذف شود؟",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "بله حذف شود",
+            cancelButtonText: "خیر",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+                    sendtoservertodelete(id);
+
+                } else {
+                    swal("صرف نظر", "حذف نشد", "error");
+                }
+            });
+    }
+
+    function sendtoservertodelete(id) {
+        $.ajax({
+            type: "Post",
+            url: '/AllHomeType/DeleteImage',
+            data: { id: id },
+            success: function (data) {
+                window.location.reload();
+            }
+        });
+        }
+
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

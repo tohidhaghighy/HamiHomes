@@ -23,27 +23,45 @@ namespace AmlakWebApplication.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.HomeAnbarRepository.GetManyAsyncWithInclude("Home"));
+            var main = new ViewModelLayer.HomeManagment.MainSearch();
+            main.Contracts = _context.ContractRepository.GetAllWithWhereandTwoInclude("Home", "Adviser", a => a.Home.IsShow == false && a.Home.Hometype==8).ToList();
+            main.Mahalles = await _context.MahalleRepository.GetAllAsync();
+            return View(main);
+        }
+        public async Task<IActionResult> ShowAnbars()
+        {
+            var main = new ViewModelLayer.HomeManagment.MainSearch();
+            main.Contracts = _context.ContractRepository.GetAllWithWhereandTwoInclude("Home", "Adviser", a => a.Home.IsShow == true && a.Home.Hometype == 8 && (a.TypContract == DomainLayer.Enums.TypeHome.Buy || a.TypContract == DomainLayer.Enums.TypeHome.Rent || a.TypContract == DomainLayer.Enums.TypeHome.build)).ToList();
+            main.Mahalles = await _context.MahalleRepository.GetAllAsync();
+            return View(main);
         }
 
         public async Task<IActionResult> Create(int homeid,int hometype,int contracttype)
         {
             var anbar = new AnbarFacility();
-            var typehomeid = (MelkType)hometype;
-            var contracttypeid = (TypeHome)contracttype;
+            var contracttypeid = (TypeHome)hometype;
+            var typehomeid = (MelkType)contracttype;
+
             anbar.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetManyAsync(a=>a.TypeHome == contracttypeid && a.MelkType == typehomeid);
             ViewData["Id"] = homeid;
             return View(anbar);
         }
 
 
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Update(int homeid, int hometype, int contracttype)
         {
             var anbar = new AnbarFacility();
-            anbar.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetAllAsync();
-            anbar.Anbar = _context.HomeAnbarRepository.GetById(id);
-            anbar.Selectedlist = anbar.Anbar.HomeEmtiaz.Split(new char[] { ',' });
-            return View(anbar);
+            var contracttypeid = (TypeHome)hometype;
+            var typehomeid = (MelkType)contracttype;
+            anbar.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            ViewData["Id"] = homeid;
+            var findhome = await _context.HomeAnbarRepository.GetManyAsync(a => a.HomeId == homeid);
+            if (findhome!=null)
+            {
+                anbar.Anbar = findhome.FirstOrDefault();
+                return View(anbar);
+            }
+            return RedirectToAction("Create",new { homeid =homeid , hometype =hometype, contracttype = contracttype });
         }
 
         [HttpPost]
@@ -87,7 +105,7 @@ namespace AmlakWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateItem(AnbarFacility facility, int HomeId, string[] emtiaz)
+        public async Task<IActionResult> UpdateItem(AnbarFacility facility,int Id, int HomeId, string[] emtiaz)
         {
             try
             {
@@ -102,11 +120,11 @@ namespace AmlakWebApplication.Controllers
                         NegahbaniName = facility.Anbar.NegahbaniName,
                         NegahbaniPhone = facility.Anbar.NegahbaniPhone,
                         HomeEmtiaz = emtiazlist,
-                        Id=facility.Anbar.Id
+                        Id=Id
                     };
                     _context.HomeAnbarRepository.Update(anbar);
                     await _context.CommitAsync();
-                    return RedirectToAction("Index", "HomeGalleryManagment", new { homeid = facility.Anbar.HomeId });
+                    return RedirectToAction("Index", "HomeGalleryManagment", new { homeid = HomeId });
                 }
             }
             catch (DbUpdateException ex)

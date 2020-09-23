@@ -17,7 +17,8 @@ namespace AmlakWebApplication
     {
         public static void Main(string[] args)
         {
-            var host=CreateWebHostBuilder(args).UseKestrel().Build();
+            //CreateWebHostBuilder(args).Build().Run();
+            var host = CreateWebHostBuilder(args).UseKestrel().Build();
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;

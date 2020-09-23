@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using ViewModelLayer.AdvisorManagment;
 using Utilities.Hash;
 using Microsoft.EntityFrameworkCore;
+using AmlakWebApplication.Models;
 
 namespace AmlakWebApplication.Controllers
 {
@@ -33,12 +34,15 @@ namespace AmlakWebApplication.Controllers
             main.buildedCount = find.Where(a => a.TypContract == TypeHome.builded).Count();
             main.rentCount = find.Where(a => a.TypContract == TypeHome.Rent).Count();
             main.rentedCount = find.Where(a => a.TypContract == TypeHome.Rented).Count();
+            main.Mahalles = await _context.MahalleRepository.GetAllAsync();
+            main.Regions = await _context.RegionRepository.GetAllAsync();
+            main.Cities = await _context.CityRepository.GetManyAsyncWithInclude("Region");
             return View(main);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateItem(Adviser adviser, IFormFile Image, IFormFile BackgroundImage)
+        public async Task<IActionResult> UpdateItem(Adviser adviser,int region,int city,string[] mahale, IFormFile Image, IFormFile BackgroundImage)
         {
             var findadviser = _context.AdviserRepository.GetById(adviser.Id);
             if (Image != null)
@@ -51,7 +55,7 @@ namespace AmlakWebApplication.Controllers
                     await Image.CopyToAsync(stream);
 
                 }
-                findadviser.Image = fileName;
+                findadviser.Image = ImageUrl.url + fileName;
             }
 
             if (BackgroundImage != null)
@@ -64,7 +68,7 @@ namespace AmlakWebApplication.Controllers
                     await BackgroundImage.CopyToAsync(stream);
 
                 }
-                findadviser.BackgroundImage = fileName;
+                findadviser.BackgroundImage = ImageUrl.url + fileName;
             }
 
             if (adviser.Password != "" && adviser.Password != null)
@@ -79,6 +83,8 @@ namespace AmlakWebApplication.Controllers
             findadviser.Family = adviser.Family;
             findadviser.Mobile = adviser.Mobile;
             findadviser.RentTakhasos = adviser.RentTakhasos;
+            findadviser.Manategh= string.Join(" , ", mahale);
+            findadviser.CityId = city;
 
             _context.AdviserRepository.Update(findadviser);
             await _context.CommitAsync();

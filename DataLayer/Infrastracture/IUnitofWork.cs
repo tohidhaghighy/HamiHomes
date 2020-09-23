@@ -4,6 +4,7 @@ using DataLayer.Repository.Interfaces.Contract;
 using DataLayer.Repository.Interfaces.Home;
 using DataLayer.Repository.Interfaces.Location;
 using DataLayer.Repository.Interfaces.Magazin;
+using DataLayer.Repository.Interfaces.Sazande;
 using DataLayer.Repository.Interfaces.Setting;
 using DataLayer.Repository.Repositories;
 using DomainLayer;
@@ -17,10 +18,14 @@ namespace DataLayer.Infrastracture
 {
     public interface IUnitofWork
     {
+        ISazandeRepository SazandeRepository { get; }
+        ISazandeGallery SazandeGalleryRepository { get; }
+        IHomeSazandeRepository HomeSazandeRepository { get; }
         IUserRepository UserRepository { get; }
         ILogRepository LogRepository { get; }
         IAdminRepository AdminRepository { get; }
         INahieRepository NahieRepository { get; }
+        INahieDirectionRepository NahieDirectionRepository { get; }
         IMahalleRepository MahalleRepository { get; }
         ICityRepository CityRepository { get; }
         IRegionRepository RegionRepository { get; }
@@ -74,6 +79,7 @@ namespace DataLayer.Infrastracture
         IMetrazSettingRepository MetrazSettingRepository { get; }
         IVadieSettingRepository VadieSettingRepository { get; }
         IEjareSettingRepository EjareSettingRepository { get; }
+        ICustomerRepository CustomerRepository { get; }
 
         void Commit();
 

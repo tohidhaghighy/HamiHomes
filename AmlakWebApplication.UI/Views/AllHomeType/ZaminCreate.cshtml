@@ -1,0 +1,146 @@
+﻿@model ViewModelLayer.Home.ZaminFacility
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<link href="~/lib/multiselect/multiselect.css" rel="stylesheet" />
+<script src="~/lib/multiselect/multiselect.js"></script>
+
+<div class="text-center" style="background:rgba(202, 199, 199, 0.50)">
+    <h2 class="text-center" style="padding-top:60px;padding-bottom:40px;">ثبت ملک جدید</h2>
+</div>
+
+
+<div class="container" style="margin-top:50px;">
+    <div class="box box-danger">
+        <div class="box-header">
+        </div>
+        <form asp-action="CreateZaminFacility" asp-controller="CreateHomeType" method="post">
+
+            <div class="box-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
+
+                <input name="HomeId" id="HomeId" type="number" style="display:none" value="@ViewData["Id"]">
+                <input name="userid" id="userid" type="number" style="display:none" value="@Model.User.Id">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <h6>عرض گذر</h6>
+                            <input asp-for="Zamin.Arzegozar" type="number" class="form-control" min="0" placeholder="عرض گذر">
+                            <span asp-validation-for="Zamin.Arzegozar" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-2">
+                            <h6>عرض ملک</h6>
+                            <input asp-for="Zamin.Arzemelk" type="number" min="0" class="form-control" placeholder="عرض ملک">
+                            <span asp-validation-for="Zamin.Arzemelk" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h6>نام نگهبان</h6>
+                            <input asp-for="Zamin.NegahbaniName" type="text" class="form-control" placeholder="نام نگهبان">
+                            <span asp-validation-for="Zamin.NegahbaniName" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-4">
+                            <h6>شماره نگهبان</h6>
+                            <input asp-for="Zamin.NegahbaniPhone" type="text" class="form-control" placeholder="شماره نگهبان">
+                            <span asp-validation-for="Zamin.NegahbaniPhone" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="">
+                            <h6> موقعیت ملک :</h6>
+                            <div class="" style="">
+                                <select class="selectpicker" multiple style="padding:10px;width:90%;" asp-for="Zamin.Homemogheiat" onchange="checkcityval()">
+                                    @for (var i = 0; i < Model.AmlakMogheiatMelk.Count; i++)
+                                    {
+                                        <option value="@Model.AmlakMogheiatMelk[i].Name">@Model.AmlakMogheiatMelk[i].Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-lg-4">
+                        <div class="">
+                            <h6> وضعیت سند :</h6>
+                            <div class="" style="">
+                                <select class="selectpicker" style="padding:10px;width:90%;" asp-for="Zamin.Homesanad" onchange="checkcityval()">
+                                    @for (var i = 0; i < Model.AmlakSanadStatus.Count; i++)
+                                    {
+                                        <option value="@Model.AmlakSanadStatus[i].Name">@Model.AmlakSanadStatus[i].Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-4">
+                        <div class="">
+                            <h6> وضعیت ملک :</h6>
+                            <div class="" style="">
+                                <select class="selectpicker" multiple="multiple" data-placeholder="  انتخاب کن  "
+                                        style="width: 90%;direction:rtl;float:right;" name="homestatus" id="homestatus">
+                                    @for (var i = 0; i < Model.AmlakMelkStatus.Count; i++)
+                                    {
+                                        <option value="@Model.AmlakMelkStatus[i].Name">@Model.AmlakMelkStatus[i].Name</option>
+                                    }
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <hr />
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="">
+                            <h6> امتیاز  :</h6>
+                            <select class="selectpicker" multiple="multiple" data-placeholder="   انتخاب کن  "
+                                    style="width: 90%;direction:rtl;float:right;" name="homeemtiaz" id="homeemtiaz">
+                                @for (var i = 0; i < Model.AmlakEmtiazes.Count; i++)
+                                {
+                                    <option value="@Model.AmlakEmtiazes[i].Name">@Model.AmlakEmtiazes[i].Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">درج اطلاعات زمین - رفتن به مرحله بعد </button>
+                </div>
+
+            </div>
+        </form>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

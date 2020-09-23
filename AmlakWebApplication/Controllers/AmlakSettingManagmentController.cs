@@ -124,7 +124,7 @@ namespace AmlakWebApplication.Controllers
             new KeyValue() { Id=4,Name= "کلنگی" },
             new KeyValue() { Id=5,Name= "اداری" },
             new KeyValue() { Id=6,Name= "مغازه" },
-            new KeyValue() { Id=7,Name= "مستقلات" },
+            new KeyValue() { Id=7,Name= "مستغلات" },
             new KeyValue() { Id=8,Name= "انبار " },
             new KeyValue() { Id=9,Name= "باغ" },new KeyValue() { Id=10,Name= "ویلا" }};
             item.Hometypes = hometypelist;
@@ -134,7 +134,7 @@ namespace AmlakWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateItem(int Id,int MelkTypeId,int HomeTypeId,string name)
+        public async Task<IActionResult> CreateItem(int Id,int MelkTypeId,int HomeTypeId,string name,Boolean status)
         {
             try
             {
@@ -147,6 +147,7 @@ namespace AmlakWebApplication.Controllers
                             Name = name,
                             MelkType = (MelkType)MelkTypeId,
                             TypeHome = (TypeHome)HomeTypeId,
+                            ShowinSearch=status
                         });
                     }
                     else if (Id==2)
@@ -156,6 +157,7 @@ namespace AmlakWebApplication.Controllers
                             Name = name,
                             MelkType = (MelkType)MelkTypeId,
                             TypeHome = (TypeHome)HomeTypeId,
+                            ShowinSearch = status
                         });
                     }
                     else if (Id==3)
@@ -165,6 +167,7 @@ namespace AmlakWebApplication.Controllers
                             Name = name,
                             MelkType = (MelkType)MelkTypeId,
                             TypeHome = (TypeHome)HomeTypeId,
+                            ShowinSearch = status
                         });
                     }
                     else if (Id == 4)
@@ -174,6 +177,7 @@ namespace AmlakWebApplication.Controllers
                             Name = name,
                             MelkType = (MelkType)MelkTypeId,
                             TypeHome = (TypeHome)HomeTypeId,
+                            ShowinSearch = status
                         });
                     }
                     else if (Id == 5)
@@ -183,6 +187,7 @@ namespace AmlakWebApplication.Controllers
                             Name = name,
                             MelkType = (MelkType)MelkTypeId,
                             TypeHome = (TypeHome)HomeTypeId,
+                            ShowinSearch = status
                         });
                     }
                     else if (Id == 6)
@@ -192,6 +197,7 @@ namespace AmlakWebApplication.Controllers
                             Name = name,
                             MelkType = (MelkType)MelkTypeId,
                             TypeHome = (TypeHome)HomeTypeId,
+                            ShowinSearch = status
                         });
                     }
                     else if (Id == 7)
@@ -201,6 +207,7 @@ namespace AmlakWebApplication.Controllers
                             Name = name,
                             MelkType = (MelkType)MelkTypeId,
                             TypeHome = (TypeHome)HomeTypeId,
+                            ShowinSearch = status
                         });
                     }
                     else if (Id == 8)
@@ -210,6 +217,7 @@ namespace AmlakWebApplication.Controllers
                             Name = name,
                             MelkType = (MelkType)MelkTypeId,
                             TypeHome = (TypeHome)HomeTypeId,
+                            ShowinSearch = status
                         });
                     }
                     else if (Id == 9)
@@ -219,6 +227,7 @@ namespace AmlakWebApplication.Controllers
                             Name = name,
                             MelkType = (MelkType)MelkTypeId,
                             TypeHome = (TypeHome)HomeTypeId,
+                            ShowinSearch = status
                         });
                     }
                     else if (Id == 10)
@@ -228,6 +237,7 @@ namespace AmlakWebApplication.Controllers
                             Name = name,
                             MelkType = (MelkType)MelkTypeId,
                             TypeHome = (TypeHome)HomeTypeId,
+                            ShowinSearch = status
                         });
                     }
                     else if (Id == 11)
@@ -237,6 +247,7 @@ namespace AmlakWebApplication.Controllers
                             Name = name,
                             MelkType = (MelkType)MelkTypeId,
                             TypeHome = (TypeHome)HomeTypeId,
+                            ShowinSearch = status
                         });
                     }
                     else if (Id == 12)
@@ -246,6 +257,7 @@ namespace AmlakWebApplication.Controllers
                             Name = name,
                             MelkType = (MelkType)MelkTypeId,
                             TypeHome = (TypeHome)HomeTypeId,
+                            ShowinSearch = status
                         });
                     }
                     else if (Id == 13)
@@ -255,6 +267,7 @@ namespace AmlakWebApplication.Controllers
                             Name = name,
                             MelkType = (MelkType)MelkTypeId,
                             TypeHome = (TypeHome)HomeTypeId,
+                            ShowinSearch = status
                         });
                     }
                     else if (Id == 14)
@@ -264,6 +277,7 @@ namespace AmlakWebApplication.Controllers
                             Name = name,
                             MelkType = (MelkType)MelkTypeId,
                             TypeHome = (TypeHome)HomeTypeId,
+                            ShowinSearch = status
                         });
                     }
                     else if (Id == 15)
@@ -273,6 +287,7 @@ namespace AmlakWebApplication.Controllers
                             Name = name,
                             MelkType = (MelkType)MelkTypeId,
                             TypeHome = (TypeHome)HomeTypeId,
+                            ShowinSearch = status
                         });
                     }
                     else if (Id == 16)
@@ -282,6 +297,7 @@ namespace AmlakWebApplication.Controllers
                             Name = name,
                             MelkType = (MelkType)MelkTypeId,
                             TypeHome = (TypeHome)HomeTypeId,
+                            ShowinSearch = status
                         });
                     }
                     else if (Id == 17)
@@ -291,6 +307,7 @@ namespace AmlakWebApplication.Controllers
                             Name = name,
                             MelkType = (MelkType)MelkTypeId,
                             TypeHome = (TypeHome)HomeTypeId,
+                            ShowinSearch = status
                         });
                     }
                     else if (Id == 18)
@@ -300,6 +317,7 @@ namespace AmlakWebApplication.Controllers
                             Name = name,
                             MelkType = (MelkType)MelkTypeId,
                             TypeHome = (TypeHome)HomeTypeId,
+                            ShowinSearch = status
                         });
                     }
                     await _context.CommitAsync();
@@ -469,6 +487,97 @@ namespace AmlakWebApplication.Controllers
                 else if (Id == 18)
                 {
                     _context.AmlakKafRepository.Delete(deleteditem);
+                }
+                await _context.CommitAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _context.LogRepository.Insert(new Log()
+                {
+                    LogController = "AmlaksettingManagment",
+                    LogText = ex.ToString(),
+                    LogView = "Delete"
+                });
+            }
+            return false;
+        }
+
+        public async Task<Boolean> SearchStatus(int statusid, int Id)
+        {
+            try
+            {
+                if (Id == 1)
+                {
+                    await _context.AmlakDivarRepository.ChangeStatus(statusid);
+                }
+                else if (Id == 2)
+                {
+                    await _context.AmlakEmtiazRepository.ChangeStatus(statusid);
+                }
+                else if (Id == 3)
+                {
+                    await _context.AmlakJahatvahedRepository.ChangeStatus(statusid);
+                }
+                else if (Id == 4)
+                {
+                    await _context.AmlakKitchenRepository.ChangeStatus(statusid);
+                }
+                else if (Id == 5)
+                {
+                    await _context.AmlakMelStatusRepository.ChangeStatus(statusid);
+                }
+                else if (Id == 6)
+                {
+                    await _context.AmlakMoghiateMelkRepository.ChangeStatus(statusid);
+                }
+                else if (Id == 7)
+                {
+                    await _context.AmlakMoshaatRepository.ChangeStatus(statusid);
+                }
+                else if (Id == 8)
+                {
+                    await _context.AmlakMoshakhaseRepository.ChangeStatus(statusid);
+                }
+                else if (Id == 9)
+                {
+                    await _context.AmlakNemaRepository.ChangeStatus(statusid);
+                }
+                else if (Id == 10)
+                {
+                    await _context.AmlakNoeZaminRepository.ChangeStatus(statusid);
+                }
+                else if (Id == 11)
+                {
+                    await _context.AmlakParkingRepository.ChangeStatus(statusid);
+                }
+                else if (Id == 12)
+                {
+                    await _context.AmlakPishraftStatusRepository.ChangeStatus(statusid);
+                }
+                else if (Id == 13)
+                {
+                    await _context.AmlakSaghfRepository.ChangeStatus(statusid);
+                }
+                else if (Id == 14)
+                {
+                    await _context.AmlakSanadStatusRepository.ChangeStatus(statusid);
+                }
+                else if (Id == 15)
+                {
+                    await _context.AmlakSkeletonRepository.ChangeStatus(statusid);
+                }
+                else if (Id == 16)
+                {
+                    await _context.AmlakTasisatGarmaieshiRepository.ChangeStatus(statusid);
+                }
+                else if (Id == 17)
+                {
+                    await _context.AmlakWcRepository.ChangeStatus(statusid);
+                }
+                else if (Id == 18)
+                {
+                    await _context.AmlakKafRepository.ChangeStatus(statusid);
                 }
                 await _context.CommitAsync();
                 return true;

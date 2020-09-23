@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AmlakWebApplication.Models;
 using DataLayer.Infrastracture;
 using DomainLayer;
 using Microsoft.AspNetCore.Hosting.Internal;
@@ -48,7 +49,7 @@ namespace AmlakWebApplication.Controllers
                         {
                             await Icon.CopyToAsync(stream);
                         }
-                        homegroup.Icon = fileName;
+                        homegroup.Icon = ImageUrl.url + fileName;
                     }
                     _context.HomeGroupRepository.Insert(homegroup);
                     await _context.CommitAsync();

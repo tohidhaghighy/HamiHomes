@@ -9,6 +9,7 @@ namespace ViewModelLayer.HomeManagment
     public class MainSearch
     {
         public List<DomainLayer.Home.Home> Homes { get; set; }
+        public List<DomainLayer.Contract.Contract> Contracts { get; set; }
         public List<Mahalle> Mahalles { get; set; }
         public List<CostSetting> CostSetting { get; set; }
         public List<EjareSetting> EjareSetting { get; set; }

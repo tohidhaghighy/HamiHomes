@@ -189,7 +189,7 @@
                     <div class="" style="padding-top:10px;">
                         @if (Model.Adviser.Image != null && Model.Adviser.Image != "")
                         {
-                            <img src="http://panel.hamihomes.com/images/@Model.Adviser.Image"  style="border-radius:120px;width:90px;height:90px;text-align:center;align-content:center;padding:10px;" />
+                            <img src="@Model.Adviser.Image"  style="border-radius:120px;width:90px;height:90px;text-align:center;align-content:center;padding:10px;" />
                         }
                         else
                         {
@@ -209,9 +209,9 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-12 col-md-6" style="padding-top:30px;padding-left:22px;">
-                    <a class="btn btn-default btn-default" style="color:white;width:150px;padding:10px;float:left;margin-left:20px;" href="/Rezome/Index?id=@Model.Adviser.Id">ثبت رزومه جدید</a>
+                    <a class="btn btn-default btn-default" style="color:white;width:150px;padding:10px;float:left;margin-left:20px;" href="/Rezome/Create?id=@Model.Adviser.Id">ثبت رزومه جدید</a>
                     <a class="btn btn-default btn-danger" style="color:white;width:150px;padding:10px;float:left;margin-left:20px;" onclick="showinfo()">ویرایش اطلاعات</a>
-                    <a class="btn btn-default btn-primary" style="color:white;width:150px;padding:10px;float:left;margin-left:20px;" onclick="shownumberhide()" id="btnnumberphonehide"> <span class="fa fa-phone" style="padding:5px;"></span> تماس با ما</a>
+                    <a class="btn btn-default btn-primary" style="color:white;width:150px;padding:10px;float:left;margin-left:20px;" href="/Rezome/Index?id=@Model.Adviser.Id">املاک رزومه مشاور</a>
                 </div>
 
             </div>
@@ -231,7 +231,7 @@
                         <div class="">
                             @if (Model.Adviser.Image != null && Model.Adviser.Image != "")
                             {
-                                <img src="http://panel.hamihomes.com/images/@Model.Adviser.Image" class="border" style="border-radius:120px;width:200px;height:200px;text-align:center;align-content:center;" />
+                                <img src="@Model.Adviser.Image" class="border" style="border-radius:120px;width:200px;height:200px;text-align:center;align-content:center;" />
                             }
                             else
                             {
@@ -252,12 +252,9 @@
                     </div>
                 </div>
                 <div class="row" style="padding-top:10px;float:left;padding-left:8%;">
-                    <a class="btn btn-default btn-default" style="color:white;width:150px;padding:10px;float:left;margin-left:20px;" href="/Rezome/Index?id=@Model.Adviser.Id">ثبت رزومه جدید</a>
+                    <a class="btn btn-default btn-default" style="color:white;width:150px;padding:10px;float:left;margin-left:20px;" href="/Rezome/Create?id=@Model.Adviser.Id">ثبت رزومه جدید</a>
                     <a class="btn btn-default btn-danger" style="color:white;width:150px;padding:10px;float:left;margin-left:20px;" onclick="showinfo()">ویرایش اطلاعات</a>
-                    <a class="btn btn-default btn-primary" style="color:white;width:150px;padding:10px;margin-right:20px;" onclick="shownumber('@Model.Adviser.Mobile')" id="btnnumberphone">
-                        <span class="fa fa-phone" style="padding:5px;"></span>
-                        تماس با ما
-                    </a>
+                    <a class="btn btn-default btn-primary" style="color:white;width:150px;padding:10px;float:left;margin-left:20px;" href="/Rezome/Index?id=@Model.Adviser.Id">املاک رزومه مشاور</a>
                 </div>
 
             </div>

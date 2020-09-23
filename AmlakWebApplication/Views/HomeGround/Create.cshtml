@@ -18,7 +18,7 @@
 </style>
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
@@ -49,18 +49,13 @@
                     <div class="row">
 
                         <div class="col-lg-2">
-                            <h4>متراژ زمین</h4>
-                            <input asp-for="Zamin.Metrazhzamin" type="number" class="form-control" placeholder="متراژ زمین" value="1">
-                            <span asp-validation-for="Zamin.Metrazhzamin" class="text-danger"></span>
-                        </div>
-                        <div class="col-lg-2">
                             <h4>عرض گذر</h4>
-                            <input asp-for="Zamin.Arzegozar" type="number" class="form-control" placeholder="عرض گذر">
+                            <input asp-for="Zamin.Arzegozar" type="number" class="form-control" min="0" placeholder="عرض گذر">
                             <span asp-validation-for="Zamin.Arzegozar" class="text-danger"></span>
                         </div>
                         <div class="col-lg-2">
                             <h4>عرض ملک</h4>
-                            <input asp-for="Zamin.Arzemelk" type="number" class="form-control" placeholder="عرض ملک">
+                            <input asp-for="Zamin.Arzemelk" type="number" min="0" class="form-control" placeholder="عرض ملک">
                             <span asp-validation-for="Zamin.Arzemelk" class="text-danger"></span>
                         </div>
                     </div>
@@ -76,7 +71,7 @@
                         </div>
                         <div class="col-lg-4">
                             <h4>شماره نگهبان</h4>
-                            <input asp-for="Zamin.NegahbaniPhone" type="number" class="form-control" placeholder="شماره نگهبان">
+                            <input asp-for="Zamin.NegahbaniPhone" type="text" class="form-control" placeholder="شماره نگهبان">
                             <span asp-validation-for="Zamin.NegahbaniPhone" class="text-danger"></span>
                         </div>
                     </div>
@@ -88,7 +83,7 @@
                         <div class="">
                             <h4> موقعیت ملک :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Zamin.Homemogheiat" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Zamin.Homemogheiat" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakMogheiatMelk.Count; i++)
                                     {
                                         <option value="@Model.AmlakMogheiatMelk[i].Name">@Model.AmlakMogheiatMelk[i].Name</option>
@@ -104,7 +99,7 @@
                         <div class="">
                             <h4> وضعیت سند :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;"asp-for="Zamin.Homesanad" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;"asp-for="Zamin.Homesanad" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakSanadStatus.Count; i++)
                                     {
                                         <option value="@Model.AmlakSanadStatus[i].Name">@Model.AmlakSanadStatus[i].Name</option>

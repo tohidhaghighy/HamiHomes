@@ -27,6 +27,15 @@
     .dropdown-menu {
         font-size: 1rem;
     }
+
+     @@media(min-width:767px) {
+        #mobileversion{display:none;}
+        }
+
+     @@media(max-width:767px) {
+        #webversion{display:none;}
+        }
+
 </style>
 
 <div id="boxbackgroundmain" class="mainback" style="box-shadow:inset 0px 80px 30px rgba(10, 10, 10, 0.35)">
@@ -41,19 +50,19 @@
                             </button>
                             <div class="collapse navbar-collapse" id="mynavbar">
                                 <ul class="navbar-nav list-unstyled card-columns">
-                                    <li class="nav-item">
-                                        <a href="/" class="text-red-hover nav-link mr-1"><img src="img/logo2.png" style="width:40px;height:40px;" /></a>
+                                    <li class="nav-item text-center">
+                                        <a href="/" class="text-red-hover nav-link mr-1"><img src="img/logo 3.png" style="width:40px;height:40px;" /></a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item text-center">
                                         <a href="#" class="text-red-hover nav-link mr-1"><p class="text-center" style="color:#FFF;padding:10px"> ارزیابی قیمت </p></a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item text-center">
                                         <a href="#" class=" nav-link mx-1"><p class="text-center" style="color:#FFF;padding:10px"> اخبار </p></a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item text-center">
                                         <a href="#" class="nav-link mx-1 "> <p class="text-center" style="color:#FFF;padding:10px"> قوانین   </p></a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item text-center">
                                         <a href="#" class="nav-link mx-1 "><p class="text-center" style="color:#FFF;background-color:#ca062b;padding:10px;border-radius: 10px 10px 10px 10px;"> املاک ترکیه </p> </a>
                                     </li>
                                     <!--<li class="nav-item">
@@ -67,15 +76,41 @@
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-12 d-none d-sm-block" style="background-color:rgba(0, 0, 0, 0.00);margin-top:6px;font-size:17px;">
                     <div class="row float-right">
-                        <a href="/Account/Login" class="text-center btnchange1" style="margin-left:5px;">ورود</a>
-                        <a href="/Account/Register" class="text-center border btnchange" style="margin-left:25px;margin-right:15px;"><p style="font-size:17px;margin-left:15px;margin-right:15px;margin-bottom:0px;">   ثبت نام </p>  </a>
+                        @{
+                            if (Model.Userid != 0)
+                            {
+                                <a href="/Account/Login" class="text-center btnchange1" style="margin-left:5px;">پنل مدیریت</a>
+                            }
+                            else
+                            {
+                                <a href="/Account/Login" class="text-center btnchange1" style="margin-left:5px;">ورود</a>
+                                <a href="/Account/Register" class="text-center border btnchange" style="margin-left:25px;margin-right:15px;"><p style="font-size:17px;margin-left:15px;margin-right:15px;margin-bottom:0px;">   ثبت نام </p>  </a>
+                            }
+
+                        }
+
                     </div>
                 </div>
             </div>
         </div>
+        <div class="container" id="mobileversion" style="padding-top:30px;">
+            <div class="row">
+                <div class="col-sm-6" style="padding:10px;">
+                    <a href="#" class="btn-block text-center btnsearch" style="font-size:17px;" onclick="gotosearchsmall(1)">خرید</a>
+                </div>
+                <div class="col-sm-6" style="padding:10px;">
+                    <a href="#" class="btn-block text-center btnsearch" style="font-size:17px;" onclick="gotosearchsmall(2)">رهن و اجاره</a>
+                </div>
+                <div class="col-sm-6" style="padding:10px;">
+                    <a href="#" class="btn-block text-center btnsearch" style="font-size:17px;" onclick="gotosearchsmall(3)">ساخت و ساز</a>
+                </div>
+                <div class="col-sm-6" style="padding:10px;">
+                    <a href="#" class="btn-block text-center btnsearch" style="font-size:17px;" onclick="gotosearchsmall(4)"> فروخته شده</a>
+                </div>
+            </div>
+        </div>
 
-
-        <div class="container" style="">
+        <div class="container" id="webversion">
             <div class="row">
                 <div class="col-lg-10 col-sm-12 col-md-10 padd">
                     <div style="background-color:rgba(0,0,0,0.6);border-radius: 4px 4px 4px 4px;" id="backblack">
@@ -386,7 +421,18 @@
                         <div class="container text-center " style="margin-top:48px;">
                             <br>
                             <br>
-                            <a href="#" class="text-center btnchange" style="padding:10px;border-radius: 7px 7px 7px 7px;border: 2px solid white;font-size:20px;"> سپردن ملک  </a>
+                            @{
+                                if (Model.Userid != 0)
+                                {
+                                        <a href="/UserManagment/CreateContract?userid=@Model.Userid" class="text-center btnchange" style="padding:10px;border-radius: 7px 7px 7px 7px;border: 2px solid white;font-size:20px;"> سپردن ملک  </a>
+                                }
+                                else
+                                {
+                                       <a href="/Account/Login" class="text-center btnchange" style="padding:10px;border-radius: 7px 7px 7px 7px;border: 2px solid white;font-size:20px;"> سپردن ملک  </a>
+                                }
+
+                            }
+                            
                         </div>
 
                         <div class="container" style="margin-top:30px;">
@@ -1153,6 +1199,23 @@
 
         }
         else if (witchmenu == 4) {
+
+        }
+
+        }
+
+    function gotosearchsmall(val) {
+        if (val == 1) {
+            window.location.href = "/Search/SearchList?menu=" + witchmenu + "&mincost=" + mincost + "&maxcost=" + maxcost + "&minmetr=" + minmetr + "&maxmetr=" + maxmetr + "&minejare=" + minejare + "&maxejare=" + maxejare + "&selectitem=" + hometypebuy+"&typehome=1";
+            
+        }
+        else if (val == 2) {
+            window.location.href = "/Search/SearchList?menu=" + witchmenu + "&mincost=" + mincost + "&maxcost=" + maxcost + "&minmetr=" + minmetr + "&maxmetr=" + maxmetr + "&minejare=" + minejare + "&maxejare=" + maxejare + "&selectitem=" + hometyperent+"&typehome=2";
+        }
+        else if (val == 3) {
+
+        }
+        else if (val == 4) {
 
         }
 

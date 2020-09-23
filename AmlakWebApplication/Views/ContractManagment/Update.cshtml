@@ -8,7 +8,7 @@
 
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
@@ -59,53 +59,89 @@
                 <label> نوع قرارداد  @s  تنظیم شده ایا میخواهید تغییر دهید</label>
                 <div class="form-group">
                     <label> نوع قرارداد </label>
-                    <select asp-for="Contract.TypContract" id="" class="form-control" style="width:30%">
-                        <option value="1" onclick="sell()" style="text-align:center">خرید و فروش</option>
-                        <option value="2" onclick="rent()" style="text-align:center">رهن و اجاره</option>
-                        <option value="3" onclick="build()" style="text-align:center">ساخت و ساز</option>
-                        <option value="4" onclick="Sell()" style="text-align:center">فروخته شده</option>
-                        <option value="5" onclick="rent()" style="text-align:center">اجاره داده شده</option>
-                        <option value="6" onclick="build()" style="text-align:center">ساخته شده</option>
+                    <select asp-for="Contract.TypContract" class="form-control" style="width:30%" onclick="showandhideitems(this.value);">
+                        <option value="1" style="text-align:center">فروش</option>
+                        <option value="2" style="text-align:center">رهن و اجاره</option>
+                        <option value="3" style="text-align:center">ساخت و ساز</option>
+                        <option value="4" style="text-align:center">فروخته شده</option>
+                        <option value="5" style="text-align:center">اجاره داده شده</option>
+                        <option value="6" style="text-align:center">ساخته شده</option>
                     </select>
                 </div>
-                <div id="buy">
+                @{
+                    if (Model.Contract.TypContract == DomainLayer.Enums.TypeHome.Buy || Model.Contract.TypContract == DomainLayer.Enums.TypeHome.Selled)
+                    {
+                        <div id="buy">
+                            <div class="form-group">
+                                <label style="width:100%">قیمت پیشنهادی ( تومان ) - به عدد</label>
+                                <input id="costbuy" name="costbuy" type="text" class="form-control" placeholder=" قیمت پیشنهادی" style="width:30%;display:inline-block;" value="@Model.Contract.BuyCost" onkeyup="separateNum(this.value,this);" onload="separateNum(this.value,this);">
+                                <h4 style="display:inline-block;padding:10px;color:red" id="txtcost1"></h4>
+                            </div>
+                        </div>
+                        <div id="rent" style="display:none">
+                            <div class="form-group">
+                                <label style="width:100%">قیمت رهن  ( تومان ) - به عدد</label>
+                                <input id="costrahn" name="costrahn" type="text" class="form-control" placeholder="قیمت رهن" style="width:30%;display:inline-block;" value="@Model.Contract.Vadie" onkeyup="separateNum2(this.value,this);" onload="separateNum2(this.value,this);">
+                                <h4 style="display:inline-block;padding:10px;color:red" id="txtcost2"> </h4>
+                            </div>
+                            <div class="form-group">
+                                <label style="width:100%">قیمت اجاره  ( تومان ) - به عدد</label>
+                                <input id="costejare" name="costejare" type="text" class="form-control" placeholder="قیمت اجاره" style="width:30%;display:inline-block;" value="@Model.Contract.RentCOst" onkeyup="separateNum3(this.value,this);" onload="separateNum3(this.value,this);">
+                                <h4 style="display:inline-block;padding:10px;color:red" id="txtcost3"> </h4>
+                            </div>
+
+                        </div>
+                    }
+                    else if (Model.Contract.TypContract == DomainLayer.Enums.TypeHome.Rent || Model.Contract.TypContract == DomainLayer.Enums.TypeHome.Rented)
+                    {
+                        <div id="buy" style="display:none">
+                            <div class="form-group">
+                                <label style="width:100%">قیمت پیشنهادی ( تومان ) - به عدد</label>
+                                <input id="costbuy" name="costbuy" type="text" class="form-control" placeholder=" قیمت پیشنهادی" style="width:30%;display:inline-block;" value="@Model.Contract.BuyCost" onkeyup="separateNum(this.value,this);" onload="separateNum(this.value,this);">
+                                <h4 style="display:inline-block;padding:10px;color:red" id="txtcost1"></h4>
+                            </div>
+                        </div>
+                        <div id="rent">
+                            <div class="form-group">
+                                <label style="width:100%">قیمت رهن  ( تومان ) - به عدد</label>
+                                <input id="costrahn" name="costrahn" type="text" class="form-control" placeholder="قیمت رهن" style="width:30%;display:inline-block;" value="@Model.Contract.Vadie" onkeyup="separateNum2(this.value,this);" onload="separateNum2(this.value,this);">
+                                <h4 style="display:inline-block;padding:10px;color:red" id="txtcost2"> </h4>
+                            </div>
+                            <div class="form-group">
+                                <label style="width:100%">قیمت اجاره  ( تومان ) - به عدد</label>
+                                <input id="costejare" name="costejare" type="text" class="form-control" placeholder="قیمت اجاره" style="width:30%;display:inline-block;" value="@Model.Contract.RentCOst" onkeyup="separateNum3(this.value,this);" onload="separateNum3(this.value,this);">
+                                <h4 style="display:inline-block;padding:10px;color:red" id="txtcost3"> </h4>
+                            </div>
+
+                        </div>
+                    }
+                }
+
+
+
+
+                @if (ViewData["hometype"].ToString() != "3" && ViewData["hometype"].ToString() != "4" && ViewData["hometype"].ToString() != "8" && ViewData["hometype"].ToString() != "9")
+                {
                     <div class="form-group">
-                        <label>قیمت پیشنهادی ( تومان ) - به عدد</label>
-                        <input id="costbuy" name="costbuy" type="text" value="@Model.Contract.SellCOst" class="form-control" placeholder=" قیمت پیشنهادی" style="width:30%" value="0" onkeyup="separateNum(this.value,this);" />
+                        <label style="width:100%">متراژ بنا  ( متر ) - به عدد</label>
+                        <input asp-for="Contract.Metraz" type="number" class="form-control" placeholder=" متراژ" style="width:30%;display:inline-block;" value="@Model.Contract.Metraz" onkeyup="showmetrvalue()">
+                        <h4 style="display:inline-block;padding:10px;color:red" id="txtmetr"></h4>
+                        <span asp-validation-for="Contract.Metraz" class="text-danger"></span>
                     </div>
-                </div>
-                <div id="rent" style="display:none">
+                }
+
+                @if (ViewData["hometype"].ToString() != "6")
+                {
                     <div class="form-group">
-                        <label>قیمت رهن  ( تومان ) - به عدد</label>
-                        <input id="costrahn" name="costrahn" type="text" value="@Model.Contract.Vadie" class="form-control" placeholder="قیمت رهن" style="width:30%" value="0" onkeyup="separateNum(this.value,this);" />
+                        <label style="width:100%">متراژ زمین ( متر ) - به عدد</label>
+                        <input asp-for="Contract.MetrazZamin" type="number" class="form-control" placeholder=" متراژ زمین" style="width:30%;display:inline-block;" value="@Model.Contract.MetrazZamin" onkeyup="showmetrvaluezamin()">
+                        <h4 style="display:inline-block;padding:10px;color:red" id="txtmetrzamin"></h4>
+                        <span asp-validation-for="Contract.MetrazZamin" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <label>قیمت اجاره  ( تومان ) - به عدد</label>
-                        <input id="costejare" name="costejare" type="text" value="@Model.Contract.RentCOst" class="form-control" placeholder="قیمت اجاره" style="width:30%" value="0" onkeyup="separateNum(this.value,this);" />
-                    </div>
-
-                </div>
-                <div class="form-group">
-                    <label>متراژ  ( متر ) - به عدد</label>
-                    <input asp-for="Contract.Metraz" type="number" class="form-control" placeholder=" متراژ" style="width:30%" value="0">
-                    <span asp-validation-for="Contract.Metraz" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label>به @Model.Contract.Adviser.Name @Model.Contract.Adviser.Family واگذار شده آیا میخواهید تغییر دهید : </label>
-                    <select asp-for="Contract.AdviserId" id="" class="form-control" style="width:30%">
-                        @{
-                            foreach (var item in Model.Advisers)
-                            {
-                                <option value="@item.Id" style="text-align:center">@item.Name  @item.Family</option>
-                            }
-                        }
-
-                    </select>
-                </div>
-
+                }
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success">درج قرارداد جدید و رفتن به مرحله بعد</button>
+                    <button type="submit" class="btn btn-success">ویرایش قرارداد جدید و رفتن به مرحله بعد</button>
                 </div>
 
             </div>
@@ -131,9 +167,15 @@
     function build() {
         $("#buy").hide();
         $("#rent").hide();
-        }
+    }
 
-     function separateNum(value, input) {
+    function setval() {
+        priceconvertercost1();
+        priceconvertercost2();
+        priceconvertercost3();
+    }
+
+    function separateNum(value, input) {
         /* seprate number input 3 number */
         var nStr = value + '';
         nStr = nStr.replace(/\,/g, "");
@@ -144,14 +186,141 @@
         while (rgx.test(x1)) {
             x1 = x1.replace(rgx, '$1' + ',' + '$2');
         }
+        priceconvertercost1();
         if (input !== undefined) {
 
             input.value = x1 + x2;
         } else {
             return x1 + x2;
         }
-        }
+    }
 
+    function separateNum2(value, input) {
+        /* seprate number input 3 number */
+        var nStr = value + '';
+        nStr = nStr.replace(/\,/g, "");
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        priceconvertercost2();
+        if (input !== undefined) {
+
+            input.value = x1 + x2;
+        } else {
+            return x1 + x2;
+        }
+    }
+
+    function separateNum3(value, input) {
+        /* seprate number input 3 number */
+        var nStr = value + '';
+        nStr = nStr.replace(/\,/g, "");
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        priceconvertercost3();
+        if (input !== undefined) {
+
+            input.value = x1 + x2;
+        } else {
+            return x1 + x2;
+        }
+    }
+
+    function priceconvertercost1() {
+
+        var cost = document.getElementById("txtcost1");
+        var costbuy = $("#costbuy").val();
+        costbuy = costbuy.split(',').join('');
+        $.ajax({
+            type: "Post",
+            url: '/PriceConverter/AlphabeticPrice',
+            data: { text: costbuy },
+            success: function (data) {
+                cost.innerText = data + " تومان ";
+            }
+        });
+    }
+
+    function priceconvertercost2() {
+        var cost = document.getElementById("txtcost2");
+        var costrehn = $("#costrahn").val();
+        costrehn = costrehn.split(',').join('');
+        $.ajax({
+            type: "Post",
+            url: '/PriceConverter/AlphabeticPrice',
+            data: { text: costrehn },
+            success: function (data) {
+                cost.innerText = data + " تومان ";
+            }
+        });
+    }
+
+    function priceconvertercost3() {
+        var cost = document.getElementById("txtcost3");
+        var costrejare = $("#costejare").val();
+        costrejare = costrejare.split(',').join('');
+        $.ajax({
+            type: "Post",
+            url: '/PriceConverter/AlphabeticPrice',
+            data: { text: costrejare },
+            success: function (data) {
+                cost.innerText = data + " تومان ";
+            }
+        });
+    }
+
+    function showmetrvalue() {
+        var metr = document.getElementById("txtmetr");
+        var metrcontract = $("#Contract_Metraz").val();
+        $.ajax({
+            type: "Post",
+            url: '/PriceConverter/AlphabeticPrice',
+            data: { text: metrcontract },
+            success: function (data) {
+                metr.innerText = data + " متر ";
+            }
+        });
+
+    }
+
+    function showmetrvaluezamin() {
+        var metr = document.getElementById("txtmetrzamin");
+        var metrcontract = $("#Contract_MetrazZamin").val();
+        $.ajax({
+            type: "Post",
+            url: '/PriceConverter/AlphabeticPrice',
+            data: { text: metrcontract },
+            success: function (data) {
+                metr.innerText = data + " متر ";
+            }
+        });
+
+    }
+
+    function showandhideitems(val) {
+        if (val == 1) {
+            sell();
+        } else if (val == 2) {
+            rent();
+        } else if (val == 3) {
+            build();
+        } else if (val == 4) {
+            rent();
+        } else if (val == 5) {
+            sell();
+        } else if (val == 6) {
+            build();
+        }
+    }
 </script>
 
 @section Scripts {

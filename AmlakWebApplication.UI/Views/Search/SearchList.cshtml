@@ -4,6 +4,12 @@
     Layout = "~/Views/Shared/_SearchLayout.cshtml";
 }
 <style>
+    @@media(max-width:767px) {
+        #map {
+            display: none;
+        }
+    }
+
     .zoom {
         padding: 20px;
         transition: transform .2s; /* Animation */
@@ -40,7 +46,7 @@
         color: black;
     }
 
-        .districts-list-item {
+    .districts-list-item {
         direction: rtl;
         width: 100%;
         background-color: #fdfdfd;
@@ -62,15 +68,14 @@
 
     .dropdown-item {
         font-family: sahel;
-        display:inline-block;
+        display: inline-block;
     }
 
     .dropdown-menu {
         font-size: 1rem;
     }
-
 </style>
-<input class="hidden" style="display:none" value="@ViewData["type"]" id="rentbuytextbox"/>
+<input class="hidden" style="display:none" value="@ViewData["type"]" id="rentbuytextbox" />
 <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-12" style="height:100%">
         <div id="map" style="width:100%;height:700px;">
@@ -118,7 +123,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-12" style="border-left: 1px solid rgba(169, 167, 167, 0.60);">
                             <div class="container" onclick="showcostitem()" style="cursor:pointer;">
                                 <div class="text-center" style="padding-top:10px;">
-                                    <p style="font-size:14px;font-weight:bold;color:black;display:inline"  id="changablecostwithcombo">  قیمت : @Model.ShowItems.Mincost - @Model.ShowItems.Maxcost </p>
+                                    <p style="font-size:14px;font-weight:bold;color:black;display:inline" id="changablecostwithcombo">  قیمت : @Model.ShowItems.Mincost - @Model.ShowItems.Maxcost </p>
                                     <span class="fa fa-caret-down"></span>
                                 </div>
                             </div>
@@ -185,7 +190,7 @@
                                     <div class="dropdown" style="margin-right:2px;display:inline-block;background-color:rgba(255, 255, 255, 0.00);border-radius:0px;">
                                         <div class="dropdown">
                                             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="mincostsearch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:black;border:0px;width:100%;font-size:15px;">
-                                                حداقل قیمت  
+                                                حداقل قیمت
                                             </a>
                                             <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;" id="mincostcombo">
                                                 @{
@@ -206,7 +211,7 @@
                                     <div class="dropdown" style="margin-right:2px;display:inline-block;background-color:rgba(255, 255, 255, 0.00);border-radius:0px;">
                                         <div class="dropdown">
                                             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="maxcostsearch" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:rgba(0, 0, 0, 0.00);color:black;border:0px;width:100%">
-                                                حداکثر قیمت  
+                                                حداکثر قیمت
                                             </a>
                                             <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuLink" style="height:200px;overflow-y:scroll;overflow-x:scroll;" id="maxcostcombo">
                                                 @{
@@ -258,7 +263,7 @@
                 <div class="container">
                     <div class="container" style="overflow-y: scroll;height:540px;" id="">
                         <div id="searchboxtoggle">
-                            @await Html.PartialAsync("_SearchList",Model.Homes)
+                            @await Html.PartialAsync("_SearchList", Model.Homes)
                         </div>
                         <div id="showfilterbox">
 
@@ -315,11 +320,11 @@
         }
 
     $(document).ready(function () {
-        
+
         getmetrazbana();
         getmetrazzamin();
     });
-
+     typemelk = @ViewData["type"];
 
     showpartial(@Model.ShowItems.MelknameId);
     $("#showfilterbox").hide();
@@ -329,11 +334,13 @@
     if (@ViewData["type"]== 1) {
         $("#buyheadershow").addClass("border-down");
         rentbuy = 1;
+        typemelk = 1;
     } else {
         $("#rentheadershow").addClass("border-down");
         rentbuy = 2;
+        typemelk = 2;
     }
-    var map = L.map('map').setView([37.553278571293816, 45.07666215851912], 13);
+    var map = L.map('map').setView([37.553278571293816, 45.07666215851912], 14);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -349,30 +356,99 @@
     var redIcon = new LeafIcon({ iconUrl: '/img/house.png' });
 
     var marker;
-     @foreach (var item in Model.ShowItems.ListNahie)
-        {
-            <text>
-               marker = new L.Marker([@item.Gpsx, @item.Gpsy], { icon: greenIcon });
-               marker.addTo(map).on('click', function (e) {
-               map.setView([@item.Gpsx,@item.Gpsy], 14);
-              });
-            </text>
-        }
-     @foreach (var item in Model.Homes)
-        {
+    var plygon;
+
+     @{
+         foreach (var item in Model.Homes)
+         {
             <text>
                marker = new L.Marker([@item.Home.Gpsx, @item.Home.Gpsy], { icon: redIcon });
+               map.setView([@item.Home.Gpsx,@item.Home.Gpsy], 15);
                marker.addTo(map).on('click', function (e) {
-               map.setView([@item.Home.Gpsx,@item.Home.Gpsy], 14);
+               map.setView([@item.Home.Gpsx,@item.Home.Gpsy], 16);
               });
             </text>
-        }
+         }
 
+     @foreach (var item in Model.ShowItems.ListNahie)
+     {
+         <text>var listofdirection = [];</text>
+         foreach (var location in Model.NahieDirection.Where(a => a.NahieId == item.Id))
+         {
+              <text>var listofitem = [];</text>
+              @:listofitem.push(@location.Gpsx);
+              @:listofitem.push(@location.Gpsy);
+              @:listofdirection.push(listofitem);
+         }
+
+         <text>var plo = L.polygon(listofdirection).setStyle({ 'color': '#FFF','fillOpacity':'0.2','opacity':'0.1' }).addTo(map).bindPopup('@item.Name').on('click', function (e) {
+    map.setView([@item.Gpsx,@item.Gpsy], 17);
+    removelayer();
+    showmahalle();
+});</text>
+     }
+
+             }
+
+    sethover();
+
+    function sethover() {
+         map.eachLayer(function(layer) {
+      layer.on('mouseover', function(e) {
+        // Set highlight
+        setHighlight(layer);
+      });
+
+      layer.on('mouseout', function(e) {
+
+        unsetHighlight(layer);
+      });
+
+      layer.on('mouseover', function(e) {
+
+      });
+
+    });
+    };
+   
+
+    function removelayer() {
+         map.eachLayer(function(layer) {
+             layer.on('mouseover', function(e) {
+              window.map.removeLayer(layer);
+             });
+    });
+
+    }
+
+    function setHighlight(layer) {
+      // Set default style
+      layer.setStyle({
+          'fillColor': '#3498db',
+          'color': '#3498db',
+          'fillOpacity': '0.3',
+          'opacity':'0.5'
+      });
+    }
+
+    function unsetHighlight(layer) {
+        layer.setStyle({
+        'fillColor': '#FFF',
+        'color': '#FFF',
+        'fillOpacity': '0.2',
+        'opacity':'0.1'
+      });
+    }
+             map.on('mousedown', function (e) {
+                 var gp = map.getCenter();
+                 changesearchrealtimeDirection(gp.lat, gp.lng);
+
+             });
 
     var w = window.innerWidth;
-    var h = window.innerHeight;
+             var h = window.innerHeight;
 
-    document.getElementById("map").style.height = h - 50 + "px";
+             document.getElementById("map").style.height = h - 50 + "px";
     document.getElementById("scrollbox").style.height = h - 90 + "px";
 
     if (w < 600) {
@@ -382,133 +458,166 @@
     }
 
 
+    function showmahalle() {
+        @foreach (var item in Model.Mahalles)
+     {
+         <text>var listofdirection = [];</text>
+         foreach (var location in Model.MahalleDirection.Where(a => a.NahieId == item.Id))
+         {
+              <text>var listofitem = [];</text>
+              @:listofitem.push(@location.Gpsx);
+              @:listofitem.push(@location.Gpsy);
+              @:listofdirection.push(listofitem);
+         }
 
-
-    function searchbox() {
-        var x = document.getElementById("searchboxtoggle");
-
-        if (x.style.display === "none") {
-            $("#showfilterbox").slideUp(1000);
-            x.style.display = "block";
-            $("#dropdownlist").show();
-            $("#hidefilter").hide();
-
-        } else {
-            $("#showfilterbox").slideDown(1000);
-            x.style.display = "none";
-            $("#dropdownlist").hide();
-            $("#hidefilter").show();
-
-        }
+         <text>var plo = L.polygon(listofdirection).setStyle({ 'color': '#3498db','fillOpacity':'0.3','opacity':'0.5' }).addTo(map).bindPopup('@item.Name').on('click', function (e) {
+    map.setView([@item.Gpsx,@item.Gpsy], 18);
+    sethover();
+});
+        </text>
+     }
+        sethover();
     }
 
 
-    function hidefilter() {
-        var x = document.getElementById("searchboxtoggle");
+
+         function searchbox() {
+             var x = document.getElementById("searchboxtoggle");
+
+             if (x.style.display === "none") {
+            $("#showfilterbox").slideUp(1000);
+                 x.style.display = "block";
+            $("#dropdownlist").show();
+            $("#hidefilter").hide();
+
+             } else {
+            $("#showfilterbox").slideDown(1000);
+                 x.style.display = "none";
+            $("#dropdownlist").hide();
+            $("#hidefilter").show();
+
+             }
+         }
+
+
+         function hidefilter() {
+             var x = document.getElementById("searchboxtoggle");
         $("#showfilterbox").slideUp(1000);
-        x.style.display = "block";
+             x.style.display = "block";
         $("#dropdownlist").show();
         $("#hidefilter").hide();
-        }
 
-    function changehometype(id, text) {
-        var buybtn = document.getElementById("showtypehome");
-        buybtn.innerHTML = text;
-        showpartial(id);
-        hometype = id;
-        if (id == 3 || id == 4 || id == 9) {
+         }
+
+
+         function changehometype(id, text) {
+             var buybtn = document.getElementById("showtypehome");
+             buybtn.innerHTML = text;
+             showpartial(id);
+             hometype = id;
+             changesearchrealtime();
+             if (id == 3 || id == 4 || id == 9) {
             $('#minmetrazcombo').empty();
             $('#maxmetrazcombo').empty();
             $('#minmetrazcombo').append(buminmetrzamin);
             $('#maxmetrazcombo').append(bumaxmetrzamin);
-        }
-        else {
+             }
+             else {
             $('#minmetrazcombo').empty();
             $('#maxmetrazcombo').empty();
             $('#minmetrazcombo').append(buminmetrbana);
             $('#maxmetrazcombo').append(bumaxmetrbana);
-        }
-        }
+             }
+         }
 
     function showpartial(id) {
         $("#showfilterbox").empty();
-        if (id==1) {
+             if (id==1) {
             $('#showfilterbox').load('/Search/GetApartemanPartial?buyrent=@ViewData["type"]&hometype='+id);
-            $("#showfilterbox").show();
-        } else if (id==2) {
+             } else if (id==2) {
             $('#showfilterbox').load('/Search/GetHomeWithGardenPartial?buyrent=@ViewData["type"]&hometype='+id);
-            $("#showfilterbox").show();
-        } else if (id==3) {
+             } else if (id==3) {
             $('#showfilterbox').load('/Search/ZaminPartial?buyrent=@ViewData["type"]&hometype='+id);
-            $("#showfilterbox").show();
-        } else if (id==4) {
+             } else if (id==4) {
             $('#showfilterbox').load('/Search/KolangiPartial?buyrent=@ViewData["type"]&hometype='+id);
-            $("#showfilterbox").show();
-        } else if (id==5) {
+             } else if (id==5) {
             $('#showfilterbox').load('/Search/EdariPartial?buyrent=@ViewData["type"]&hometype='+id);
-            $("#showfilterbox").show();
-        } else if (id==6) {
+             } else if (id==6) {
             $('#showfilterbox').load('/Search/MaghazePartial?buyrent=@ViewData["type"]&hometype='+id);
-            $("#showfilterbox").show();
-        } else if (id==7) {
+             } else if (id==7) {
             $('#showfilterbox').load('/Search/MostaghelatPartial?buyrent=@ViewData["type"]&hometype='+id);
-            $("#showfilterbox").show();
-        } else if (id==8) {
+             } else if (id==8) {
             $('#showfilterbox').load('/Search/GetAnbarPartial?buyrent=@ViewData["type"]&hometype='+id);
-            $("#showfilterbox").show();
-        } else if (id==9) {
+             } else if (id==9) {
             $('#showfilterbox').load('/Search/GardenPartial?buyrent=@ViewData["type"]&hometype='+id);
-            $("#showfilterbox").show();
-        } else if (id==10) {
+             } else if (id==10) {
             $('#showfilterbox').load('/Search/VillaPartial?buyrent=@ViewData["type"]&hometype='+id);
-            $("#showfilterbox").show();
-        }
+             }
         $('#selectpicker').multiselect();
-    }
+         }
 
-    function showmetritem() {
+         function showmetritem() {
         $("#showcostmetr").toggle(1000);
         $("#showcostsub").slideUp();
         $("#showmetrsub").slideDown();
-        }
+         }
 
-    function showcostitem() {
+         function showcostitem() {
         $("#showcostmetr").toggle(1000);
         $("#showmetrsub").slideUp();
         $("#showcostsub").slideDown();
-        }
+         }
 
-    var minmetr = 0;
-    var maxmetr = 0;
-    var mincost = 0;
-    var maxcost = 0;
+         var minmetr = 0;
+         var maxmetr = 0;
+         var mincost = 0;
+         var maxcost = 0;
 
-    function showminmetraz(text,id) {
-        document.getElementById("minmetrsearch").innerHTML = text;
-        minmetr = id;
-        minmetrtext = text;
-        document.getElementById("changablemetrazwithcombo").innerHTML ="متراژ :"+ minmetrtext + " - " + maxmetrtext;
-        
-        }
+         function showminmetraz(text,id) {
+             document.getElementById("minmetrsearch").innerHTML = text;
+             minmetr = id;
+             minmetrtext = text;
+             changesearchrealtime();
+             document.getElementById("changablemetrazwithcombo").innerHTML ="متراژ :"+ minmetrtext + " - " + maxmetrtext;
 
-    function showmaxmetraz(text,id) {
-        document.getElementById("maxmetrsearch").innerHTML = text;
-        maxmetr = id;
-        maxmetrtext = text;
-        document.getElementById("changablemetrazwithcombo").innerHTML ="متراژ :"+  minmetrtext + " - " + maxmetrtext;
-        }
-    function showmincost(text, id) {
-        document.getElementById("mincostsearch").innerHTML = text;
-        mincost = id;
-        mincosttext = text;
-        document.getElementById("changablecostwithcombo").innerHTML = "قیمت :" + mincosttext + " - " + maxcosttext;
-        }
+         }
 
-    function showmaxcost(text,id) {
-        document.getElementById("maxcostsearch").innerHTML = text;
-        maxcost = id;
-        maxcosttext = text;
-        document.getElementById("changablecostwithcombo").innerHTML = "قیمت :" + mincosttext + " - " + maxcosttext;
-    }
+         function showmaxmetraz(text,id) {
+             document.getElementById("maxmetrsearch").innerHTML = text;
+             maxmetr = id;
+             maxmetrtext = text;
+             changesearchrealtime();
+             document.getElementById("changablemetrazwithcombo").innerHTML ="متراژ :"+  minmetrtext + " - " + maxmetrtext;
+         }
+         function showmincost(text, id) {
+             document.getElementById("mincostsearch").innerHTML = text;
+             mincost = id;
+             mincosttext = text;
+             changesearchrealtime();
+             document.getElementById("changablecostwithcombo").innerHTML = "قیمت :" + mincosttext + " - " + maxcosttext;
+         }
+
+         function showmaxcost(text,id) {
+             document.getElementById("maxcostsearch").innerHTML = text;
+             maxcost = id;
+             maxcosttext = text;
+             changesearchrealtime();
+             document.getElementById("changablecostwithcombo").innerHTML = "قیمت :" + mincosttext + " - " + maxcosttext;
+         }
+
+
+         function changesearchrealtime() {
+        $("#searchboxtoggle").empty();
+        $('#searchboxtoggle').load('/RealtimeSearch/SearchList?selectitem=' + hometype + '&typehome=' + typemelk + '&mincost=' + mincost + '&maxcost=' + maxcost + '&minmetr=' + minmetr + '&maxmetr=' + maxmetr + '&minejare=' + mincost + '&maxejare=' + maxcost);
+         $("#searchboxtoggle").show();
+
+         }
+    function changesearchrealtimeDirection(gpsx, gpsy) {
+         $("#searchboxtoggle").empty();
+         $('#searchboxtoggle').load('/RealtimeSearch/SearchListGps?selectitem=' + hometype + '&typehome=' + typemelk + '&mincost=' + mincost + '&maxcost=' + maxcost + '&minmetr=' + minmetr + '&maxmetr=' + maxmetr + '&minejare=' + mincost + '&maxejare=' + maxcost + '&gpsx=' + gpsx + '&gpsy=' + gpsy);
+         $("#searchboxtoggle").show();
+
+         }
 </script>
 
+@*, {icon: L.divIcon({className: 'my-custom-icon',html: "5"})});*@

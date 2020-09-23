@@ -11,7 +11,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Hami Homes - حامی هوم</title>
-    <link rel="icon" type="image/x-icon" href="~/img/logo2.png" />
+    <link rel="icon" type="image/x-icon" href="~/img/logo 3.png" />
 
 
 
@@ -19,16 +19,16 @@
     <meta name="twitter:title" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان">
     <meta name="twitter:description" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان">
     <meta name="twitter:creator" content="توحید حقیقی">
-    <meta name="twitter:image:src" content="~/img/logo2.png">
+    <meta name="twitter:image:src" content="~/img/logo 3.png">
 
     <meta itemprop="name" content="Hami Homes - حامی هوم">
     <meta itemprop="description" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان">
-    <meta itemprop="image" content="~/img/logo2.png">
+    <meta itemprop="image" content="~/img/logo 3.png">
 
     <meta property="og:title" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان" />
     <meta property="og:type" content="personal page" />
-    <meta property="og:url" content="~/img/logo2.png" />
-    <meta property="og:image" content="~/img/logo2.png" />
+    <meta property="og:url" content="~/img/logo 3.png" />
+    <meta property="og:image" content="~/img/logo 3.png" />
     <meta property="og:description" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان" />
     <meta property="og:site_name" content="Hami Homes - حامی هوم" />
 
@@ -45,6 +45,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <script type="text/javascript" src="~/js/multiselect/js/bootstrap-multiselect.js"></script>
     <link rel="stylesheet" href="~/js/multiselect/css/bootstrap-multiselect.css" type="text/css" />
@@ -251,7 +252,76 @@
 
 
 
+    <script>
+        AOS.init();
+        $(document).ready(function () {
+            listdata();
+            $("#menusub").hide();
+            $("#showwhenscroll").hide();
+            AOS.init();
 
+        });
+
+        $(document).scroll(function () {
+            var y = $(this).scrollTop();
+            if (y > 500) {
+                $('#showwhenscroll').slideDown();
+            } else {
+                $('#showwhenscroll').slideUp();
+            }
+        });
+        function listdata() {
+            $.ajax({
+                type: "Post",
+                url: '/Home/Getdatalist',
+                success: function (data) {
+                    $("#defaultEmails").empty();
+                    $("#defaultEmails").append(data);
+                }
+            });
+        }
+
+
+        function changecolor(color) {
+            var buyheadershow = document.getElementById("buyheadershow");
+            buyheadershow.classList.remove("border-down");
+            var rentheadershow = document.getElementById("rentheadershow");
+            rentheadershow.classList.remove("border-down");
+            var buildheadershow = document.getElementById("buildheadershow");
+            buildheadershow.classList.remove("border-down");
+            var soldheadershow = document.getElementById("soldheadershow");
+            soldheadershow.classList.remove("border-down");
+            if (color == 1) {
+                $("#buyheadershow").addClass("border-down");
+                typemelk = 1;
+            } else if (color == 2) {
+                $("#rentheadershow").addClass("border-down");
+                typemelk = 2;
+            } else if (color == 3) {
+                $("#buildheadershow").addClass("border-down");
+                typemelk = 3;
+            } else if (color == 4) {
+                $("#soldheadershow").addClass("border-down");
+                typemelk = 4;
+            }
+        }
+
+        function showhidemenu() {
+            var x = document.getElementById("menusub");
+
+            if (x.style.display === "none") {
+                $("#menusub").slideDown(100);
+
+            } else {
+                $("#menusub").slideUp(100);
+
+            }
+        }
+
+        function shownumberhide() {
+            document.getElementById("btnnumberphonehide").innerHTML = "<span class='fa fa-phone' style='padding:5px;'></span> 09144967941";
+        }
+    </script>
     @RenderSection("Scripts", required: false)
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-176930890-1"></script>

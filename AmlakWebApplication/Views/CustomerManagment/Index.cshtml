@@ -1,0 +1,146 @@
+﻿@model List<DomainLayer.Customer>
+@{
+    ViewBag.Title = "مدیران سایت";
+}
+<link href="~/css/alert/sweetalert.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<script src="~/css/alert/sweetalert.js"></script>
+
+<style>
+    tr:nth-child(even) {
+        background: rgba(126, 136, 241, 0.59)
+    }
+</style>
+<link href="~/css/alert/sweetalert.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<script src="~/css/alert/sweetalert.js"></script>
+
+<section class="content-header">
+    <h1>
+        داشبورد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/CustomerManagment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">مدیریت مشتریان</li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>مدیریت مشتریان</h4>
+</div>
+
+<p style="margin-right:50px;">
+    <a href="/CustomerManagment/Create" class="btn btn-default">افزودن مشتری جدید</a>
+</p>
+
+<div class="container">
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">جستجو سریع</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="form-horizontal">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">نام</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="نام">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">محله</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="mahalle" name="mahalle" placeholder="محله">
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <a class="btn btn-info pull-right" onclick="searchhome()">جستجو</a>
+            </div>
+            <!-- /.box-footer -->
+        </div>
+    </div>
+</div>
+
+<div class="row" style="padding:50px;">
+    <div class="col-md-12 box">
+        <div class="table-responsive box-body">
+            <table id="mytable" class="table table-bordered table-hover" style="background-color:white;">
+                <thead>
+                    <tr>
+                        <th class="text-center">کد</th>
+                        <th class="text-center">نام</th>
+                        <th class="text-center">نام خانوادگی</th>
+                        <th class="text-center">موبایل </th>
+                        <th class="text-center">شناسنامه</th>
+                        <th class="text-center">نام پدر</th>
+                        <th class="text-center">تاریخ تولد</th>
+                        <th class="text-center">ادرس</th>
+                        <th class="text-center">ویرایش</th>
+                        <th class="text-center">حذف</th>
+                    </tr>
+                </thead>
+                <tbody id="showfilterbox">
+                    @await Html.PartialAsync("_ListAjax", Model)
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+     function deleteitem(id) {
+            swal({
+                title: "آیا میخواهید حذف شود؟",
+                text: "",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "بله حذف شود",
+                cancelButtonText: "خیر",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        sendtoservertodelete(id);
+
+                    } else {
+                        swal("صرف نظر", "حذف نشد", "error");
+                    }
+                });
+        }
+
+        function sendtoservertodelete(id) {
+            $.ajax({
+                type: "Post",
+                url: '/CustomerManagment/Delete',
+                data: { id: id },
+                success: function (data) {
+                    window.location.reload();
+                }
+            });
+    }
+
+
+    function update(id) {
+        window.location.href = "/CustomerManagment/Update?id=" + id;
+    }
+
+    function searchhome() {
+        var name = $("#name").val();
+        var mahalle = $("#mahalle").val();
+        $("#showfilterbox").empty();
+        $('#showfilterbox').load('/CustomerManagment/GetPartial?name=' + name + '&mahale=' + mahale);
+        $("#showfilterbox").show();
+    }
+
+</script>

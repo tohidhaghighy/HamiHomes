@@ -27,7 +27,8 @@ namespace DomainLayer
         public string Description { get; set; }
         public string BuyTakhasos { get; set; }
         public string RentTakhasos { get; set; }
-
+        public string Manategh { get; set; }
+        public Nullable<int> CityId { get; set; }
         public Boolean Active { get; set; }
         public Boolean CanAdd { get; set; }
 

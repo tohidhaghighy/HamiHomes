@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "Utilities\Util
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmlakWebApplication.UI", "AmlakWebApplication.UI\AmlakWebApplication.UI.csproj", "{79B981ED-B096-4D55-B3D7-CAA00436A9FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmlakWebApplication.Karshenas", "AmlakWebApplication.Karshenas\AmlakWebApplication.Karshenas.csproj", "{DA249406-2E71-4F56-9F69-966FA837C8E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AmlakWebApplication.Karshenas", "AmlakWebApplication.Karshenas\AmlakWebApplication.Karshenas.csproj", "{DA249406-2E71-4F56-9F69-966FA837C8E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmlakWebApplication.Sazande", "AmlakWebApplication.Sazande\AmlakWebApplication.Sazande.csproj", "{2C1A3DF0-66DE-4FC7-9B39-343A7735D25D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{DA249406-2E71-4F56-9F69-966FA837C8E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA249406-2E71-4F56-9F69-966FA837C8E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA249406-2E71-4F56-9F69-966FA837C8E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C1A3DF0-66DE-4FC7-9B39-343A7735D25D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C1A3DF0-66DE-4FC7-9B39-343A7735D25D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C1A3DF0-66DE-4FC7-9B39-343A7735D25D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C1A3DF0-66DE-4FC7-9B39-343A7735D25D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

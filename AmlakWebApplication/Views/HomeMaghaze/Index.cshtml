@@ -1,4 +1,4 @@
-﻿@model List<DomainLayer.Home.Maghaze>
+﻿@model ViewModelLayer.HomeManagment.MainSearch
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Managment.cshtml";
@@ -10,92 +10,119 @@
 <script src="~/css/alert/sweetalert.js"></script>
 
 <style>
-    tr:nth-child(even) {
-        background: rgba(126, 136, 241, 0.59)
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #af1e1e;
+        color: white;
+        direction: rtl;
+    }
+
+    span {
+        direction: rtl;
     }
 </style>
 
-
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="/HomeMaghaze/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
-        <li class="active">مدیریت مغازه  </li>
+        <li><a href="/HomeManagment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">مدیریت خانه ها </li>
     </ol>
 </section>
 
 <div class="callout callout-info" style="margin-top:10px;">
-    <h4>مدریت مغازه ها</h4>
-    در اینجا میتوانید لیست مغازه درج شده را ببینید و اطلاعات ان را ویرایش و یا حذف کنید
+    <h4>مدریت خانه ها</h4>
+    در اینجا میتوانید خانه هایی را با لوکیشن آن ها در نقشه درج کنید
 
+</div>
+
+
+
+<p style="margin-right:50px;">
+    <a href="/HomeManagment/Create" class="btn btn-default">افزودن خانه جدید</a>
+    <a href="/HomeMaghaze/ShowMaghaze" class="btn btn-default">لیست املاک موجود</a>
+    <a href="/HomeManagment/Search" class="btn btn-default">جستجوی پیشرفته</a>
+    <a href="/Map/Index" class="btn btn-default">جستجوی روی نقشه</a>
+</p>
+
+<div class="container">
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">جستجو سریع</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="form-horizontal">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">کد ملک</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="code" name="code" placeholder="کد ملک">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">محله</label>
+                    <div class="col-sm-10">
+                        <select class="form-control select2 text-center btn-block" data-placeholder="   محلات را انتخاب کن  "
+                                style="width: 100%;direction:rtl;float:right;" name="mahale" id="mahale">
+                            @foreach (var item in Model.Mahalles)
+                            {
+                                <option value="@item.Name">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <a class="btn btn-info pull-right" onclick="searchhome()">جستجو</a>
+            </div>
+            <!-- /.box-footer -->
+        </div>
+    </div>
 </div>
 
 <div class="row">
     <div class="container">
-        <div class="col-lg-2 col-xs-4">
-            <!-- small box -->
-            <div class="small-box bg-primary">
-                <div class="inner">
-                    <h3>@Model.Where(a => a.Home.IsShow == true).Count()<sup style="font-size: 20px"></sup></h3>
+        <h3 class="text-center">ملک های تایید نشده</h3>
+    </div>
+</div>
 
-                    <p>تایید شده ها</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
-                </div>
-            </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-2 col-xs-4">
-            <!-- small box -->
-            <div class="small-box bg-primary">
-                <div class="inner">
-                    <h3>@Model.Where(a => a.Home.IsShow == false).Count()<sup style="font-size: 20px"></sup></h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 box">
+            <div class="table-responsive box-body">
+                <table id="mytable" class="table table-bordered table-hover" style="background-color:white;">
+                    <thead>
+                        <tr>
+                            <th class="text-center">تایید شده ؟</th>
+                            <th class="text-center">عکس</th>
+                            <th class="text-center">کد فایل</th>
+                            <th class="text-center">تاریخ انتشار</th>
+                            <th class="text-center">مالک</th>
+                            <th class="text-center">مشاور</th>
+                            <th class="text-center">نوع ملک</th>
+                            <th class="text-center">نوع معامله</th>
+                            <th class="text-center">وضعیت قیمت</th>
+                            <th class="text-center">متراژ</th>
+                            <th class="text-center">حذف</th>
+                        </tr>
+                    </thead>
+                    <tbody id="showfilterbox">
+                        @await Html.PartialAsync("_ListAjax", Model.Contracts)
+                    </tbody>
 
-                    <p>تعداد جدید ها</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
-                </div>
+                </table>
+
             </div>
+
         </div>
     </div>
 </div>
 
-<p style="margin-right:50px;">
-    <a href="/HomeManagment/Create" class="btn btn-default">افزودن مغازه جدید</a>
-</p>
-
-<div class="row" style="padding:50px;">
-    <div class="col-md-12 box">
-        <div class="table-responsive box-body">
-            <table id="mytable" class="table table-bordered table-hover" style="background-color:white;">
-                <thead>
-                    <tr>
-                        <th class="text-center">تایید شده ؟</th>
-                        <th class="text-center">متراژ کف مغازه</th>
-                        <th class="text-center">دهنه مغازه</th>
-                        <th class="text-center">طبقه</th>
-                        <th class="text-center">متراژ بالکن</th>
-                        <th class="text-center">متراژ انبار </th>
-                        <th class="text-center">نام نگهبان </th>
-                        <th class="text-center">شماره نگهبان</th>
-                        <th class="text-center">حذف</th>
-                    </tr>
-                </thead>
-                <tbody id="listofarticle">
-                    @await Html.PartialAsync("_ListAjax", Model)
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-</div>
 
 <script>
 
@@ -125,7 +152,7 @@
     function sendtoservertodelete(id) {
         $.ajax({
             type: "Post",
-            url: '/HomeMaghaze/Delete',
+            url: '/HomeManagment/Delete',
             data: { id: id },
             success: function (data) {
                 window.location.reload();
@@ -141,8 +168,39 @@
         window.location.href = url;
     }
 
+    function gallery(id) {
+        window.location.href = "/HomeGalleryManagment/Index?homeid=" + id;
+    }
+
     function Changecheck(id) {
-         $.ajax({
+        swal({
+            title: "کارشناس مورد نظر خود را اختصاص دهید؟",
+            text: "",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonClass: "btn-success",
+            confirmButtonText: "بله میخوام",
+            cancelButtonText: "خیر",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+                    takhsissearch(id);
+
+                } else {
+                    swal("صرف نظر", "حذف نشد", "error");
+                }
+            });
+
+    }
+
+    function takhsissearch(id) {
+        window.location.href = "/AdvisorManagment/AdviserSelect?contractid=" + id;
+    }
+
+    function Changecheckunpin(id) {
+        $.ajax({
             type: "Post",
             url: '/HomeManagment/CheckChange',
             data: { id: id },
@@ -150,5 +208,13 @@
                 window.location.reload();
             }
         });
+    }
+
+    function searchhome() {
+        var mahale = $("#mahale").val();
+        var code = $("#code").val();
+        $("#showfilterbox").empty();
+        $('#showfilterbox').load('/HomeManagment/GetHomePartial?code=' + code + '&mahale=' + mahale + '&type=6');
+        $("#showfilterbox").show();
     }
 </script>

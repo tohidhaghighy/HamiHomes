@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AmlakWebApplication.Models;
 using DataLayer.Infrastracture;
 using DomainLayer;
 using DomainLayer.Magzine;
@@ -55,7 +56,7 @@ namespace AmlakWebApplication.Controllers
                             await Image.CopyToAsync(stream);
 
                         }
-                        magzin.Image = fileName;
+                        magzin.Image = ImageUrl.url + fileName;
                     }
                     _context.MagazinRepository.Insert(magzin);
                     await _context.CommitAsync();

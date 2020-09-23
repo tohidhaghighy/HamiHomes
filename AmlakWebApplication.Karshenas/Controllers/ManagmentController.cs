@@ -23,7 +23,7 @@ namespace AmlakWebApplication.Karshenas.Controllers
         {
             var main = new ViewModelLayer.Adviser.AdviserMain();
             main.Adviser = _context.AdviserRepository.GetById(adviserid);
-            main.homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.AdviserId == adviserid).ToList();
+            main.homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.AdviserId == adviserid && a.Home.Usertype == DomainLayer.Enums.UserType.Adviser).ToList();
             return View(main);
         }
 

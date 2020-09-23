@@ -17,8 +17,12 @@ namespace ViewModelLayer.UI
         public List<AmlakTasisatGarmaieshi> AmlakTasisatGarmaieshi { get; set; }
         public List<AmlakKitchen> AmlakKitchen { get; set; }
         public List<AmlakNoeZamin> AmlakNoeZamin { get; set; }
+        public List<AmlakParking> AmlakParking { get; set; }
         public List<HomeFacility> HomeFacility { get; set; }
         public MainPage MainPage { get; set; }
         public List<DomainLayer.Contract.Contract> Homes { get; set; }
+        public List<DomainLayer.Location.NahieDirections> NahieDirection { get; set; }
+        public List<DomainLayer.Location.Mahalle> Mahalles { get; set; }
+        public List<DomainLayer.Location.NahieDirections> MahalleDirection { get; set; }
     }
 }

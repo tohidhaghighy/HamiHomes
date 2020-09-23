@@ -247,6 +247,15 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
+      "SmsIrRestful/1.1.3": {
+        "type": "package",
+        "compile": {
+          "lib/SmsIrRestful.dll": {}
+        },
+        "runtime": {
+          "lib/SmsIrRestful.dll": {}
+        }
+      },
       "System.Drawing.Common/4.5.1": {
         "type": "package",
         "dependencies": {
@@ -791,6 +800,18 @@
         "netstandard.library.nuspec"
       ]
     },
+    "SmsIrRestful/1.1.3": {
+      "sha512": "ouYKkhQv0zLbdDIPw5Eagpod9828Fd2zQhqt2N2MMPHdCV7oHYuAvClSBS4Pru1MclEvH5mmLfE7cgeFZ9ea+w==",
+      "type": "package",
+      "path": "smsirrestful/1.1.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/SmsIrRestful.dll",
+        "smsirrestful.1.1.3.nupkg.sha512",
+        "smsirrestful.nuspec"
+      ]
+    },
     "System.Drawing.Common/4.5.1": {
       "sha512": "GiyeGi/v4xYDz1vCNFwFvhz9k1XddOG7VD3jxRqzRBCbTHji+s3HxxbxtoymuK4OadEpgotI8zQ5+GEEH9sUEQ==",
       "type": "package",
@@ -829,6 +850,7 @@
     ".NETCoreApp,Version=v2.1": [
       "Microsoft.AspNetCore.Cryptography.KeyDerivation >= 2.1.1",
       "Microsoft.NETCore.App >= 2.1.0",
+      "SmsIrRestful >= 1.1.3",
       "System.Drawing.Common >= 4.5.1"
     ]
   },
@@ -883,6 +905,10 @@
             "version": "[2.1.0, )",
             "autoReferenced": true
           },
+          "SmsIrRestful": {
+            "target": "Package",
+            "version": "[1.1.3, )"
+          },
           "System.Drawing.Common": {
             "target": "Package",
             "version": "[4.5.1, )"
@@ -895,5 +921,17 @@
         "warn": true
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'SmsIrRestful 1.1.3' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.1'. This package may not be fully compatible with your project.",
+      "libraryId": "SmsIrRestful",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.1"
+      ]
+    }
+  ]
 }

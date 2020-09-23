@@ -1,0 +1,126 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان" />
+    <meta name="author" content="توحید حقیقی" />
+    <meta name="keywords" content="توحید حقیقی ,حامی هوم , خرید ملک , سپردن ملک, خرید ,فروش, اجاره , سپردن,جستجو ملک, خانه,اپارتمان,ویلا,حیاط باغ دار,باغ و باغچه, انبار" />
+    <meta name="" content="توحید حقیقی" />
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Hami Homes - فعال سازی</title>
+    <link rel="icon" type="image/x-icon" href="~/img/logo2.png" />
+
+
+
+    <meta name="twitter:site" content="Hami Homes - حامی هوم">
+    <meta name="twitter:title" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان">
+    <meta name="twitter:description" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان">
+    <meta name="twitter:creator" content="توحید حقیقی">
+    <meta name="twitter:image:src" content="~/img/logo2.png">
+
+    <meta itemprop="name" content="Hami Homes - حامی هوم">
+    <meta itemprop="description" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان">
+    <meta itemprop="image" content="~/img/logo2.png">
+
+    <meta property="og:title" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان" />
+    <meta property="og:type" content="personal page" />
+    <meta property="og:url" content="~/img/logo2.png" />
+    <meta property="og:image" content="~/img/logo2.png" />
+    <meta property="og:description" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان" />
+    <meta property="og:site_name" content="Hami Homes - حامی هوم" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link href="~/lib/login/all.css" rel="stylesheet" />
+    <link href="~/css/Custom.css" rel="stylesheet" />
+    <style>
+        :root {
+            --input-padding-x: 1.5rem;
+            --input-padding-y: .75rem;
+        }
+
+
+        .card-signin {
+            border: 0;
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+        }
+
+            .card-signin .card-title {
+                margin-bottom: 2rem;
+                font-weight: 300;
+                font-size: 1.5rem;
+            }
+
+            .card-signin .card-body {
+                padding: 2rem;
+            }
+
+        .form-signin {
+            width: 100%;
+        }
+
+            .form-signin .btn {
+                font-size: 80%;
+                border-radius: 5rem;
+                letter-spacing: .1rem;
+                font-weight: bold;
+                padding: 1rem;
+                transition: all 0.2s;
+            }
+
+        .form-label-group {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        @@media only screen and (min-width: 600px) {
+            #cardview {
+                padding-right: 30%
+            }
+
+            #subcardview {
+                width: 60%
+            }
+        }
+    </style>
+</head>
+<body id="boxbackgroundmain" style="background-image:url(/img/houseback.png);background-repeat: no-repeat;background-size: cover;">
+
+    <div class="container" style="direction:rtl;">
+        <div class="row">
+            <div class="mx-auto" style="padding-top:10%;" id="cardview">
+                <div class="card card-signin my-5" style="background-color:white;border-radius:10px;" id="subcardview">
+                    <div class="card-body">
+                        <h3 class="text-center" style="padding-bottom:20px;">فعال سازی پنل مدیریت</h3>
+                        <form asp-action="CheckActivation" class="form-signin">
+                            <input style="display:none" name="username" id="username" value="@ViewData["username"]"/>
+                            <input style="display:none" name="pass" id="pass" value="@ViewData["pass"]"/>
+                            <div class="form-label-group text-center">
+                                <input type="text" id="code" name="code" class="form-control" placeholder="کد فعال سازی" style="height:50px;text-align:center;font-size:15px;font-weight:bold" required>
+                            </div>
+                            <h5 class="text-center" style="padding-bottom:20px;color:rgba(159, 2, 2, 0.80)">کد فعال سازی به شما پیامک شده است</h5>
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" style="font-size:15px;font-weight:bold">فعال سازی پنل</button>
+                            <a class="btn btn-lg btn-link btn-block text-uppercase" style="font-size:15px;font-weight:bold" href="/Account/Register"> ثبت نام کن</a>
+                            <a class="btn btn-lg btn-link btn-block text-uppercase" style="font-size:15px;font-weight:bold" href="/"> ورود به سایت</a>
+                            <hr class="my-4">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+    </script>
+</body>
+</html>

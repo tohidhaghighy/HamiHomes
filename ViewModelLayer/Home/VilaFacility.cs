@@ -23,5 +23,7 @@ namespace ViewModelLayer.Home
         public List<AmlakTasisatGarmaieshi> AmlakTasisatGarmaieshi { get; set; }
         public List<AmlakWC> AmlakWC { get; set; }
         public List<HomeFacility> HomeFacility { get; set; }
+        public DomainLayer.User User { get; set; }
+        public DomainLayer.Adviser Adviser { get; set; }
     }
 }

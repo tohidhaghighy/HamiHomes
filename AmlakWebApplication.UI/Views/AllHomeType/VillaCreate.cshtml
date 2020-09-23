@@ -1,0 +1,284 @@
+﻿@model ViewModelLayer.Home.VilaFacility
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<link href="~/lib/multiselect/multiselect.css" rel="stylesheet" />
+<script src="~/lib/multiselect/multiselect.js"></script>
+
+
+<div class="text-center" style="background:rgba(202, 199, 199, 0.50)">
+    <h2 class="text-center" style="padding-top:60px;padding-bottom:40px;">ثبت ملک جدید</h2>
+</div>
+
+
+
+<div class="container" style="margin-top:50px;">
+    <div class="box box-danger">
+        <div class="box-header">
+        </div>
+        <form asp-action="CreateVillaFacility" asp-controller="CreateHomeType" method="post">
+
+            <div class="box-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
+
+                <input name="HomeId" id="HomeId" type="number" style="display:none" value="@ViewData["Id"]">
+                <input name="userid" id="userid" type="number" style="display:none" value="@Model.User.Id">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <h6>تعداد کل طبقات</h6>
+                            <input asp-for="Vila.Tedadkoltabaghat" type="number" class="form-control" min="0" placeholder="تعداد کل طبقات">
+                            <span asp-validation-for="Vila.Tedadkoltabaghat" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <h6>نام نگهبان</h6>
+                            <input asp-for="Vila.NegahbaniName" type="text" class="form-control" placeholder="نام نگهبان">
+                            <span asp-validation-for="Vila.NegahbaniName" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-4">
+                            <h6>شماره نگهبان</h6>
+                            <input asp-for="Vila.NegahbaniPhone" type="text" class="form-control" placeholder="شماره نگهبان">
+                            <span asp-validation-for="Vila.NegahbaniPhone" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="">
+                            <h6> موقعیت ملک :</h6>
+                            <div class="" style="">
+                                <select class="selectpicker" style="padding:10px;width:90%;" asp-for="Vila.Homemogheiat" onchange="checkcityval()">
+                                    @for (var i = 0; i < Model.AmlakMogheiatMelk.Count; i++)
+                                    {
+                                        <option value="@Model.AmlakMogheiatMelk[i].Name">@Model.AmlakMogheiatMelk[i].Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="">
+                            <h6> نمای ساختمان :</h6>
+                            <div class="" style="">
+                                <select class="selectpicker" style="padding:10px;width:90%;" asp-for="Vila.Homenema" onchange="checkcityval()">
+                                    @for (var i = 0; i < Model.AmlakNema.Count; i++)
+                                    {
+                                        <option value="@Model.AmlakNema[i].Name">@Model.AmlakNema[i].Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="">
+                            <h6> مشخصه ملک :</h6>
+                            <select class="selectpicker" multiple="multiple" data-placeholder="  انتخاب کن  "
+                                    style="width: 90%;direction:rtl;float:right;" name="homemoshakhase" id="homemoshakhase">
+                                @for (var i = 0; i < Model.AmlakMoshakhase.Count; i++)
+                                {
+                                    <option value="@Model.AmlakMoshakhase[i].Name">@Model.AmlakMoshakhase[i].Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <hr />
+
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="">
+                            <h6> تاسیسات گرمایشی و سرمایشی :</h6>
+                            <div class="" style="">
+                                <select class="selectpicker" multiple style="padding:10px;width:90%;" asp-for="Vila.Homeparking" onchange="checkcityval()">
+                                    @for (var i = 0; i < Model.AmlakTasisatGarmaieshi.Count; i++)
+                                    {
+                                        <option value="@Model.AmlakTasisatGarmaieshi[i].Name">@Model.AmlakTasisatGarmaieshi[i].Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="">
+                            <h6> پوشش کف :</h6>
+                            <div class="" style="">
+                                <select class="selectpicker" style="padding:10px;width:90%;" asp-for="Vila.Homekaf" onchange="checkcityval()">
+                                    @for (var i = 0; i < Model.AmlakKafes.Count; i++)
+                                    {
+                                        <option value="@Model.AmlakKafes[i].Name">@Model.AmlakKafes[i].Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="row">
+
+
+                    <div class="col-lg-4">
+                        <div class="">
+                            <h6> نوع دیوار  :</h6>
+                            <div>
+                                <select class="selectpicker" style="padding:10px;width:90%;" asp-for="Vila.Homedivar" onchange="checkcityval()">
+                                    @for (var i = 0; i < Model.AmlakDivars.Count; i++)
+                                    {
+                                        <option value="@Model.AmlakDivars[i].Name">@Model.AmlakDivars[i].Name</option>
+                                    }
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="">
+                            <h6> سرویس بهداشتی و حمام  :</h6>
+                            <select class="selectpicker" multiple="multiple" data-placeholder="   انتخاب کن  "
+                                    style="width: 90%;direction:rtl;float:right;" name="homewc" id="homewc">
+                                @for (var i = 0; i < Model.AmlakWC.Count; i++)
+                                {
+                                    <option value="@Model.AmlakWC[i].Name">@Model.AmlakWC[i].Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="">
+                            <h6> آشپزخانه :</h6>
+                            <select class="selectpicker" multiple="multiple" data-placeholder="   انتخاب کن  "
+                                    style="width: 90%;direction:rtl;float:right;" name="homekitchen" id="homekitchen">
+                                @for (var i = 0; i < Model.AmlakKitchenes.Count; i++)
+                                {
+                                    <option value="@Model.AmlakKitchenes[i].Name">@Model.AmlakKitchenes[i].Name</option>
+                                }
+                            </select>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <hr />
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="">
+                            <h6> نوع و تعداد پارکینگ :</h6>
+                            <div class="" style="">
+                                <select class="selectpicker" style="padding:10px;width:90%;" asp-for="Vila.Homeparking" onchange="checkcityval()">
+                                    @for (var i = 0; i < Model.AmlakParking.Count; i++)
+                                    {
+                                        <option value="@Model.AmlakParking[i].Name">@Model.AmlakParking[i].Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="">
+                            <h6> وضعیت ملک :</h6>
+                            <div class="" style="">
+                                <select class="selectpicker" multiple="multiple" data-placeholder="  انتخاب کن  "
+                                        style="width: 90%;direction:rtl;float:right;" name="homestatus" id="homestatus">
+                                    @for (var i = 0; i < Model.AmlakMelkStatus.Count; i++)
+                                    {
+                                        <option value="@Model.AmlakMelkStatus[i].Name">@Model.AmlakMelkStatus[i].Name</option>
+                                    }
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="">
+                            <h6> امتیاز  :</h6>
+                            <select class="selectpicker" multiple="multiple" data-placeholder="   انتخاب کن  "
+                                    style="width: 90%;direction:rtl;float:right;" name="homeemtiaz" id="homeemtiaz">
+                                @for (var i = 0; i < Model.AmlakEmtiazes.Count; i++)
+                                {
+                                    <option value="@Model.AmlakEmtiazes[i].Name">@Model.AmlakEmtiazes[i].Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+                <hr />
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="">
+                            <h6> وضعیت سند :</h6>
+                            <div class="" style="">
+                                <select class="selectpicker" style="padding:10px;width:100%;" asp-for="Vila.Homesanad" onchange="checkcityval()">
+                                    @for (var i = 0; i < Model.AmlakSanadStatus.Count; i++)
+                                    {
+                                        <option value="@Model.AmlakSanadStatus[i].Name">@Model.AmlakSanadStatus[i].Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-4">
+                        <div class="">
+                            <h6> امکانات :</h6>
+                            <div class="" style="">
+                                <select class="selectpicker" multiple style="padding:10px;width:100%;" asp-for="HomeFacility" onchange="checkcityval()">
+                                    @for (var i = 0; i < Model.HomeFacility.Count; i++)
+                                    {
+                                        <option value="@Model.HomeFacility[i].Name">@Model.HomeFacility[i].Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">درج اطلاعات ویلا - رفتن به مرحله بعد </button>
+                </div>
+
+            </div>
+        </form>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

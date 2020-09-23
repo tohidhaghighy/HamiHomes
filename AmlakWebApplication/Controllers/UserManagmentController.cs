@@ -6,6 +6,7 @@ using DataLayer.Infrastracture;
 using DomainLayer;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Utilities.Hash;
 
 namespace AmlakWebApplication.Controllers
 {
@@ -38,6 +39,7 @@ namespace AmlakWebApplication.Controllers
                 {
                     user.Active = true;
                     user.Activecode = "0000000000";
+                    user.Password=user.Password.GetHashPassword();
                     _context.UserRepository.Insert(user);
                     await _context.CommitAsync();
                 }

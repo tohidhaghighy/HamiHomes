@@ -23,7 +23,18 @@ namespace AmlakWebApplication.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.HomeGardenRepository.GetManyAsyncWithInclude("Home"));
+            var main = new ViewModelLayer.HomeManagment.MainSearch();
+            main.Contracts = _context.ContractRepository.GetAllWithWhereandTwoInclude("Home", "Adviser", a => a.Home.IsShow == false && a.Home.Hometype == 9).ToList();
+            main.Mahalles = await _context.MahalleRepository.GetAllAsync();
+            return View(main);
+        }
+
+        public async Task<IActionResult> ShowHomeGardens()
+        {
+            var main = new ViewModelLayer.HomeManagment.MainSearch();
+            main.Contracts = _context.ContractRepository.GetAllWithWhereandTwoInclude("Home", "Adviser", a => a.Home.IsShow == true && a.Home.Hometype == 9 && (a.TypContract == DomainLayer.Enums.TypeHome.Buy || a.TypContract == DomainLayer.Enums.TypeHome.Rent || a.TypContract == DomainLayer.Enums.TypeHome.build)).ToList();
+            main.Mahalles = await _context.MahalleRepository.GetAllAsync();
+            return View(main);
         }
 
         public async Task<IActionResult> Create(int homeid, int hometype, int contracttype)
@@ -36,12 +47,20 @@ namespace AmlakWebApplication.Controllers
             return View(Garden);
         }
 
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Update(int homeid, int hometype, int contracttype)
         {
             var Garden = new GardenFacility();
-            Garden.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetAllAsync();
-            Garden.Garden = _context.HomeGardenRepository.GetById(id);
-            return View(Garden);
+            var contracttypeid = (TypeHome)hometype;
+            var typehomeid = (MelkType)contracttype;
+            Garden.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            ViewData["Id"] = homeid;
+            var gardenone = await _context.HomeGardenRepository.GetManyAsync(a => a.HomeId == homeid);
+            if (gardenone != null)
+            {
+                Garden.Garden = gardenone.FirstOrDefault();
+                return View(Garden);
+            }
+            return RedirectToAction("Create", new { homeid = homeid, hometype = hometype, contracttype = contracttype });
         }
 
         [HttpPost]
@@ -77,13 +96,15 @@ namespace AmlakWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateItem(Garden garden, string[] emtiaz)
+        public async Task<IActionResult> UpdateItem(Garden garden,int Id,int HomeId, string[] emtiaz)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     garden.HomeEmtiaz = string.Join(" , ", emtiaz);
+                    garden.HomeId = HomeId;
+                    garden.Id = Id;
                     _context.HomeGardenRepository.Update(garden);
                     await _context.CommitAsync();
                     return RedirectToAction("Index", "HomeGalleryManagment", new { homeid = garden.HomeId });

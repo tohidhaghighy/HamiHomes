@@ -18,17 +18,18 @@
 </style>
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/HomeEdari/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
-        <li class="active">ویرایش خانه اداری </li>
+        <li class="active">خانه اداری جدید </li>
     </ol>
 </section>
 
 <div class="callout callout-info" style="margin-top:10px;">
     <h4>ویرایش اطلاعات خانه اداری</h4>
+    در اینجا میتوانید مرحله دوم ویرایش اطلاعات خانه اداری را وارد کنید
 
 </div>
 
@@ -37,38 +38,34 @@
         <div class="box-header">
             <h3 class="box-title">ویرایش اطلاعات خانه اداری</h3>
         </div>
-        <form asp-action="CreateFacilityItem">
+        <form asp-action="UpdateItem">
 
             <div class="box-body">
                 <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
 
-                <input asp-for="Edari.HomeId" type="number" class="hidden">
-                <input asp-for="Edari.Id" type="number" class="hidden">
+                <input name="HomeId" id="HomeId" type="number" class="hidden" value="@ViewData["Id"]">
+                <input name="Id" id="Id" type="number" class="hidden" value="@Model.Edari.Id">
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-lg-2">
-                            <h4>متراژ بنا</h4>
-                            <input asp-for="Edari.MetrazhBena" type="number" class="form-control" placeholder="متراژ بنا" value="1">
-                            <span asp-validation-for="Edari.MetrazhBena" class="text-danger"></span>
-                        </div>
+
                         <div class="col-lg-2">
                             <h4>طبقه</h4>
-                            <input asp-for="Edari.Tabaghe" type="number" class="form-control" placeholder="طبقه" value="1">
+                            <input asp-for="Edari.Tabaghe" type="number" class="form-control" min="0" placeholder="طبقه">
                             <span asp-validation-for="Edari.Tabaghe" class="text-danger"></span>
                         </div>
-                        <div class="col-lg-2">
-                            <h4>تعداد کل طبقات</h4>
-                            <input asp-for="Edari.Tedadkoltabaghat" type="number" class="form-control" placeholder="تعداد کل طبقات" value="1">
+                        <div class="col-lg-3">
+                            <h5>تعداد کل طبقات</h5>
+                            <input asp-for="Edari.Tedadkoltabaghat" type="number" class="form-control" min="0" placeholder="تعداد کل طبقات">
                             <span asp-validation-for="Edari.Tedadkoltabaghat" class="text-danger"></span>
                         </div>
-                        <div class="col-lg-2">
-                            <h4>تعداد کل واحد ها</h4>
-                            <input asp-for="Edari.Tedadkolvahedha" type="number" class="form-control" placeholder="تعداد کل واحد ها" value="1">
+                        <div class="col-lg-3">
+                            <h5>تعداد کل واحد ها</h5>
+                            <input asp-for="Edari.Tedadkolvahedha" type="number" class="form-control" min="0" placeholder="تعداد کل واحد ها">
                             <span asp-validation-for="Edari.Tedadkolvahedha" class="text-danger"></span>
                         </div>
-                        <div class="col-lg-2">
-                            <h4>تعداد واحد ها در طبقه</h4>
-                            <input asp-for="Edari.Tedadvaheddartabaghe" type="number" class="form-control" placeholder="تعداد واحد ها در طبقه" value="1">
+                        <div class="col-lg-3">
+                            <h5>تعداد واحد ها در طبقه</h5>
+                            <input asp-for="Edari.Tedadvaheddartabaghe" type="number" class="form-control" min="0" placeholder="تعداد واحد ها در طبقه">
                             <span asp-validation-for="Edari.Tedadkoltabaghat" class="text-danger"></span>
                         </div>
                     </div>
@@ -84,7 +81,7 @@
                         </div>
                         <div class="col-lg-4">
                             <h4>شماره نگهبان</h4>
-                            <input asp-for="Edari.NegahbaniPhone" type="number" class="form-control" placeholder="شماره نگهبان">
+                            <input asp-for="Edari.NegahbaniPhone" type="text" class="form-control" placeholder="شماره نگهبان">
                             <span asp-validation-for="Edari.NegahbaniPhone" class="text-danger"></span>
                         </div>
                     </div>
@@ -95,7 +92,7 @@
                         <div class="">
                             <h4> موقعیت ملک :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Edari.Homemogheiat" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Edari.Homemogheiat" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakMogheiatMelk.Count; i++)
                                     {
                                         <option value="@Model.AmlakMogheiatMelk[i].Name">@Model.AmlakMogheiatMelk[i].Name</option>
@@ -109,10 +106,17 @@
                         <div class="">
                             <h4> تاسیسات گرمایشی و سرمایشی :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Edari.Hometasisat" onchange="checkcityval()">
+                                <select class="form-control select2" multiple style="padding:10px;width:100%;" onchange="checkcityval()" id="tasisat" name="tasisat">
                                     @for (var i = 0; i < Model.AmlakTasisatGarmaieshi.Count; i++)
                                     {
-                                        <option value="@Model.AmlakTasisatGarmaieshi[i].Name">@Model.AmlakTasisatGarmaieshi[i].Name</option>
+                                        if (Model.Edari.Hometasisat.Contains(Model.AmlakTasisatGarmaieshi[i].Name))
+                                        {
+                                            <option value="@Model.AmlakTasisatGarmaieshi[i].Name" selected="selected">@Model.AmlakTasisatGarmaieshi[i].Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@Model.AmlakTasisatGarmaieshi[i].Name">@Model.AmlakTasisatGarmaieshi[i].Name</option>
+                                        }
                                     }
                                 </select>
                             </div>
@@ -123,7 +127,7 @@
                         <div class="">
                             <h4> نمای ساختمان :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Edari.Homenema" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Edari.Homenema" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakNema.Count; i++)
                                     {
                                         <option value="@Model.AmlakNema[i].Name">@Model.AmlakNema[i].Name</option>
@@ -140,12 +144,20 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="">
-                            <h4> نوع و تعداد پارکینگ :</h4>
+                            <h4> نوع پارکینگ :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Edari.Homeparking" onchange="checkcityval()">
+                                <select class="form-control select2" multiple style="padding:10px;width:100%;" id="parking" name="parking" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakParking.Count; i++)
                                     {
-                                        <option value="@Model.AmlakParking[i].Name">@Model.AmlakParking[i].Name</option>
+                                        if (Model.Edari.Homeparking.Contains(Model.AmlakParking[i].Name))
+                                        {
+                                            <option value="@Model.AmlakParking[i].Name" selected="selected">@Model.AmlakParking[i].Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@Model.AmlakParking[i].Name">@Model.AmlakParking[i].Name</option>
+                                        }
+
                                     }
                                 </select>
                             </div>
@@ -156,7 +168,7 @@
                         <div class="">
                             <h4> پوشش کف :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Edari.Homekaf" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Edari.Homekaf" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakKafes.Count; i++)
                                     {
                                         <option value="@Model.AmlakKafes[i].Name">@Model.AmlakKafes[i].Name</option>
@@ -170,7 +182,7 @@
                         <div class="">
                             <h4> وضعیت سند :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Edari.Homesanad" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Edari.Homesanad" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakSanadStatus.Count; i++)
                                     {
                                         <option value="@Model.AmlakSanadStatus[i].Name">@Model.AmlakSanadStatus[i].Name</option>
@@ -195,7 +207,15 @@
                                         style="width: 100%;direction:rtl;float:right;" name="homestatus" id="homestatus">
                                     @for (var i = 0; i < Model.AmlakMelkStatus.Count; i++)
                                     {
-                                        <option value="@Model.AmlakMelkStatus[i].Name">@Model.AmlakMelkStatus[i].Name</option>
+                                        if (Model.Edari.Homevaziate.Contains(Model.AmlakMelkStatus[i].Name))
+                                        {
+                                            <option value="@Model.AmlakMelkStatus[i].Name" selected="selected">@Model.AmlakMelkStatus[i].Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@Model.AmlakMelkStatus[i].Name">@Model.AmlakMelkStatus[i].Name</option>
+                                        }
+
                                     }
                                 </select>
                             </div>
@@ -210,7 +230,15 @@
                                     style="width: 100%;direction:rtl;float:right;" name="homeemtiaz" id="homeemtiaz">
                                 @for (var i = 0; i < Model.AmlakEmtiazes.Count; i++)
                                 {
-                                    <option value="@Model.AmlakEmtiazes[i].Name">@Model.AmlakEmtiazes[i].Name</option>
+                                    if (Model.Edari.HomeEmtiaz.Contains(Model.AmlakEmtiazes[i].Name))
+                                    {
+                                        <option value="@Model.AmlakEmtiazes[i].Name" selected="selected">@Model.AmlakEmtiazes[i].Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@Model.AmlakEmtiazes[i].Name">@Model.AmlakEmtiazes[i].Name</option>
+                                    }
+
                                 }
                             </select>
                         </div>
@@ -223,7 +251,15 @@
                                     style="width: 100%;direction:rtl;float:right;" id="homewc" name="homewc">
                                 @for (var i = 0; i < Model.AmlakWC.Count; i++)
                                 {
-                                    <option value="@Model.AmlakWC[i].Name">@Model.AmlakWC[i].Name</option>
+                                    if (Model.Edari.Homewc.Contains(Model.AmlakWC[i].Name))
+                                    {
+                                        <option value="@Model.AmlakWC[i].Name" selected="selected">@Model.AmlakWC[i].Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@Model.AmlakWC[i].Name">@Model.AmlakWC[i].Name</option>
+                                    }
+
                                 }
                             </select>
                         </div>
@@ -233,6 +269,28 @@
 
                 <hr />
 
+                <div class="row">
+                    @*<div class="col-lg-3">
+                <div class="">
+                    <h4> امکانات  :</h4>
+                    <select class="form-control select2 text-center" multiple="multiple" data-placeholder="   انتخاب کن  "
+                            style="width: 100%;direction:rtl;float:right;" name="HomeFacility" id="HomeFacility">
+                        @for (var i = 0; i < Model.HomeFacility.Count; i++)
+                        {
+                            if (Model.Edari.hom.Contains(Model.HomeFacility[i].Name))
+                            {
+                        <option value="@Model.HomeFacility[i].Name" selected="selected">@Model.HomeFacility[i].Name</option>
+                            }
+                            else
+                            {
+                    <option value="@Model.HomeFacility[i].Name">@Model.HomeFacility[i].Name</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+            </div>*@
+                </div>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">ویرایش اطلاعات ساختمان اداری - رفتن به مرحله بعد </button>

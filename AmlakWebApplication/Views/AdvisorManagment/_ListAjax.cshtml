@@ -5,11 +5,11 @@
         foreach (var item in Model)
         {
     <tr>
-        <td class="text-center" style="padding:50px;">
+        <td class="text-center" style="padding:20px;">
             @{
                 if (item.Image != null)
                 {
-                    <a href="~/images/@item.Image"><img style="width:40px;height:40px;" src="~/images/@item.Image" /></a>
+                    <a href="@item.Image"><img style="width:40px;height:40px;" src="@item.Image" /></a>
                 }
                 else
                 {
@@ -17,17 +17,17 @@
                 }
             }
         </td>
-        <td class="text-center" style="padding:50px;">@item.Name</td>
-        <td class="text-center" style="padding:50px;">
+        <td class="text-center" style="padding:20px;">@item.Name</td>
+        <td class="text-center" style="padding:20px;">
             @item.Family
         </td>
-        <td class="text-center" style="padding:50px;">
+        <td class="text-center" style="padding:20px;">
             @item.Mobile
         </td>
-        <td class="text-center" style="padding:50px;">
+        <td class="text-center" style="padding:20px;">
             @item.Username
         </td>
-        <td class="text-center" style="padding:50px;">
+        <td class="text-center" style="padding:20px;">
             @{
                 if (item.Active == true)
                 {
@@ -40,8 +40,8 @@
             }
 
         </td>
-        <td class="text-center" style="padding:50px;"><p data-placement="top" data-toggle="tooltip" title="رزومه"><a class="btn btn-primary btn-xs" href="/Rezome/Index?id=@item.Id">رزومه</a></p></td>
-        <td class="text-center" style="padding:50px;"><p data-placement="top" data-toggle="tooltip" title="حذف"><a class="btn btn-danger btn-xs" onclick="deleteitem(@item.Id)"><i class="ion ion-ios-trash"></i></a></p></td>
+        <td class="text-center" style="padding:20px;"><p data-placement="top" data-toggle="tooltip" title="رزومه"><a class="btn btn-primary btn-xs" href="/Rezome/Index?id=@item.Id">رزومه</a></p></td>
+        <td class="text-center" style="padding:20px;"><p data-placement="top" data-toggle="tooltip" title="حذف"><a class="btn btn-danger btn-xs" onclick="deleteitem(@item.Id)"><i class="ion ion-ios-trash"></i></a></p></td>
     </tr>
         }
 

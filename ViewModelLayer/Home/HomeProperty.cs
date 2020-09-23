@@ -7,6 +7,7 @@ namespace ViewModelLayer.Home
     public class HomeProperty
     {
         public DomainLayer.Home.Home Home { get; set; }
+        public List<DomainLayer.Region> Regions { get; set; }
         public List<DomainLayer.City> Cities { get; set; }
         public List<DomainLayer.Location.Mahalle> Mahalles { get; set; }
     }

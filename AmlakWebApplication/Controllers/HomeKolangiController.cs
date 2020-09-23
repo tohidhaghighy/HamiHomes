@@ -23,14 +23,25 @@ namespace AmlakWebApplication.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.HomeKolangiRepository.GetManyAsyncWithInclude("Home"));
+            var main = new ViewModelLayer.HomeManagment.MainSearch();
+            main.Contracts = _context.ContractRepository.GetAllWithWhereandTwoInclude("Home", "Adviser", a => a.Home.IsShow == false && a.Home.Hometype == 4).ToList();
+            main.Mahalles = await _context.MahalleRepository.GetAllAsync();
+            return View(main);
+        }
+
+        public async Task<IActionResult> ShowKolangi()
+        {
+            var main = new ViewModelLayer.HomeManagment.MainSearch();
+            main.Contracts = _context.ContractRepository.GetAllWithWhereandTwoInclude("Home", "Adviser", a => a.Home.IsShow == true && a.Home.Hometype == 4 && (a.TypContract == DomainLayer.Enums.TypeHome.Buy || a.TypContract == DomainLayer.Enums.TypeHome.Rent || a.TypContract == DomainLayer.Enums.TypeHome.build)).ToList();
+            main.Mahalles = await _context.MahalleRepository.GetAllAsync();
+            return View(main);
         }
 
         public async Task<IActionResult> Create(int homeid, int hometype, int contracttype)
         {
             var Kolangi = new KolangiFacility();
-            var contracttypeid = (TypeHome)hometype;
-            var typehomeid = (MelkType)contracttype;
+            var contracttypeid = (TypeHome)contracttype;
+            var typehomeid = (MelkType)hometype;
             Kolangi.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
             Kolangi.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
             Kolangi.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
@@ -41,16 +52,25 @@ namespace AmlakWebApplication.Controllers
             return View(Kolangi);
         }
 
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Update(int homeid, int hometype, int contracttype)
         {
             var Kolangi = new KolangiFacility();
-            Kolangi.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetAllAsync();
-            Kolangi.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetAllAsync();
-            Kolangi.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetAllAsync();
-            Kolangi.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetAllAsync();
-            Kolangi.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetAllAsync();
-            Kolangi.Kolangi = _context.HomeKolangiRepository.GetById(id);
-            return View(Kolangi);
+            var contracttypeid = (TypeHome)contracttype;
+            var typehomeid = (MelkType)hometype;
+            Kolangi.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Kolangi.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Kolangi.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Kolangi.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Kolangi.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+
+            ViewData["Id"] = homeid;
+            var kolangione = await _context.HomeKolangiRepository.GetManyAsync(a => a.HomeId == homeid);
+            if (kolangione != null)
+            {
+                Kolangi.Kolangi = kolangione.FirstOrDefault();
+                return View(Kolangi);
+            }
+            return RedirectToAction("Create", new { homeid = homeid, hometype = hometype, contracttype = contracttype });
         }
 
 
@@ -88,7 +108,7 @@ namespace AmlakWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateItem(Kolangi kolangi, string[] homestatus, string[] homemoshakhase, string[] homeemtiaz)
+        public async Task<IActionResult> UpdateItem(Kolangi kolangi,int Id,int HomeId, string[] homestatus, string[] homemoshakhase, string[] homeemtiaz)
         {
             try
             {
@@ -97,6 +117,8 @@ namespace AmlakWebApplication.Controllers
                     kolangi.Homevaziate = string.Join(" , ", homestatus);
                     kolangi.Homemoshakhase = string.Join(" , ", homemoshakhase);
                     kolangi.HomeEmtiaz = string.Join(" , ", homeemtiaz);
+                    kolangi.HomeId = HomeId;
+                    kolangi.Id = Id;
                     _context.HomeKolangiRepository.Update(kolangi);
                     await _context.CommitAsync();
                     return RedirectToAction("Index", "HomeGalleryManagment", new { homeid = kolangi.HomeId });

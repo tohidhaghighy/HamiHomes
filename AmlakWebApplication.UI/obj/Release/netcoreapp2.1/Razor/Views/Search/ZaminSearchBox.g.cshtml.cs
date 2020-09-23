@@ -54,7 +54,7 @@ using AmlakWebApplication.UI.Models;
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
             BeginContext(37, 66, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "f148b12373804226ae2407985a60912d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "722ac76c1f2a495e80083a40b3487d5f", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -73,7 +73,7 @@ using AmlakWebApplication.UI.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(105, 56, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a4af0cb54cd44f61a7dded9fcc3fab87", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "119c5603868642ad8f0e079b0e5360bf", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -151,7 +151,7 @@ using AmlakWebApplication.UI.Models;
             WriteLiteral("                        ");
             EndContext();
             BeginContext(2268, 44, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "aec5e31350a340a7a09f5a30c03dd761", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0e87fc7bcc9f4f4eb23505de46804cf2", async() => {
                 BeginContext(2294, 9, false);
 #line 55 "D:\Projects\AmlakWebApplication\AmlakWebApplication.UI\Views\Search\ZaminSearchBox.cshtml"
                                             Write(item.Name);
@@ -216,7 +216,7 @@ using AmlakWebApplication.UI.Models;
             WriteLiteral("                        ");
             EndContext();
             BeginContext(2985, 44, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cd070d34ee664f20806cbe44294906e5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9a172dbc32c64c568530f6b13351d2af", async() => {
                 BeginContext(3011, 9, false);
 #line 74 "D:\Projects\AmlakWebApplication\AmlakWebApplication.UI\Views\Search\ZaminSearchBox.cshtml"
                                             Write(item.Name);
@@ -281,7 +281,7 @@ using AmlakWebApplication.UI.Models;
             WriteLiteral("                        ");
             EndContext();
             BeginContext(3711, 44, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c2161c6a79e64ba2bd16ae27a3b1da5b", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "65cda1e7018d4182a59c477c5fbd5edf", async() => {
                 BeginContext(3737, 9, false);
 #line 93 "D:\Projects\AmlakWebApplication\AmlakWebApplication.UI\Views\Search\ZaminSearchBox.cshtml"
                                             Write(item.Name);
@@ -346,7 +346,7 @@ using AmlakWebApplication.UI.Models;
             WriteLiteral("                        ");
             EndContext();
             BeginContext(4424, 44, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a63ce809a98c4299bc05b1068371cb71", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "925b213cde1447c886a4ca41ceacca36", async() => {
                 BeginContext(4450, 9, false);
 #line 112 "D:\Projects\AmlakWebApplication\AmlakWebApplication.UI\Views\Search\ZaminSearchBox.cshtml"
                                             Write(item.Name);
@@ -411,7 +411,7 @@ using AmlakWebApplication.UI.Models;
             WriteLiteral("                        ");
             EndContext();
             BeginContext(5146, 44, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5918146a53e54fcfbfc9c373996c9c00", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "32e053a4267e4b2cab76675a6fe193b0", async() => {
                 BeginContext(5172, 9, false);
 #line 131 "D:\Projects\AmlakWebApplication\AmlakWebApplication.UI\Views\Search\ZaminSearchBox.cshtml"
                                             Write(item.Name);

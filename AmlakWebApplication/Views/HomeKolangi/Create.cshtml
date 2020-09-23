@@ -18,7 +18,7 @@
 </style>
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
@@ -48,24 +48,15 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-lg-2">
-                            <h4>متراژ بنا</h4>
-                            <input asp-for="Kolangi.Metrazhbena" type="number" class="form-control" placeholder="متراژ بنا" value="1">
-                            <span asp-validation-for="Kolangi.Metrazhbena" class="text-danger"></span>
-                        </div>
-                        <div class="col-lg-2">
-                            <h4>متراژ زمین</h4>
-                            <input asp-for="Kolangi.Metrazhzamin" type="number" class="form-control" placeholder="متراژ زمین" value="1">
-                            <span asp-validation-for="Kolangi.Metrazhzamin" class="text-danger"></span>
-                        </div>
+                        
                         <div class="col-lg-2">
                             <h4>عرض گذر</h4>
-                            <input asp-for="Kolangi.Arzegozar" type="number" class="form-control" placeholder="عرض گذر">
+                            <input asp-for="Kolangi.Arzegozar" type="number" class="form-control" min="0" placeholder="عرض گذر">
                             <span asp-validation-for="Kolangi.Arzegozar" class="text-danger"></span>
                         </div>
                         <div class="col-lg-2">
                             <h4>عرض ملک</h4>
-                            <input asp-for="Kolangi.Arzemelk" type="number" class="form-control" placeholder="عرض ملک">
+                            <input asp-for="Kolangi.Arzemelk" type="number" class="form-control" min="0" placeholder="عرض ملک">
                             <span asp-validation-for="Kolangi.Arzemelk" class="text-danger"></span>
                         </div>
                     </div>
@@ -82,7 +73,7 @@
                         </div>
                         <div class="col-lg-4">
                             <h4>شماره نگهبان</h4>
-                            <input asp-for="Kolangi.NegahbaniPhone" type="number" class="form-control" placeholder="شماره نگهبان">
+                            <input asp-for="Kolangi.NegahbaniPhone" type="text" class="form-control" placeholder="شماره نگهبان">
                             <span asp-validation-for="Kolangi.NegahbaniPhone" class="text-danger"></span>
                         </div>
                     </div>
@@ -95,7 +86,7 @@
                         <div class="">
                             <h4> موقعیت ملک :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Kolangi.Homemogheiat" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Kolangi.Homemogheiat" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakMogheiatMelk.Count; i++)
                                     {
                                         <option value="@Model.AmlakMogheiatMelk[i].Name">@Model.AmlakMogheiatMelk[i].Name</option>
@@ -144,7 +135,7 @@
                         <div class="">
                             <h4> وضعیت سند :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Kolangi.Homesanad" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Kolangi.Homesanad" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakSanadStatus.Count; i++)
                                     {
                                         <option value="@Model.AmlakSanadStatus[i].Name">@Model.AmlakSanadStatus[i].Name</option>

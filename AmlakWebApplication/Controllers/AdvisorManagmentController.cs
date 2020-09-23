@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AmlakWebApplication.Models;
 using DataLayer.Infrastracture;
 using DomainLayer;
 using DomainLayer.Enums;
@@ -29,9 +30,160 @@ namespace AmlakWebApplication.Controllers
             return View(await _context.AdviserRepository.GetAllAsync());
         }
 
+        public async Task<IActionResult> AdviserSelect(int contractid)
+        {
+            var findall = new List<ViewModelLayer.Adviser.AdviserInfo>();
+            var findadvisers = await _context.AdviserRepository.GetManyAsync(a => a.Active == true);
+            foreach (var item in findadvisers)
+            {
+                var oneadviserinfo = new ViewModelLayer.Adviser.AdviserInfo();
+                oneadviserinfo.Adviser = item;
+                var findhomes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.AdviserId == item.Id);
+                //oneadviserinfo.BuildCount = findhomes.Where(a => a.TypContract == TypeHome.Selled).Count();
+                oneadviserinfo.RentCount = findhomes.Where(a => a.TypContract == TypeHome.build).Count();
+                oneadviserinfo.BuyCount = findhomes.Where(a => a.TypContract == TypeHome.Buy).Count();
+                oneadviserinfo.SellCount = findhomes.Where(a => a.TypContract == TypeHome.Selled).Count();
+                oneadviserinfo.RentedCount = findhomes.Where(a => a.TypContract == TypeHome.Rented).Count();
+                ViewData["contractid"] = contractid;
+                findall.Add(oneadviserinfo);
+            }
+            
+            return View(findall);
+        }
+
+        public async Task<PartialViewResult> Searchfast(string takhasos = "", string manategh = "")
+        {
+            var findall = new List<ViewModelLayer.Adviser.AdviserInfo>();
+            var findadvisers = await _context.AdviserRepository.GetManyAsync(a => a.Active == true && (a.RentTakhasos.Contains(takhasos) || a.BuyTakhasos.Contains(takhasos) || a.Manategh.Contains(manategh)));
+            foreach (var item in findadvisers)
+            {
+                var oneadviserinfo = new ViewModelLayer.Adviser.AdviserInfo();
+                oneadviserinfo.Adviser = item;
+                var findhomes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.AdviserId == item.Id);
+                //oneadviserinfo.BuildCount = findhomes.Where(a => a.TypContract == TypeHome.Selled).Count();
+                oneadviserinfo.RentCount = findhomes.Where(a => a.TypContract == TypeHome.build).Count();
+                oneadviserinfo.BuyCount = findhomes.Where(a => a.TypContract == TypeHome.Buy).Count();
+                oneadviserinfo.SellCount = findhomes.Where(a => a.TypContract == TypeHome.Selled).Count();
+                oneadviserinfo.RentedCount = findhomes.Where(a => a.TypContract == TypeHome.Rented).Count();
+                findall.Add(oneadviserinfo);
+            }
+
+            return PartialView("_ListAjaxSelectedAdviser", findall);
+        }
+
+        public async Task<PartialViewResult> Searchsabeghe()
+        {
+            var findall = new List<ViewModelLayer.Adviser.AdviserInfo>();
+            var findadvisers = await _context.AdviserRepository.GetManyAsync(a => a.Active == true);
+            foreach (var item in findadvisers)
+            {
+                var oneadviserinfo = new ViewModelLayer.Adviser.AdviserInfo();
+                oneadviserinfo.Adviser = item;
+                var findhomes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.AdviserId == item.Id);
+                //oneadviserinfo.BuildCount = findhomes.Where(a => a.TypContract == TypeHome.Selled).Count();
+                oneadviserinfo.RentCount = findhomes.Where(a => a.TypContract == TypeHome.build).Count();
+                oneadviserinfo.BuyCount = findhomes.Where(a => a.TypContract == TypeHome.Buy).Count();
+                oneadviserinfo.SellCount = findhomes.Where(a => a.TypContract == TypeHome.Selled).Count();
+                oneadviserinfo.RentedCount = findhomes.Where(a => a.TypContract == TypeHome.Rented).Count();
+                findall.Add(oneadviserinfo);
+            }
+            findall = findall.OrderByDescending(a => a.Adviser.ExperienceYear).ToList();
+
+            return PartialView("_ListAjaxSelectedAdviser", findall);
+        }
+
+        public async Task<PartialViewResult> Searchforosh()
+        {
+            var findall = new List<ViewModelLayer.Adviser.AdviserInfo>();
+            var findadvisers = await _context.AdviserRepository.GetManyAsync(a => a.Active == true);
+            foreach (var item in findadvisers)
+            {
+                var oneadviserinfo = new ViewModelLayer.Adviser.AdviserInfo();
+                oneadviserinfo.Adviser = item;
+                var findhomes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.AdviserId == item.Id);
+                //oneadviserinfo.BuildCount = findhomes.Where(a => a.TypContract == TypeHome.Selled).Count();
+                oneadviserinfo.RentCount = findhomes.Where(a => a.TypContract == TypeHome.build).Count();
+                oneadviserinfo.BuyCount = findhomes.Where(a => a.TypContract == TypeHome.Buy).Count();
+                oneadviserinfo.SellCount = findhomes.Where(a => a.TypContract == TypeHome.Selled).Count();
+                oneadviserinfo.RentedCount = findhomes.Where(a => a.TypContract == TypeHome.Rented).Count();
+                findall.Add(oneadviserinfo);
+            }
+            findall = findall.OrderByDescending(a => a.BuyCount).ToList();
+
+            return PartialView("_ListAjaxSelectedAdviser", findall);
+        }
+
+        public async Task<PartialViewResult> Searchejare()
+        {
+            var findall = new List<ViewModelLayer.Adviser.AdviserInfo>();
+            var findadvisers = await _context.AdviserRepository.GetManyAsync(a => a.Active == true);
+            foreach (var item in findadvisers)
+            {
+                var oneadviserinfo = new ViewModelLayer.Adviser.AdviserInfo();
+                oneadviserinfo.Adviser = item;
+                var findhomes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.AdviserId == item.Id);
+                //oneadviserinfo.BuildCount = findhomes.Where(a => a.TypContract == TypeHome.Selled).Count();
+                oneadviserinfo.RentCount = findhomes.Where(a => a.TypContract == TypeHome.build).Count();
+                oneadviserinfo.BuyCount = findhomes.Where(a => a.TypContract == TypeHome.Buy).Count();
+                oneadviserinfo.SellCount = findhomes.Where(a => a.TypContract == TypeHome.Selled).Count();
+                oneadviserinfo.RentedCount = findhomes.Where(a => a.TypContract == TypeHome.Rented).Count();
+                findall.Add(oneadviserinfo);
+            }
+            findall = findall.OrderByDescending(a => a.RentCount).ToList();
+
+            return PartialView("_ListAjaxSelectedAdviser", findall);
+        }
+
+        public async Task<PartialViewResult> Searchforokhteshode()
+        {
+            var findall = new List<ViewModelLayer.Adviser.AdviserInfo>();
+            var findadvisers = await _context.AdviserRepository.GetManyAsync(a => a.Active == true);
+            foreach (var item in findadvisers)
+            {
+                var oneadviserinfo = new ViewModelLayer.Adviser.AdviserInfo();
+                oneadviserinfo.Adviser = item;
+                var findhomes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.AdviserId == item.Id);
+                //oneadviserinfo.BuildCount = findhomes.Where(a => a.TypContract == TypeHome.Selled).Count();
+                oneadviserinfo.RentCount = findhomes.Where(a => a.TypContract == TypeHome.build).Count();
+                oneadviserinfo.BuyCount = findhomes.Where(a => a.TypContract == TypeHome.Buy).Count();
+                oneadviserinfo.SellCount = findhomes.Where(a => a.TypContract == TypeHome.Selled).Count();
+                oneadviserinfo.RentedCount = findhomes.Where(a => a.TypContract == TypeHome.Rented).Count();
+                findall.Add(oneadviserinfo);
+            }
+            findall = findall.OrderByDescending(a => a.SellCount).ToList();
+
+            return PartialView("_ListAjaxSelectedAdviser", findall);
+        }
+
+        public async Task<PartialViewResult> Searchejaredadeshode()
+        {
+            var findall = new List<ViewModelLayer.Adviser.AdviserInfo>();
+            var findadvisers = await _context.AdviserRepository.GetManyAsync(a => a.Active == true);
+            foreach (var item in findadvisers)
+            {
+                var oneadviserinfo = new ViewModelLayer.Adviser.AdviserInfo();
+                oneadviserinfo.Adviser = item;
+                var findhomes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.AdviserId == item.Id);
+                //oneadviserinfo.BuildCount = findhomes.Where(a => a.TypContract == TypeHome.Selled).Count();
+                oneadviserinfo.RentCount = findhomes.Where(a => a.TypContract == TypeHome.build).Count();
+                oneadviserinfo.BuyCount = findhomes.Where(a => a.TypContract == TypeHome.Buy).Count();
+                oneadviserinfo.SellCount = findhomes.Where(a => a.TypContract == TypeHome.Selled).Count();
+                oneadviserinfo.RentedCount = findhomes.Where(a => a.TypContract == TypeHome.Rented).Count();
+                findall.Add(oneadviserinfo);
+            }
+            findall = findall.OrderByDescending(a => a.RentedCount).ToList();
+
+            return PartialView("_ListAjaxSelectedAdviser", findall);
+        }
+
+
         public async Task<IActionResult> Create()
         {
-            return View();
+            var main = new MainAdvisor();
+            main.Mahalles = await _context.MahalleRepository.GetAllAsync();
+            main.Regions = await _context.RegionRepository.GetAllAsync();
+            main.Cities = await _context.CityRepository.GetAllAsync();
+            return View(main);
         }
 
         public async Task<IActionResult> AmlakList(int type,int id)
@@ -64,7 +216,7 @@ namespace AmlakWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateItem(Adviser adviser, IFormFile Image, IFormFile BackgroundImage)
+        public async Task<IActionResult> CreateItem(Adviser adviser, IFormFile Image, IFormFile BackgroundImage,string[] mahale,int city)
         {
             try
             {
@@ -80,7 +232,7 @@ namespace AmlakWebApplication.Controllers
                             await Image.CopyToAsync(stream);
 
                         }
-                        adviser.Image = fileName;
+                        adviser.Image = ImageUrl.url + fileName;
                     }
 
                     if (BackgroundImage != null)
@@ -93,9 +245,10 @@ namespace AmlakWebApplication.Controllers
                             await BackgroundImage.CopyToAsync(stream);
 
                         }
-                        adviser.BackgroundImage = fileName;
+                        adviser.BackgroundImage = ImageUrl.url + fileName;
                     }
-
+                    adviser.Manategh= string.Join(" , ", mahale);
+                    adviser.CityId = city;
                     adviser.Password = adviser.Password.GetHashPassword();
                     _context.AdviserRepository.Insert(adviser);
                     await _context.CommitAsync();

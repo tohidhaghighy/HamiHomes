@@ -74,7 +74,7 @@
 
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
@@ -83,13 +83,11 @@
     </ol>
 </section>
 
-<div class="callout callout-info" style="margin-top:10px;">
-    <h4>مدریت گالری</h4>
-    در این قسمت برای خانه خود گالری تصاویر ایجاد کنید
-    <br />
-    برای حذف عکس روی عکس کلیک کنید
-
+<div class="text-center" style="background:rgba(202, 199, 199, 0.50)">
+    <h4 class="text-center" style="padding-top:80px;padding-bottom:10px;">اطلاعات ملک شما با موفقیت ثبت گردید پس از بررسی منتشر خواهد شد</h4>
+    <h6 class="text-center" style="padding-top:10px;padding-bottom:50px;color:rgba(41, 41, 41, 0.75)">برای بیشتر دیده شدن ملک خود در این قسمت میتوانید عکس اپلود کنید</h6>
 </div>
+
 
 <div class="container">
     <div class="box box-danger">
@@ -135,7 +133,7 @@
                     {
                         <div class="col-lg-3 col-md-4 col-xs-6 thumb">
                             <a class="fancybox img-hover-zoom" rel="ligthbox" onclick="deleteitem(@item.Id)">
-                                <img src="~/images/@item.Url" class="zoom img-fluid " alt="">
+                                <img src="@item.Url" class="zoom img-fluid " alt="">
 
                             </a>
                         </div>
@@ -143,7 +141,7 @@
                 }
 
 
-                
+
             </div>
 
         </div>

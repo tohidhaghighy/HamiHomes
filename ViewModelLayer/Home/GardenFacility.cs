@@ -10,5 +10,7 @@ namespace ViewModelLayer.Home
     {
         public Garden Garden { get; set; }
         public List<AmlakEmtiaz> AmlakEmtiazes { get; set; }
+        public DomainLayer.User User { get; set; }
+        public DomainLayer.Adviser Adviser { get; set; }
     }
 }

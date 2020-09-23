@@ -9,6 +9,9 @@ namespace ViewModelLayer.AdvisorManagment
     public class MainAdvisor
     {
         public DomainLayer.Adviser Adviser { get; set; }
+        public List<DomainLayer.Location.Mahalle> Mahalles { get; set; }
+        public List<DomainLayer.Region> Regions { get; set; }
+        public List<DomainLayer.City> Cities { get; set; }
         public int buildCount { get; set; }
         public int buildedCount { get; set; }
         public int sellCount { get; set; }

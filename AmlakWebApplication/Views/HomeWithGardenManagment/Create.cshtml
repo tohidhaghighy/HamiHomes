@@ -19,7 +19,7 @@
 
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
@@ -44,47 +44,48 @@
             <div class="box-body">
                 <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
 
-                <input name="HOmeId" id="HomeId" type="number" class="hidden" value="@ViewData["Id"]">
+                <input name="HomeId" id="HomeId" type="number" class="hidden" value="@ViewData["Id"]">
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-lg-2">
+                        <div class="col-lg-2" style="display:none;">
                             <h4>متراژ بنا</h4>
-                            <input asp-for="HomewithGarden.MetrazhBena" type="number" class="form-control" placeholder="متراژ بنا" value="1">
+                            <input asp-for="HomewithGarden.MetrazhBena" type="number" class="form-control" min="0" placeholder="متراژ بنا" value="1">
                             <span asp-validation-for="HomewithGarden.MetrazhBena" class="text-danger"></span>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-2" style="display:none">
                             <h4>متراژ زمین</h4>
-                            <input asp-for="HomewithGarden.Metrazhzamin" type="number" class="form-control" placeholder="متراژ زمین" value="1">
+                            <input asp-for="HomewithGarden.Metrazhzamin" type="number" class="form-control" min="0" placeholder="متراژ زمین" value="1">
                             <span asp-validation-for="HomewithGarden.Metrazhzamin" class="text-danger"></span>
                         </div>
                         <div class="col-lg-2">
                             <h4>تعداد کل طبقات</h4>
-                            <input asp-for="HomewithGarden.Tedadkoltabaghat" type="number" class="form-control" placeholder="تعداد کل طبقات">
+                            <input asp-for="HomewithGarden.Tedadkoltabaghat" type="number" class="form-control" min="0" placeholder="تعداد کل طبقات">
                             <span asp-validation-for="HomewithGarden.Tedadkoltabaghat" class="text-danger"></span>
                         </div>
                         <div class="col-lg-2">
                             <h4>عرض گذر</h4>
-                            <input asp-for="HomewithGarden.Arzegozar" type="text" class="form-control" placeholder="عرض گذر">
+                            <input asp-for="HomewithGarden.Arzegozar" type="text" class="form-control" min="0" placeholder="عرض گذر">
                             <span asp-validation-for="HomewithGarden.Arzegozar" class="text-danger"></span>
                         </div>
                         <div class="col-lg-2">
                             <h4>عرض ملک</h4>
-                            <input asp-for="HomewithGarden.Arzemelk" type="number" class="form-control" placeholder="عرض ملک">
+                            <input asp-for="HomewithGarden.Arzemelk" type="number" class="form-control" min="0" placeholder="عرض ملک">
                             <span asp-validation-for="HomewithGarden.Arzemelk" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
+
                     <div class="col-lg-3">
                         <div class="">
                             <h4> موقعیت ملک :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="HomewithGarden.Homemogheiat" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="HomewithGarden.Homemogheiat" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakMogheiatMelk.Count; i++)
                                     {
-                                        <option value="@Model.AmlakMogheiatMelk[i].Id">@Model.AmlakMogheiatMelk[i].Name</option>
+                                        <option value="@Model.AmlakMogheiatMelk[i].Name">@Model.AmlakMogheiatMelk[i].Name</option>
                                     }
                                 </select>
                             </div>
@@ -95,10 +96,10 @@
                         <div class="">
                             <h4> نمای ساختمان :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" id="AmlakNema" name="AmlakNema" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="HomewithGarden.Homenema" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakNema.Count; i++)
                                     {
-                                        <option value="@Model.AmlakNema[i].Id">@Model.AmlakNema[i].Name</option>
+                                        <option value="@Model.AmlakNema[i].Name">@Model.AmlakNema[i].Name</option>
                                     }
                                 </select>
                             </div>
@@ -109,11 +110,13 @@
                         <div class="">
                             <h4> مشخصه ملک :</h4>
                             <select class="form-control select2 text-center" multiple="multiple" data-placeholder="  انتخاب کن  "
-                                    style="width: 100%;direction:rtl;float:right;">
+                                    style="width: 100%;direction:rtl;float:right;" id="moshakhase" name="moshakhase">
+
                                 @for (var i = 0; i < Model.AmlakMoshakhase.Count; i++)
                                 {
-                                    <option value="@Model.AmlakMoshakhase[i].Id">@Model.AmlakMoshakhase[i].Name</option>
+                                    <option value="@Model.AmlakMoshakhase[i].Name">@Model.AmlakMoshakhase[i].Name</option>
                                 }
+
                             </select>
                         </div>
                     </div>
@@ -123,14 +126,15 @@
                 <hr />
 
                 <div class="row">
+
                     <div class="col-lg-3">
                         <div class="">
                             <h4> تاسیسات گرمایشی و سرمایشی :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" id="AmlakParking" name="AmlakParking" onchange="checkcityval()">
+                                <select class="form-control select2" multiple style="padding:10px;width:100%;" id="AmlakParking" name="AmlakParking" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakTasisatGarmaieshi.Count; i++)
                                     {
-                                        <option value="@Model.AmlakTasisatGarmaieshi[i].Id">@Model.AmlakTasisatGarmaieshi[i].Name</option>
+                                        <option value="@Model.AmlakTasisatGarmaieshi[i].Name">@Model.AmlakTasisatGarmaieshi[i].Name</option>
                                     }
                                 </select>
                             </div>
@@ -141,10 +145,10 @@
                         <div class="">
                             <h4> پوشش کف :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" id="AmlakParking" name="AmlakParking" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="HomewithGarden.Homekaf" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakKafes.Count; i++)
                                     {
-                                        <option value="@Model.AmlakKafes[i].Id">@Model.AmlakKafes[i].Name</option>
+                                        <option value="@Model.AmlakKafes[i].Name">@Model.AmlakKafes[i].Name</option>
                                     }
                                 </select>
                             </div>
@@ -155,10 +159,10 @@
                         <div class="">
                             <h4> آشپزخانه :</h4>
                             <select class="form-control select2 text-center" multiple="multiple" data-placeholder="   انتخاب کن  "
-                                    style="width: 100%;direction:rtl;float:right;">
+                                    style="width: 100%;direction:rtl;float:right;" id="kitchen" name="kitchen">
                                 @for (var i = 0; i < Model.AmlakKitchenes.Count; i++)
                                 {
-                                    <option value="@Model.AmlakKitchenes[i].Id">@Model.AmlakKitchenes[i].Name</option>
+                                    <option value="@Model.AmlakKitchenes[i].Name">@Model.AmlakKitchenes[i].Name</option>
                                 }
                             </select>
 
@@ -170,14 +174,15 @@
                 <hr />
 
                 <div class="row">
+
                     <div class="col-lg-3">
                         <div class="">
                             <h4> نوع دیوار  :</h4>
                             <div>
-                                <select style="padding:10px;width:100%;" id="AmlakParking" name="AmlakParking" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="HomewithGarden.Homedivar" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakDivars.Count; i++)
                                     {
-                                        <option value="@Model.AmlakDivars[i].Id">@Model.AmlakDivars[i].Name</option>
+                                        <option value="@Model.AmlakDivars[i].Name">@Model.AmlakDivars[i].Name</option>
                                     }
                                 </select>
                             </div>
@@ -189,10 +194,10 @@
                         <div class="">
                             <h4> نوع و تعداد پارکینگ :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" id="AmlakParking" name="AmlakParking" onchange="checkcityval()">
+                                <select class="form-control select2" multiple style="padding:10px;width:100%;" id="AmlakParking" name="AmlakParking" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakParking.Count; i++)
                                     {
-                                        <option value="@Model.AmlakParking[i].Id">@Model.AmlakParking[i].Name</option>
+                                        <option value="@Model.AmlakParking[i].Name">@Model.AmlakParking[i].Name</option>
                                     }
                                 </select>
                             </div>
@@ -203,10 +208,10 @@
                         <div class="">
                             <h4> سرویس بهداشتی و حمام  :</h4>
                             <select class="form-control select2 text-center btn-block" multiple="multiple" data-placeholder="   انتخاب کن  "
-                                    style="width: 100%;direction:rtl;float:right;">
+                                    style="width: 100%;direction:rtl;float:right;" id="homewc" name="homewc">
                                 @for (var i = 0; i < Model.AmlakWC.Count; i++)
                                 {
-                                    <option value="@Model.AmlakWC[i].Id">@Model.AmlakWC[i].Name</option>
+                                    <option value="@Model.AmlakWC[i].Name">@Model.AmlakWC[i].Name</option>
                                 }
                             </select>
                         </div>
@@ -217,14 +222,15 @@
                 <hr />
 
                 <div class="row">
+
                     <div class="col-lg-3">
                         <div class="">
                             <h4> وضعیت سند :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" id="AmlakSanadStatus" name="AmlakSanadStatus" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="HomewithGarden.Homesanad" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakSanadStatus.Count; i++)
                                     {
-                                        <option value="@Model.AmlakSanadStatus[i].Id">@Model.AmlakSanadStatus[i].Name</option>
+                                        <option value="@Model.AmlakSanadStatus[i].Name">@Model.AmlakSanadStatus[i].Name</option>
                                     }
                                 </select>
                             </div>
@@ -235,10 +241,10 @@
                         <div class="">
                             <h4> امتیاز  :</h4>
                             <select class="form-control select2 text-center" multiple="multiple" data-placeholder="   انتخاب کن  "
-                                    style="width: 100%;direction:rtl;float:right;">
+                                    style="width: 100%;direction:rtl;float:right;" id="emtiaz" name="emtiaz">
                                 @for (var i = 0; i < Model.AmlakEmtiazes.Count; i++)
                                 {
-                                    <option value="@Model.AmlakEmtiazes[i].Id">@Model.AmlakEmtiazes[i].Name</option>
+                                    <option value="@Model.AmlakEmtiazes[i].Name">@Model.AmlakEmtiazes[i].Name</option>
                                 }
                             </select>
                         </div>
@@ -249,23 +255,37 @@
                             <h4> وضعیت ملک :</h4>
                             <div class="custom-select" style="">
                                 <select class="form-control select2 text-center" multiple="multiple" data-placeholder="  انتخاب کن  "
-                                        style="width: 100%;direction:rtl;float:right;">
+                                        style="width: 100%;direction:rtl;float:right;" id="vaziat" name="vaziat">
                                     @for (var i = 0; i < Model.AmlakMelkStatus.Count; i++)
                                     {
-                                        <option value="@Model.AmlakMelkStatus[i].Id">@Model.AmlakMelkStatus[i].Name</option>
+                                        <option value="@Model.AmlakMelkStatus[i].Name">@Model.AmlakMelkStatus[i].Name</option>
                                     }
                                 </select>
                             </div>
 
                         </div>
+
+                        
                     </div>
 
+                </div>
+                <div class="row" style="padding-top:10px;">
+                    <div class="col-lg-3">
+                        <div class="">
+                            <h4> امکانات  :</h4>
+                            <select class="form-control select2 text-center" multiple="multiple" data-placeholder="   انتخاب کن  "
+                                    style="width: 100%;direction:rtl;float:right;" name="HomeFacility" id="HomeFacility">
+                                @for (var i = 0; i < Model.HomeFacility.Count; i++)
+                                {
+                                    <option value="@Model.HomeFacility[i].Name">@Model.HomeFacility[i].Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
                 <hr />
 
-              
-               
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">درج اطلاعات خانه حیاط دار - رفتن به مرحله بعد </button>
                 </div>

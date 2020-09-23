@@ -12,5 +12,7 @@ namespace DomainLayer.Enums
         Selled=4,
         Rented=5,
         builded=6,
+        SellWithOther=7,
+        Cancel=8
     }
 }

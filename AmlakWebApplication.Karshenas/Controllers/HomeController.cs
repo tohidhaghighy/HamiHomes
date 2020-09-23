@@ -79,9 +79,9 @@ namespace AmlakWebApplication.Karshenas.Controllers
             CookieOptions option = new CookieOptions();
 
             if (expireTime.HasValue)
-                option.Expires = DateTime.Now.AddMinutes(expireTime.Value);
+                option.Expires = DateTime.Now.AddDays(20);
             else
-                option.Expires = DateTime.Now.AddMilliseconds(10);
+                option.Expires = DateTime.Now.AddDays(10);
 
             Response.Cookies.Append(key, value, option);
         }

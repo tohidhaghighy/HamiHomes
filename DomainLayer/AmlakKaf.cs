@@ -12,6 +12,6 @@ namespace DomainLayer
         public TypeHome TypeHome { get; set; }
         public MelkType MelkType { get; set; }
         public Boolean Selected { get; set; }
-        public int Itemid { get; set; }
+        public Boolean ShowinSearch { get; set; }
     }
 }

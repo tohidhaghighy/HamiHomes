@@ -243,16 +243,7 @@
 <div class="container">
     <h3 class="text-center" style="padding-top:50px;color:rgba(111, 109, 109, 0.65)">لیست املاک مشاور</h3>
     <a class="btn btn-success" style="margin-top:20px;color:white" href="/Rezome/Create?id=@Model.Adviser.Id">ثبت ملک جدید</a>
-    <div class="row text-center" style="padding-top:30px;">
-        <h5 style="display:inline;padding-top:10px;padding-left:10px;">نوع قرارداد خود را انتخاب کن :</h5>
-        <select class="selectpicker" data-live-search="true" style="width:20%;height:50px;">
-            <option value="1" onclick="showothers()">برای فروش</option>
-            <option value="2" onclick="showothers()">برای اجاره</option>
-            <option value="3" onclick="showothers()">برای ساخت</option>
-            <option value="4" onclick="showsolditem()">فروخته شده</option>
-            <option value="5" onclick="showrenteditem()">اجاره داده شده</option>
-        </select>
-    </div>
+    
     <hr />
 </div>
 
@@ -664,13 +655,8 @@
 
 <script>
     $("#info").hide();
-    $("#solditems").hide();
-    $("#renteditems").hide();
 
-    function shownumber(number) {
-        document.getElementById("btnnumberphone").innerHTML = "<span class='fa fa-phone' style='padding:5px;'></span> " + number;
-    }
-
+   
     function showinfo() {
         var x = document.getElementById("info");
 
@@ -685,20 +671,5 @@
         }
         }
 
-    function showsolditem() {
-        $("#renteditems").hide();
-        $("#solditems").slideDown(1000);
     
-        }
-
-    function showrenteditem() {
-        $("#solditems").hide();
-        $("#renteditems").slideDown(1000);
-        }
-
-
-    function showothers() {
-        $("#solditems").hide();
-        $("#renteditems").hide();
-        }
 </script>

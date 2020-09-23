@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AmlakWebApplication.Models;
 using DataLayer.Infrastracture;
 using DomainLayer;
 using DomainLayer.Home;
@@ -67,11 +68,12 @@ namespace AmlakWebApplication.Controllers
                             await Image.CopyToAsync(stream);
 
                         }
-                        gallery.Url = fileName;
+                        gallery.Url = ImageUrl.url + fileName;
+
+                        _context.HomeGalleryRepository.Insert(gallery);
+                        await _context.CommitAsync();
                     }
 
-                    _context.HomeGalleryRepository.Insert(gallery);
-                    await _context.CommitAsync();
                 }
             }
             catch (DbUpdateException ex)

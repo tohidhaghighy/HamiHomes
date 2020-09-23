@@ -10,10 +10,6 @@
 <script src="~/css/alert/sweetalert.js"></script>
 
 <style>
-    tr:nth-child(even) {
-        background: rgba(126, 136, 241, 0.59)
-    }
-
     .select2-container--default .select2-selection--multiple .select2-selection__choice {
         background-color: #af1e1e;
         color: white;
@@ -27,7 +23,7 @@
 
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
@@ -60,10 +56,10 @@
         <div class="form-horizontal">
             <div class="box-body">
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">کد ملک</label>
+                    <label for="inputEmail3" class="col-sm-2 control-label">کد فایل</label>
 
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="code" name="code" placeholder="کد ملک">
+                        <input type="text" class="form-control" id="code" name="code" placeholder="کد فایل">
                     </div>
                 </div>
                 <div class="form-group">
@@ -103,18 +99,19 @@
                         <tr>
                             <th class="text-center">تایید شده ؟</th>
                             <th class="text-center">عکس</th>
+                            <th class="text-center">مشاور</th>
                             <th class="text-center">زمان انتشار</th>
-                            <th class="text-center">عمومی / خصوصی</th>
-                            <th class="text-center">ادرس</th>
-                            <th class="text-center">کد پستی</th>
-                            <th class="text-center">لیست قراردادها</th>
+                            <th class="text-center">آدرس</th>
+                            <th class="text-center">نوع معامله</th>
+                            <th class="text-center">قیمت</th>
+                            <th class="text-center">متراژ</th>
                             <th class="text-center">گالری تصاویر</th>
                             <th class="text-center">نقشه 3 یعدی</th>
                             <th class="text-center">حذف</th>
                         </tr>
                     </thead>
                     <tbody id="showfilterbox">
-                        @await Html.PartialAsync("_ListAjax", Model.Homes)
+                        @await Html.PartialAsync("_ListAjax", Model.Contracts)
                     </tbody>
 
                 </table>
@@ -175,6 +172,33 @@
         }
 
     function Changecheck(id) {
+         swal({
+            title: "کارشناس مورد نظر خود را اختصاص دهید؟",
+            text: "",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonClass: "btn-success",
+            confirmButtonText: "بله میخوام",
+            cancelButtonText: "خیر",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+                    takhsissearch(id);
+
+                } else {
+                    swal("صرف نظر", "حذف نشد", "error");
+                }
+            });
+        
+        }
+    
+    function takhsissearch(id) {
+        window.location.href = "/AdvisorManagment/AdviserSelect?contractid=" + id;
+    }
+
+    function Changecheckunpin(id) {
          $.ajax({
             type: "Post",
             url: '/HomeManagment/CheckChange',
@@ -183,13 +207,13 @@
                 window.location.reload();
             }
         });
-        }
+    }
 
     function searchhome() {
         var mahale = $("#mahale").val();
         var code = $("#code").val();
         $("#showfilterbox").empty();
-        $('#showfilterbox').load('/HomeManagment/GetHomePartial?code=' + code + '&mahale=' + mahale);
+        $('#showfilterbox').load('/HomeManagment/GetHomePartial?code=' + code + '&mahale=' + mahale+'&type=0');
         $("#showfilterbox").show();
     }
 </script>

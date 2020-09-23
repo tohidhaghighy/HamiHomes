@@ -54,7 +54,7 @@ namespace AmlakWebApplication.Controllers
         {
             try
             {
-                Contract.SellCOst = Convert.ToInt64(costbuy.Replace(",", ""));
+                Contract.BuyCost = Convert.ToInt64(costbuy.Replace(",", ""));
                 Contract.RentCOst = Convert.ToInt64(costejare.Replace(",", ""));
                 Contract.Vadie = Convert.ToInt64(costrahn.Replace(",", ""));
                 if (ModelState.IsValid)
@@ -99,7 +99,7 @@ namespace AmlakWebApplication.Controllers
         {
             try
             {
-                Contract.SellCOst = Convert.ToInt64(costbuy.Replace(",", ""));
+                Contract.BuyCost = Convert.ToInt64(costbuy.Replace(",", ""));
                 Contract.RentCOst = Convert.ToInt64(costejare.Replace(",", ""));
                 Contract.Vadie = Convert.ToInt64(costrahn.Replace(",", ""));
                 if (ModelState.IsValid)
@@ -121,22 +121,12 @@ namespace AmlakWebApplication.Controllers
                 });
 
             }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("", "با مدیر سایت تماس بگیرید مشکل سروری است");
-                _context.LogRepository.Insert(new Log()
-                {
-                    LogController = "ContractManagment",
-                    LogText = ex.ToString(),
-                    LogView = "CreateItem"
-                });
-                return RedirectToAction(nameof(Create), "ContractManagment", new { homeid = Contract.Id, hometype = hometype, text = "خانه" });
-            }
-            return OpenUrl(hometype, Contract.HomeId, Contract.TypContract);
+
+            return OpenUrlUpdate(hometype, Contract.HomeId, Contract.TypContract);
         }
 
 
-        public IActionResult OpenUrl(int typename, int id,TypeHome contracttypeid)
+        public IActionResult OpenUrl(int typename , int id, TypeHome contracttypeid)
         {
             if (typename == 1)
             {
@@ -177,7 +167,48 @@ namespace AmlakWebApplication.Controllers
             return RedirectToAction(nameof(Create), "HomeGardenManagment", new { homeid = id, hometype = typename, contracttype = (int)contracttypeid });
         }
 
-        
+        public IActionResult OpenUrlUpdate(int typename, int id, TypeHome contracttypeid)
+        {
+            if (typename == 1)
+            {
+                return RedirectToAction(nameof(Update), "HomeApartemanManagment", new { homeid = id, hometype = typename, contracttype = (int)contracttypeid });
+            }
+            else if (typename == 2)
+            {
+                return RedirectToAction(nameof(Update), "HomeWithGardenManagment", new { homeid = id, hometype = typename, contracttype = (int)contracttypeid });
+            }
+            else if (typename == 3)
+            {
+                return RedirectToAction(nameof(Update), "HomeGround", new { homeid = id, hometype = typename, contracttype = (int)contracttypeid });
+            }
+            else if (typename == 4)
+            {
+                return RedirectToAction(nameof(Update), "HomeKolangi", new { homeid = id, hometype = typename, contracttype = (int)contracttypeid });
+            }
+            else if (typename == 5)
+            {
+                return RedirectToAction(nameof(Update), "HomeEdari", new { homeid = id, hometype = typename, contracttype = (int)contracttypeid });
+            }
+            else if (typename == 6)
+            {
+                return RedirectToAction(nameof(Update), "HomeMaghaze", new { homeid = id, hometype = typename, contracttype = (int)contracttypeid });
+            }
+            else if (typename == 7)
+            {
+                return RedirectToAction(nameof(Update), "HomeMostaghelat", new { homeid = id, hometype = typename, contracttype = (int)contracttypeid });
+            }
+            else if (typename == 8)
+            {
+                return RedirectToAction(nameof(Update), "HomeAnbarManagment", new { homeid = id, hometype = typename, contracttype = (int)contracttypeid });
+            }
+            else if (typename == 9)
+            {
+                return RedirectToAction(nameof(Update), "HomeVilaManagment", new { homeid = id, hometype = typename, contracttype = (int)contracttypeid });
+            }
+            return RedirectToAction(nameof(Update), "HomeGardenManagment", new { homeid = id, hometype = typename, contracttype = (int)contracttypeid });
+        }
+
+
         public async Task<JsonResult> AdviserInfo(int id)
         {
             var allinfo = new AdviserInfo();
@@ -191,6 +222,24 @@ namespace AmlakWebApplication.Controllers
                 allinfo.Builded += getallcontracts.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.builded).Count().ToString() + ",";
             }
             return Json(allinfo);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> AddAdviser(int contractid,int adviserid)
+        {
+            var findadviser = _context.ContractRepository.GetById(contractid);
+            if (findadviser!=null)
+            {
+                findadviser.AdviserId = adviserid;
+                _context.ContractRepository.Update(findadviser);
+                var findhome = _context.HomeRepository.GetById(findadviser.HomeId);
+                findhome.IsShow = true;
+                _context.HomeRepository.Update(findhome);
+                await _context.CommitAsync();
+
+                return Json(true);
+            }
+            return Json(false);
         }
     }
 

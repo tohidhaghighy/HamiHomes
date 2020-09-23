@@ -59,18 +59,30 @@
             {
                 melk = "زمین";
             }
-            <tr>
-                <td class="text-center" style="padding:10px;">
-                    <a href="~/images/@item.Icon"><img style="width:40px;height:40px;" src="~/images/@item.Icon" /></a>
-                </td>
-                <td class="text-center" style="padding:10px;">
-                    @item.Name
-                </td>
-                <td class="text-center" style="padding:10px;">@s</td>
-                <td class="text-center" style="padding:10px;">@melk</td>
+    <tr>
+        <td class="text-center" style="padding:10px;">
+            <a href="~/images/@item.Icon"><img style="width:40px;height:40px;" src="~/images/@item.Icon" /></a>
+        </td>
+        <td class="text-center" style="padding:10px;">
+            @item.Name
+        </td>
+        <td class="text-center" style="padding:10px;">@s</td>
+        <td class="text-center" style="padding:10px;">@melk</td>
+        <td class="text-center" style="padding:10px;">
+            @{
+                if (item.ShowinSearch == true)
+                {
+                    <input type="checkbox" checked="checked" onchange="Showinsearch(@item.Id)" />
+                }
+                else
+                {
+                    <input type="checkbox" onchange="Showinsearch(@item.Id)" />
+                }
+            }
 
-                <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="حذف"><a class="btn btn-danger btn-xs" onclick="deleteitem(@item.Id)"><i class="ion ion-ios-trash"></i></a></p></td>
-            </tr>
+        </td>
+        <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="حذف"><a class="btn btn-danger btn-xs" onclick="deleteitem(@item.Id)"><i class="ion ion-ios-trash"></i></a></p></td>
+    </tr>
         }
 
     }

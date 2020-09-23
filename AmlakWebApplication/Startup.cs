@@ -30,12 +30,13 @@ namespace AmlakWebApplication
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
             services.AddDbContext<AmlakDbContext>(options =>
-                             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                   options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                   x => x.MigrationsAssembly("DataLayer")));
 
 
             services.AddScoped<IUnitofWork, UnitofWork>();
@@ -44,11 +45,12 @@ namespace AmlakWebApplication
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, AmlakDbContext context)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -59,7 +61,8 @@ namespace AmlakWebApplication
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-            //context.Database.Migrate();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
@@ -67,6 +70,19 @@ namespace AmlakWebApplication
                     name: "default",
                     template: "{controller=AccountManagment}/{action=Index}/{id?}");
             });
+        }
+
+        private static void UpdateDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<AmlakDbContext>())
+                {
+                    context.Database.Migrate();
+                }
+            }
         }
     }
 }

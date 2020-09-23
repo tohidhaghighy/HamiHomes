@@ -18,17 +18,17 @@
 </style>
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/HomeGround/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
-        <li class="active">ویرایش زمین </li>
+        <li class="active">زمین جدید </li>
     </ol>
 </section>
 
 <div class="callout callout-info" style="margin-top:10px;">
-    <h4>ویرایش اطلاعات زمین</h4>
+    <h4>درج اطلاعات زمین</h4>
     در اینجا میتوانید مرحله دوم درج اطلاعات زمین را وارد کنید
 
 </div>
@@ -36,32 +36,27 @@
 <div class="container">
     <div class="box box-danger">
         <div class="box-header">
-            <h3 class="box-title">ویرایش اطلاعات زمین</h3>
+            <h3 class="box-title">درج اطلاعات زمین</h3>
         </div>
         <form asp-action="UpdateItem">
 
             <div class="box-body">
                 <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
 
-                <input asp-for="Zamin.HomeId" type="number" class="hidden">
-                <input asp-for="Zamin.Id" type="number" class="hidden">
+                <input name="HomeId" id="HomeId" type="number" class="hidden" value="@ViewData["Id"]">
+                <input name="Id" id="Id" type="number" class="hidden" value="@Model.Zamin.Id">
 
                 <div class="form-group">
                     <div class="row">
 
                         <div class="col-lg-2">
-                            <h4>متراژ زمین</h4>
-                            <input asp-for="Zamin.Metrazhzamin" type="number" class="form-control" placeholder="متراژ زمین" value="1">
-                            <span asp-validation-for="Zamin.Metrazhzamin" class="text-danger"></span>
-                        </div>
-                        <div class="col-lg-2">
                             <h4>عرض گذر</h4>
-                            <input asp-for="Zamin.Arzegozar" type="number" class="form-control" placeholder="عرض گذر">
+                            <input asp-for="Zamin.Arzegozar" type="number" class="form-control" min="0" placeholder="عرض گذر">
                             <span asp-validation-for="Zamin.Arzegozar" class="text-danger"></span>
                         </div>
                         <div class="col-lg-2">
                             <h4>عرض ملک</h4>
-                            <input asp-for="Zamin.Arzemelk" type="number" class="form-control" placeholder="عرض ملک">
+                            <input asp-for="Zamin.Arzemelk" type="number" min="0" class="form-control" placeholder="عرض ملک">
                             <span asp-validation-for="Zamin.Arzemelk" class="text-danger"></span>
                         </div>
                     </div>
@@ -77,7 +72,7 @@
                         </div>
                         <div class="col-lg-4">
                             <h4>شماره نگهبان</h4>
-                            <input asp-for="Zamin.NegahbaniPhone" type="number" class="form-control" placeholder="شماره نگهبان">
+                            <input asp-for="Zamin.NegahbaniPhone" type="text" class="form-control" placeholder="شماره نگهبان">
                             <span asp-validation-for="Zamin.NegahbaniPhone" class="text-danger"></span>
                         </div>
                     </div>
@@ -89,10 +84,18 @@
                         <div class="">
                             <h4> موقعیت ملک :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Zamin.Homemogheiat" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Zamin.Homemogheiat" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakMogheiatMelk.Count; i++)
                                     {
-                                        <option value="@Model.AmlakMogheiatMelk[i].Name">@Model.AmlakMogheiatMelk[i].Name</option>
+                                        if (Model.Zamin.Homemogheiat.Contains(Model.AmlakMogheiatMelk[i].Name))
+                                        {
+                                    <option value="@Model.AmlakMogheiatMelk[i].Name" selected="selected">@Model.AmlakMogheiatMelk[i].Name</option>
+                                        }
+                                        else
+                                        {
+                                <option value="@Model.AmlakMogheiatMelk[i].Name">@Model.AmlakMogheiatMelk[i].Name</option>
+                                        }
+                                        
                                     }
                                 </select>
                             </div>
@@ -105,7 +108,7 @@
                         <div class="">
                             <h4> وضعیت سند :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Zamin.Homesanad" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Zamin.Homesanad" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakSanadStatus.Count; i++)
                                     {
                                         <option value="@Model.AmlakSanadStatus[i].Name">@Model.AmlakSanadStatus[i].Name</option>
@@ -124,7 +127,15 @@
                                         style="width: 100%;direction:rtl;float:right;" name="homestatus" id="homestatus">
                                     @for (var i = 0; i < Model.AmlakMelkStatus.Count; i++)
                                     {
-                                        <option value="@Model.AmlakMelkStatus[i].Name">@Model.AmlakMelkStatus[i].Name</option>
+                                        if (Model.Zamin.Homevaziate.Contains(Model.AmlakMelkStatus[i].Name))
+                                        {
+                                            <option value="@Model.AmlakMelkStatus[i].Name" selected="selected">@Model.AmlakMelkStatus[i].Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@Model.AmlakMelkStatus[i].Name">@Model.AmlakMelkStatus[i].Name</option>
+                                        }
+
                                     }
                                 </select>
                             </div>
@@ -145,7 +156,14 @@
                                     style="width: 100%;direction:rtl;float:right;" name="homeemtiaz" id="homeemtiaz">
                                 @for (var i = 0; i < Model.AmlakEmtiazes.Count; i++)
                                 {
-                                    <option value="@Model.AmlakEmtiazes[i].Name">@Model.AmlakEmtiazes[i].Name</option>
+                                    if (Model.Zamin.HomeEmtiaz.Contains(Model.AmlakEmtiazes[i].Name))
+                                    {
+                                        <option value="@Model.AmlakEmtiazes[i].Name" selected="selected">@Model.AmlakEmtiazes[i].Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@Model.AmlakEmtiazes[i].Name">@Model.AmlakEmtiazes[i].Name</option>
+                                    }
                                 }
                             </select>
                         </div>
@@ -158,7 +176,7 @@
                 <hr />
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success">درج اطلاعات زمین - رفتن به مرحله بعد </button>
+                    <button type="submit" class="btn btn-success">ویرایش اطلاعات زمین - رفتن به مرحله بعد </button>
                 </div>
 
             </div>

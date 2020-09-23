@@ -4,6 +4,7 @@ using DataLayer.Repository.Interfaces.Contract;
 using DataLayer.Repository.Interfaces.Home;
 using DataLayer.Repository.Interfaces.Location;
 using DataLayer.Repository.Interfaces.Magazin;
+using DataLayer.Repository.Interfaces.Sazande;
 using DataLayer.Repository.Interfaces.Setting;
 using DataLayer.Repository.Repositories;
 using DataLayer.Repository.Repositories.AmlakSetting;
@@ -11,6 +12,7 @@ using DataLayer.Repository.Repositories.Contract;
 using DataLayer.Repository.Repositories.Home;
 using DataLayer.Repository.Repositories.Location;
 using DataLayer.Repository.Repositories.Magazin;
+using DataLayer.Repository.Repositories.Sazande;
 using DataLayer.Repository.Repositories.Setting;
 using DomainLayer;
 using DomainLayer.Location;
@@ -40,6 +42,7 @@ namespace DataLayer.Infrastracture
         private IRepository<Mahalle> mahalleRepo;
         private IRepository<VadieSetting> vadieRepo;
         private IRepository<EjareSetting> ejareRepo;
+        private IRepository<Customer> costumerRepo;
 
         #region amlak setting
         private IRepository<AmlakDivar> amlakdivarRepo;
@@ -533,5 +536,44 @@ namespace DataLayer.Infrastracture
             }
         }
 
+        public ICustomerRepository CustomerRepository
+        {
+            get
+            {
+                return new CustomerRepository(db);
+            }
+        }
+
+        public INahieDirectionRepository NahieDirectionRepository
+        {
+            get
+            {
+                return new NahieDirectionRepository(db);
+            }
+        }
+
+        public ISazandeRepository SazandeRepository
+        {
+            get
+            {
+                return new SazandeRepository(db);
+            }
+        }
+
+        public IHomeSazandeRepository HomeSazandeRepository
+        {
+            get
+            {
+                return new HomeSazandeRepository(db);
+            }
+        }
+
+        public ISazandeGallery SazandeGalleryRepository
+        {
+            get
+            {
+                return new SazandeGalleryRepository(db);
+            }
+        }
     }
 }

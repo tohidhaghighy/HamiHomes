@@ -1,43 +1,133 @@
-﻿@model List<DomainLayer.Home.HomewithGarden>
-
+﻿@model List<DomainLayer.Contract.Contract>
+@using Utilities.Calender
 @{
     if (Model.Count() > 0)
     {
         foreach (var item in Model)
         {
-    <tr >
-        <td class="text-center" style="padding:10px;">
-            @{
-                if (item.Home.IsShow)
-                {
-                    <input type="checkbox" checked="checked" onchange="Changecheck(@item.HomeId)" />
-                }
-                else
-                {
-                    <input type="checkbox" onchange="Changecheck(@item.HomeId)" />
-                }
-            }
+            <tr>
+                <td class="text-center" style="padding:10px;">
+                    @{
+                        if (item.Home.IsShow)
+                        {
+                            <input type="checkbox" checked="checked" onchange="Changecheckunpin(@item.Home.Id)" />
+                        }
+                        else
+                        {
+                            <input type="checkbox" onchange="Changecheck(@item.Id)" />
+                        }
+                    }
 
 
-        </td>
-        <td class="text-center" style="padding:10px;" onclick="updateitem(@item.HomeId)">
-            @item.MetrazhBena
-        </td>
-        <td class="text-center" style="padding:10px;" onclick="updateitem(@item.HomeId)">
-            @item.Metrazhzamin
-        </td>
-        <td class="text-center" style="padding:10px;" onclick="updateitem(@item.HomeId)">
-            @item.Tedadkoltabaghat
-        </td>
+                </td>
+                <td class="text-center" style="padding:10px;" onclick="updateitem(@item.Home.Id)">
+                    <a href="@item.Home.Image"><img style="width:40px;height:40px;" src="@item.Home.Image" /></a>
+                </td>
+                <td class="text-center" style="padding:10px;" onclick="updateitem(@item.Home.Id)">
+                    @item.Home.Code
+                </td>
+                <td class="text-center" style="padding:10px;">
+                    @{
+                        string s = Calender.OnlyPersianDate(item.Home.Date);
+                    }
+                    @s
+                </td>
+                <td class="text-center" style="padding:10px;" onclick="updateitem(@item.Home.Id)">
+                    @item.Home.OwnerName
+                </td>
+                <td class="text-center" style="padding:10px;" onclick="updateitem(@item.Id)">
+                    @{
+                        string adviser = "مشاور ندارد";
+                        if (item.AdviserId != null)
+                        {
+                            adviser = item.Adviser.Name + " " + item.Adviser.Family;
+                        }
+                        @adviser
+                    }
+                </td>
 
-        <td class="text-center" style="padding:10px;" onclick="updateitem(@item.HomeId)">
-            @item.Arzegozar
-        </td>
-        <td class="text-center" style="padding:10px;" onclick="updateitem(@item.HomeId)">
-            @item.Arzemelk
-        </td>
-        <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="حذف"><a class="btn btn-danger btn-xs" onclick="deleteitem(@item.Id)"><i class="ion ion-ios-trash"></i></a></p></td>
-    </tr>
+                <td class="text-center" style="padding:10px;" onclick="updateitem(@item.Home.Id)">
+                    @{
+                        string melk = "آپارتمان";
+                        if (item.Home.Hometype == 2)
+                        {
+                            melk = "خانه حیاط دار";
+                        }
+                        else if (item.Home.Hometype == 3)
+                        {
+                            melk = "زمین";
+                        }
+                        else if (item.Home.Hometype == 4)
+                        {
+                            melk = "کلنگی";
+                        }
+                        else if (item.Home.Hometype == 5)
+                        {
+                            melk = "اداری";
+                        }
+                        else if (item.Home.Hometype == 6)
+                        {
+                            melk = "مغازه";
+                        }
+                        else if (item.Home.Hometype == 7)
+                        {
+                            melk = "مستغلات";
+                        }
+                        else if (item.Home.Hometype == 8)
+                        {
+                            melk = "انبار";
+                        }
+                        else if (item.Home.Hometype == 9)
+                        {
+                            melk = "باغ";
+                        }
+                        else if (item.Home.Hometype == 10)
+                        {
+                            melk = "ویلا";
+                        }
+                        @melk
+                    }
+                </td>
+                <td class="text-center" style="padding:10px;" onclick="updateitem(@item.Home.Id)">
+                    @{
+                        string ss = "خرید";
+                        if (item.TypContract == DomainLayer.Enums.TypeHome.Rent)
+                        {
+                            ss = "رهن و اجاره";
+                        }
+                        else if (item.TypContract == DomainLayer.Enums.TypeHome.build)
+                        {
+                            ss = "ساخت و ساز";
+                        }
+                        @ss
+                    }
+                </td>
+                <td class="text-center" style="padding:10px;" onclick="updateitem(@item.Home.Id)">
+                    @{
+                        string cost = item.BuyCost.ToString();
+                        if (item.TypContract == DomainLayer.Enums.TypeHome.Rent)
+                        {
+                            cost = item.RentCOst.ToString() + " " + item.Vadie.ToString();
+                        }
+                        @cost
+                    }
+                </td>
+                <td class="text-center" style="padding:10px;" onclick="updateitem(@item.Home.Id)">
+                    @{
+                        string hometype = "";
+                        if (item.Home.Hometype == 3 || item.Home.Hometype == 4 || item.Home.Hometype == 8 || item.Home.Hometype == 9)
+                        {
+                            hometype = item.MetrazZamin.ToString();
+                        }
+                        else
+                        {
+                            hometype = item.Metraz.ToString();
+                        }
+                    }
+                    @hometype
+                </td>
+                <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="حذف"><a class="btn btn-danger btn-xs" onclick="deleteitem(@item.Home.Id)"><i class="ion ion-ios-trash"></i></a></p></td>
+            </tr>
         }
 
     }

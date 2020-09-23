@@ -1,0 +1,240 @@
+﻿@model ViewModelLayer.User.UserMain
+@{
+    ViewData["Title"] = "adviser";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+<style>
+    #backchagner {
+        box-shadow: inset 0px 80px 30px rgba(10, 10, 10, 0.35);
+        background-image: url(/img/back2.jpg);
+        height: 400px;
+        width: 100%;
+        background-size: 100% 100%;
+        animation-name: zoomin;
+        animation-duration: 4s;
+        background-position: center center;
+    }
+
+    .border-number {
+        display: inline-grid;
+        margin: 15px;
+        margin-right: 5px;
+        cursor: pointer;
+        background: #c78910;
+        border-radius: 20px;
+        width: 40px;
+        color: white;
+        text-align: center
+    }
+</style>
+
+<div class="mainback" id="backchagner">
+    <div class="overlay">
+        <div class="container">
+            <div class="" style="padding-top:70px;">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-12 col-md-6">
+                        <div class="">
+                           
+                            <img src="~/img/user.png" class="border" style="border-radius:120px;width:200px;height:200px;text-align:center;align-content:center;" />
+                           
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-sm-12 col-md-6" style="padding-top:50px;">
+                        <div class="">
+                            <h2 style="padding:10px;color:white;">@Model.User.Name  @Model.User.Family</h2>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row" style="padding-top:10px;float:left;padding-left:8%;">
+                    <a class="btn btn-primary btn-default" style="color:white;width:150px;padding:10px;float:left;margin-left:20px;" href="/UserManagment/CreateContract?userid=@Model.User.Id">سپردن ملک جدید</a>
+                    <a class="btn btn-primary btn-default" style="color:white;width:150px;padding:10px;float:left;margin-left:20px;" href="/UserManagment/Contracts?userid=@Model.User.Id">املاک سپرده شده</a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<form asp-action="UpdateItem" enctype="multipart/form-data">
+    <div class="container" id="info">
+        @*<h3 class="text-center" style="padding-top:20px;color:rgba(111, 109, 109, 0.65)">ویرایش اطلاعات</h3>*@
+        <input type="number" style="display:none;" value="@Model.User.Id" id="Id" name="Id" />
+        <div class="row" style="padding-top:20px;">
+            <div class="col-4" style="">
+                <h5>عکس پروفایل</h5>
+                <input type="file" class="form-control-file" style="padding:10px;float:right" id="Image" name="Image" />
+            </div>
+            <div class="col-4">
+                <h5>عکس پشت زمینه</h5>
+                <input type="file" class="form-control-file" style="padding:10px;" id="BackgroundImage" name="BackgroundImage" />
+            </div>
+        </div>
+        <div class="row" style="padding:10px;">
+            <textarea class="form-control" placeholder="توضیحات خود را وارد کید" cols="3" id="description" name="description"></textarea>
+        </div>
+        <div class="row" style="padding:10px;">
+            <button class="btn btn-success" type="submit">ویرایش اطلاعات</button>
+        </div>
+        <hr />
+    </div>
+</form>
+<div class="row">
+    <div class="container text-center" style="padding-top:40px;">
+        <h3 style="color:rgba(0, 0, 0, 0.70)">املاک ثبت شده @Model.User.Name  @Model.User.Family</h3>
+    </div>
+    <div class="container text-center" style="padding-bottom:20px;padding-top:20px;">
+        @{
+            if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Selled).Count() > 0)
+            {
+                <a style="display:inline; margin:15px;cursor:pointer" href="#">فروخته شده</a>
+                <p class="border-number">@Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Selled).Count()</p>
+            }
+            if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Rented).Count() > 0)
+            {
+
+                <a style="display:inline; margin:15px;cursor:pointer" href="#">اجاره داده شده</a>
+                <p class="border-number" style="background:#ff0000">@Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Selled).Count()</p>
+            }
+            if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Buy).Count() > 0)
+            {
+
+                <a style="display:inline;margin:15px;cursor:pointer;" href="#">برای فروش</a>
+                <p class="border-number" style="background:#faa90a">@Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Buy).Count()</p>
+            }
+            if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Rent).Count() > 0)
+            {
+
+                <a style="display:inline; margin:15px;cursor:pointer" href="#">برای اجاره</a>
+                <p class="border-number" style="background:#ff0000">@Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Rent).Count()</p>
+            }
+            if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.build).Count() > 0)
+            {
+
+                <a style="display:inline; margin:15px;cursor:pointer" href="#">برای ساخت و ساز</a>
+                <p class="border-number">@Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.build).Count()</p>
+            }
+        }
+
+    </div>
+</div>
+
+
+<div id="map" style="width:100%;height:400px;">
+
+</div>
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+
+<script>
+
+    $("#info").hide();
+     var map = L.map('map').setView([37.553278571293816, 45.07666215851912], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var LeafIcon = L.Icon.extend({
+            options: {
+                iconSize: [30, 30]
+            }
+        });
+
+    var redIcon = new LeafIcon({ iconUrl: '/img/circle-red.png' });
+    var goldIcon = new LeafIcon({ iconUrl: '/img/circle-gold.png' });
+    var orangeIcon = new LeafIcon({ iconUrl: '/img/circle-orange.png' });
+
+    var marker;
+     @{
+         if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Selled).Count()>0)
+         {
+             foreach (var item in Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Selled))
+         {
+            <text>
+               marker = new L.Marker([@item.Home.Gpsx, @item.Home.Gpsy], { icon: redIcon });
+               marker.addTo(map).on('click', function (e) {
+               map.setView([@item.Home.Gpsx,@item.Home.Gpsy], 14);
+              });
+            </text>
+             }
+         }
+
+         if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Rented).Count()>0)
+         {
+             foreach (var item in Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Rented))
+         {
+            <text>
+               marker = new L.Marker([@item.Home.Gpsx, @item.Home.Gpsy], { icon: goldIcon });
+               marker.addTo(map).on('click', function (e) {
+               map.setView([@item.Home.Gpsx,@item.Home.Gpsy], 14);
+              });
+            </text>
+             }
+         }
+
+         if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Buy).Count()>0)
+         {
+             foreach (var item in Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Buy))
+         {
+            <text>
+               marker = new L.Marker([@item.Home.Gpsx, @item.Home.Gpsy], { icon: orangeIcon });
+               marker.addTo(map).on('click', function (e) {
+               map.setView([@item.Home.Gpsx,@item.Home.Gpsy], 14);
+              });
+            </text>
+             }
+         }
+
+          if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Rent).Count()>0)
+         {
+             foreach (var item in Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.Rent))
+         {
+            <text>
+               marker = new L.Marker([@item.Home.Gpsx, @item.Home.Gpsy], { icon: redIcon });
+               marker.addTo(map).on('click', function (e) {
+               map.setView([@item.Home.Gpsx,@item.Home.Gpsy], 14);
+              });
+            </text>
+             }
+         }
+
+          if (Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.build).Count()>0)
+         {
+             foreach (var item in Model.homes.Where(a => a.TypContract == DomainLayer.Enums.TypeHome.build))
+         {
+            <text>
+               marker = new L.Marker([@item.Home.Gpsx, @item.Home.Gpsy], { icon: goldIcon });
+               marker.addTo(map).on('click', function (e) {
+               map.setView([@item.Home.Gpsx,@item.Home.Gpsy], 14);
+              });
+            </text>
+             }
+         }
+
+         }
+
+
+     function shownumber(number) {
+            document.getElementById("btnnumberphone").innerHTML = "<span class='fa fa-phone' style='padding:5px;'></span> " + number;
+        }
+
+    function showinfo() {
+    var x = document.getElementById("info");
+
+        if (x.style.display === "none") {
+            $("#info").slideDown(1000);
+            x.style.display = "block";
+
+        } else {
+            $("#info").slideUp(1000);
+            x.style.display = "none";
+
+        }
+    }
+</script>

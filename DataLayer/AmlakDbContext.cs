@@ -1,7 +1,9 @@
 ﻿using DomainLayer;
+using DomainLayer.Contract;
 using DomainLayer.Home;
 using DomainLayer.Location;
 using DomainLayer.Magzine;
+using DomainLayer.Sazande;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,17 +14,14 @@ namespace DataLayer
 {
     public class AmlakDbContext:DbContext
     {
-        public AmlakDbContext()
-        {
-
-        }
-        
-
         public AmlakDbContext(DbContextOptions<AmlakDbContext> options)
     : base(options)
         {
 
         }
+        public DbSet<Sazande> Sazande { get; set; }
+        public DbSet<HomeSazande> HomeSazande { get; set; }
+        public DbSet<SazandeGallery> SazandeGallery { get; set; }
         public DbSet<MetrazSetting> MetrazSetting { get; set; }
         public DbSet<CostSetting> CostSetting { get; set; }
         public DbSet<VadieSetting> VadieSetting { get; set; }
@@ -30,10 +29,13 @@ namespace DataLayer
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Mahalle> Mahalles { get; set; }
         public DbSet<Nahie> Nahies { get; set; }
+        public DbSet<NahieDirections> NahieDirections { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Region> Regions { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Log> Logs { get; set; }
+        public DbSet<Customer> Customer { get; set; }
+        
         public DbSet<HomeGroup> HomeGroups { get; set; }
         public DbSet<HomeFacility> HomeFacilities { get; set; }
         public DbSet<Setting> Settings { get; set; }

@@ -65,6 +65,8 @@ namespace DataLayer.Migrations
 
                     b.Property<bool>("CanAdd");
 
+                    b.Property<int?>("CityId");
+
                     b.Property<string>("Description")
                         .HasMaxLength(1000);
 
@@ -78,6 +80,8 @@ namespace DataLayer.Migrations
 
                     b.Property<string>("Image")
                         .HasMaxLength(500);
+
+                    b.Property<string>("Manategh");
 
                     b.Property<string>("Mobile")
                         .IsRequired()
@@ -114,6 +118,8 @@ namespace DataLayer.Migrations
 
                     b.Property<bool>("Selected");
 
+                    b.Property<bool>("ShowinSearch");
+
                     b.Property<int>("TypeHome");
 
                     b.HasKey("Id");
@@ -132,6 +138,8 @@ namespace DataLayer.Migrations
                     b.Property<string>("Name");
 
                     b.Property<bool>("Selected");
+
+                    b.Property<bool>("ShowinSearch");
 
                     b.Property<int>("TypeHome");
 
@@ -152,6 +160,8 @@ namespace DataLayer.Migrations
 
                     b.Property<bool>("Selected");
 
+                    b.Property<bool>("ShowinSearch");
+
                     b.Property<int>("TypeHome");
 
                     b.HasKey("Id");
@@ -171,6 +181,8 @@ namespace DataLayer.Migrations
 
                     b.Property<bool>("Selected");
 
+                    b.Property<bool>("ShowinSearch");
+
                     b.Property<int>("TypeHome");
 
                     b.HasKey("Id");
@@ -184,13 +196,13 @@ namespace DataLayer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Itemid");
-
                     b.Property<int>("MelkType");
 
                     b.Property<string>("Name");
 
                     b.Property<bool>("Selected");
+
+                    b.Property<bool>("ShowinSearch");
 
                     b.Property<int>("TypeHome");
 
@@ -211,6 +223,8 @@ namespace DataLayer.Migrations
 
                     b.Property<bool>("Selected");
 
+                    b.Property<bool>("ShowinSearch");
+
                     b.Property<int>("TypeHome");
 
                     b.HasKey("Id");
@@ -229,6 +243,8 @@ namespace DataLayer.Migrations
                     b.Property<string>("Name");
 
                     b.Property<bool>("Selected");
+
+                    b.Property<bool>("ShowinSearch");
 
                     b.Property<int>("TypeHome");
 
@@ -249,6 +265,8 @@ namespace DataLayer.Migrations
 
                     b.Property<bool>("Selected");
 
+                    b.Property<bool>("ShowinSearch");
+
                     b.Property<int>("TypeHome");
 
                     b.HasKey("Id");
@@ -267,6 +285,8 @@ namespace DataLayer.Migrations
                     b.Property<string>("Name");
 
                     b.Property<bool>("Selected");
+
+                    b.Property<bool>("ShowinSearch");
 
                     b.Property<int>("TypeHome");
 
@@ -287,6 +307,8 @@ namespace DataLayer.Migrations
 
                     b.Property<bool>("Selected");
 
+                    b.Property<bool>("ShowinSearch");
+
                     b.Property<int>("TypeHome");
 
                     b.HasKey("Id");
@@ -305,6 +327,8 @@ namespace DataLayer.Migrations
                     b.Property<string>("Name");
 
                     b.Property<bool>("Selected");
+
+                    b.Property<bool>("ShowinSearch");
 
                     b.Property<int>("TypeHome");
 
@@ -325,6 +349,8 @@ namespace DataLayer.Migrations
 
                     b.Property<bool>("Selected");
 
+                    b.Property<bool>("ShowinSearch");
+
                     b.Property<int>("TypeHome");
 
                     b.HasKey("Id");
@@ -343,6 +369,8 @@ namespace DataLayer.Migrations
                     b.Property<string>("Name");
 
                     b.Property<bool>("Selected");
+
+                    b.Property<bool>("ShowinSearch");
 
                     b.Property<int>("TypeHome");
 
@@ -363,6 +391,8 @@ namespace DataLayer.Migrations
 
                     b.Property<bool>("Selected");
 
+                    b.Property<bool>("ShowinSearch");
+
                     b.Property<int>("TypeHome");
 
                     b.HasKey("Id");
@@ -381,6 +411,8 @@ namespace DataLayer.Migrations
                     b.Property<string>("Name");
 
                     b.Property<bool>("Selected");
+
+                    b.Property<bool>("ShowinSearch");
 
                     b.Property<int>("TypeHome");
 
@@ -401,6 +433,8 @@ namespace DataLayer.Migrations
 
                     b.Property<bool>("Selected");
 
+                    b.Property<bool>("ShowinSearch");
+
                     b.Property<int>("TypeHome");
 
                     b.HasKey("Id");
@@ -419,6 +453,8 @@ namespace DataLayer.Migrations
                     b.Property<string>("Name");
 
                     b.Property<bool>("Selected");
+
+                    b.Property<bool>("ShowinSearch");
 
                     b.Property<int>("TypeHome");
 
@@ -439,6 +475,8 @@ namespace DataLayer.Migrations
 
                     b.Property<bool>("Selected");
 
+                    b.Property<bool>("ShowinSearch");
+
                     b.Property<int>("TypeHome");
 
                     b.HasKey("Id");
@@ -451,6 +489,18 @@ namespace DataLayer.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CityPhoneCode");
+
+                    b.Property<string>("Code");
+
+                    b.Property<string>("Gpsx")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Gpsy")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -473,15 +523,31 @@ namespace DataLayer.Migrations
 
                     b.Property<int?>("AdviserId");
 
+                    b.Property<long>("BuyCost");
+
+                    b.Property<int?>("CostumerId");
+
                     b.Property<DateTime>("Date");
+
+                    b.Property<string>("Description");
+
+                    b.Property<long?>("FinalCost1");
+
+                    b.Property<long?>("FinalCost2");
+
+                    b.Property<long?>("FinalCost3");
+
+                    b.Property<string>("GharardadNumber");
 
                     b.Property<int>("HomeId");
 
                     b.Property<int>("Metraz");
 
+                    b.Property<int>("MetrazZamin");
+
                     b.Property<long>("RentCOst");
 
-                    b.Property<long>("SellCOst");
+                    b.Property<DateTime>("SellDate");
 
                     b.Property<bool>("SelledOrRented");
 
@@ -511,6 +577,43 @@ namespace DataLayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CostSetting");
+                });
+
+            modelBuilder.Entity("DomainLayer.Customer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .IsRequired();
+
+                    b.Property<string>("Birthdate")
+                        .IsRequired();
+
+                    b.Property<string>("Code");
+
+                    b.Property<string>("Family")
+                        .IsRequired();
+
+                    b.Property<string>("Fathername")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("Number")
+                        .IsRequired();
+
+                    b.Property<string>("Sadere")
+                        .IsRequired();
+
+                    b.Property<string>("Shenasname")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customer");
                 });
 
             modelBuilder.Entity("DomainLayer.EjareSetting", b =>
@@ -874,6 +977,8 @@ namespace DataLayer.Migrations
                         .HasMaxLength(500);
 
                     b.Property<string>("Title");
+
+                    b.Property<int>("Usertype");
 
                     b.HasKey("Id");
 
@@ -1258,6 +1363,8 @@ namespace DataLayer.Migrations
 
                     b.Property<bool>("Selected");
 
+                    b.Property<bool>("ShowinSearch");
+
                     b.Property<int>("TypeHome");
 
                     b.HasKey("Id");
@@ -1318,17 +1425,11 @@ namespace DataLayer.Migrations
 
                     b.Property<int>("CityId");
 
-                    b.Property<string>("Gpsx")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    b.Property<string>("Gpsx");
 
-                    b.Property<string>("Gpsy")
-                        .IsRequired()
-                        .HasMaxLength(50);
+                    b.Property<string>("Gpsy");
 
-                    b.Property<string>("Icon")
-                        .IsRequired()
-                        .HasMaxLength(1000);
+                    b.Property<string>("Icon");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1339,6 +1440,25 @@ namespace DataLayer.Migrations
                     b.HasIndex("CityId");
 
                     b.ToTable("Nahie");
+                });
+
+            modelBuilder.Entity("DomainLayer.Location.NahieDirections", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Gpsx");
+
+                    b.Property<string>("Gpsy");
+
+                    b.Property<int>("NahieId");
+
+                    b.Property<int>("Type");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NahieDirections");
                 });
 
             modelBuilder.Entity("DomainLayer.Log", b =>
@@ -1434,6 +1554,14 @@ namespace DataLayer.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Gpsx")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Gpsy")
+                        .IsRequired()
+                        .HasMaxLength(50);
 
                     b.Property<string>("Name")
                         .IsRequired()

@@ -5,20 +5,16 @@
         foreach (var item in Model)
         {
     <tr>
-        <td class="text-center" style="padding:10px;">
-            <a href="~/images/@item.Icon"><img style="width:40px;height:40px;" src="~/images/@item.Icon" /></a>
-        </td>
+        
         <td class="text-center" style="padding:10px;">
             @item.Name
         </td>
 
-        <td class="text-center" style="padding:10px;">
-            @item.Gpsx  -  @item.Gpsy
-        </td>
 
         <td class="text-center" style="padding:10px;">
             @item.City.Name
         </td>
+        <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="افزودن موقعیت"><a class="btn btn-success btn-xs" onclick="Directionset(@item.Id)">افزودن مختصات</a></p></td>
         <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="افزودن محله"><a class="btn btn-warning btn-xs" onclick="Mahalleitem(@item.Id)">افزودن محله</a></p></td>
         <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="ویرایش"><a class="btn btn-primary btn-xs" onclick="Updateitem(@item.Id)">ویرایش</a></p></td>
         <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="حذف"><a class="btn btn-danger btn-xs" onclick="deleteitem(@item.Id)"><i class="ion ion-ios-trash"></i></a></p></td>

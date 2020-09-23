@@ -1,8 +1,359 @@
-﻿
+﻿@model ViewModelLayer.Home.HomeWithGardenFacility
 @{
-    ViewData["Title"] = "Update";
+    ViewData["Title"] = "CreateFacility";
     Layout = "~/Views/Shared/_Managment.cshtml";
 }
 
-<h2>Update</h2>
+<style>
 
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #af1e1e;
+        color: white;
+        direction: rtl;
+    }
+
+    span {
+        direction: rtl;
+    }
+</style>
+
+<section class="content-header">
+    <h1>
+        داشبورد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/HomeVilaManagment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">خانه حیاط دار جدید </li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>ویرایش اطلاعات خانه حیاط دار</h4>
+    در اینجا میتوانید مرحله دوم ویرایش اطلاعات خانه حیاط دار را وارد کنید
+
+</div>
+
+<div class="container">
+    <div class="box box-danger">
+        <div class="box-header">
+            <h3 class="box-title">ویرایش اطلاعات خانه حیاط دار</h3>
+        </div>
+        <form asp-action="UpdateItem">
+
+            <div class="box-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
+
+                <input name="HomeId" id="HomeId" type="number" class="hidden" value="@ViewData["Id"]">
+                <input name="Id" id="Id" type="number" class="hidden" value="@Model.HomewithGarden.Id">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-2" style="display:none;">
+                            <h4>متراژ بنا</h4>
+                            <input asp-for="HomewithGarden.MetrazhBena" type="number" class="form-control" min="0" placeholder="متراژ بنا" value="1">
+                            <span asp-validation-for="HomewithGarden.MetrazhBena" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-2" style="display:none">
+                            <h4>متراژ زمین</h4>
+                            <input asp-for="HomewithGarden.Metrazhzamin" type="number" class="form-control" min="0" placeholder="متراژ زمین" value="1">
+                            <span asp-validation-for="HomewithGarden.Metrazhzamin" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-2">
+                            <h4>تعداد کل طبقات</h4>
+                            <input asp-for="HomewithGarden.Tedadkoltabaghat" type="number" class="form-control" min="0" placeholder="تعداد کل طبقات">
+                            <span asp-validation-for="HomewithGarden.Tedadkoltabaghat" class="text-danger"></span>
+                        </div>
+                        <div class="col-lg-2">
+                            <h4>عرض گذر</h4>
+                            <input asp-for="HomewithGarden.Arzegozar" type="text" class="form-control" min="0" placeholder="عرض گذر">
+                            <span asp-validation-for="HomewithGarden.Arzegozar" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <h4>عرض ملک</h4>
+                            <input asp-for="HomewithGarden.Arzemelk" type="number" class="form-control" min="0" placeholder="عرض ملک">
+                            <span asp-validation-for="HomewithGarden.Arzemelk" class="text-danger"></span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-lg-3">
+                        <div class="">
+                            <h4> موقعیت ملک :</h4>
+                            <div class="custom-select" style="">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="HomewithGarden.Homemogheiat" onchange="checkcityval()">
+                                    @for (var i = 0; i < Model.AmlakMogheiatMelk.Count; i++)
+                                    {
+                                        <option value="@Model.AmlakMogheiatMelk[i].Name">@Model.AmlakMogheiatMelk[i].Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="">
+                            <h4> نمای ساختمان :</h4>
+                            <div class="custom-select" style="">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="HomewithGarden.Homenema" onchange="checkcityval()">
+                                    @for (var i = 0; i < Model.AmlakNema.Count; i++)
+                                    {
+                                        <option value="@Model.AmlakNema[i].Name">@Model.AmlakNema[i].Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="">
+                            <h4> مشخصه ملک :</h4>
+                            <select class="form-control select2 text-center" multiple="multiple" data-placeholder="  انتخاب کن  "
+                                    style="width: 100%;direction:rtl;float:right;" id="moshakhase" name="moshakhase">
+
+                                @for (var i = 0; i < Model.AmlakMoshakhase.Count; i++)
+                                {
+                                    if (Model.HomewithGarden.Homemoshakhase.Contains(Model.AmlakMoshakhase[i].Name))
+                                    {
+                                        <option value="@Model.AmlakMoshakhase[i].Name" selected="selected">@Model.AmlakMoshakhase[i].Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@Model.AmlakMoshakhase[i].Name">@Model.AmlakMoshakhase[i].Name</option>
+                                    }
+
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="">
+                            <h4> تاسیسات گرمایشی و سرمایشی :</h4>
+                            <div class="custom-select" style="">
+                                <select class="form-control select2" multiple style="padding:10px;width:100%;" id="tasisat" name="tasisat" onchange="checkcityval()">
+                                    @for (var i = 0; i < Model.AmlakTasisatGarmaieshi.Count; i++)
+                                    {
+                                        if (Model.HomewithGarden.Hometasisat.Contains(Model.AmlakTasisatGarmaieshi[i].Name))
+                                        {
+                                            <option value="@Model.AmlakTasisatGarmaieshi[i].Name" selected="selected">@Model.AmlakTasisatGarmaieshi[i].Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@Model.AmlakTasisatGarmaieshi[i].Name">@Model.AmlakTasisatGarmaieshi[i].Name</option>
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="">
+                            <h4> پوشش کف :</h4>
+                            <div class="custom-select" style="">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="HomewithGarden.Homekaf" onchange="checkcityval()">
+                                    @for (var i = 0; i < Model.AmlakKafes.Count; i++)
+                                    {
+                                        <option value="@Model.AmlakKafes[i].Name">@Model.AmlakKafes[i].Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="">
+                            <h4> آشپزخانه :</h4>
+                            <select class="form-control select2 text-center" multiple="multiple" data-placeholder="   انتخاب کن  "
+                                    style="width: 100%;direction:rtl;float:right;" id="kitchen" name="kitchen">
+                                @for (var i = 0; i < Model.AmlakKitchenes.Count; i++)
+                                {
+                                    if (Model.HomewithGarden.Homekitchen.Contains(Model.AmlakKitchenes[i].Name))
+                                    {
+                                        <option value="@Model.AmlakKitchenes[i].Name" selected="selected">@Model.AmlakKitchenes[i].Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@Model.AmlakKitchenes[i].Name">@Model.AmlakKitchenes[i].Name</option>
+                                    }
+
+                                }
+                            </select>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="">
+                            <h4> نوع دیوار  :</h4>
+                            <div>
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="HomewithGarden.Homedivar" onchange="checkcityval()">
+                                    @for (var i = 0; i < Model.AmlakDivars.Count; i++)
+                                    {
+                                        <option value="@Model.AmlakDivars[i].Name">@Model.AmlakDivars[i].Name</option>
+                                    }
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="">
+                            <h4> نوع و تعداد پارکینگ :</h4>
+                            <div class="custom-select" style="">
+                                <select class="form-control select2" multiple style="padding:10px;width:100%;" id="AmlakParking" name="AmlakParking" onchange="checkcityval()">
+                                    @for (var i = 0; i < Model.AmlakParking.Count; i++)
+                                    {
+                                        if (Model.HomewithGarden.Homeparking.Contains(Model.AmlakParking[i].Name))
+                                        {
+                                    <option value="@Model.AmlakParking[i].Name" selected="selected">@Model.AmlakParking[i].Name</option>
+                                        }
+                                        else
+                                        {
+                                <option value="@Model.AmlakParking[i].Name">@Model.AmlakParking[i].Name</option>
+                                        }
+                                        
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="">
+                            <h4> سرویس بهداشتی و حمام  :</h4>
+                            <select class="form-control select2 text-center btn-block" multiple="multiple" data-placeholder="   انتخاب کن  "
+                                    style="width: 100%;direction:rtl;float:right;" id="homewc" name="homewc">
+                                @for (var i = 0; i < Model.AmlakWC.Count; i++)
+                                {
+                                    if (Model.HomewithGarden.Homewc.Contains(Model.AmlakWC[i].Name))
+                                    {
+                                        <option value="@Model.AmlakWC[i].Name" selected="selected">@Model.AmlakWC[i].Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@Model.AmlakWC[i].Name">@Model.AmlakWC[i].Name</option>
+                                    }
+
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="">
+                            <h4> وضعیت سند :</h4>
+                            <div class="custom-select" style="">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="HomewithGarden.Homesanad" onchange="checkcityval()">
+                                    @for (var i = 0; i < Model.AmlakSanadStatus.Count; i++)
+                                    {
+                                        <option value="@Model.AmlakSanadStatus[i].Name">@Model.AmlakSanadStatus[i].Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="">
+                            <h4> امتیاز  :</h4>
+                            <select class="form-control select2 text-center" multiple="multiple" data-placeholder="   انتخاب کن  "
+                                    style="width: 100%;direction:rtl;float:right;" id="emtiaz" name="emtiaz">
+                                @for (var i = 0; i < Model.AmlakEmtiazes.Count; i++)
+                                {
+                                    if (Model.HomewithGarden.HomeEmtiaz.Contains(Model.AmlakEmtiazes[i].Name))
+                                    {
+                                        <option value="@Model.AmlakEmtiazes[i].Name" selected="selected">@Model.AmlakEmtiazes[i].Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@Model.AmlakEmtiazes[i].Name">@Model.AmlakEmtiazes[i].Name</option>
+                                    }
+
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="">
+                            <h4> وضعیت ملک :</h4>
+                            <div class="custom-select" style="">
+                                <select class="form-control select2 text-center" multiple="multiple" data-placeholder="  انتخاب کن  "
+                                        style="width: 100%;direction:rtl;float:right;" id="vaziat" name="vaziat">
+                                    @for (var i = 0; i < Model.AmlakMelkStatus.Count; i++)
+                                    {
+                                        if (Model.HomewithGarden.Homevaziate.Contains(Model.AmlakMelkStatus[i].Name))
+                                        {
+                                            <option value="@Model.AmlakMelkStatus[i].Name" selected="selected">@Model.AmlakMelkStatus[i].Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@Model.AmlakMelkStatus[i].Name">@Model.AmlakMelkStatus[i].Name</option>
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+                @*<div class="row" style="padding-top:10px;">
+            <div class="col-lg-3">
+                <div class="">
+                    <h4> امکانات  :</h4>
+                    <select class="form-control select2 text-center" multiple="multiple" data-placeholder="   انتخاب کن  "
+                            style="width: 100%;direction:rtl;float:right;" name="HomeFacility" id="HomeFacility">
+                        @for (var i = 0; i < Model.HomeFacility.Count; i++)
+                        {
+                            <option value="@Model.HomeFacility[i].Name">@Model.HomeFacility[i].Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>*@
+
+                <hr />
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">ویرایش اطلاعات خانه حیاط دار - رفتن به مرحله بعد </button>
+                </div>
+
+            </div>
+        </form>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

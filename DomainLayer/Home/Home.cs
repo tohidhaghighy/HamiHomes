@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainLayer.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -12,7 +13,6 @@ namespace DomainLayer.Home
         {
             this.IsShow = false;
             this.Date = DateTime.Now;
-            this.Code = RandomNumber.GetRandomNumber().ToString();
             this.AdvisorId = 0;
             this.Title = "";
         }
@@ -83,6 +83,7 @@ namespace DomainLayer.Home
         public int Hometype { get; set; }
         public int HometypeId { get; set; }
 
+        public UserType Usertype { get; set; }
 
         public virtual ICollection<HomeGallery> HomeGalleries { get; set; }
 

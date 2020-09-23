@@ -4,19 +4,22 @@
     Layout = "~/Views/Shared/_Managment.cshtml";
 }
 
-<style>
-    tr:nth-child(even) {
-        background: rgba(126, 136, 241, 0.59)
-    }
-    a{
-        cursor:pointer;
-    }
-</style>
+    <style>
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background-color: #af1e1e;
+            color: white;
+            direction: rtl;
+        }
+
+        span {
+            direction: rtl;
+        }
+    </style>
 
 
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
@@ -141,7 +144,7 @@
                     <a class="fancybox img-hover-zoom" rel="ligthbox" href="#">
                         @if (Model.Adviser.Image != null)
                         {
-                            <img src="~/images/@Model.Adviser.Image" class="img img-circle" alt=" " style="width:150px; height:150px;">
+                            <img src="@Model.Adviser.Image" class="img img-circle" alt=" " style="width:150px; height:150px;">
                         }
                         else
                         {
@@ -158,7 +161,7 @@
 
                         @if (Model.Adviser.BackgroundImage != null)
                         {
-                            <img src="~/images/@Model.Adviser.BackgroundImage" class="img img-circle" alt=" " style="width:150px; height:150px;">
+                            <img src="@Model.Adviser.BackgroundImage" class="img img-circle" alt=" " style="width:150px; height:150px;">
                         }
                         else
                         {
@@ -187,7 +190,7 @@
 
                 <div class="box-body">
                     <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
-                    <input asp-for="Adviser.Id" class="hidden" style="display:none;" value="@Model.Adviser.Id"/>
+                    <input asp-for="Adviser.Id" class="hidden" style="display:none;" value="@Model.Adviser.Id" />
 
                     <div class="row">
                         <div class="col-lg-4">
@@ -252,6 +255,72 @@
                         <span asp-validation-for="Adviser.Description" class="text-danger"></span>
                     </div>
 
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h4>  استان @Model.Cities.FirstOrDefault(a => a.Id == Model.Adviser.CityId).Region.Name انتخاب شده : </h4>
+                                <select class="form-control select2 text-center" data-placeholder="استان  "
+                                        style="width: 100%;direction:rtl;float:right;" name="region" id="region">
+                                    <option value=""> انتخاب استان :</option>
+                                    @{
+                                        foreach (var item in Model.Regions)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    }
+
+                                </select>
+                            </div>
+                            <div class="col-lg-6">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h4> شهر @Model.Cities.FirstOrDefault(a=>a.Id==Model.Adviser.CityId).Name انتخاب شده : </h4>
+                                <select class="form-control select2 text-center" data-placeholder="انتخاب شهر  "
+                                        style="width: 100%;direction:rtl;float:right;" name="city" id="city">
+                                    <option value=""> انتخاب شهر :</option>
+                                    @{
+                                        foreach (var item in Model.Cities)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    }
+
+                                </select>
+                            </div>
+                            <div class="col-lg-6">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h4> محلات @Model.Adviser.Manategh انتخاب شده : </h4>
+                                <select class="form-control select2 text-center" multiple="multiple" data-placeholder="انتخاب محلات  "
+                                        style="width: 100%;direction:rtl;float:right;" name="mahale" id="mahale">
+                                    <option value=""> انتخاب محله :</option>
+                                    @{
+                                        foreach (var item in Model.Mahalles)
+                                        {
+                                            <option value="@item.Name">@item.Name</option>
+                                        }
+                                    }
+
+                                </select>
+                            </div>
+                            <div class="col-lg-6">
+
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-group">
@@ -269,15 +338,16 @@
                         </div>
                     </div>
 
+
                     <div class="form-group">
                         <label>عکس کارشناس</label>
-                        <input asp-for="Adviser.Image" type="file" placeholder="عکس کارشناس" id="Image" name="Image">
+                        <input type="file" placeholder="عکس کارشناس" id="Image" name="Image">
                         <span asp-validation-for="Adviser.Image" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <label>عکس پس زمینه کارشناس</label>
-                        <input asp-for="Adviser.BackgroundImage" type="file" id="BackgroundImage" name="BackgroundImage"/>
+                        <input type="file" id="BackgroundImage" name="BackgroundImage" />
                         <span asp-validation-for="Adviser.BackgroundImage" class="text-danger"></span>
                     </div>
 

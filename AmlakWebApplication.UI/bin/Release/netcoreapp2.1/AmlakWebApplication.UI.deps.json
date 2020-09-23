@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "09451dbdcc81339a373ddb46d4f573607b6bcce1"
+    "signature": "ca206ae54f9b7f88ecc0de222941e632c282117c"
   },
   "compilationOptions": {
     "defines": [
@@ -227,6 +227,17 @@
           "lib/netstandard1.6/NuGet.Frameworks.dll": {}
         }
       },
+      "SmsIrRestful/1.1.3": {
+        "runtime": {
+          "lib/SmsIrRestful.dll": {
+            "assemblyVersion": "1.1.3.0",
+            "fileVersion": "1.1.3.0"
+          }
+        },
+        "compile": {
+          "lib/SmsIrRestful.dll": {}
+        }
+      },
       "System.Composition/1.0.31": {
         "dependencies": {
           "System.Composition.AttributedModel": "1.0.31",
@@ -423,6 +434,7 @@
       "Utilities/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Cryptography.KeyDerivation": "2.1.1",
+          "SmsIrRestful": "1.1.3",
           "System.Drawing.Common": "4.5.1"
         },
         "runtime": {
@@ -3663,6 +3675,13 @@
       "sha512": "sha512-qbXaB76XYUVLocLBs8Z9TS/ERGK2wm797feO+0JEPFvT7o7MRadOR77mqaSD4J1k8G+DlZQyq+MlkCuxrkr3ag==",
       "path": "nuget.frameworks/4.7.0",
       "hashPath": "nuget.frameworks.4.7.0.nupkg.sha512"
+    },
+    "SmsIrRestful/1.1.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ouYKkhQv0zLbdDIPw5Eagpod9828Fd2zQhqt2N2MMPHdCV7oHYuAvClSBS4Pru1MclEvH5mmLfE7cgeFZ9ea+w==",
+      "path": "smsirrestful/1.1.3",
+      "hashPath": "smsirrestful.1.1.3.nupkg.sha512"
     },
     "System.Composition/1.0.31": {
       "type": "package",

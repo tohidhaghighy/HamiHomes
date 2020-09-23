@@ -28,7 +28,7 @@
 
     #backchagner {
         box-shadow: inset 0px 80px 30px rgba(10, 10, 10, 0.35);
-        background-image: url(/img/back2.jpg);
+        background-image: url("@Model.home.Image");
         height: 400px;
         width: 100%;
         background-size: 100% 100%;
@@ -141,13 +141,13 @@
             <div class="row">
                 <div class="col-lg-6 col-sm-12 col-md-6">
                     <div class="text-center">
-                        <h5 style="padding:10px;background-color:rgba(178, 174, 174, 0.50);border-radius:20px;color:white;width:200px;float:right;">@ViewData["hometype"]</h5>
+                        <h6 style="padding:10px;background-color:rgba(178, 174, 174, 0.50);border-radius:20px;color:white;width:200px;float:right;">@Model.home.Code</h6>
                     </div>
                 </div>
 
                 <div class="col-lg-6 col-sm-12 col-md-6">
                     <div class="text-center">
-                        <h5 style="padding:10px;background-color:rgba(139, 137, 137, 0.50);border-radius:20px;color:white;">@Model.home.Address</h5>
+                        <h6 style="padding:10px;background-color:rgba(139, 137, 137, 0.50);border-radius:20px;color:white;">@Model.home.Address</h6>
                     </div>
                 </div>
             </div>
@@ -175,16 +175,16 @@
                         @if (Model.home.Hometype == 1 || Model.home.Hometype == 2 || Model.home.Hometype == 7)
                         {
                             <div class="col-4 text-center">
-                                <p class="font-xs-ad" style="font-size:15px;color:white;float:right;"><img src="/img/bed.png" style="width:25px;height:25px;padding-left:10px;" /> @Model.home.Bed اتاق</p>
+                                <p class="font-xs-ad" style="font-size:15px;color:white;float:right;"><img src="/img/bed1.png" style="width:25px;height:25px;padding-left:10px;" /> @Model.home.Bed اتاق</p>
 
                             </div>
                             <div class="col-4 text-center">
-                                <p class="font-xs-ad" style="font-size:15px;color:white;float:right;"><img src="/img/bath.png" style="width:25px;height:25px;padding-left:10px;" /> @Model.home.Bath حمام</p>
+                                <p class="font-xs-ad" style="font-size:15px;color:white;float:right;"><img src="/img/bath1.png" style="width:25px;height:25px;padding-left:10px;" /> @Model.home.Bath حمام</p>
 
                             </div>
                         }
                         <div class="col-4 text-center">
-                            <p class="font-xs-ad" style="font-size:15px;color:white;float:right;"><img src="/img/Resize-icon.png" style="width:25px;height:25px;padding-left:10px;" /> @Model.contract.Metraz متر </p>
+                            <p class="font-xs-ad" style="font-size:15px;color:white;float:right;"><img src="~/img/size1.png" style="width:25px;height:25px;padding-left:10px;" /> @Model.contract.Metraz متر </p>
                         </div>
 
                     </div>
@@ -197,7 +197,7 @@
                             <div class="col-9" style="padding-top:10px;">
                                 <h5 style="color:#ca062b;padding-right:25px;">قیمت</h5>
                                 <div class="">
-                                    <h3 style="color:rgba(116, 113, 113, 0.75);text-align:left;padding-left:5px;" id="costwithspliter">@Model.contract.SellCOst </h3>
+                                    <h3 style="color:rgba(116, 113, 113, 0.75);text-align:left;padding-left:5px;" id="costwithspliter">@Model.contract.BuyCost </h3>
                                 </div>
                             </div>
                             <div class="col-3" style="padding-top:10px;">
@@ -214,7 +214,7 @@
                                     if (Model.contract.Adviser.Image != "" && Model.contract.Adviser.Image != null)
                                     {
                                         <div class="text-center">
-                                            <img src="http://panel.hamihomes.com/images/@Model.contract.Adviser.Image" style="border-radius:40px;width:70px;height:70px;text-align:center;align-content:center;" />
+                                            <img src="@Model.contract.Adviser.Image" style="border-radius:40px;width:70px;height:70px;text-align:center;align-content:center;" />
                                         </div>
                                     }
                                     else
@@ -258,27 +258,26 @@
         <div class="col-lg-8 col-sm-12 col-md-8">
             <div class="row">
                 @{
+                    if (Model.gallery.Count > 0)
+                    {
+                        <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px">
+                            <img src="@Model.gallery[0].Url" class="zoom" style="width:100%;height:200px;border-radius:10px;cursor:pointer" />
+                        </div>
+                    }
+
                     if (Model.gallery.Count > 1)
                     {
-
                         <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px">
-                            <img src="http://panel.hamihomes.com/images/@Model.gallery[0].Url" class="zoom" style="width:100%;height:200px;border-radius:10px;" />
+                            <img src="@Model.gallery[1].Url" class="zoom" style="width:100%;height:200px;border-radius:10px;cursor:pointer" />
                         </div>
-
                     }
                 }
 
-                <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px;">
-                    <img src="http://panel.hamihomes.com/images/@Model.gallery[0].Url" class="zoom" style="width:100%;height:200px;border-radius:10px;filter: blur(4px);" />
-                    <div style="position:absolute;top:40%;right:30%;">
-                        <h4 class="text-center" style="color:white;">10 +</h4>
-                        <h4 class="text-center" style="color:white;">عکس بیشتر</h4>
-                    </div>
-                </div>
+
                 @if (Model.home.HomeMapImage != null && Model.home.HomeMapImage != "")
                 {
                     <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px;">
-                        <img src="http://panel.hamihomes.com/images/@Model.home.HomeMapImage" class="zoom" style="width:70%;height:150px;border-radius:10px;" />
+                        <img src="@Model.home.HomeMapImage" class="zoom" style="width:100%;height:200px;border-radius:10px;cursor:pointer" />
                     </div>
                 }
 
@@ -291,7 +290,7 @@
                         foreach (var item in Model.gallery.Skip(1))
                         {
                             <div class="col-lg-4 col-sm-12 col-md-4" style="padding:10px">
-                                <img src="http://panel.hamihomes.com/images/@item.Url" class="zoom" style="width:100%;height:200px;border-radius:10px;" />
+                                <img src="@item.Url" class="zoom" style="width:100%;height:200px;border-radius:10px;cursor:pointer" onclick="showmodal('@item.Url')"/>
                             </div>
                         }
                     }
@@ -302,7 +301,7 @@
                 <a class="btn btn-default btn-block" style="padding-top:10px;border:0px;background-color:transparent;width:100%;color:rgba(0, 0, 0, 0.81)" onclick="showallimages()"><p style="display:inline" id="maximagetext">بیشتر</p><img src="~/img/down.png" style="width:20px;height:20px;display:inline" id="imgdownshow" /></a>
             </div>
             <div class="row">
-                @if (Model.home.ThreeDView != "" && Model.home.ThreeDView!=null)
+                @if (Model.home.ThreeDView != "" && Model.home.ThreeDView != null)
                 {
                     <div class="col-lg-12 col-sm-12 col-md-12">
                         <iframe style="width:100%;z-index:10;border-radius:10px;padding-top:10px;" height="300" src="@Model.home.ThreeDView" frameborder="0" allowfullscreen allow="xr-spatial-tracking" onclick="show3d()"></iframe>
@@ -328,16 +327,16 @@
             @if (Model.home.Hometype == 1 || Model.home.Hometype == 2 || Model.home.Hometype == 7)
             {
                 <div class="text-center">
-                    <p class="font-xs-ad" style="font-size:15px;color:black;padding:10px;"><img src="/img/bed.png" style="width:25px;height:25px;" /> @Model.home.Bed اتاق</p>
+                    <p class="font-xs-ad" style="font-size:15px;color:black;padding:10px;"><img src="~/img/bed.png" style="width:25px;height:25px;" /> @Model.home.Bed اتاق</p>
 
                 </div>
                 <div class="text-center">
-                    <p class="font-xs-ad" style="font-size:15px;color:black;padding:10px;"><img src="/img/bath.png" style="width:25px;height:25px;" /> @Model.home.Bath حمام</p>
+                    <p class="font-xs-ad" style="font-size:15px;color:black;padding:10px;"><img src="~/img/bath.png" style="width:25px;height:25px;" /> @Model.home.Bath حمام</p>
 
                 </div>
             }
             <div class="text-center">
-                <p class="font-xs-ad" style="font-size:15px;color:black;padding:10px;"><img src="/img/Resize-icon.png" style="width:25px;height:25px;" /> @Model.contract.Metraz متر </p>
+                <p class="font-xs-ad" style="font-size:15px;color:black;padding:10px;"><img src="~/img/Resize-icon.png" style="width:25px;height:25px;" /> @Model.contract.Metraz متر </p>
             </div>
 
         </div>
@@ -888,7 +887,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-4 zoom" style="padding-left:10px;padding-bottom:10px">
                     <a href="/Home/Detail?homeid=@item.Home.Id&contractid=@item.Id&hometype=@s">
                         <div class="card">
-                            <img class="card-img-top" src="http://panel.hamihomes.com/images/@item.Home.Image" style="height:200px;" alt="خانه ارومیه">
+                            <img class="card-img-top" src="@item.Home.Image" style="height:200px;" alt="خانه ارومیه">
                             <div class="card-block p-3">
 
                                 <h4 class="card-title font-xs-b ">@s @item.Home.OwnerName </h4>
@@ -968,6 +967,9 @@
         </div>
     </div>
 </div>
+
+
+
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
@@ -1106,4 +1108,10 @@ var chart = new Chart(ctx, {
         }
             return x1 + x2;
         }
+
+
+    function showmodal(url) {
+        //alert(url);
+        //document.getElementById("imgshow").innerHTML = "<img src=" + url + " class='img img-thumbnail'/>";
+    }
 </script>

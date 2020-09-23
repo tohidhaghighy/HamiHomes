@@ -15,7 +15,7 @@
 
     <section class="content-header">
         <h1>
-            داشبرد
+            داشبورد
             <small>کنترل پنل</small>
         </h1>
         <ol class="breadcrumb">
@@ -46,6 +46,7 @@
                             <th class="text-center">نام</th>
                             <th class="text-center">خرید / اجاره / ساخت</th>
                             <th class="text-center">نوع ملک</th>
+                            <th class="text-center">نمایش در جستجو</th>
                             <th class="text-center">حذف</th>
                         </tr>
                     </thead>
@@ -95,4 +96,15 @@
                 }
             });
         }
+
+        function Showinsearch(statusid) {
+         $.ajax({
+            type: "Post",
+            url: '/HomeFacilityManagment/SearchStatus',
+            data: { id: statusid},
+            success: function (data) {
+                window.location.reload();
+            }
+        });
+    }
     </script>

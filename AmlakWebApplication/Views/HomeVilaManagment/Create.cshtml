@@ -18,7 +18,7 @@
 </style>
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
@@ -48,19 +48,10 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-lg-2">
-                            <h4>متراژ بنا</h4>
-                            <input asp-for="Vila.MetrazhBena" type="number" class="form-control" placeholder="متراژ بنا" value="1">
-                            <span asp-validation-for="Vila.MetrazhBena" class="text-danger"></span>
-                        </div>
-                        <div class="col-lg-2">
-                            <h4>متراژ زمین</h4>
-                            <input asp-for="Vila.Metrazhzamin" type="number" class="form-control" placeholder="متراژ زمین" value="1">
-                            <span asp-validation-for="Vila.Metrazhzamin" class="text-danger"></span>
-                        </div>
+                        
                         <div class="col-lg-2">
                             <h4>تعداد کل طبقات</h4>
-                            <input asp-for="Vila.Tedadkoltabaghat" type="number" class="form-control" placeholder="تعداد کل طبقات">
+                            <input asp-for="Vila.Tedadkoltabaghat" type="number" class="form-control" min="0" placeholder="تعداد کل طبقات">
                             <span asp-validation-for="Vila.Tedadkoltabaghat" class="text-danger"></span>
                         </div>
                     </div>
@@ -76,7 +67,7 @@
                         </div>
                         <div class="col-lg-4">
                             <h4>شماره نگهبان</h4>
-                            <input asp-for="Vila.NegahbaniPhone" type="number" class="form-control" placeholder="شماره نگهبان">
+                            <input asp-for="Vila.NegahbaniPhone" type="text" class="form-control" placeholder="شماره نگهبان">
                             <span asp-validation-for="Vila.NegahbaniPhone" class="text-danger"></span>
                         </div>
                     </div>
@@ -88,7 +79,7 @@
                         <div class="">
                             <h4> موقعیت ملک :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Vila.Homemogheiat" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Vila.Homemogheiat" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakMogheiatMelk.Count; i++)
                                     {
                                         <option value="@Model.AmlakMogheiatMelk[i].Name">@Model.AmlakMogheiatMelk[i].Name</option>
@@ -102,7 +93,7 @@
                         <div class="">
                             <h4> نمای ساختمان :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Vila.Homenema" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Vila.Homenema" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakNema.Count; i++)
                                     {
                                         <option value="@Model.AmlakNema[i].Name">@Model.AmlakNema[i].Name</option>
@@ -136,7 +127,7 @@
                         <div class="">
                             <h4> تاسیسات گرمایشی و سرمایشی :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Vila.Homeparking" onchange="checkcityval()">
+                                <select class="form-control select2" multiple style="padding:10px;width:100%;" asp-for="Vila.Homeparking" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakTasisatGarmaieshi.Count; i++)
                                     {
                                         <option value="@Model.AmlakTasisatGarmaieshi[i].Name">@Model.AmlakTasisatGarmaieshi[i].Name</option>
@@ -150,7 +141,7 @@
                         <div class="">
                             <h4> پوشش کف :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Vila.Homekaf" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Vila.Homekaf" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakKafes.Count; i++)
                                     {
                                         <option value="@Model.AmlakKafes[i].Name">@Model.AmlakKafes[i].Name</option>
@@ -170,7 +161,7 @@
                         <div class="">
                             <h4> نوع دیوار  :</h4>
                             <div>
-                                <select style="padding:10px;width:100%;" asp-for="Vila.Homedivar" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Vila.Homedivar" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakDivars.Count; i++)
                                     {
                                         <option value="@Model.AmlakDivars[i].Name">@Model.AmlakDivars[i].Name</option>
@@ -218,7 +209,7 @@
                         <div class="">
                             <h4> نوع و تعداد پارکینگ :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Vila.Homeparking" onchange="checkcityval()">
+                                <select class="form-control select2" multiple style="padding:10px;width:100%;" asp-for="Vila.Homeparking" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakParking.Count; i++)
                                     {
                                         <option value="@Model.AmlakParking[i].Name">@Model.AmlakParking[i].Name</option>
@@ -269,7 +260,7 @@
                         <div class="">
                             <h4> وضعیت سند :</h4>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" asp-for="Vila.Homesanad" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Vila.Homesanad" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakSanadStatus.Count; i++)
                                     {
                                         <option value="@Model.AmlakSanadStatus[i].Name">@Model.AmlakSanadStatus[i].Name</option>
@@ -279,7 +270,18 @@
                         </div>
                     </div>
 
-
+                    <div class="col-lg-3">
+                        <div class="">
+                            <h4> امکانات  :</h4>
+                            <select class="form-control select2 text-center" multiple="multiple" data-placeholder="   انتخاب کن  "
+                                    style="width: 100%;direction:rtl;float:right;" name="HomeFacility" id="HomeFacility">
+                                @for (var i = 0; i < Model.HomeFacility.Count; i++)
+                                {
+                                    <option value="@Model.HomeFacility[i].Name">@Model.HomeFacility[i].Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
 
                 </div>
 

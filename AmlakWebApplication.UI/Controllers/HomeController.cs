@@ -9,6 +9,7 @@ using DataLayer.Infrastracture;
 using ViewModelLayer.UI;
 using DomainLayer;
 using ViewModelLayer.Detail;
+using Utilities.Smsdotir;
 
 namespace AmlakWebApplication.UI.Controllers
 {
@@ -33,6 +34,17 @@ namespace AmlakWebApplication.UI.Controllers
             main.MetrazSetting = main.MetrazSetting.OrderBy(a => a.MetrazChance).ToList();
             main.EjareSetting = main.EjareSetting.OrderBy(a => a.CostChance).ToList();
             main.VadieSetting = main.VadieSetting.OrderBy(a => a.CostChance).ToList();
+            main.Userid = 0;
+            string username = Request.Cookies["userusername"];
+            string password = Request.Cookies["userpassword"];
+            if (username != "" && password != "")
+            {
+                var finduser = await _context.UserRepository.Login(username, password);
+                if (finduser != null)
+                {
+                    main.Userid = finduser.Id;
+                }
+            }
             return View(main);
         }
 
@@ -46,6 +58,7 @@ namespace AmlakWebApplication.UI.Controllers
         public async Task<IActionResult> Detail(int homeid,int contractid,string hometype)
         {
             var allinfo = new Detailpage();
+            int homenoe = 0;
             allinfo.home =  _context.HomeRepository.GetById(homeid);
             var find = _context.ContractRepository.GetByIdwithinclude("Adviser");
             allinfo.contract = find.FirstOrDefault(a => a.Id == contractid);
@@ -53,44 +66,54 @@ namespace AmlakWebApplication.UI.Controllers
             if (allinfo.home.Hometype==1)
             {
                 allinfo.aparteman = _context.HomeApartemanRepository.GetMany(a=>a.HomeId==homeid).FirstOrDefault();
+                homenoe = allinfo.aparteman.Home.Hometype;
             }
             else if (allinfo.home.Hometype == 2)
             {
                 allinfo.homewithgarden = _context.HomeWithGardenRepository.GetMany(a => a.HomeId == homeid).FirstOrDefault();
+                homenoe = allinfo.homewithgarden.Home.Hometype;
             }
             else if (allinfo.home.Hometype == 3)
             {
                 allinfo.zamin = _context.ZaminRepository.GetMany(a => a.HomeId == homeid).FirstOrDefault();
+                homenoe = allinfo.zamin.Home.Hometype;
             }
             else if (allinfo.home.Hometype == 4)
             {
                 allinfo.kolangi = _context.HomeKolangiRepository.GetMany(a => a.HomeId == homeid).FirstOrDefault();
+                homenoe = allinfo.kolangi.Home.Hometype;
             }
             else if (allinfo.home.Hometype == 5)
             {
                 allinfo.edari = _context.HomeEdariRepository.GetMany(a => a.HomeId == homeid).FirstOrDefault();
+                homenoe = allinfo.edari.Home.Hometype;
             }
             else if (allinfo.home.Hometype == 6)
             {
                 allinfo.maghaze = _context.MaghazeRepository.GetMany(a => a.HomeId == homeid).FirstOrDefault();
+                homenoe = allinfo.maghaze.Home.Hometype;
             }
             else if (allinfo.home.Hometype == 7)
             {
                 allinfo.moshtghelat = _context.MoshtghelatRepository.GetMany(a => a.HomeId == homeid).FirstOrDefault();
+                homenoe = allinfo.moshtghelat.Home.Hometype;
             }
             else if (allinfo.home.Hometype == 8)
             {
                 allinfo.anbar = _context.HomeAnbarRepository.GetMany(a => a.HomeId == homeid).FirstOrDefault();
+                homenoe = allinfo.anbar.Home.Hometype;
             }
             else if (allinfo.home.Hometype == 9)
             {
                 allinfo.garden = _context.HomeGardenRepository.GetMany(a => a.HomeId == homeid).FirstOrDefault();
+                homenoe = allinfo.garden.Home.Hometype;
             }
             else if (allinfo.home.Hometype == 10)
             {
                 allinfo.vila = _context.VilaRepository.GetMany(a => a.HomeId == homeid).FirstOrDefault();
+                homenoe = allinfo.vila.Home.Hometype;
             }
-            var findallcontract = await _context.ContractRepository.GetManyAsyncWithInclude("Home");
+            var findallcontract = _context.ContractRepository.GetAllWithWhereandInclude("Home",a=>a.Home.IsShow==true && a.Home.Hometype==homenoe && a.Home.Id!=homeid).ToList();
             if (findallcontract.Count()>4)
             {
                 findallcontract = findallcontract.Take(4).ToList();

@@ -1,0 +1,126 @@
+﻿@model DomainLayer.Customer
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Managment.cshtml";
+}
+
+    <link href="~/css/PersianCalender/bootstrap-datepicker.css" rel="stylesheet" />
+
+<section class="content-header">
+    <h1>
+        داشبورد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/CustomerManagment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">مشتری جدید </li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>درج مشتری جدید</h4>
+
+</div>
+
+<div class="container">
+    <div class="box box-danger">
+        <div class="box-header">
+            <h3 class="box-title">ویرایش مشتری</h3>
+        </div>
+        <form asp-action="UpdateItem">
+            <div class="box-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
+                <input asp-for="Id" type="text" style="display:none" value="@Model.Id">
+                <input asp-for="Code" type="text" style="display:none" value="@Model.Code">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label>نام</label>
+                            <input asp-for="Name" type="text" class="form-control" placeholder="نام">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label>نام خانوادگی</label>
+                            <input asp-for="Family" type="text" class="form-control" placeholder="نام خانوادگی">
+                            <span asp-validation-for="Family" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label>شناسنامه</label>
+                            <input asp-for="Shenasname" type="text" class="form-control" placeholder="شناسنامه">
+                            <span asp-validation-for="Shenasname" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label>موبایل</label>
+                            <input asp-for="Number" type="text" class="form-control" placeholder="موبایل">
+                            <span asp-validation-for="Number" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label>صادره</label>
+                            <input asp-for="Sadere" type="text" class="form-control" placeholder="صادره">
+                            <span asp-validation-for="Sadere" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label>تاریخ تولد</label>
+                            <input asp-for="Birthdate" type="text" class="form-control" placeholder="تاریخ تولد">
+                            <span asp-validation-for="Birthdate" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label>نام پدر</label>
+                            <input asp-for="Fathername" type="text" class="form-control" placeholder="نام پدر">
+                            <span asp-validation-for="Fathername" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>آدرس</label>
+                    <input asp-for="Address" type="text" class="form-control" placeholder="شناسنامه">
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">ویرایش مشتری</button>
+                </div>
+
+            </div>
+        </form>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+</div>
+<script src="~/css/PersianCalender/userclass/jqueay.js"></script>
+<script src="~/css/PersianCalender/jquery.Bootstrap-PersianDateTimePicker.js"></script>
+<script src="~/css/PersianCalender/bootstrap-datepicker.min.js"></script>
+<script src="~/css/PersianCalender/bootstrap-datepicker.fa.min.js"></script>
+<script>
+
+    $("#Birthdate").datepicker({
+        dateFormat: "d / mm / yy",
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1309:1425'
+    });
+
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

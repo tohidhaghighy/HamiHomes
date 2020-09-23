@@ -17,7 +17,7 @@
 
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
@@ -43,10 +43,9 @@
             <table id="mytable" class="table table-bordered table-hover" style="background-color:white;">
                 <thead>
                     <tr>
-                        <th class="text-center">عکس</th>
                         <th class="text-center">نام</th>
-                        <th class="text-center">Gps</th>
                         <th class="text-center">شهر</th>
+                        <th class="text-center">افزودن مختصات</th>
                         <th class="text-center">افزودن محله</th>
                         <th class="text-center">ویرایش</th>
                         <th class="text-center">حذف</th>
@@ -100,10 +99,14 @@
     }
 
     function Updateitem(id) {
-        window.location.href = "/NahieManagment/Update?id=" + id;
+         window.location.href = "/NahieManagment/ListDirection?nahieid=" + id;
     }
     function Mahalleitem(id) {
         window.location.href = "/MahalleManagment/Index?id=" + id;
-        }
+    }
+
+    function Directionset(id) {
+         window.location.href = "/NahieManagment/ListDirection?nahieid=" + id;
+    }
 </script>
 

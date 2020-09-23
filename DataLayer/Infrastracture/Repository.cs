@@ -93,6 +93,10 @@ namespace DataLayer.Infrastracture
         {
             return DbSet.Include(children).Where(where).ToList();
         }
+        public virtual IEnumerable<TEntity> GetAllWithWhereandTwoInclude(string children1,string children2, Expression<Func<TEntity, bool>> where)
+        {
+            return DbSet.Include(children1).Include(children2).Where(where).ToList();
+        }
 
         public virtual IEnumerable<TEntity> GetManyWithInclude(Expression<Func<TEntity, bool>> where)
         {

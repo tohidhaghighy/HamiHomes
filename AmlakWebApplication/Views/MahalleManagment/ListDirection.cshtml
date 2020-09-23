@@ -1,0 +1,201 @@
+﻿@model ViewModelLayer.City.NahieDirect
+@{
+    ViewData["Title"] = "ListDirection";
+    Layout = "~/Views/Shared/_Managment.cshtml";
+}
+
+<link href="~/css/alert/sweetalert.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<script src="~/css/alert/sweetalert.js"></script>
+
+<link href="~/js/leaflet/leaflet.css" rel="stylesheet" />
+<script src="~/js/leaflet/leaflet.js"></script>
+
+<section class="content-header">
+    <h1>
+        داشبورد
+        <small>کنترل پنل</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> خانه</a></li>
+        <li class="active">مدیریت مختصات </li>
+    </ol>
+</section>
+
+<div class="callout callout-info" style="margin-top:10px;">
+    <h4>مدریت مختصات</h4>
+</div>
+
+<div class="container">
+    <input type="number" style="display:none" value="@Model.nahieid" id="nahieid" name="nahieid" />
+    <div class="row">
+        <div class="col-lg-8">
+            <div id="map" style="width:100%;height:300px;">
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>محور افقی</label>
+                <input name="gpsx" id="gpsx" type="text" class="form-control" placeholder="محور افقی ">
+            </div>
+            <div class="form-group">
+                <label>محور عموری</label>
+                <input name="gpsy" id="gpsy" type="text" class="form-control" placeholder="محور عموری ">
+            </div>
+            <a class="btn btn-success" onclick="adddirectiontonahie()">
+                ثبت موقعیت
+            </a>
+        </div>
+    </div>
+    <div class="row" style="padding:50px;">
+        <div class="col-md-12 box">
+            <div class="table-responsive box-body">
+                <table id="mytable" class="table table-bordered table-hover" style="background-color:white;">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Gpsx</th>
+                            <th class="text-center">Gpsy</th>
+                            <th class="text-center">حذف</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listofarticle">
+                        @{
+                            <input style="display:none;" id="nahieid" name="nahieid" value="@Model.nahieid" />
+                            if (Model.OnlyThisNahieDirections.Count() > 0)
+                            {
+                                foreach (var item in Model.OnlyThisNahieDirections)
+                                {
+                                    <tr>
+                                        <td class="text-center" style="padding:10px;">
+                                            @item.Gpsx.ToString()
+                                        </td>
+                                        <td class="text-center" style="padding:10px;">
+                                            @item.Gpsy.ToString()
+                                        </td>
+
+                                        <td class="text-center" style="padding:10px;"><p data-placement="top" data-toggle="tooltip" title="حذف"><a class="btn btn-danger btn-xs" onclick="deleteitem(@item.Id)"><i class="ion ion-ios-trash"></i></a></p></td>
+                                    </tr>
+                                }
+
+                            }
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    var map = L.map('map').setView([37.553278571293816, 45.07666215851912], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var LeafIcon = L.Icon.extend({
+        options: {
+            iconSize: [30, 30]
+        }
+    });
+
+    var greenIcon = new LeafIcon({ iconUrl: '/js/leaflet/icon.png' });
+    @{
+        foreach (var mahal in Model.Mahalle)
+        {
+            <text>var listofdirection = [];</text>
+
+    @foreach (var item in Model.NahieDirections.Where(a=>a.NahieId==mahal.Id))
+    {
+        <text>var listofitem = [];</text>
+        @:listofitem.push(@item.Gpsx);
+        @:listofitem.push(@item.Gpsy);
+        @:listofdirection.push(listofitem);
+    }
+            if (mahal.Id==Model.nahieid)
+            {
+                <text>var polygon = L.polygon(listofdirection).setStyle({ 'color': '#000','fillOpacity':'0.2','opacity':'0.3' }).addTo(map);</text>
+            }
+            else
+            {
+                <text>var polygon = L.polygon(listofdirection).addTo(map);</text>
+            }
+
+
+        }
+    }
+
+
+    var marker;
+    map.on("click", function (e) {
+        if (marker) {
+            map.removeLayer(marker);
+        }
+        marker = new L.Marker(e.latlng, { icon: greenIcon });
+        $('#gpsx').val(e.latlng.lat);
+        $('#gpsy').val(e.latlng.lng);
+        marker.addTo(map);
+    });
+
+    function deleteitem(id) {
+
+    }
+
+
+    function adddirectiontonahie() {
+        var nahieid = $("#nahieid").val();
+        var gpsx = $("#gpsx").val();
+        var gpsy = $("#gpsy").val();
+        if (gpsx != "" && gpsy != "") {
+            $.ajax({
+                type: "Post",
+                url: '/MahalleManagment/InsertDirection',
+                data: { mahalleid: nahieid, gpsx: gpsx, gpsy: gpsy },
+                success: function (data) {
+                    window.location.reload();
+                }
+            });
+        } else {
+            alert("موقعیت را روی نقشه انتخاب کنید");
+        }
+
+    }
+
+    function deleteitem(id) {
+        swal({
+            title: "آیا میخواهید حذف شود؟",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "بله حذف شود",
+            cancelButtonText: "خیر",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+                    sendtoservertodelete(id);
+
+                } else {
+                    swal("صرف نظر", "حذف نشد", "error");
+                }
+            });
+    };
+
+    function sendtoservertodelete(id) {
+        $.ajax({
+            type: "Post",
+            url: '/NahieManagment/DeleteDirection',
+            data: { id: id },
+            success: function (data) {
+                window.location.reload();
+            }
+        });
+    }
+
+</script>

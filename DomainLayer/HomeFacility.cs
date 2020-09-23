@@ -18,5 +18,6 @@ namespace DomainLayer
         public MelkType MelkType { get; set; }
 
         public Boolean Selected { get; set; }
+        public Boolean ShowinSearch { get; set; }
     }
 }

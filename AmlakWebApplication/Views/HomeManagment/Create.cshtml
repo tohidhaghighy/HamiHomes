@@ -11,7 +11,7 @@
 
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
@@ -36,7 +36,8 @@
         <form asp-action="CreateItem" enctype="multipart/form-data">
             <div class="box-body">
                 <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
-
+                <input style="display:none" id="conty" name="conty" value="ارومیه" />
+                <input asp-for="Home.Code" style="display:none" value="0" />
                 <div class="form-group">
                     <label>نوع خانه</label>
                     <a class="btn" style="background-color:#e4002b;color:white" id="aparteman" onclick="apartemanclick()">آپارتمان</a>
@@ -69,27 +70,38 @@
                     <div class="col-lg-4">
                         <br />
 
-                        <div class="custom-select" style="width:100%;padding:10px;">
-                            <select style="width:100%;padding:10px;" id="cityselect" name="cityselect" onchange="checkcityval()">
-                                <option value="0">شهر را انتخاب کن :</option>
+                        <div class="" style="width:100%;padding:10px;">
+                            <select class="form-control" style="width:100%;" id="cityselect" name="cityselect" onchange="checkcityval()">
+                                <option value="0">استان  :</option>
                                 @{
-                                    foreach (var item in Model.Cities)
+                                    foreach (var item in Model.Regions)
                                     {
-                                        <option value="@item.Id">@item.Region.Name  @item.Name</option>
+                                        <option value="@item.Id">@item.Name</option>
                                     }
                                 }
                             </select>
                         </div>
 
-                        <br />
+                        <div class="" style="width:100%;padding:10px;">
+                            <select class="form-control" style="width:100%;" id="cityselect" name="cityselect" onchange="checkcityval()">
+                                <option value="0">شهر  :</option>
+                                @{
+                                    foreach (var item in Model.Cities)
+                                    {
+                                        <option value="@item.Id"> @item.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
 
-                        <div class="custom-select" style="width:100%;padding:10px;">
-                            <select style="width:100%;padding:10px;" id="Mantagheselect" name="Mantagheselect" onchange="checkmantagheval()">
-                                <option value="0">محله را انتخاب کن :</option>
+
+                        <div class="" style="width:100%;padding:10px;">
+                            <select class="form-control " style="width:100%;" id="Mantagheselect" name="Mantagheselect" onchange="rezolotion(this.value)">
+                                <option value="0">محله :</option>
                                 @{
                                     foreach (var item in Model.Mahalles)
                                     {
-                                        <option value="@item.Id" onclick="setgps(@item.Gpsx, @item.Gpsy,16)">@item.Name  @item.Nahie.Name</option>
+                                        <option  value="@item.Gpsx,@item.Gpsy,@item.Id" >@item.Name  @item.Nahie.Name</option>
                                     }
                                 }
                             </select>
@@ -135,12 +147,12 @@
                         </div>
                         <div class="col-lg-3">
                             <label>شماره تلفن</label>
-                            <input asp-for="Home.Phone" type="number" class="form-control"  value="044" placeholder=" شماره تلفن" onkeyup="if(this.value<0){this.value= this.value * -1}">
+                            <input asp-for="Home.Phone" type="number" class="form-control" value="" placeholder=" شماره تلفن" onkeyup="if(this.value<0){this.value= this.value * -1}">
                             <span asp-validation-for="Home.Phone" class="text-danger"></span>
                         </div>
                         <div class="col-lg-3">
                             <label>شماره موبایل</label>
-                            <input asp-for="Home.Mobile" type="number" class="form-control"  value="09" placeholder="شماره موبایل" onkeyup="if(this.value<0){this.value= this.value * -1}">
+                            <input asp-for="Home.Mobile" type="number" class="form-control" value="" placeholder="شماره موبایل" onkeyup="if(this.value<0){this.value= this.value * -1}">
                             <span asp-validation-for="Home.Mobile" class="text-danger"></span>
                         </div>
                     </div>
@@ -150,22 +162,22 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <label>تعداد اتاق</label>
-                            <input asp-for="Home.Bed" type="number" class="form-control" placeholder="تعداد اتاق" value="1" onkeyup="if(this.value<0){this.value= this.value * -1}">
+                            <input asp-for="Home.Bed" type="number" min="0" class="form-control" placeholder="تعداد اتاق" value="1" onkeyup="if(this.value<0){this.value= this.value * -1}">
                             <span asp-validation-for="Home.Bed" class="text-danger"></span>
                         </div>
                         <div class="col-lg-3">
                             <label>تعداد سرویس بهداشتی</label>
-                            <input asp-for="Home.Bath" type="number" class="form-control" value="1"  placeholder="تعداد سرویس بهداشتی">
+                            <input asp-for="Home.Bath" min="0" type="number" class="form-control" value="1" placeholder="تعداد سرویس بهداشتی">
                             <span asp-validation-for="Home.Bath" class="text-danger"></span>
                         </div>
                         <div class="col-lg-3">
                             <label>تعداد پارکینگ</label>
-                            <input asp-for="Home.Parking" type="number" class="form-control" value="1"  placeholder=" تعداد پارکینگ" onkeyup="if(this.value<0){this.value= this.value * -1}">
+                            <input asp-for="Home.Parking" type="number" min="0" class="form-control" value="1" placeholder=" تعداد پارکینگ" onkeyup="if(this.value<0){this.value= this.value * -1}">
                             <span asp-validation-for="Home.Parking" class="text-danger"></span>
                         </div>
                         <div class="col-lg-3">
                             <label>عمر بنا</label>
-                            <input asp-for="Home.Bana" type="number" class="form-control" value="1"  placeholder=" عمر بنا" onkeyup="if(this.value<0){this.value= this.value * -1}">
+                            <input asp-for="Home.Bana" type="number" min="0" class="form-control" value="1" placeholder=" عمر بنا" onkeyup="if(this.value<0){this.value= this.value * -1}">
                             <span asp-validation-for="Home.Bana" class="text-danger"></span>
                         </div>
                     </div>
@@ -179,7 +191,7 @@
 
                 <div class="form-group">
                     <label>توضیحات</label>
-                    <textarea asp-for="Home.Description" id="editortext" cols="80" rows="10">توضیحات خانه</textarea>
+                    <textarea asp-for="Home.Description" id="editortext" cols="80" rows="6">توضیحات خانه</textarea>
                     <span asp-validation-for="Home.Description" class="text-danger"></span>
                 </div>
 
@@ -227,6 +239,12 @@
             iconSize: [30, 30]
         }
     });
+
+    //L.polygon([
+    //    [37.536328793820104, 45.04212465024221],
+    //    [37.55289978615527, 45.012679435711185],
+    //    [37.56967118646641, 45.06140097276832]
+    //]).addTo(map);
 
     var greenIcon = new LeafIcon({ iconUrl: '/js/leaflet/icon.png' });
 
@@ -378,6 +396,7 @@
                 document.getElementById("addressshow").value = data.address; 
                 document.getElementById("Home_Postalcode").value = data.postal_code;
                 document.getElementById("Home_Address").value = data.address;
+                document.getElementById("conty").value = data.county;
             },
             failure: function (result) {
                 alert('Error: ' + result);
@@ -397,6 +416,14 @@
         $('#gpsy').val(y);
         sendtoserver();
         marker.addTo(map);
+        }
+
+     function rezolotion(gps) {
+        var gpsarray = gps.split(',');
+        setgps(gpsarray[0], gpsarray[1], 12);
+        $('#gpsx').val(gpsarray[0]);
+        $('#gpsy').val(gpsarray[1]);
+        sendtoserver();
     }
 
 </script>

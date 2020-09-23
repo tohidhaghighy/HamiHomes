@@ -1,12 +1,22 @@
-﻿@model DomainLayer.Adviser
+﻿@model ViewModelLayer.AdvisorManagment.MainAdvisor
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Managment.cshtml";
 }
+<style>
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+        background-color: #af1e1e;
+        color: white;
+        direction: rtl;
+    }
 
+    span {
+        direction: rtl;
+    }
+</style>
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
@@ -34,22 +44,22 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>نام</label>
-                            <input asp-for="Name" type="text" class="form-control" placeholder="نام">
-                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <input asp-for="Adviser.Name" type="text" class="form-control" placeholder="نام">
+                            <span asp-validation-for="Adviser.Name" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>نام خانوادگی</label>
-                            <input asp-for="Family" type="text" class="form-control" placeholder="نام خانوادگی">
-                            <span asp-validation-for="Family" class="text-danger"></span>
+                            <input asp-for="Adviser.Family" type="text" class="form-control" placeholder="نام خانوادگی">
+                            <span asp-validation-for="Adviser.Family" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>موبایل</label>
-                            <input asp-for="Mobile" type="number" class="form-control" placeholder="موبایل">
-                            <span asp-validation-for="Mobile" class="text-danger"></span>
+                            <input asp-for="Adviser.Mobile" type="number" class="form-control" placeholder="موبایل">
+                            <span asp-validation-for="Adviser.Mobile" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -58,15 +68,15 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>چند سال سابقه</label>
-                            <input asp-for="ExperienceYear" type="number" class="form-control" placeholder="چند سال سابقه">
-                            <span asp-validation-for="ExperienceYear" class="text-danger"></span>
+                            <input asp-for="Adviser.ExperienceYear" type="number" class="form-control" placeholder="چند سال سابقه">
+                            <span asp-validation-for="Adviser.ExperienceYear" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>ایمیل</label>
-                            <input asp-for="Email" type="email" class="form-control" placeholder="ایمیل">
-                            <span asp-validation-for="Email" class="text-danger"></span>
+                            <input asp-for="Adviser.Email" type="email" class="form-control" placeholder="ایمیل">
+                            <span asp-validation-for="Adviser.Email" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -77,35 +87,102 @@
 
                 <div class="form-group">
                     <label>توضیحات</label>
-                    <textarea asp-for="Description" type="text" class="form-control" rows="6" placeholder="توضیحات"></textarea>
-                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <textarea asp-for="Adviser.Description" type="text" class="form-control" rows="6" placeholder="توضیحات"></textarea>
+                    <span asp-validation-for="Adviser.Description" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label>تخصص در فروش</label>
-                    <textarea asp-for="BuyTakhasos" type="text" class="form-control" rows="2" placeholder="تخصص در فروش"></textarea>
-                    <span asp-validation-for="BuyTakhasos" class="text-danger"></span>
+                    <textarea asp-for="Adviser.BuyTakhasos" type="text" class="form-control" rows="2" placeholder="تخصص در فروش"></textarea>
+                    <span asp-validation-for="Adviser.BuyTakhasos" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label>تخصص در اجاره</label>
-                    <textarea asp-for="RentTakhasos" type="text" class="form-control" rows="2" placeholder="تخصص در اجاره"></textarea>
-                    <span asp-validation-for="RentTakhasos" class="text-danger"></span>
+                    <textarea asp-for="Adviser.RentTakhasos" type="text" class="form-control" rows="2" placeholder="تخصص در اجاره"></textarea>
+                    <span asp-validation-for="Adviser.RentTakhasos" class="text-danger"></span>
                 </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h4> استان : </h4>
+                            <select class="form-control select2 text-center" data-placeholder="استان  "
+                                    style="width: 100%;direction:rtl;float:right;">
+                                <option value=""> انتخاب استان :</option>
+                                @{
+                                    foreach (var item in Model.Regions)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
+
+                            </select>
+                        </div>
+                        <div class="col-lg-6">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h4> شهر : </h4>
+                            <select asp-for="Adviser.CityId" class="form-control select2 text-center" data-placeholder="انتخاب شهر  "
+                                    style="width: 100%;direction:rtl;float:right;" name="city">
+                                <option value=""> انتخاب شهر :</option>
+                                @{
+                                    foreach (var item in Model.Cities)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
+
+                            </select>
+                        </div>
+                        <div class="col-lg-6">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <h4> مناطق : </h4>
+                            <select class="form-control select2 text-center" multiple="multiple" data-placeholder="انتخاب مناطق  "
+                                    style="width: 100%;direction:rtl;float:right;" name="mahale" id="mahale">
+                                <option value=""> انتخاب مناطق :</option>
+                                @{
+                                    foreach (var item in Model.Mahalles)
+                                    {
+                                        <option value="@item.Name">@item.Name</option>
+                                    }
+                                }
+
+                            </select>
+                        </div>
+                        <div class="col-lg-6">
+
+                        </div>
+                    </div>
+                </div>
+
 
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>نام کاربری </label>
-                            <input asp-for="Username" type="text" class="form-control" placeholder="نام کاربری">
-                            <span asp-validation-for="Username" class="text-danger"></span>
+                            <input asp-for="Adviser.Username" type="text" class="form-control" placeholder="نام کاربری">
+                            <span asp-validation-for="Adviser.Username" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>پسورد</label>
-                            <input asp-for="Password" type="password" class="form-control" placeholder="پسورد">
-                            <span asp-validation-for="Password" class="text-danger"></span>
+                            <input asp-for="Adviser.Password" type="password" class="form-control" placeholder="پسورد">
+                            <span asp-validation-for="Adviser.Password" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -114,14 +191,12 @@
 
                 <div class="form-group">
                     <label>عکس کارشناس</label>
-                    <input asp-for="Image" type="file" placeholder="عکس کارشناس">
-                    <span asp-validation-for="Image" class="text-danger"></span>
+                    <input name="Image" id="Image" type="file" placeholder="عکس کارشناس">
                 </div>
 
                 <div class="form-group">
                     <label>عکس پس زمینه کارشناس</label>
-                    <input asp-for="BackgroundImage" type="file" />
-                    <span asp-validation-for="BackgroundImage" class="text-danger"></span>
+                    <input name="BackgroundImage" id="BackgroundImage" type="file" />
                 </div>
 
                 <div class="form-group">
@@ -137,7 +212,7 @@
 </div>
 
 <script>
-  
+
 </script>
 
 

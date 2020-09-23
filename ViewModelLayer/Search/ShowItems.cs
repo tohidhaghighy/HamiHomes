@@ -18,7 +18,9 @@ namespace ViewModelLayer.Search
         public string MaxEjarecost { get; set; }
         public long MaxEjarecostPrice { get; set; }
         public string MinMetr { get; set; }
+        public int MinMetrInt { get; set; }
         public string MaxMetr { get; set; }
+        public int MaxMetrInt { get; set; }
 
         public List<Nahie> ListNahie { get; set; }
     }

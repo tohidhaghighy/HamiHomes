@@ -17,5 +17,7 @@ namespace ViewModelLayer.Home
         public List<AmlakParking> AmlakParking { get; set; }
         public List<AmlakSanadStatus> AmlakSanadStatus { get; set; }
         public List<AmlakWC> AmlakWC { get; set; }
+        public DomainLayer.User User { get; set; }
+        public DomainLayer.Adviser Adviser { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace DataLayer.Repository.Interfaces
 {
     public interface IUserRepository :IRepository<User>
     {
-        Task<bool> Login(string username, string password);
+        Task<User> Login(string username, string password);
         Task<bool> ChangeCheck(int id);
     }
 }

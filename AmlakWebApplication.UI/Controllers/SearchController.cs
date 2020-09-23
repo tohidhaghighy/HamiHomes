@@ -29,73 +29,87 @@ namespace AmlakWebApplication.UI.Controllers
             var find = await ConvertItems(mincost, maxcost, minmetr, maxmetr, minejare, maxejare, selectitem);
             searchlist.ShowItems = find;
             searchlist.MainPage = await GetListMetrCost();
-            if (typehome==1)
+            if (typehome == 1)
             {
-                if (maxcost!=0)
+                if (maxcost != 0)
                 {
-                    searchlist.Homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Buy && a.SellCOst > find.MinCostPrice && a.SellCOst < find.MaxCostPrice && a.Home.IsShow==true).ToList();
+                    searchlist.Homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Buy && a.BuyCost > find.MinCostPrice && a.BuyCost < find.MaxCostPrice && a.Home.IsShow == true).ToList();
                 }
                 else
                 {
-                    searchlist.Homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Buy && a.SellCOst > find.MinCostPrice && a.Home.IsShow == true).ToList();
+                    searchlist.Homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Buy && a.BuyCost > find.MinCostPrice && a.Home.IsShow == true).ToList();
                 }
-                
+
             }
-            else if (typehome==2)
+            else if (typehome == 2)
             {
-                if (maxcost!=0 && maxejare!=0)
+                if (maxcost != 0 && maxejare != 0)
                 {
                     searchlist.Homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Rent && a.RentCOst > find.MinEjareCostPrice && a.RentCOst < find.MaxEjarecostPrice && a.Vadie > find.MinCostPrice && a.Vadie < find.MaxCostPrice && a.Home.IsShow == true).ToList();
                 }
-                else if (maxcost!=0 && maxejare==0)
+                else if (maxcost != 0 && maxejare == 0)
                 {
                     searchlist.Homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Rent && a.RentCOst > find.MinEjareCostPrice && a.Vadie > find.MinCostPrice && a.Vadie < find.MaxCostPrice && a.Home.IsShow == true).ToList();
                 }
-                else if (maxcost==0 && maxejare!=0)
+                else if (maxcost == 0 && maxejare != 0)
                 {
                     searchlist.Homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Rent && a.RentCOst > find.MinEjareCostPrice && a.RentCOst < find.MaxEjarecostPrice && a.Vadie > find.MinCostPrice && a.Home.IsShow == true).ToList();
                 }
-                else if (maxcost==0 && maxejare==0)
+                else if (maxcost == 0 && maxejare == 0)
                 {
                     searchlist.Homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Rent && a.RentCOst > find.MinEjareCostPrice && a.Vadie > find.MinCostPrice && a.Home.IsShow == true).ToList();
                 }
-               
+
             }
-            else if (typehome==3)
+            else if (typehome == 3)
             {
                 searchlist.Homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Selled && a.Home.IsShow == true).ToList();
             }
 
             if (selectitem!=0)
             {
-                if (maxmetr!=0)
+                if (maxmetr != 0)
                 {
-                    searchlist.Homes = searchlist.Homes.Where(a => a.Home.Hometype == selectitem && a.Metraz >= minmetr && a.Metraz <= maxmetr).ToList();
+                    searchlist.Homes = searchlist.Homes.Where(a => a.Home.Hometype == selectitem && a.Metraz >= find.MinMetrInt && a.Metraz <= find.MaxMetrInt).ToList();
                 }
                 else
                 {
-                    searchlist.Homes = searchlist.Homes.Where(a => a.Home.Hometype == selectitem && a.Metraz >= minmetr).ToList();
+                    searchlist.Homes = searchlist.Homes.Where(a => a.Home.Hometype == selectitem && a.Metraz >= find.MinMetrInt).ToList();
                 }
-                
             }
-            
+            else
+            {
+                if (maxmetr != 0)
+                {
+                    searchlist.Homes = searchlist.Homes.Where(a => a.Metraz >= find.MinMetrInt && a.Metraz <= find.MaxMetrInt).ToList();
+                }
+                else
+                {
+                    searchlist.Homes = searchlist.Homes.Where(a => a.Metraz >= find.MinMetrInt).ToList();
+                }
+            }
+
+            searchlist.NahieDirection = await _context.NahieDirectionRepository.GetManyAsync(a => a.Type == 0);
+            searchlist.Mahalles = await _context.MahalleRepository.GetAllAsync();
+            searchlist.MahalleDirection= await _context.NahieDirectionRepository.GetManyAsync(a => a.Type == 1);
             return View(searchlist);
         }
-        public async Task<PartialViewResult> GetApartemanPartial(int buyrent,int hometype)
+        public async Task<PartialViewResult> GetApartemanPartial(int buyrent, int hometype)
         {
             var searchlist = new SearchList();
             var buyrenttype = (TypeHome)buyrent;
             var hometypeint = (MelkType)hometype;
-            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a=>a.MelkType==hometypeint && a.TypeHome==buyrenttype);
-            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            return PartialView("ApartemanSearchBox",searchlist);
+            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakParking = await _context.AmlakParkingRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            return PartialView("ApartemanSearchBox", searchlist);
         }
 
         public async Task<PartialViewResult> GetAnbarPartial(int buyrent, int hometype)
@@ -103,15 +117,15 @@ namespace AmlakWebApplication.UI.Controllers
             var searchlist = new SearchList();
             var buyrenttype = (TypeHome)buyrent;
             var hometypeint = (MelkType)hometype;
-            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
+            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
             return PartialView("AnbarSearchBox", searchlist);
         }
 
@@ -120,15 +134,15 @@ namespace AmlakWebApplication.UI.Controllers
             var searchlist = new SearchList();
             var buyrenttype = (TypeHome)buyrent;
             var hometypeint = (MelkType)hometype;
-            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
+            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
             return PartialView("HomeWithGardenSearchBox", searchlist);
         }
 
@@ -137,15 +151,15 @@ namespace AmlakWebApplication.UI.Controllers
             var searchlist = new SearchList();
             var buyrenttype = (TypeHome)buyrent;
             var hometypeint = (MelkType)hometype;
-            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
+            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
             return PartialView("ZaminSearchBox", searchlist);
         }
 
@@ -154,15 +168,15 @@ namespace AmlakWebApplication.UI.Controllers
             var searchlist = new SearchList();
             var buyrenttype = (TypeHome)buyrent;
             var hometypeint = (MelkType)hometype;
-            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
+            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
             return PartialView("KolangiSearchBox", searchlist);
         }
 
@@ -171,15 +185,16 @@ namespace AmlakWebApplication.UI.Controllers
             var searchlist = new SearchList();
             var buyrenttype = (TypeHome)buyrent;
             var hometypeint = (MelkType)hometype;
-            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
+            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakParking = await _context.AmlakParkingRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
             return PartialView("EdariSearchBox", searchlist);
         }
 
@@ -188,15 +203,16 @@ namespace AmlakWebApplication.UI.Controllers
             var searchlist = new SearchList();
             var buyrenttype = (TypeHome)buyrent;
             var hometypeint = (MelkType)hometype;
-            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
+            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakParking = await _context.AmlakParkingRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
             return PartialView("MaghazeSearchBox", searchlist);
         }
 
@@ -205,15 +221,16 @@ namespace AmlakWebApplication.UI.Controllers
             var searchlist = new SearchList();
             var buyrenttype = (TypeHome)buyrent;
             var hometypeint = (MelkType)hometype;
-            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
+            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakParking = await _context.AmlakParkingRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
             return PartialView("MostaghelatSearchBox", searchlist);
         }
 
@@ -222,15 +239,15 @@ namespace AmlakWebApplication.UI.Controllers
             var searchlist = new SearchList();
             var buyrenttype = (TypeHome)buyrent;
             var hometypeint = (MelkType)hometype;
-            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
+            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
             return PartialView("GardenSearchBox", searchlist);
         }
 
@@ -239,15 +256,15 @@ namespace AmlakWebApplication.UI.Controllers
             var searchlist = new SearchList();
             var buyrenttype = (TypeHome)buyrent;
             var hometypeint = (MelkType)hometype;
-            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
-            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype);
+            searchlist.AmlakKitchen = await _context.AmlakKitchenRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakMoshakhase = await _context.AmlakMoshakhaseRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.AmlakNoeZamin = await _context.AmlakNoeZaminRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
+            searchlist.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.MelkType == hometypeint && a.TypeHome == buyrenttype && a.ShowinSearch == true);
             return PartialView("VillaSearchBox", searchlist);
         }
 
@@ -256,9 +273,9 @@ namespace AmlakWebApplication.UI.Controllers
         {
             var items = new ShowItems();
             items.Mincost = "0";
-            if (mincost!=0)
+            if (mincost != 0)
             {
-                var findmincost = await _context.CostSettingRepository.GetAsync(a=>a.Id==mincost);
+                var findmincost = await _context.CostSettingRepository.GetAsync(a => a.Id == mincost);
                 items.Mincost = findmincost.Cost.ToString();
                 items.MinCostPrice = findmincost.CostChance;
             }
@@ -292,6 +309,7 @@ namespace AmlakWebApplication.UI.Controllers
             {
                 var findminmetr = await _context.MetrazSettingRepository.GetAsync(a => a.Id == minmetr);
                 items.MinMetr = findminmetr.MetrazChance.ToString();
+                items.MinMetrInt = findminmetr.MetrazChance;
             }
 
             items.MaxMetr = "0";
@@ -299,6 +317,7 @@ namespace AmlakWebApplication.UI.Controllers
             {
                 var findmaxmetr = await _context.MetrazSettingRepository.GetAsync(a => a.Id == maxmetr);
                 items.MaxMetr = findmaxmetr.MetrazChance.ToString();
+                items.MaxMetrInt = findmaxmetr.MetrazChance;
             }
 
             items.MelknameId = selectitem;
@@ -327,76 +346,76 @@ namespace AmlakWebApplication.UI.Controllers
             return main;
         }
 
-        public async Task<PartialViewResult> SearchAnbarPartial(int hometype,int minmetr,int maxmetr,int mincost,int maxcost,int arzebana, int arzegozar, string sanad,string moghiat,string rentbuy)
+        public async Task<PartialViewResult> SearchAnbarPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int arzebana, int arzegozar, string sanad, string moghiat, string rentbuy)
         {
             var homes = await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
             var homecontracts = new List<Contract>();
             foreach (var item in homes)
             {
-                if (item.HomeId!=null)
+                if (item.HomeId != null)
                 {
                     var findanbars = _context.HomeAnbarRepository.GetById(item.HomeId);
-                    if (findanbars!=null)
+                    if (findanbars != null)
                     {
-                        if (moghiat==null)
+                        if (moghiat == null)
                         {
                             moghiat = "";
                         }
-                        if (findanbars.Arzegozar>=arzegozar && findanbars.Arzemelk>=arzebana && findanbars.MoghiateMelk.Contains(moghiat) && findanbars.SanadStatus.Contains(sanad))
+                        if (findanbars.Arzegozar >= arzegozar && findanbars.Arzemelk >= arzebana && findanbars.MoghiateMelk.Contains(moghiat) && findanbars.SanadStatus.Contains(sanad))
                         {
                             homecontracts.Add(item);
                         }
                     }
                 }
             }
-            
-            
+
+
             return PartialView("_SearchList", homecontracts);
         }
 
-        public async Task<PartialViewResult> SearchApartemanPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int bed, int parking,int wc,int bana, string wclist, string moghiat,string kitchen, string tasisat,string melkstatus,string sanad, string moshakhase, string rentbuy)
-        {
-            var homes =await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
-            var homecontracts = new List<Contract>();
-            return PartialView("_SearchList", homecontracts);
-        }
-
-        public async Task<PartialViewResult> SearchEdariPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int bed, int parking, int wc, int bana, string wclist, string moghiat , string tasisat, string vaziat, string sanad, string rentbuy)
+        public async Task<PartialViewResult> SearchApartemanPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int bed, int parking, int wc, int bana, string wclist, string moghiat, string kitchen, string tasisat, string melkstatus, string sanad, string moshakhase, string rentbuy)
         {
             var homes = await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
             var homecontracts = new List<Contract>();
             return PartialView("_SearchList", homecontracts);
         }
 
-        public async Task<PartialViewResult> SearchGardenPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int bed,int arzemelk, string moghiat, string vaziat, string sanad, string rentbuy)
+        public async Task<PartialViewResult> SearchEdariPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int bed, int parking, int wc, int bana, string wclist, string moghiat, string tasisat, string vaziat, string sanad, string rentbuy)
         {
             var homes = await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
             var homecontracts = new List<Contract>();
             return PartialView("_SearchList", homecontracts);
         }
 
-        public async Task<PartialViewResult> SearchHomewithGardenPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int bed,int arzemelk,string wclist, string moghiat , string sanad , string kitchen , string tasisat , string vizhe , string moshakhase, string rentbuy)
+        public async Task<PartialViewResult> SearchGardenPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int bed, int arzemelk, string moghiat, string vaziat, string sanad, string rentbuy)
         {
             var homes = await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
             var homecontracts = new List<Contract>();
             return PartialView("_SearchList", homecontracts);
         }
 
-        public async Task<PartialViewResult> SearchKolangiPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int arzemelk, int arzegozar, string moghiat, string sanad, string vizhe, string moshakhase,string nozamin, string rentbuy)
+        public async Task<PartialViewResult> SearchHomewithGardenPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int bed, int arzemelk, string wclist, string moghiat, string sanad, string kitchen, string tasisat, string vizhe, string moshakhase, string rentbuy)
         {
             var homes = await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
             var homecontracts = new List<Contract>();
             return PartialView("_SearchList", homecontracts);
         }
 
-        public async Task<PartialViewResult> SearchMaghazePartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int metrazhkaf, int metrazhdahane,int anbarmetrazh, string moghiat, string sanad, string vizhe, string moshakhase, string rentbuy)
+        public async Task<PartialViewResult> SearchKolangiPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int arzemelk, int arzegozar, string moghiat, string sanad, string vizhe, string moshakhase, string nozamin, string rentbuy)
         {
             var homes = await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
             var homecontracts = new List<Contract>();
             return PartialView("_SearchList", homecontracts);
         }
 
-        public async Task<PartialViewResult> SearchMostaghelatPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int bed, int parking, int wc, int bana, int metrazhkaf, int metrazhdahane, int arzemelk, string wclist, string moghiat, string kitchen, string tasisat, string nozamin, string sanad, string moshakhase,string vizhe, string rentbuy)
+        public async Task<PartialViewResult> SearchMaghazePartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int metrazhkaf, int metrazhdahane, int anbarmetrazh, string moghiat, string sanad, string vizhe, string moshakhase, string rentbuy)
+        {
+            var homes = await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
+            var homecontracts = new List<Contract>();
+            return PartialView("_SearchList", homecontracts);
+        }
+
+        public async Task<PartialViewResult> SearchMostaghelatPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int bed, int parking, int wc, int bana, int metrazhkaf, int metrazhdahane, int arzemelk, string wclist, string moghiat, string kitchen, string tasisat, string nozamin, string sanad, string moshakhase, string vizhe, string rentbuy)
         {
             var homes = await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
             var homecontracts = new List<Contract>();
@@ -410,7 +429,7 @@ namespace AmlakWebApplication.UI.Controllers
             return PartialView("_SearchList", homecontracts);
         }
 
-        public async Task<PartialViewResult> SearchZaminPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int arzemelk, int arzegozar, string moghiat, string sanad, string moshakhase, string vizhe,string nozamin, string rentbuy)
+        public async Task<PartialViewResult> SearchZaminPartial(int hometype, int minmetr, int maxmetr, int mincost, int maxcost, int arzemelk, int arzegozar, string moghiat, string sanad, string moshakhase, string vizhe, string nozamin, string rentbuy)
         {
             var homes = await Returnhomefunction(hometype, minmetr, maxmetr, mincost, maxcost, rentbuy);
             var homecontracts = new List<Contract>();
@@ -425,11 +444,11 @@ namespace AmlakWebApplication.UI.Controllers
             {
                 if (maxcost != 0)
                 {
-                    homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Buy && a.SellCOst > find.MinCostPrice && a.SellCOst < find.MaxCostPrice && a.Home.IsShow == true).ToList();
+                    homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Buy && a.BuyCost > find.MinCostPrice && a.BuyCost < find.MaxCostPrice && a.Home.IsShow == true).ToList();
                 }
                 else
                 {
-                    homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Buy && a.SellCOst > find.MinCostPrice && a.Home.IsShow == true).ToList();
+                    homes = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == TypeHome.Buy && a.BuyCost > find.MinCostPrice && a.Home.IsShow == true).ToList();
                 }
 
             }

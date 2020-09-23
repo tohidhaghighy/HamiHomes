@@ -10,8 +10,10 @@ C:\Users\tohid\Source\Repos\AmlakWebApplication\ViewModelLayer\obj\Debug\netcore
 D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Debug\netcoreapp2.1\ViewModelLayer.deps.json
 D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Debug\netcoreapp2.1\ViewModelLayer.dll
 D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Debug\netcoreapp2.1\ViewModelLayer.pdb
+D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Debug\netcoreapp2.1\DataLayer.dll
 D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Debug\netcoreapp2.1\DomainLayer.dll
 D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Debug\netcoreapp2.1\Utilities.dll
+D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Debug\netcoreapp2.1\DataLayer.pdb
 D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Debug\netcoreapp2.1\DomainLayer.pdb
 D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Debug\netcoreapp2.1\Utilities.pdb
 D:\Projects\AmlakWebApplication\ViewModelLayer\obj\Debug\netcoreapp2.1\ViewModelLayer.csprojAssemblyReference.cache
@@ -21,5 +23,3 @@ D:\Projects\AmlakWebApplication\ViewModelLayer\obj\Debug\netcoreapp2.1\ViewModel
 D:\Projects\AmlakWebApplication\ViewModelLayer\obj\Debug\netcoreapp2.1\ViewModelLayer.csproj.CopyComplete
 D:\Projects\AmlakWebApplication\ViewModelLayer\obj\Debug\netcoreapp2.1\ViewModelLayer.dll
 D:\Projects\AmlakWebApplication\ViewModelLayer\obj\Debug\netcoreapp2.1\ViewModelLayer.pdb
-D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Debug\netcoreapp2.1\DataLayer.dll
-D:\Projects\AmlakWebApplication\ViewModelLayer\bin\Debug\netcoreapp2.1\DataLayer.pdb

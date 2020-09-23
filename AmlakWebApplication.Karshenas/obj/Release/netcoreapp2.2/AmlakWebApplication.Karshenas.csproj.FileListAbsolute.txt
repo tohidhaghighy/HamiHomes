@@ -39,3 +39,16 @@ D:\Projects\AmlakWebApplication\AmlakWebApplication.Karshenas\obj\Release\netcor
 D:\Projects\AmlakWebApplication\AmlakWebApplication.Karshenas\obj\Release\netcoreapp2.2\AmlakWebApplication.Karshenas.csproj.CopyComplete
 D:\Projects\AmlakWebApplication\AmlakWebApplication.Karshenas\obj\Release\netcoreapp2.2\AmlakWebApplication.Karshenas.dll
 D:\Projects\AmlakWebApplication\AmlakWebApplication.Karshenas\obj\Release\netcoreapp2.2\AmlakWebApplication.Karshenas.pdb
+D:\Projects\AmlakWebApplication\AmlakWebApplication.Karshenas\obj\Release\netcoreapp2.2\Razor\Views\AllHomeType\AnbarCreate.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication.Karshenas\obj\Release\netcoreapp2.2\Razor\Views\AllHomeType\ApartemanCreate.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication.Karshenas\obj\Release\netcoreapp2.2\Razor\Views\AllHomeType\EdariCreate.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication.Karshenas\obj\Release\netcoreapp2.2\Razor\Views\AllHomeType\Gallery.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication.Karshenas\obj\Release\netcoreapp2.2\Razor\Views\AllHomeType\GardenCreate.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication.Karshenas\obj\Release\netcoreapp2.2\Razor\Views\AllHomeType\HomewithGardenCreate.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication.Karshenas\obj\Release\netcoreapp2.2\Razor\Views\AllHomeType\KolangiCreate.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication.Karshenas\obj\Release\netcoreapp2.2\Razor\Views\AllHomeType\MaghazeCreate.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication.Karshenas\obj\Release\netcoreapp2.2\Razor\Views\AllHomeType\MostaghelatCreate.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication.Karshenas\obj\Release\netcoreapp2.2\Razor\Views\AllHomeType\VillaCreate.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication.Karshenas\obj\Release\netcoreapp2.2\Razor\Views\AllHomeType\ZaminCreate.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication.Karshenas\obj\Release\netcoreapp2.2\Razor\Views\Rezome\Contract.g.cshtml.cs
+D:\Projects\AmlakWebApplication\AmlakWebApplication.Karshenas\obj\Release\netcoreapp2.2\Razor\Views\Shared\_ContractLayout.g.cshtml.cs

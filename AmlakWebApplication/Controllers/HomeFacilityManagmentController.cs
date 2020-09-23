@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AmlakWebApplication.Models;
 using DataLayer.Infrastracture;
 using DomainLayer;
 using DomainLayer.Enums;
@@ -64,7 +65,7 @@ namespace AmlakWebApplication.Controllers
                         {
                             await Icon.CopyToAsync(stream);
                         }
-                        homefacility.Icon = fileName;
+                        homefacility.Icon = ImageUrl.url + fileName;
                     }
                     homefacility.MelkType = (MelkType)MelkTypeId;
                     homefacility.TypeHome = (TypeHome)HomeTypeId;
@@ -109,5 +110,25 @@ namespace AmlakWebApplication.Controllers
             return false;
         }
 
+        [HttpPost]
+        public async Task<Boolean> SearchStatus(int id)
+        {
+            try
+            {
+                await _context.HomeFacilityRepository.ChangeStatus(id);
+                await _context.CommitAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _context.LogRepository.Insert(new Log()
+                {
+                    LogController = "AmlaksettingManagment",
+                    LogText = ex.ToString(),
+                    LogView = "Delete"
+                });
+            }
+            return false;
+        }
     }
 }

@@ -1,0 +1,284 @@
+﻿@model ViewModelLayer.Adviser.AdviserMain
+@{
+    ViewData["Title"] = "Contract";
+    Layout = "~/Views/Shared/_ContractLayout.cshtml";
+}
+
+
+<div class="text-center" style="background:rgba(202, 199, 199, 0.50)">
+    <h2 class="text-center" style="padding-top:60px;padding-bottom:40px;">ثبت ملک جدید</h2>
+</div>
+
+<div class="container" onload="hideall">
+    <div class="box box-danger">
+        <div class="box-header">
+        </div>
+        <form asp-action="CreateContractItem">
+            <div class="box-body">
+                <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
+                <input style="display:none" id="homeid" name="homeid" value="@ViewData["homeid"]" />
+                <input style="display:none" name="hometype" id="hometype" value="@ViewData["hometype"]" />
+                <input style="display:none" name="userid" id="userid" value="@Model.Adviser.Id" />
+                <div class="form-group">
+                    <label style="width:100%;"> نوع قرارداد </label>
+                    <select id="typecontract" name="typecontract" class="form-control" style="width:30%" onclick="showandhideitems(this.value);">
+                        <option value="1" style="text-align:center">فروش</option>
+                        <option value="2" style="text-align:center">رهن و اجاره</option>
+                        <option value="3" style="text-align:center">ساخت و ساز</option>
+                    </select>
+                </div>
+                <div id="buy">
+                    <div class="form-group">
+                        <label style="width:100%">قیمت پیشنهادی ( تومان ) - به عدد</label>
+                        <input id="costbuy" name="costbuy" type="text" class="form-control" placeholder=" قیمت پیشنهادی" style="width:30%;display:inline-block;" value="0" onkeyup="separateNum(this.value,this);">
+                        <h4 style="display:inline-block;padding:10px;color:red" id="txtcost1"></h4>
+                    </div>
+                </div>
+                <div id="rent" style="display:none">
+                    <div class="form-group">
+                        <label style="width:100%">قیمت رهن  ( تومان ) - به عدد</label>
+                        <input id="costrahn" name="costrahn" type="text" class="form-control" placeholder="قیمت رهن" style="width:30%;display:inline-block;" value="0" onkeyup="separateNum2(this.value,this);">
+                        <h4 style="display:inline-block;padding:10px;color:red" id="txtcost2"> </h4>
+                    </div>
+                    <div class="form-group">
+                        <label style="width:100%">قیمت اجاره  ( تومان ) - به عدد</label>
+                        <input id="costejare" name="costejare" type="text" class="form-control" placeholder="قیمت اجاره" style="width:30%;display:inline-block;" value="0" onkeyup="separateNum3(this.value,this);">
+                        <h4 style="display:inline-block;padding:10px;color:red" id="txtcost3"> </h4>
+                    </div>
+
+                </div>
+                @if (ViewData["hometype"].ToString() != "3" && ViewData["hometype"].ToString() != "4" && ViewData["hometype"].ToString() != "8" && ViewData["hometype"].ToString() != "9")
+                {
+                    <div class="form-group">
+                        <label style="width:100%">متراژ بنا  ( متر ) - به عدد</label>
+                        <input asp-for="Contracts.Metraz" type="number" class="form-control" placeholder=" متراژ" style="width:30%;display:inline-block;" value="0" onkeyup="showmetrvalue()">
+                        <h4 style="display:inline-block;padding:10px;color:red" id="txtmetr"></h4>
+                        <span asp-validation-for="Contracts.Metraz" class="text-danger"></span>
+                    </div>
+                }
+
+                @if (ViewData["hometype"].ToString() != "6")
+                {
+                    <div class="form-group">
+                        <label style="width:100%">متراژ زمین ( متر ) - به عدد</label>
+                        <input asp-for="Contracts.MetrazZamin" type="number" class="form-control" placeholder=" متراژ زمین" style="width:30%;display:inline-block;" value="0" onkeyup="showmetrvaluezamin()">
+                        <h4 style="display:inline-block;padding:10px;color:red" id="txtmetrzamin"></h4>
+                        <span asp-validation-for="Contracts.MetrazZamin" class="text-danger"></span>
+                    </div>
+                }
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">درج قرارداد جدید و رفتن به مرحله بعد</button>
+                </div>
+
+            </div>
+        </form>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+    <!-- /.box -->
+</div>
+
+
+
+<script>
+    $("#info").hide();
+
+
+    $(document).on("keydown", "input", function (e) {
+        if (e.which == 13) e.preventDefault();
+    });
+
+
+    function shownumber(number) {
+        document.getElementById("btnnumberphone").innerHTML = "<span class='fa fa-phone' style='padding:5px;'></span> " + number;
+    }
+
+    function showinfo() {
+        var x = document.getElementById("info");
+
+        if (x.style.display === "none") {
+            $("#info").slideDown(1000);
+            x.style.display = "block";
+
+        } else {
+            $("#info").slideUp(1000);
+            x.style.display = "none";
+
+        }
+    }
+
+
+    function sell() {
+        $("#buy").show();
+        $("#rent").hide();
+    }
+
+    function rent() {
+        $("#buy").hide();
+        $("#rent").show();
+    }
+
+    function build() {
+        $("#buy").hide();
+        $("#rent").hide();
+    }
+
+    function separateNum(value, input) {
+        /* seprate number input 3 number */
+        var nStr = value + '';
+        nStr = nStr.replace(/\,/g, "");
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        priceconvertercost1();
+        if (input !== undefined) {
+
+            input.value = x1 + x2;
+        } else {
+            return x1 + x2;
+        }
+    }
+
+    function separateNum2(value, input) {
+        /* seprate number input 3 number */
+        var nStr = value + '';
+        nStr = nStr.replace(/\,/g, "");
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        priceconvertercost2();
+        if (input !== undefined) {
+
+            input.value = x1 + x2;
+        } else {
+            return x1 + x2;
+        }
+    }
+
+    function separateNum3(value, input) {
+        /* seprate number input 3 number */
+        var nStr = value + '';
+        nStr = nStr.replace(/\,/g, "");
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        priceconvertercost3();
+        if (input !== undefined) {
+
+            input.value = x1 + x2;
+        } else {
+            return x1 + x2;
+        }
+    }
+    function priceconvertercost1() {
+
+        var cost = document.getElementById("txtcost1");
+        var costbuy = $("#costbuy").val();
+        costbuy = costbuy.split(',').join('');
+        $.ajax({
+            type: "Post",
+            url: '/PriceConverter/AlphabeticPrice',
+            data: { text: costbuy },
+            success: function (data) {
+                cost.innerText = data + " تومان ";
+            }
+        });
+    }
+
+    function priceconvertercost2() {
+        var cost = document.getElementById("txtcost2");
+        var costrehn = $("#costrahn").val();
+        costrehn = costrehn.split(',').join('');
+        $.ajax({
+            type: "Post",
+            url: '/PriceConverter/AlphabeticPrice',
+            data: { text: costrehn },
+            success: function (data) {
+                cost.innerText = data + " تومان ";
+            }
+        });
+    }
+
+    function priceconvertercost3() {
+        var cost = document.getElementById("txtcost3");
+        var costrejare = $("#costejare").val();
+        costrejare = costrejare.split(',').join('');
+        $.ajax({
+            type: "Post",
+            url: '/PriceConverter/AlphabeticPrice',
+            data: { text: costrejare },
+            success: function (data) {
+                cost.innerText = data + " تومان ";
+            }
+        });
+    }
+
+
+    function showmetrvalue() {
+        var metr = document.getElementById("txtmetr");
+        var metrcontract = $("#Contracts_Metraz").val();
+        $.ajax({
+            type: "Post",
+            url: '/PriceConverter/AlphabeticPrice',
+            data: { text: metrcontract },
+            success: function (data) {
+                metr.innerText = data + " متر ";
+            }
+        });
+
+    }
+
+    function showmetrvaluezamin() {
+        var metr = document.getElementById("txtmetrzamin");
+        var metrcontract = $("#Contracts_MetrazZamin").val();
+        $.ajax({
+            type: "Post",
+            url: '/PriceConverter/AlphabeticPrice',
+            data: { text: metrcontract },
+            success: function (data) {
+                metr.innerText = data + " متر ";
+            }
+        });
+
+        }
+
+    function showandhideitems(val) {
+        if (val==1) {
+            sell();
+        } else if (val==2) {
+            rent();
+        }else if (val==3) {
+            build();
+        }else if (val==4) {
+            rent();
+        }else if (val==5) {
+            sell();
+        }else if (val==6) {
+            build();
+        }
+    }
+</script>
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

@@ -14,5 +14,7 @@ namespace ViewModelLayer.Home
         public List<AmlakMogheiatMelk> AmlakMogheiatMelk { get; set; }
         public List<AmlakMoshakhase> AmlakMoshakhase { get; set; }
         public List<AmlakSanadStatus> AmlakSanadStatus { get; set; }
+        public DomainLayer.User User { get; set; }
+        public DomainLayer.Adviser Adviser { get; set; }
     }
 }

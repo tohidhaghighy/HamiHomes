@@ -211,7 +211,14 @@
             <div class="row" style="padding-top:0px;padding-bottom:0px;">
                 <div class="col-lg-1 col-sm-12 col-md-1">
                     <div class="" style="padding-top:10px;">
-                        <img src="~/img/back2.jpg" style="border-radius:120px;width:90px;height:90px;text-align:center;align-content:center;padding:10px;" />
+                        @if (Model.Adviser.Image != null && Model.Adviser.Image != "")
+                        {
+                            <img src="@Model.Adviser.Image" class="border" style="border-radius:120px;width:90px;height:90px;text-align:center;align-content:center;padding:10px;" />
+                        }
+                        else
+                        {
+                            <img src="http://panel.hamihomes.com/images/def.jpg" class="border" style="border-radius:120px;width:200px;height:200px;text-align:center;align-content:center;" />
+                        }
                     </div>
                 </div>
 
@@ -243,7 +250,7 @@
                         <div class="">
                             @if (Model.Adviser.Image != null && Model.Adviser.Image != "")
                             {
-                                <img src="http://panel.hamihomes.com/images/@Model.Adviser.Image" class="border" style="border-radius:120px;width:200px;height:200px;text-align:center;align-content:center;" />
+                                <img src="@Model.Adviser.Image" class="border" style="border-radius:120px;width:200px;height:200px;text-align:center;align-content:center;" />
                             }
                             else
                             {
@@ -685,7 +692,7 @@
                         <div class="col-lg-3 col-md-3 col-sm-4 zoom" style="padding-left:10px;padding-bottom:10px">
                             <a href="/Home/Detail?homeid=@item.Home.Id&contractid=@item.Id&hometype=@s">
                                 <div class="card">
-                                    <img class="card-img-top" src="http://panel.hamihomes.com/images/@item.Home.Image" style="height:200px;" alt="خانه ارومیه">
+                                    <img class="card-img-top" src="@item.Home.Image" style="height:200px;" alt="خانه ارومیه">
                                     <div class="card-block p-3">
 
                                         <h4 class="card-title font-xs-b ">@s @item.Home.OwnerName </h4>
@@ -784,7 +791,7 @@
                         <div class="col-lg-3 col-md-3 col-sm-4 zoom" style="padding-left:10px;padding-bottom:10px">
                             <a href="/Home/Detail?homeid=@item.Home.Id&contractid=@item.Id&hometype=@s">
                                 <div class="card">
-                                    <img class="card-img-top" src="http://panel.hamihomes.com/images/@item.Home.Image" style="height:200px;" alt="خانه ارومیه">
+                                    <img class="card-img-top" src="@item.Home.Image" style="height:200px;" alt="خانه ارومیه">
                                     <div class="card-block p-3">
 
                                         <h4 class="card-title font-xs-b ">@s @item.Home.OwnerName </h4>

@@ -20,17 +20,19 @@
 
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
         <li><a href="/HomeApartemanManagment/Index"><i class="fa fa-dashboard"></i> خانه</a></li>
-        <li class="active">ویرایش اپارتمان </li>
+        <li class="active">اپارتمان جدید </li>
     </ol>
 </section>
 
 <div class="callout callout-info" style="margin-top:10px;">
     <h4>ویرایش اطلاعات اپارتمان</h4>
+    در اینجا میتوانید مرحله دوم ویرایش اطلاعات اپارتمان را وارد کنید
+    و اطلاعات اپارتمان را وارد کنید
 
 </div>
 
@@ -44,29 +46,18 @@
             <div class="box-body">
                 <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
 
-                <input asp-for="Aparteman.Id" type="number" class="hidden" value="@Model.Aparteman.Id">
-                <input asp-for="Aparteman.HomeId" type="number" class="hidden" value="@Model.Aparteman.HomeId">
-
+                <input name="HomeId" id="HomeId" type="number" class="hidden" value="@Model.Aparteman.HomeId">
+                <input name="Id" id="Id" type="number" class="hidden" value="@Model.Aparteman.Id">
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-lg-2">
-                            <h4>متراژ بنا</h4>
-                            <input asp-for="Aparteman.MetrazhBena" type="number" class="form-control" placeholder="متراژ بنا" value="1">
-                            <span asp-validation-for="Aparteman.MetrazhBena" class="text-danger"></span>
-                        </div>
-                        <div class="col-lg-2">
-                            <h4>متراژ زمین</h4>
-                            <input asp-for="Aparteman.Metrazhzamin" type="number" class="form-control" placeholder="متراژ زمین" value="1">
-                            <span asp-validation-for="Aparteman.Metrazhzamin" class="text-danger"></span>
-                        </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-3">
                             <h4>طبقه</h4>
-                            <input asp-for="Aparteman.Tabaghe" type="number" class="form-control" placeholder="طبقه" value="1">
+                            <input asp-for="Aparteman.Tabaghe" type="number" min="0" class="form-control" placeholder="طبقه">
                             <span asp-validation-for="Aparteman.Tabaghe" class="text-danger"></span>
                         </div>
-                        <div class="col-lg-2">
-                            <h4>تعداد کل طبقات</h4>
-                            <input asp-for="Aparteman.Tedadkoltabaghat" type="number" class="form-control" placeholder="تعداد کل طبقات" value="1">
+                        <div class="col-lg-3">
+                            <h5>تعداد کل طبقات</h5>
+                            <input asp-for="Aparteman.Tedadkoltabaghat" min="0" type="number" class="form-control" placeholder="تعداد کل طبقات">
                             <span asp-validation-for="Aparteman.Tedadkoltabaghat" class="text-danger"></span>
                         </div>
                     </div>
@@ -74,16 +65,19 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-lg-2">
-                            <h4>تعداد کل واحد ها</h4>
-                            <input asp-for="Aparteman.Tedadkolvahedha" type="number" class="form-control" placeholder="تعداد کل واحد ها" value="1">
+
+                        <div class="col-lg-3">
+                            <h5>تعداد کل واحد ها</h5>
+                            <input asp-for="Aparteman.Tedadkolvahedha" min="0" type="number" class="form-control" placeholder="تعداد کل واحد ها">
                             <span asp-validation-for="Aparteman.Tedadkolvahedha" class="text-danger"></span>
                         </div>
-                        <div class="col-lg-2">
-                            <h4>تعداد واحد ها در طبقه</h4>
-                            <input asp-for="Aparteman.Tedadvaheddartabaghe" type="number" class="form-control" placeholder="تعداد واحد ها در طبقه" value="1">
+
+                        <div class="col-lg-3">
+                            <h5>تعداد واحد ها در طبقه</h5>
+                            <input asp-for="Aparteman.Tedadvaheddartabaghe" min="0" type="number" class="form-control" placeholder="تعداد واحد ها در طبقه" >
                             <span asp-validation-for="Aparteman.Tedadkoltabaghat" class="text-danger"></span>
                         </div>
+
                     </div>
                 </div>
 
@@ -97,18 +91,18 @@
                         </div>
                         <div class="col-lg-4">
                             <h4>شماره نگهبان</h4>
-                            <input asp-for="Aparteman.NegahbaniPhone" type="number" class="form-control" placeholder="شماره نگهبان">
+                            <input asp-for="Aparteman.NegahbaniPhone" type="text" class="form-control" placeholder="شماره نگهبان">
                             <span asp-validation-for="Aparteman.NegahbaniPhone" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="">
-                            <h4> موقعیت ملک :</h4>
+                            <h5> موقعیت ملک @Model.Aparteman.Homemogheiat تنظیم شده است میتوانید در زیر تغییر دهید:</h5>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" id="Homemogheiat" name="Homemogheiat" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Aparteman.Homemogheiat" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakMogheiatMelk.Count; i++)
                                     {
                                         <option value="@Model.AmlakMogheiatMelk[i].Name">@Model.AmlakMogheiatMelk[i].Name</option>
@@ -118,11 +112,11 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="">
-                            <h4> جهت واحد :</h4>
+                            <h5> جهت واحد @Model.Aparteman.Homejahatevahed تنظیم شده است میتوانید در زیر تغییر دهید:</h5>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" id="Homejahatevahed" name="Homejahatevahed" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Aparteman.Homejahatevahed" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakJahatVahedes.Count; i++)
                                     {
                                         <option value="@Model.AmlakJahatVahedes[i].Name">@Model.AmlakJahatVahedes[i].Name</option>
@@ -132,11 +126,11 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="">
-                            <h4> نمای ساختمان :</h4>
+                            <h5> نمای ساختمان @Model.Aparteman.Homenema تنظیم شده است میتوانید در زیر تغییر دهید:</h5>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" id="Homenema" name="Homenema" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Aparteman.Homenema" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakNema.Count; i++)
                                     {
                                         <option value="@Model.AmlakNema[i].Name">@Model.AmlakNema[i].Name</option>
@@ -152,11 +146,11 @@
                 <hr />
 
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="">
-                            <h4> وضعیت سند :</h4>
+                            <h5> وضعیت سند @Model.Aparteman.Homesanad تنظیم شده است میتوانید در زیر تغییر دهید:</h5>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" id="Homesanad" name="Homesanad" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Aparteman.Homesanad" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakSanadStatus.Count; i++)
                                     {
                                         <option value="@Model.AmlakSanadStatus[i].Name">@Model.AmlakSanadStatus[i].Name</option>
@@ -166,28 +160,44 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="">
-                            <h4> تاسیسات گرمایشی و سرمایشی :</h4>
+                            <h5> تاسیسات گرمایشی و سرمایشی @Model.Aparteman.Hometasisat تنظیم شده است میتوانید در زیر تغییر دهید:</h5>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" id="Hometasisat" name="Hometasisat" onchange="checkcityval()">
+                                <select class="form-control select2" multiple style="padding:10px;width:100%;" asp-for="Aparteman.Hometasisat" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakTasisatGarmaieshi.Count; i++)
                                     {
-                                        <option value="@Model.AmlakTasisatGarmaieshi[i].Name">@Model.AmlakTasisatGarmaieshi[i].Name</option>
+                                        if (Model.Aparteman.Hometasisat.Contains(Model.AmlakTasisatGarmaieshi[i].Name))
+                                        {
+                                            <option value="@Model.AmlakTasisatGarmaieshi[i].Name" selected="selected">@Model.AmlakTasisatGarmaieshi[i].Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@Model.AmlakTasisatGarmaieshi[i].Name">@Model.AmlakTasisatGarmaieshi[i].Name</option>
+                                        }
+
                                     }
                                 </select>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="">
-                            <h4> نوع و تعداد پارکینگ :</h4>
+                            <h5> نوع پارکینگ @Model.Aparteman.Homeparking تنظیم شده است میتوانید در زیر تغییر دهید:</h5>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" id="Homeparking" name="Homeparking" onchange="checkcityval()">
+                                <select class="form-control select2" multiple style="padding:10px;width:100%;" asp-for="Aparteman.Homeparking" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakParking.Count; i++)
                                     {
-                                        <option value="@Model.AmlakParking[i].Name">@Model.AmlakParking[i].Name</option>
+                                        if (Model.Aparteman.Homeparking.Contains(Model.AmlakParking[i].Name))
+                                        {
+                                            <option value="@Model.AmlakParking[i].Name" selected="selected">@Model.AmlakParking[i].Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@Model.AmlakParking[i].Name">@Model.AmlakParking[i].Name</option>
+                                        }
+
                                     }
                                 </select>
                             </div>
@@ -200,40 +210,43 @@
                 <hr />
 
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="">
-                            <h4> مشخصه ملک :</h4>
+                            <h5> مشخصه ملک @Model.Aparteman.Homemoshakhase تنظیم شده است میتوانید در زیر تغییر دهید:</h5>
                             <select class="form-control select2 text-center" multiple="multiple" data-placeholder="  انتخاب کن  "
-                                    style="width: 100%;direction:rtl;float:right;" name="Homemoshakhase" id="Homemoshakhase">
+                                    style="width: 100%;direction:rtl;float:right;" asp-for="Aparteman.Homemoshakhase" name="Homemoshakhase" id="Homemoshakhase">
                                 @for (var i = 0; i < Model.AmlakMoshakhase.Count; i++)
                                 {
-                                    <option value="@Model.AmlakMoshakhase[i].Name">@Model.AmlakMoshakhase[i].Name</option>
+                                    if (Model.Aparteman.Homemoshakhase.Contains(Model.AmlakMoshakhase[i].Name))
+                                    {
+                                        <option value="@Model.AmlakMoshakhase[i].Name" selected="selected">@Model.AmlakMoshakhase[i].Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@Model.AmlakMoshakhase[i].Name">@Model.AmlakMoshakhase[i].Name</option>
+                                    }
+
                                 }
                             </select>
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="">
-                            <h4> مشاعات :</h4>
-                            <select class="form-control select2 text-center" multiple="multiple" data-placeholder="   انتخاب کن  "
-                                    style="width: 100%;direction:rtl;float:right;" name="Homemoshaat" id="Homemoshaat">
-                                @for (var i = 0; i < Model.AmlakMoshaat.Count; i++)
-                                {
-                                    <option value="@Model.AmlakMoshaat[i].Name">@Model.AmlakMoshaat[i].Name</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3">
-                        <div class="">
-                            <h4> وضعیت ملک :</h4>
+                            <h5> وضعیت ملک @Model.Aparteman.Homevaziate تنظیم شده است میتوانید در زیر تغییر دهید:</h5>
                             <div class="custom-select" style="">
                                 <select class="form-control select2 text-center" multiple="multiple" data-placeholder="  انتخاب کن  "
-                                        style="width: 100%;direction:rtl;float:right;" name="Homevaziate" id="Homevaziate">
+                                        style="width: 100%;direction:rtl;float:right;" asp-for="Aparteman.Homevaziate" name="Homevaziate" id="Homevaziate">
                                     @for (var i = 0; i < Model.AmlakMelkStatus.Count; i++)
                                     {
+                                        if (Model.Aparteman.Homevaziate.Contains(Model.AmlakMelkStatus[i].Name))
+                                        {
+                                            <option value="@Model.AmlakMelkStatus[i].Name" selected="selected">@Model.AmlakMelkStatus[i].Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@Model.AmlakMelkStatus[i].Name">@Model.AmlakMelkStatus[i].Name</option>
+                                        }
                                         <option value="@Model.AmlakMelkStatus[i].Name">@Model.AmlakMelkStatus[i].Name</option>
                                     }
                                 </select>
@@ -249,11 +262,11 @@
 
 
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="">
-                            <h4> پوشش کف :</h4>
+                            <h5> پوشش کف @Model.Aparteman.Homekaf تنظیم شده است میتوانید در زیر تغییر دهید:</h5>
                             <div class="custom-select" style="">
-                                <select style="padding:10px;width:100%;" id="Homekaf" name="Homekaf" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Aparteman.Homekaf" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakKafes.Count; i++)
                                     {
                                         <option value="@Model.AmlakKafes[i].Name">@Model.AmlakKafes[i].Name</option>
@@ -263,11 +276,11 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="">
-                            <h4> نوع دیوار  :</h4>
+                            <h5> نوع دیوار @Model.Aparteman.Homedivar تنظیم شده است میتوانید در زیر تغییر دهید :</h5>
                             <div>
-                                <select style="padding:10px;width:100%;" id="Homedivar" name="Homedivar" onchange="checkcityval()">
+                                <select class="form-control select2" style="padding:10px;width:100%;" asp-for="Aparteman.Homedivar" onchange="checkcityval()">
                                     @for (var i = 0; i < Model.AmlakDivars.Count; i++)
                                     {
                                         <option value="@Model.AmlakDivars[i].Name">@Model.AmlakDivars[i].Name</option>
@@ -278,14 +291,23 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <div class="">
-                            <h4> آشپزخانه :</h4>
+                            <h5> آشپزخانه @Model.Aparteman.Homekitchen تنظیم شده است میتوانید در زیر تغییر دهید:</h5>
                             <select class="form-control select2 text-center" multiple="multiple" data-placeholder="   انتخاب کن  "
-                                    style="width: 100%;direction:rtl;float:right;" name="Homekitchen" id="Homekitchen">
+                                    style="width: 100%;direction:rtl;float:right;" asp-for="Aparteman.Homekitchen" name="Homekitchen" id="Homekitchen">
                                 @for (var i = 0; i < Model.AmlakKitchenes.Count; i++)
                                 {
-                                    <option value="@Model.AmlakKitchenes[i].Name">@Model.AmlakKitchenes[i].Name</option>
+
+                                    if (Model.Aparteman.Homekitchen.Contains(Model.AmlakKitchenes[i].Name))
+                                    {
+                                        <option value="@Model.AmlakKitchenes[i].Name" selected="selected">@Model.AmlakKitchenes[i].Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@Model.AmlakKitchenes[i].Name">@Model.AmlakKitchenes[i].Name</option>
+                                    }
+
                                 }
                             </select>
 
@@ -301,14 +323,22 @@
                 <hr />
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <div class="">
-                                <h4> سرویس بهداشتی و حمام  :</h4>
+                                <h5> سرویس بهداشتی و حمام @Model.Aparteman.Homewc تنظیم شده است میتوانید در زیر تغییر دهید :</h5>
                                 <select class="form-control select2 text-center btn-block" multiple="multiple" data-placeholder="   انتخاب کن  "
-                                        style="width: 100%;direction:rtl;float:right;" name="Homewc" id="Homewc">
+                                        style="width: 100%;direction:rtl;float:right;" asp-for="Aparteman.Homewc" name="Homewc" id="Homewc">
                                     @for (var i = 0; i < Model.AmlakWC.Count; i++)
                                     {
-                                        <option value="@Model.AmlakWC[i].Name">@Model.AmlakWC[i].Name</option>
+                                        if (Model.Aparteman.Homewc.Contains(Model.AmlakWC[i].Name))
+                                        {
+                                            <option value="@Model.AmlakWC[i].Name" selected="selected">@Model.AmlakWC[i].Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@Model.AmlakWC[i].Name">@Model.AmlakWC[i].Name</option>
+                                        }
+
                                     }
                                 </select>
                             </div>
@@ -316,27 +346,52 @@
 
 
 
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <div class="">
-                                <h4> امتیاز  :</h4>
+                                <h5> امتیاز @Model.Aparteman.HomeEmtiaz تنظیم شده است میتوانید در زیر تغییر دهید :</h5>
                                 <select class="form-control select2 text-center" multiple="multiple" data-placeholder="   انتخاب کن  "
-                                        style="width: 100%;direction:rtl;float:right;" name="HomeEmtiaz" id="HomeEmtiaz">
+                                        style="width: 100%;direction:rtl;float:right;" asp-for="Aparteman.HomeEmtiaz" name="HomeEmtiaz" id="HomeEmtiaz">
                                     @for (var i = 0; i < Model.AmlakEmtiazes.Count; i++)
                                     {
-                                        <option value="@Model.AmlakEmtiazes[i].Name">@Model.AmlakEmtiazes[i].Name</option>
+                                        if (Model.Aparteman.HomeEmtiaz.Contains(Model.AmlakEmtiazes[i].Name))
+                                        {
+                                            <option value="@Model.AmlakEmtiazes[i].Name" selected="selected">@Model.AmlakEmtiazes[i].Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@Model.AmlakEmtiazes[i].Name">@Model.AmlakEmtiazes[i].Name</option>
+                                        }
+
                                     }
                                 </select>
                             </div>
                         </div>
 
+                        <div class="col-lg-4">
+                            <div class="">
+                                <h5> امکانات @Model.Aparteman.HomeFacilities تنظیم شده است میتوانید در زیر تغییر دهید :</h5>
+                                <select class="form-control select2 text-center" multiple="multiple" data-placeholder="   انتخاب کن  "
+                                        style="width: 100%;direction:rtl;float:right;" asp-for="Aparteman.HomeFacilities" name="HomeFacility" id="HomeFacility">
+                                    @for (var i = 0; i < Model.HomeFacility.Count; i++)
+                                    {
+                                        if (Model.Aparteman.HomeFacilities.Contains(Model.HomeFacility[i].Name))
+                                        {
+                                            <option value="@Model.HomeFacility[i].Name" selected="selected">@Model.HomeFacility[i].Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@Model.HomeFacility[i].Name">@Model.HomeFacility[i].Name</option>
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <br />
                 <hr />
-
-
-
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">ویرایش اطلاعات اپارتمان - رفتن به مرحله بعد </button>
@@ -351,9 +406,7 @@
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#example-getting-started').multiselect();
-    });
+
 </script>
 
 @section Scripts {

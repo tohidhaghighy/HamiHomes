@@ -14,9 +14,19 @@ namespace DomainLayer
         [MinLength(3, ErrorMessage = "بیشتر از 3 کلمه باید باشد")]
         public string Name { get; set; }
         public int RegionId { get; set; }
+        public string CityPhoneCode { get; set; }
+
+        [Required(ErrorMessage = "نباید خالی باشد")]
+        [MaxLength(50, ErrorMessage = "کمتر از 50 کلمه باشد")]
+        public string Gpsx { get; set; }
+
+        [Required(ErrorMessage = "نباید خالی باشد")]
+        [MaxLength(50, ErrorMessage = "کمتر از 50 کلمه باشد")]
+        public string Gpsy { get; set; }
+        public string Code { get; set; }
 
         #region Foregnkey
-        
+
         [ForeignKey(nameof(RegionId))]
         public virtual Region Region { get; set; }
         #endregion

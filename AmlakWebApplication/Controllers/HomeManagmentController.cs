@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AmlakWebApplication.Models;
 using DataLayer.Infrastracture;
 using DomainLayer;
+using DomainLayer.Enums;
 using DomainLayer.Home;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Utilities.Random;
 using ViewModelLayer.Home;
 
 namespace AmlakWebApplication.Controllers
@@ -21,14 +24,39 @@ namespace AmlakWebApplication.Controllers
         {
             this._context = repo;
         }
-
+        
         public async Task<IActionResult> Index()
         {
             var main = new ViewModelLayer.HomeManagment.MainSearch();
-            main.Homes = await _context.HomeRepository.GetManyAsync(a=>a.IsShow==false);
+            main.Contracts = _context.ContractRepository.GetAllWithWhereandTwoInclude("Home","Adviser", a=>a.Home.IsShow==false).ToList();
             main.Mahalles = await _context.MahalleRepository.GetAllAsync();
             return View(main);
         }
+
+        public async Task<IActionResult> AllShowMelk()
+        {
+            var main = new ViewModelLayer.HomeManagment.MainSearch();
+            main.Contracts = _context.ContractRepository.GetAllWithWhereandTwoInclude("Home", "Adviser", a => a.Home.IsShow == true && (a.TypContract==DomainLayer.Enums.TypeHome.Buy || a.TypContract == DomainLayer.Enums.TypeHome.Rent || a.TypContract == DomainLayer.Enums.TypeHome.build)).ToList();
+            main.Mahalles = await _context.MahalleRepository.GetAllAsync();
+            return View(main);
+        }
+
+        public async Task<IActionResult> AllFinishMelk()
+        {
+            var main = new ViewModelLayer.HomeManagment.MainSearch();
+            main.Contracts = _context.ContractRepository.GetAllWithWhereandTwoInclude("Home", "Adviser", a => a.Home.IsShow == true && (a.TypContract == DomainLayer.Enums.TypeHome.Rented || a.TypContract == DomainLayer.Enums.TypeHome.Selled || a.TypContract == DomainLayer.Enums.TypeHome.builded)).ToList();
+            main.Mahalles = await _context.MahalleRepository.GetAllAsync();
+            return View(main);
+        }
+
+        public async Task<IActionResult> AllShowVagozarMelk()
+        {
+            var main = new ViewModelLayer.HomeManagment.MainSearch();
+            main.Contracts = _context.ContractRepository.GetAllWithWhereandInclude("Home", a => a.TypContract == DomainLayer.Enums.TypeHome.SellWithOther || a.TypContract == DomainLayer.Enums.TypeHome.Cancel).ToList();
+            main.Mahalles = await _context.MahalleRepository.GetAllAsync();
+            return View(main);
+        }
+        
 
         public async Task<IActionResult> Search()
         {
@@ -45,13 +73,16 @@ namespace AmlakWebApplication.Controllers
         {
             var home = new HomeProperty();
             home.Cities = await _context.CityRepository.GetManyAsyncWithInclude("Region");
+            home.Cities = home.Cities.OrderBy(a => a.Name).ToList();
             home.Mahalles = await _context.MahalleRepository.GetManyAsyncWithInclude("Nahie");
+            home.Mahalles = home.Mahalles.OrderBy(a => a.Name).ToList();
+            home.Regions = await _context.RegionRepository.GetAllAsync();
             return View(home);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateItem(Home home,int typehome,string txtkuche, IFormFile homeImage, IFormFile pelanImage)
+        public async Task<IActionResult> CreateItem(Home home,int typehome,string txtkuche, IFormFile homeImage, IFormFile pelanImage,string conty)
         {
             try
             {
@@ -67,7 +98,7 @@ namespace AmlakWebApplication.Controllers
                             await homeImage.CopyToAsync(stream);
 
                         }
-                        home.Image = fileName;
+                        home.Image = ImageUrl.url + fileName;
                     }
 
                     if (pelanImage != null)
@@ -80,15 +111,38 @@ namespace AmlakWebApplication.Controllers
                             await pelanImage.CopyToAsync(stream);
 
                         }
-                        home.HomeMapImage = fileName;
+                        home.HomeMapImage = ImageUrl.url + fileName;
                     }
                     if (txtkuche!=null)
                     {
-                        home.Address += " " + txtkuche;
+                        home.Address += " کوچه " + txtkuche;
                     }
-                    home.Hometype = typehome;
-                    _context.HomeRepository.Insert(home);
-                    await _context.CommitAsync();
+                    if (conty!=null)
+                    {
+                        var findcity = await _context.CityRepository.GetAsync(a => a.Name.Contains(conty));
+                        var findhomesfinal = await _context.HomeRepository.GetManyAsync(a=>a.Address.Contains(conty));
+                        var homecounts = findhomesfinal.OrderByDescending(a=>a.Id).FirstOrDefault();
+                        
+                        if (findcity!=null)
+                        {
+                            if (homecounts == null)
+                            {
+                                home.Code = RandomNumber.MakeKey(findcity.Code, 0);
+                            }
+                            else
+                            {
+                                home.Code = RandomNumber.MakeKey(findcity.Code, homecounts.Id);
+                            }
+                            
+                            home.Hometype = typehome;
+                            home.AdvisorId = 0;
+                            home.Usertype = DomainLayer.Enums.UserType.Admin;
+                            _context.HomeRepository.Insert(home);
+                            await _context.CommitAsync();
+                        }
+                    }
+                    
+                    
                     return OpenUrl(typehome, home.Id);
                 }
             }
@@ -159,7 +213,10 @@ namespace AmlakWebApplication.Controllers
         {
             var home = new HomeProperty();
             home.Cities = await _context.CityRepository.GetManyAsyncWithInclude("Region");
+            home.Cities = home.Cities.OrderBy(a => a.Name).ToList();
             home.Mahalles = await _context.MahalleRepository.GetManyAsyncWithInclude("Nahie");
+            home.Mahalles = home.Mahalles.OrderBy(a => a.Name).ToList();
+            home.Regions = await _context.RegionRepository.GetAllAsync();
             home.Home = _context.HomeRepository.GetById(id);
             return View(home);
         }
@@ -183,7 +240,7 @@ namespace AmlakWebApplication.Controllers
                             await homeImage.CopyToAsync(stream);
 
                         }
-                        home.Image = fileName;
+                        home.Image = ImageUrl.url + fileName;
                     }
 
                     if (pelanImage != null)
@@ -196,17 +253,17 @@ namespace AmlakWebApplication.Controllers
                             await pelanImage.CopyToAsync(stream);
 
                         }
-                        home.HomeMapImage = fileName;
+                        home.HomeMapImage = ImageUrl.url + fileName;
                     }
 
                     if (txtkuche != null)
                     {
-                        home.Address += " " + txtkuche;
+                        home.Address += " کوچه  " + txtkuche;
                     }
                     home.Hometype = typehome;
                     _context.HomeRepository.Update(home);
                     await _context.CommitAsync();
-                    return OpenUrlUpdate(typehome, home.Id);
+                    return await OpenUrlUpdate(typehome, home.Id);
                 }
             }
             catch (DbUpdateException ex)
@@ -266,45 +323,50 @@ namespace AmlakWebApplication.Controllers
         }
 
 
-        public IActionResult OpenUrlUpdate(int typename, int id)
+        public async Task<IActionResult> OpenUrlUpdate(int typename, int id)
         {
+            var contract = _context.ContractRepository.GetAllWithWhereandInclude("Home",a => a.HomeId == id).FirstOrDefault();
+            if (contract==null)
+            {
+                return RedirectToAction("Index");
+            }
             if (typename == 1)
             {
-                return RedirectToAction(nameof(Index), "ContractManagment", new { homeid = id, hometype = 1, text = "آپارتمان"});
+                return RedirectToAction("Update", "ContractManagment", new { contractid=contract.Id , homeid = id, hometype = 1, text = "آپارتمان"});
             }
             else if (typename == 2)
             {
-                return RedirectToAction(nameof(Index), "ContractManagment", new { homeid = id, hometype = 2, text = "خانه حیاط دار" });
+                return RedirectToAction("Update", "ContractManagment", new { contractid = contract.Id, homeid = id, hometype = 2, text = "خانه حیاط دار" });
             }
             else if (typename == 3)
             {
-                return RedirectToAction(nameof(Index), "ContractManagment", new { homeid = id, hometype = 3, text = "زمین" });
+                return RedirectToAction("Update", "ContractManagment", new { contractid = contract.Id, homeid = id, hometype = 3, text = "زمین" });
             }
             else if (typename == 4)
             {
-                return RedirectToAction(nameof(Index), "ContractManagment", new { homeid = id, hometype = 4, text = "کلنگی" });
+                return RedirectToAction("Update", "ContractManagment", new { contractid = contract.Id, homeid = id, hometype = 4, text = "کلنگی" });
             }
             else if (typename == 5)
             {
-                return RedirectToAction(nameof(Index), "ContractManagment", new { homeid = id, hometype = 5, text = "اداری" });
+                return RedirectToAction("Update", "ContractManagment", new { contractid = contract.Id, homeid = id, hometype = 5, text = "اداری" });
             }
             else if (typename == 6)
             {
-                return RedirectToAction(nameof(Index), "ContractManagment", new { homeid = id, hometype = 6, text = "مغازه" });
+                return RedirectToAction("Update", "ContractManagment", new { contractid = contract.Id, homeid = id, hometype = 6, text = "مغازه" });
             }
             else if (typename == 7)
             {
-                return RedirectToAction(nameof(Index), "ContractManagment", new { homeid = id, hometype = 7, text = "مستقلات" });
+                return RedirectToAction("Update", "ContractManagment", new { contractid = contract.Id, homeid = id, hometype = 7, text = "مستقلات" });
             }
             else if (typename == 8)
             {
-                return RedirectToAction(nameof(Index), "ContractManagment", new { homeid = id, hometype = 8, text = "انبار" });
+                return RedirectToAction("Update", "ContractManagment", new { contractid = contract.Id, homeid = id, hometype = 8, text = "انبار" });
             }
             else if (typename == 9)
             {
-                return RedirectToAction(nameof(Index), "ContractManagment", new { homeid = id, hometype = 9, text = "ویلا" });
+                return RedirectToAction("Update", "ContractManagment", new { contractid = contract.Id, homeid = id, hometype = 9, text = "ویلا" });
             }
-            return RedirectToAction(nameof(Index), "ContractManagment", new { homeid = id, hometype = 10, text = "باغ و باغچه" });
+            return RedirectToAction("Update", "ContractManagment", new { contractid = contract.Id, homeid = id, hometype = 10, text = "باغ و باغچه" });
         }
 
 
@@ -329,9 +391,35 @@ namespace AmlakWebApplication.Controllers
             return false;
         }
 
-        public async Task<PartialViewResult> GetHomePartial(string code="", string mahale="")
+        public async Task<PartialViewResult> GetHomePartial(string code="", string mahale="",int type=0)
         {
-            return PartialView("_ListAjax", await _context.HomeRepository.GetManyAsync(a=>a.Code.Contains(code) || a.Address.Contains(mahale)));
+            var main = new ViewModelLayer.HomeManagment.MainSearch();
+            if (type==0)
+            {
+                main.Contracts = _context.ContractRepository.GetAllWithWhereandTwoInclude("Home", "Adviser", a => a.Home.Code.Contains(code) || a.Home.Address.Contains(mahale)).ToList();
+            }
+            else
+            {
+                main.Contracts = _context.ContractRepository.GetAllWithWhereandTwoInclude("Home", "Adviser", a => (a.Home.Code.Contains(code) || a.Home.Address.Contains(mahale)) && a.Home.Hometype==type).ToList();
+            }
+            
+            return PartialView("_ListAjax", main.Contracts);
+        }
+
+        public async Task<PartialViewResult> SearchmelkPartial(int melk = 0, int type = 0)
+        {
+            var main = new ViewModelLayer.HomeManagment.MainSearch();
+            var contracttypeid = (TypeHome)type;
+            main.Contracts = _context.ContractRepository.GetAllWithWhereandTwoInclude("Home", "Adviser", a => a.TypContract== contracttypeid && a.Home.Hometype==melk).ToList();
+            return PartialView("_AllinfoListAjax", main.Contracts);
+        }
+
+        public async Task<PartialViewResult> SearchmelkSelledPartial(int melk = 0, int type = 0)
+        {
+            var main = new ViewModelLayer.HomeManagment.MainSearch();
+            var contracttypeid = (TypeHome)type;
+            main.Contracts = _context.ContractRepository.GetAllWithWhereandTwoInclude("Home", "Adviser", a => a.TypContract == contracttypeid && a.Home.Hometype == melk).ToList();
+            return PartialView("SearchmelkSelledPartial", main.Contracts);
         }
 
         [HttpPost]
@@ -354,5 +442,27 @@ namespace AmlakWebApplication.Controllers
             }
             return false;
         }
+
+        [HttpPost]
+        public async Task<string> GetValues()
+        {
+            string num = "";
+            var find = await _context.ContractRepository.GetManyAsyncWithInclude("Home");
+            for (int i = 1; i <= 10; i++)
+            {
+                num += find.Where(a => a.Home.Hometype == i && a.Home.IsShow == false).Count()+",";
+            }
+            return num;
+        }
+
+
+        public async Task<PartialViewResult> SearchmelkVagozarPartial(int melk = 0, int type = 0)
+        {
+            var main = new ViewModelLayer.HomeManagment.MainSearch();
+            var contracttypeid = (TypeHome)type;
+            main.Contracts = _context.ContractRepository.GetAllWithWhereandTwoInclude("Home", "Adviser", a => a.TypContract == contracttypeid && a.Home.Hometype == melk).ToList();
+            return PartialView("_AllinfovagozarListAjax", main.Contracts);
+        }
+        
     }
 }

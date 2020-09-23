@@ -8,11 +8,20 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>ورود به پنل کارشناس</title>
+    <title>ورود به پنل مشاور</title>
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <link href="~/lib/login/all.css" rel="stylesheet" />
     <link href="~/css/Custom.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="خرید و فروش و رهن و اجاره ملک شما در سریع ترین زمان" />
+    <meta name="author" content="توحید حقیقی" />
+    <meta name="keywords" content="توحید حقیقی ,حامی هوم , خرید ملک , سپردن ملک, خرید ,فروش, اجاره , سپردن,جستجو ملک, خانه,اپارتمان,ویلا,حیاط باغ دار,باغ و باغچه, انبار" />
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <link rel="icon" type="image/x-icon" href="~/img/logo2.png" />
     <style>
         :root {
             --input-padding-x: 1.5rem;
@@ -54,14 +63,15 @@
             margin-bottom: 1rem;
         }
 
-         @@media only screen and (min-width: 600px) {
-  #cardview{
-      padding-right:30%
-  }
-  #subcardview{
-      width:60%
-  }
-}
+        @@media only screen and (min-width: 600px) {
+            #cardview {
+                padding-right: 30%
+            }
+
+            #subcardview {
+                width: 60%
+            }
+        }
     </style>
 </head>
 <body id="boxbackgroundmain" style="background-image:url(/img/houseback.png);background-repeat: no-repeat;background-size: cover;">
@@ -71,7 +81,7 @@
             <div class="mx-auto" style="padding-top:10%;" id="cardview">
                 <div class="card card-signin my-5" style="background-color:white;border-radius:10px;" id="subcardview">
                     <div class="card-body">
-                        <h3 class="text-center" style="padding-bottom:20px;">ورود به سایت</h3>
+                        <h3 class="text-center" style="padding-bottom:20px;">ورود به پنل مشاور</h3>
                         <form asp-action="Login" class="form-signin">
                             <div asp-validation-summary="ModelOnly" class="text-danger row"></div>
                             <span asp-validation-for="Username" class="text-danger row"></span>

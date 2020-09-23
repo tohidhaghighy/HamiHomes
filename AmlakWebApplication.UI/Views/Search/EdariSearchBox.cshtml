@@ -12,7 +12,7 @@
 </style>
 <div class="wrapper" style="padding:20px;">
 
-    
+
 
     <div class="" style="padding-top:30px;">
         <div class="row">
@@ -26,19 +26,19 @@
                     <div class="col-4">
                         <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                             <label style="margin-left:10px;width:100px;"> اتاق خواب</label>
-                            <input type="number" min="0" class="form-control" value="1" placeholder=" اتاق خواب" style="width:50px;" id="bed"/>
+                            <input type="number" min="0" class="form-control" value="1" placeholder=" اتاق خواب" style="width:50px;" id="bed" />
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                             <label style="margin-left:10px;width:100px;"> پارکینگ</label>
-                            <input type="number" min="0" class="form-control" value="1" placeholder=" پارکینگ" style="width:50px;" id="parking"/>
+                            <input type="number" min="0" class="form-control" value="1" placeholder=" پارکینگ" style="width:50px;" id="parking" />
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                             <label style="margin-left:10px;width:100px;font-size:14px;"> سرویس بهداشتی</label>
-                            <input type="number" min="0" class="form-control" value="1" placeholder=" سرویس بهداشتی" style="width:50px;" id="wc"/>
+                            <input type="number" min="0" class="form-control" value="1" placeholder=" سرویس بهداشتی" style="width:50px;" id="wc" />
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                 <div class="">
                     <div class="form-inline" style="padding-top:10px;margin-right:2px;">
                         <label style="margin-left:10px;width:150px;">حداکثر عمر بنا</label>
-                        <input type="number" min="0" class="form-control" value="1" placeholder="عمر بنا" style="width:100px;" id="bana"/>
+                        <input type="number" min="0" class="form-control" value="1" placeholder="عمر بنا" style="width:100px;" id="bana" />
                     </div>
                 </div>
 
@@ -109,7 +109,7 @@
                 </div>
             </div>
             <div class="col-9">
-                <select class="selectpicker" data-live-search="true" id="sanad">
+                <select class="selectpicker" multiple data-live-search="true" id="sanad">
                     @foreach (var item in Model.AmlakSanadStatus)
                     {
                         <option value="@item.Id">@item.Name</option>
@@ -130,6 +130,25 @@
             <div class="col-9">
                 <select class="selectpicker" data-live-search="true" id="vaziat" multiple>
                     @foreach (var item in Model.AmlakMelkStatus)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <div class="" style="padding-top:10px;">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12">
+                <div class="" style="padding-right:30px;padding-top:10px;">
+                    <p style="font-weight:bold;font-size:16px;">نوع پارکینگ</p>
+                </div>
+            </div>
+            <div class="col-9">
+                <select class="selectpicker" multiple data-live-search="true" id="parking">
+                    @foreach (var item in Model.AmlakParking)
                     {
                         <option value="@item.Id">@item.Name</option>
                     }

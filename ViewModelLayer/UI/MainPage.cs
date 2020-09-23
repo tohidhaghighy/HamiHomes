@@ -10,5 +10,6 @@ namespace ViewModelLayer.UI
         public List<DomainLayer.EjareSetting> EjareSetting { get; set; }
         public List<DomainLayer.VadieSetting> VadieSetting { get; set; }
         public List<DomainLayer.MetrazSetting> MetrazSetting { get; set; }
+        public int Userid { get; set; }
     }
 }

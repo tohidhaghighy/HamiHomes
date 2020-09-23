@@ -18,7 +18,7 @@
 </style>
 <section class="content-header">
     <h1>
-        داشبرد
+        داشبورد
         <small>کنترل پنل</small>
     </h1>
     <ol class="breadcrumb">
@@ -45,18 +45,6 @@
 
                 <input name="HomeId" id="HomeId" type="number" class="hidden" value="@ViewData["Id"]">
 
-                <div class="form-group">
-                    <div class="row">
-                        
-                        <div class="col-lg-2">
-                            <h4>متراژ زمین</h4>
-                            <input asp-for="Garden.Metrazhzamin" type="number" class="form-control" placeholder="متراژ زمین" value="1">
-                            <span asp-validation-for="Garden.Metrazhzamin" class="text-danger"></span>
-                        </div>
-
-
-                    </div>
-                </div>
 
                 <div class="form-group">
                     <div class="row">
@@ -67,7 +55,7 @@
                         </div>
                         <div class="col-lg-4">
                             <h4>شماره نگهبان</h4>
-                            <input asp-for="Garden.NegahbaniPhone" type="number" class="form-control" placeholder="شماره نگهبان">
+                            <input asp-for="Garden.NegahbaniPhone" type="text" class="form-control" placeholder="شماره نگهبان">
                             <span asp-validation-for="Garden.NegahbaniPhone" class="text-danger"></span>
                         </div>
                     </div>

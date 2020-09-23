@@ -23,14 +23,25 @@ namespace AmlakWebApplication.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.HomeEdariRepository.GetManyAsyncWithInclude("Home"));
+            var main = new ViewModelLayer.HomeManagment.MainSearch();
+            main.Contracts = _context.ContractRepository.GetAllWithWhereandTwoInclude("Home", "Adviser", a => a.Home.IsShow == false && a.Home.Hometype == 5).ToList();
+            main.Mahalles = await _context.MahalleRepository.GetAllAsync();
+            return View(main);
+        }
+
+        public async Task<IActionResult> ShowEdaries()
+        {
+            var main = new ViewModelLayer.HomeManagment.MainSearch();
+            main.Contracts = _context.ContractRepository.GetAllWithWhereandTwoInclude("Home", "Adviser", a => a.Home.IsShow == true && a.Home.Hometype == 5 && (a.TypContract == DomainLayer.Enums.TypeHome.Buy || a.TypContract == DomainLayer.Enums.TypeHome.Rent || a.TypContract == DomainLayer.Enums.TypeHome.build)).ToList();
+            main.Mahalles = await _context.MahalleRepository.GetAllAsync();
+            return View(main);
         }
 
         public async Task<IActionResult> Create(int homeid, int hometype, int contracttype)
         {
             var Edari = new EdariFacility();
-            var contracttypeid = (TypeHome)hometype;
-            var typehomeid = (MelkType)contracttype;
+            var contracttypeid = (TypeHome)contracttype;
+            var typehomeid = (MelkType)hometype;
             Edari.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
             Edari.AmlakEskeletones = await _context.AmlakSkeletonRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
             Edari.AmlakKafes = await _context.AmlakKafRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
@@ -43,33 +54,43 @@ namespace AmlakWebApplication.Controllers
             Edari.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
             Edari.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
             Edari.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
             ViewData["Id"] = homeid;
             return View(Edari);
         }
 
 
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Update(int homeid, int hometype, int contracttype)
         {
             var Edari = new EdariFacility();
-            Edari.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetAllAsync();
-            Edari.AmlakEskeletones = await _context.AmlakSkeletonRepository.GetAllAsync();
-            Edari.AmlakKafes = await _context.AmlakKafRepository.GetAllAsync();
-            Edari.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetAllAsync();
-            Edari.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetAllAsync();
-            Edari.AmlakNema = await _context.AmlakNemaRepository.GetAllAsync();
-            Edari.AmlakParking = await _context.AmlakParkingRepository.GetAllAsync();
-            Edari.AmlakPishraftStatus = await _context.AmlakPishraftStatusRepository.GetAllAsync();
-            Edari.AmlakSaghf = await _context.AmlakSaghfRepository.GetAllAsync();
-            Edari.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetAllAsync();
-            Edari.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetAllAsync();
-            Edari.AmlakWC = await _context.AmlakWcRepository.GetAllAsync();
-            Edari.Edari = _context.HomeEdariRepository.GetById(id);
-            return View(Edari);
+            var contracttypeid = (TypeHome)contracttype;
+            var typehomeid = (MelkType)hometype;
+            Edari.AmlakEmtiazes = await _context.AmlakEmtiazRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakEskeletones = await _context.AmlakSkeletonRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakKafes = await _context.AmlakKafRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakMelkStatus = await _context.AmlakMelStatusRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakMogheiatMelk = await _context.AmlakMoghiateMelkRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakNema = await _context.AmlakNemaRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakParking = await _context.AmlakParkingRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakPishraftStatus = await _context.AmlakPishraftStatusRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakSaghf = await _context.AmlakSaghfRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakSanadStatus = await _context.AmlakSanadStatusRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakTasisatGarmaieshi = await _context.AmlakTasisatGarmaieshiRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.AmlakWC = await _context.AmlakWcRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            Edari.HomeFacility = await _context.HomeFacilityRepository.GetManyAsync(a => a.TypeHome == contracttypeid && a.MelkType == typehomeid);
+            ViewData["Id"] = homeid;
+            var edarione = await _context.HomeEdariRepository.GetManyAsync(a => a.HomeId == homeid);
+            if (edarione != null)
+            {
+                Edari.Edari = edarione.FirstOrDefault();
+                return View(Edari);
+            }
+            return RedirectToAction("Create", new { homeid = homeid, hometype = hometype, contracttype = contracttype });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateFacilityItem(Edari edari, int HomeId,string[] homestatus,string[] homeemtiaz,string[] homewc)
+        public async Task<IActionResult> CreateFacilityItem(Edari edari, int HomeId,string[] homestatus,string[] homeemtiaz,string[] homewc, string[] tasisat, string[] parking)
         {
 
             try
@@ -79,6 +100,8 @@ namespace AmlakWebApplication.Controllers
                     edari.Homevaziate = string.Join(" , ", homestatus);
                     edari.HomeEmtiaz = string.Join(" , ", homeemtiaz);
                     edari.Homewc = string.Join(" , ", homewc);
+                    edari.Homeparking = string.Join(" , ", parking);
+                    edari.Hometasisat = string.Join(" , ", tasisat);
                     edari.HomeId = HomeId;
                     _context.HomeEdariRepository.Insert(edari);
                     await _context.CommitAsync();
@@ -102,7 +125,7 @@ namespace AmlakWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateItem(Edari edari, string[] homestatus, string[] homeemtiaz, string[] homewc)
+        public async Task<IActionResult> UpdateItem(Edari edari,int HomeId,int Id, string[] homestatus, string[] homeemtiaz, string[] homewc,string[] HomeFacility,string[] tasisat,string[] parking)
         {
 
             try
@@ -112,6 +135,10 @@ namespace AmlakWebApplication.Controllers
                     edari.Homevaziate = string.Join(" , ", homestatus);
                     edari.HomeEmtiaz = string.Join(" , ", homeemtiaz);
                     edari.Homewc = string.Join(" , ", homewc);
+                    edari.Homeparking= string.Join(" , ", parking);
+                    edari.Hometasisat = string.Join(" , ", tasisat);
+                    edari.HomeId = HomeId;
+                    edari.Id = Id;
                     _context.HomeEdariRepository.Update(edari);
                     await _context.CommitAsync();
                     return RedirectToAction("Index", "HomeGalleryManagment", new { homeid = edari.HomeId });

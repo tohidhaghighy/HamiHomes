@@ -1,0 +1,568 @@
+﻿@model ViewModelLayer.Gharardad.Gharardad
+<style>
+    label {
+        text-align: right
+    }
+</style>
+<link href="~/css/PersianCalender/bootstrap-datepicker.css" rel="stylesheet" />
+
+<div class="form-horizontal">
+    <div class="box-body">
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">شماره قرارداد :</label>
+            <input type="text" class="form-control" id="gharardadnumber" name="gharardadnumber" value="@Model.Contract.GharardadNumber" placeholder="شماره قرارداد" style="width:30%;display:inline" required>
+        </div>
+    </div>
+</div>
+
+<div class="" >
+    <div class="box box-info">
+        <div class="box-header with-border">
+            <h3 class="box-title">اطلاعات ملک</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <input type="text" style="display:none;" value="@Model.Contract.Id" name="contractid" id="contractid"/>
+        <div class="form-horizontal container">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label" style="display:inline;text-align:right">کد فایل :</label>
+                    <label for="inputEmail3" class="col-sm-1 control-label" style="display:inline;text-align:right">@Model.Contract.Home.Code</label>
+
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label" style="display:inline;text-align:right">آدرس :</label>
+                    <label for="inputEmail3" class="col-sm-10 control-label" style="display:inline;text-align:right">@Model.Contract.Home.Address</label>
+
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label" style="display:inline;text-align:right">تعداد اتاق :</label>
+                    <label for="inputEmail3" class="col-sm-1 control-label" style="display:inline;text-align:right">@Model.Contract.Home.Bed</label>
+
+                    <label for="inputEmail3" class="col-sm-2 control-label" style="display:inline;text-align:right">تعداد پارکینگ :</label>
+                    <label for="inputEmail3" class="col-sm-1 control-label" style="display:inline;text-align:right">@Model.Contract.Home.Parking</label>
+
+                    <label for="inputEmail3" class="col-sm-2 control-label" style="display:inline;text-align:right">تعداد حمام :</label>
+                    <label for="inputEmail3" class="col-sm-1 control-label" style="display:inline;text-align:right">@Model.Contract.Home.Bath</label>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label" style="display:inline;text-align:right">کد پستی :</label>
+                    <label for="inputEmail3" class="col-sm-1 control-label" style="display:inline;text-align:right">@Model.Contract.Home.Postalcode</label>
+
+                    <label for="inputEmail3" class="col-sm-2 control-label" style="display:inline;text-align:right">متراژ :</label>
+                    <label for="inputEmail3" class="col-sm-1 control-label" style="display:inline;text-align:right">@Model.Contract.Metraz</label>
+
+                    <label for="inputEmail3" class="col-sm-2 control-label" style="display:inline;text-align:right">نوع ملک :</label>
+                    @{
+                        string melk = "آپارتمان";
+                        if (Model.Contract.Home.Hometype == 2)
+                        {
+                            melk = "خانه حیاط دار";
+                        }
+                        else if (Model.Contract.Home.Hometype == 3)
+                        {
+                            melk = "زمین";
+                        }
+                        else if (Model.Contract.Home.Hometype == 4)
+                        {
+                            melk = "کلنگی";
+                        }
+                        else if (Model.Contract.Home.Hometype == 5)
+                        {
+                            melk = "اداری";
+                        }
+                        else if (Model.Contract.Home.Hometype == 6)
+                        {
+                            melk = "مغازه";
+                        }
+                        else if (Model.Contract.Home.Hometype == 7)
+                        {
+                            melk = "مستغلات";
+                        }
+                        else if (Model.Contract.Home.Hometype == 8)
+                        {
+                            melk = "انبار";
+                        }
+                        else if (Model.Contract.Home.Hometype == 9)
+                        {
+                            melk = "باغ";
+                        }
+                        else if (Model.Contract.Home.Hometype == 10)
+                        {
+                            melk = "ویلا";
+                        }
+
+                    }
+                    <label for="inputEmail3" class="col-sm-2 control-label" style="display:inline;text-align:right">@melk</label>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="">
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">اطلاعات مالک</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="form-horizontal">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">نام :</label>
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">@Model.Contract.Home.OwnerName</label>
+
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">موبایل :</label>
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">@Model.Contract.Home.Mobile </label>
+
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">تلفن :</label>
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">@Model.Contract.Home.Phone </label>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="">
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">اطلاعات مشاور</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="form-horizontal">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">نام :</label>
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">@Model.Contract.Adviser.Name @Model.Contract.Adviser.Family</label>
+
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">موبایل :</label>
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">@Model.Contract.Adviser.Mobile </label>
+
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">سابقه :</label>
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">@Model.Contract.Adviser.ExperienceYear </label>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">تخصص در فروش :</label>
+                    <label for="inputEmail3" class="col-lg-4 col-md-4 col-sm-6 control-label" style="display:inline;text-align:right">@Model.Contract.Adviser.BuyTakhasos </label>
+
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">تخصص در اجاره :</label>
+                    <label for="inputEmail3" class="col-lg-4 col-md-4 col-sm-6 control-label" style="display:inline;text-align:right">@Model.Contract.Adviser.RentTakhasos </label>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">مناطق :</label>
+                    <label for="inputEmail3" class="col-lg-4 col-md-4 col-sm-6 control-label" style="display:inline;text-align:right">@Model.Contract.Adviser.Manategh </label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="">
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">جستجو مشتری</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="form-horizontal">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">جستجو مشتری</label>
+
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="codec" name="codec" placeholder="کد مشتری" style="width:20%;display:inline">
+                        <input type="text" class="form-control" id="namec" name="namec" placeholder="نام" style="width:20%;display:inline">
+                        <input type="text" class="form-control" id="familyc" name="familyc" placeholder="نام خانوادگی" style="width:20%;display:inline">
+                        <a class="btn btn-info" onclick="searchcustomer()" style="">جستجو</a>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="">
+                        <table id="mytable" class="table table-bordered table-hover" style="background-color:white;">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">کد</th>
+                                    <th class="text-center">نام</th>
+                                    <th class="text-center">انتخاب</th>
+                                </tr>
+                            </thead>
+                            <tbody id="listofcustomer"></tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="" id="costinfo">
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title">اطلاعات مشتری</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="form-horizontal">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">نام :</label>
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right" id="namecustomer"></label>
+
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">موبایل :</label>
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right" id="mobilecustomer"> </label>
+
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">کد ملی :</label>
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right" id="mellicustomer"> </label>
+
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">صادره :</label>
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right" id="saderecustomer"> </label>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">نام پدر :</label>
+                    <label for="inputEmail3" class="col-lg-4 col-md-4 col-sm-6 control-label" style="display:inline;text-align:right" id="fathercustomer"> </label>
+
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">تاریخ تولد :</label>
+                    <label for="inputEmail3" class="col-lg-4 col-md-4 col-sm-6 control-label" style="display:inline;text-align:right" id="datecustomer"> </label>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-6 control-label" style="display:inline;text-align:right">آدرس :</label>
+                    <label for="inputEmail3" class="col-lg-4 col-md-4 col-sm-6 control-label" style="display:inline;text-align:right" id="addresscustomer"> </label>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="" onload="setcosts()">
+    <div class="box box-warninig">
+        <div class="box-header with-border">
+            <h3 class="box-title">شرایط قرارداد</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <div class="form-horizontal">
+            <div class="box-body">
+                <div class="">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label for="inputEmail3" class=" control-label" style="width:100px;">تاریخ :</label>
+                            @{
+                                if (Model.ContractNumber != "")
+                                {
+                                    <div class="control-group" style="display:inline">
+                                        <div class="controls" style="display:inline">
+                                              <input type="text" class="form-control" id="datec" name="datec" placeholder="تاریخ" style="width:50%;display:inline" value="@Model.Contract.SellDate.ToString("dd / MM / yyyy")">
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                        <div class="control-group" style="display:inline">
+                            <div class="controls" style="display:inline">
+                                <input type="text" class="form-control" id="datec" name="datec" placeholder="تاریخ" style="width:50%;display:inline">
+                            </div>
+                        </div>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                    @{
+                        if (Model.Contract.TypContract == DomainLayer.Enums.TypeHome.Buy || Model.Contract.TypContract == DomainLayer.Enums.TypeHome.Selled)
+                        {
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class=" control-label" style="width:100px;">مبلغ فروش :</label>
+                                    <input type="text" class="form-control" id="costsell" name="costsell" placeholder="مبلغ فروش" value="@Model.Contract.FinalCost1" style="width:50%;display:inline" onkeyup="separateNum(this.value,this);">
+                                    <label id="txtcost1" class="control-label" style="display:inline;color:darkred"></label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12" style="display:none">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="control-label" style="width:100px;">مبلغ رهن :</label>
+                                    <input type="text" class="form-control" id="costrahn" name="costrahn" placeholder="مبلغ رهن" value="@Model.Contract.FinalCost3" style="width:50%;display:inline" onkeyup="separateNum2(this.value,this);">
+                                    <label id="txtcost2" class="control-label" style="display:inline;color:darkred"></label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12" style="display:none">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="control-label" style="width:100px;">مبلغ اجاره :</label>
+                                    <input type="text" class="form-control" id="costejare" name="costejare" placeholder="مبلغ اجاره" value="@Model.Contract.FinalCost2" style="width:50%;display:inline" onkeyup="separateNum3(this.value,this);" >
+                                    <label id="txtcost3" class="control-label" style="display:inline;color:darkred"></label>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.Contract.TypContract == DomainLayer.Enums.TypeHome.Rent || Model.Contract.TypContract == DomainLayer.Enums.TypeHome.Rented)
+                        {
+                            <div class="col-lg-12 col-md-12 col-sm-12" style="display:none">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class=" control-label " style="width:100px;">مبلغ فروش :</label>
+                                    <input type="text" class="form-control" id="costsell" name="costsell" placeholder="مبلغ فروش" value="@Model.Contract.FinalCost1" style="width:50%;display:inline" onkeyup="separateNum(this.value,this);">
+                                    <label id="txtcost1" class="control-label" style="display:inline;color:darkred"></label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="control-label" style="width:100px;">مبلغ رهن :</label>
+                                    <input type="text" class="form-control" id="costrahn" name="costrahn" placeholder="مبلغ رهن" value="@Model.Contract.FinalCost3" style="width:50%;display:inline" onkeyup="separateNum2(this.value,this);">
+                                    <label id="txtcost2" class="control-label" style="display:inline;color:darkred"></label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="control-label" style="width:100px;">مبلغ اجاره :</label>
+                                    <input type="text" class="form-control" id="costejare" name="costejare" placeholder="مبلغ اجاره" value="@Model.Contract.FinalCost2" style="width:50%;display:inline" onkeyup="separateNum3(this.value,this);">
+                                    <label id="txtcost3" class="control-label" style="display:inline;color:darkred"></label>
+                                </div>
+                            </div>
+                        }
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="padding:10px;">
+    <a class="btn btn-success pull-left" style="margin-left:30px;" onclick="taiidegharardad()">تایید و ثبت اطلاعات قرارداد</a>
+</div>
+
+<script src="~/css/PersianCalender/bootstrap-datepicker.min.js"></script>
+<script src="~/css/PersianCalender/bootstrap-datepicker.fa.min.js"></script>
+<script>
+    $("#datec").datepicker({
+        dateFormat: "d / mm / yy",
+        changeMonth: true,
+        changeYear: true,
+        yearRange: '1399:1425',
+    });
+
+    @{ 
+        if (Model.Contract.CostumerId!=null)
+        {
+            <text>
+    select(@Model.Contract.CostumerId);
+            </text>
+        }
+    }
+
+    $("#costinfo").hide();
+    var customerid = 0;
+    function searchcustomer() {
+        var codec = $("#codec").val();
+        var namec = $("#namec").val();
+        var familyc = $("#familyc").val();
+        $("#listofcustomer").empty();
+        $('#listofcustomer').load('/CustomerManagment/SearchcustomerPartial?code=' + codec + '&name=' + namec + '&family=' + familyc);
+        $("#listofcustomer").show();
+    }
+
+     
+
+    function taiidegharardad() {
+        var numghar = $("#gharardadnumber").val();
+        if (numghar.length > 0) {
+            if (customerid != 0) { swal({
+            title: "آیا میخواهید ثبت شود؟",
+            text: "",
+            type: "success",
+            showCancelButton: true,
+            confirmButtonClass: "btn-success",
+            confirmButtonText: "بله ثبت شود",
+            cancelButtonText: "خیر",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        },
+            function (isConfirm) {
+                if (isConfirm) {
+                    sendservertotaiid();
+
+                } else {
+                    swal("صرف نظر", "حذف نشد", "error");
+                }
+            });
+            } else {
+                 alert("مشتری انتخاب نشده است");
+            }
+           
+        } else {
+            alert("شماره قرارداد نباید خالی باشد");
+        }
+         
+    }
+
+    function sendservertotaiid() {
+        var numghar = $("#gharardadnumber").val();
+        var cost1 = $("#costsell").val();
+        var cost2 = $("#costejare").val();
+        var cost3 = $("#costrahn").val();
+        var contractid = $("#contractid").val();
+        var datec = $("#datec").val();
+        $.ajax({
+            type: "Post",
+            url: '/Gharardad/GharardadInsert',
+            data: { numgharar: numghar, date: datec, cost1: cost1, cost2: cost2, cost3: cost3, customerid: customerid, contractid: contractid },
+            success: function (data) {
+                if (data == true) {
+                    window.location.reload();
+                }
+                else {
+                    swal("مشکل در سرور", "ثبت نشد", "error");
+                }
+            }
+        });
+    }
+
+    function select(id) {
+        customerid = id;
+        $.ajax({
+            type: "Get",
+            url: '/CustomerManagment/GetCustomer',
+            data: { id: id },
+            success: function (data) {
+                $("#costinfo").slideDown(1000);
+                document.getElementById("namecustomer").innerHTML = data.name + ' ' + data.family;
+                document.getElementById("mobilecustomer").innerHTML = data.number;
+                document.getElementById("mellicustomer").innerHTML = data.shenasname;
+                document.getElementById("saderecustomer").innerHTML = data.sadere;
+                document.getElementById("fathercustomer").innerHTML = data.fathername;
+                document.getElementById("datecustomer").innerHTML = data.birthdate;
+                document.getElementById("addresscustomer").innerHTML = data.address;
+            }
+        });
+    }
+
+    function separateNum(value, input) {
+        /* seprate number input 3 number */
+        var nStr = value + '';
+        nStr = nStr.replace(/\,/g, "");
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        priceconvertercost1();
+        if (input !== undefined) {
+
+            input.value = x1 + x2;
+        } else {
+            return x1 + x2;
+        }
+    }
+
+    function separateNum2(value, input) {
+        /* seprate number input 3 number */
+        var nStr = value + '';
+        nStr = nStr.replace(/\,/g, "");
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        priceconvertercost2();
+        if (input !== undefined) {
+
+            input.value = x1 + x2;
+        } else {
+            return x1 + x2;
+        }
+    }
+
+    function separateNum3(value, input) {
+        /* seprate number input 3 number */
+        var nStr = value + '';
+        nStr = nStr.replace(/\,/g, "");
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        priceconvertercost3();
+        if (input !== undefined) {
+
+            input.value = x1 + x2;
+        } else {
+            return x1 + x2;
+        }
+    }
+
+    function priceconvertercost1() {
+
+        var cost = document.getElementById("txtcost1");
+        var costbuy = $("#costsell").val();
+        costbuy = costbuy.split(',').join('');
+        $.ajax({
+            type: "Post",
+            url: '/PriceConverter/AlphabeticPrice',
+            data: { text: costbuy },
+            success: function (data) {
+                cost.innerText = data + " تومان ";
+            }
+        });
+    }
+
+    function priceconvertercost2() {
+        var cost = document.getElementById("txtcost2");
+        var costrehn = $("#costrahn").val();
+        costrehn = costrehn.split(',').join('');
+        $.ajax({
+            type: "Post",
+            url: '/PriceConverter/AlphabeticPrice',
+            data: { text: costrehn },
+            success: function (data) {
+                cost.innerText = data + " تومان ";
+            }
+        });
+    }
+
+    function priceconvertercost3() {
+        var cost = document.getElementById("txtcost3");
+        var costrejare = $("#costejare").val();
+        costrejare = costrejare.split(',').join('');
+        $.ajax({
+            type: "Post",
+            url: '/PriceConverter/AlphabeticPrice',
+            data: { text: costrejare },
+            success: function (data) {
+                cost.innerText = data + " تومان ";
+            }
+        });
+        }
+
+</script>
